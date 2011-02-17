@@ -3,6 +3,7 @@ package hu.override.parser;
 import hu.override.Circuit;
 import hu.override.exception.UnknownComponentException;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,43 +18,37 @@ public class Parser {
 
     Pattern componentPattern = Pattern.compile("(.*?)\\s*=\\s*(.*?)\\((.*?)\\)");
 
-    public Circuit parse(String fileName) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            String line;
-            String tmp;
+    /**
+     * Létrehoz egy áramkört az argumentumokban megadott komponensekbõl
+     *
+     * @param content a komponensek, amiket hozzá akarunk adni
+     * @return
+     */
+    public Circuit parse(String... content) {
+        Circuit circuit = new Circuit();
 
-            Matcher matcher;
-            String variableName;
-            String componentName;
-            String[] arguments;
+        for (String line : content) {
+            parseLine(line, circuit);
+        }
+
+        return circuit;
+    }
+
+    /**
+     * Létrehoz egy áramkört a megadott fájlból
+
+     * @param file fájl ami tartalmazza a komponenseket újsorral elválasztva
+     * @return
+     */
+    public Circuit parse(File file) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
 
             Circuit circuit = new Circuit();
 
             while ((line = br.readLine()) != null) {
-                // System.out.println(line);
-                matcher = componentPattern.matcher(line);
-                if (matcher.matches()) {
-                    variableName = matcher.group(1);
-                    componentName = matcher.group(2).toLowerCase();
-                    tmp = matcher.group(3).trim();
-
-                    //System.out.println(variableName + " - " + componentName);
-
-                    if (tmp.length() == 0) {
-                        arguments = null;
-                    } else {
-                        arguments = tmp.split("\\s*,\\s*");
-                    }
-
-                    try {
-                        circuit.addComponent(componentName, variableName, arguments);
-                    } catch (UnknownComponentException ex) {
-                        System.err.println("nincs ilyen komponens!");
-                    }
-                } else {
-                    System.out.println("NOT FOUND!!!");
-                }
+                parseLine(line, circuit);
             }
 
             return circuit;
@@ -64,5 +59,32 @@ public class Parser {
         }
 
         return null;
+    }
+
+    protected void parseLine(String line, Circuit circuit) {
+        // System.out.println(line);
+        Matcher matcher = componentPattern.matcher(line);
+        if (matcher.matches()) {
+            String variableName = matcher.group(1);
+            String componentName = matcher.group(2).toLowerCase();
+            String tmp = matcher.group(3).trim();
+            String arguments[];
+
+            //System.out.println(variableName + " - " + componentName);
+
+            if (tmp.length() == 0) {
+                arguments = null;
+            } else {
+                arguments = tmp.split("\\s*,\\s*");
+            }
+
+            try {
+                circuit.addComponent(componentName, variableName, arguments);
+            } catch (UnknownComponentException ex) {
+                System.err.println("nincs ilyen komponens!");
+            }
+        } else {
+            System.out.println("NOT FOUND!!!");
+        }
     }
 }

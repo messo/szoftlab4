@@ -56,4 +56,8 @@ public class Circuit {
             System.out.println(s + ": " + componentMap.get(s).toString());
         }
     }
+
+    public HashMap<String, Component> getComponentMap() {
+        return componentMap;
+    }
 }
