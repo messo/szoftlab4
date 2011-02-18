@@ -1,0 +1,200 @@
+% Szglab4
+% ===========================================================================
+%
+\chapter{Követelmény, projekt, funkcionalitás}
+
+\thispagestyle{fancy}
+
+\comment{TODO ide a követelmény leírása??? vagy hagyjuk a fenébe???}
+
+\section{Követelmény definíció}
+
+\subsection{A program célja, alapvető feladata}
+
+Az általunk kifejlesztett program célja egy előre megadott digitális áramkör szimulációja és annak megjelenítése, grafikus mindenki számára könnyen kezelhető, átlátható formában. Az alkalmazás az áramköri elemekből felépített digitális hálózat működését szemlélteti úgy, hogy felhasználói interakciók során a rendszer bemenetei átkonfigurálhatóak.
+
+\subsection{A fejlesztőkörnyezet}
+
+A fejlesztéshez NetBeans 6.9.1 szoftvert választottuk. Modellezéshez a Visual Paradigm for UML nevű alkalmazást használjuk, mely képes az osztály-diagramból Java forráskódot generálni és vica versa. Fejlesztés szem előtt tartjuk, hogy a program kompatibilis legyen az Oracle által gondozott Java 1.6-os verziójával. Természetesen a cél az, hogy a modellező program a Hallgatói Számítógép Központban rendszeresített JDK és JRE alatt fordítható és futtatható legyen. A dokumentumokat Microsoft Office és Open Office programokkal, DOCX formátumban készítjük. A unit-tesztekre a JUnit csomagot fogjuk használni.
+
+\subsection{A futtatáshoz szükséges környezet}
+
+Java Runtime Environment 1.6-os verziója, illetve az a számítógép, mely ezt futtatni képes. A modellező alkalmazás használatához billentyűzet, grafikus képernyő és egér szükséges.
+
+\subsection{A felhasználói felület}
+
+A program végső változata grafikus felhasználói felülettel rendelkezik. A programot a felhasználó az egér és a billentyűzet segítségével vezérelheti.
+
+\subsection{Minőségi tényezők}
+
+\textbf{Teljesítmény}: A cél az, hogy a digitális rendszermodellező szoftver használható legyen a fentebb meghatározott minimális rendszeren. A grafikus felületnél törekedni fogunk a folyamatos szimuláció megjelenítése.\\
+\textbf{Újrafelhasználhatóság}: A cél az, hogy a grafikus felhasználói felületet a program többi részétől teljesen különválasszuk, így lehetővé téve azt, hogy később a grafikus felület egyszerűen és gyorsan változtatható legyen.\\
+\textbf{Rugalmasság}: A rugalmasságot a fejlesztőkörnyezet biztosítja, a modellező szoftvernek ugyanis minden olyan környezetben futtathatónak kell lennie, melyben létezik megfelelő Java futtatókörnyezet.\\
+\textbf{Felhasználhatóság}: A használat különösebb tanítást nem igényel, alapfokú számítástechnikai tudással akár a felhasználói kézikönyv elolvasása nélkül is használható.
+
+\subsection{A software minősítése}
+
+A kifejlesztett software akkor megfelelő, ha minél pontosabban megegyezik a fentebb leírtakkal. Ezt ellenőrizni lehet a program futtatásával és kipróbálásával, illetve a forráskód és a modell összevetésével, valamint a funkcionális tesztek futtatásával.
+
+\subsection{A kibocsátás}
+
+A program kibocsátása először a forráskóddal együtt a konzulens felé fog történni.
+
+\section{Projekt terv}
+
+\subsection{A fejlesztői csapat}
+
+\begin{center}
+\begin{tabular}{l | l}
+	\textbf{Csapattag neve} & \textbf{feladatköre} \\
+	\hline
+	Kriván Bálint & csapatvezető, kód, dokumentáció, szervezés \\ 
+	Jákli Gábor & kód, ticket-koordinátor \\ 
+	Dévényi Attila & kód, dokumentáció \\ 
+	Apagyi Gábor & kód, dokumentáció \\ 
+	Péter Tamás Pál & kód, dokumentáció 
+\end{tabular}
+\end{center}
+
+\subsection{Életciklus modell}
+
+A feladat először a program megtervezése, mely a dinamikus és objektum modelleket foglalja magába. Ha ez készen van, elkezdhető a skeleton implementálása. Ez a lépés már teljesen meghatározott, nem merülhet fel semmilyen komplikáció, ha a modellek megfelelőek voltak.
+A következő feladat a prototípus elkészítése. A programnak ebben az állapotban könnyen tesztelhetőnek kell lennie, hogy a programozási és funkcionalitási logikai hibák könnyen felismerhetők legyenek. Ha már a prototípus is megfelelő, akkor kezdődhet a grafikus felület megvalósítása. Itt is fontosa tesztelés és a kiértékelés, mert a jó megjelenés sokat számít a modellező használhatóságában. Ha ennek kifejlesztése is sikeres, készen van a program első teljes változata. A kötelező feladat csak eddig tart. Ezt a változatot kell leadni a dokumentációval és a forráskóddal együtt.
+
+\subsection{Szervezési struktúra}
+
+A csapat öt emberből áll. A feladat szempontjából a tudásunk nem azonos, mindenki más-más területet érez a magáénak, illetve a feladat eltérő részeinek megoldásához van nagyobb kedvünk. Azt a felépítést választottuk, hogy mindenki az érdeklődésének és tudásának legmegfelelőbb részt kapja az egész feladatból. A feladatok szétosztását találkozókon, illetve az alább meghatározott kommunikációs csatornákon egyeztetjük, ahol az egyéni kívánságok mellett ügyelünk arra, hogy minden feladat kiosztásra kerüljön, valamint a csapattagok az egész feladat megoldásából nagyjából egyenlő mértékben vegyék ki a részüket. A találkozók keretében, mivel a szétosztott feladatok nagy mértékben függnek egymástól, javaslatokat teszünk egymásnak a feladat megoldásának körülményeit és a határidőt illetően.\\
+
+A forráskódot és minden a fejlesztés során elkészülő dokumentációt, illetve a projekthez tartozó egyéb fájlokat megegyezés alapján egy Git központi tárolóban tároljuk, melyhez a Codaset (http://codaset.com) nevű ingyenes szolgáltatását használjuk és erről mindenki egy saját klónt készít.\\
+
+A kiosztott feladatokat a tulajdonosuk elvégzi a megbeszélt határidőig, de ha ez megváltozott funkcionalitást takar, akkor az adott csapattag köteles a megfelelő teszteseteket megírni, és azok sikeres lefutásáról meggyőződni. Abban az esetben, ha az alkalmazás nem fordul le, vagy valamelyik teszteset nem fut le sikeresen, az adott commit visszaállításra kerülhet annak kijavításáig, melyet a ticket-rendszerben jelezzük a másik felé.\\
+
+Hogy a fejlesztés minél hatékonyabb és zökkenőmentesebb legyen, a következő eszközöket alkalmazzuk:\\
+\textbf{E-mail}: Az egymás számára fontos anyagokat, melyeket a találkozókon előzetesen megbeszéltünk, levélben küldjük el.\\
+\textbf{Msn}: Felvettük egymást a Microsoft Messenger-be, hogy szükség esetén egymástól is segítséget tudjunk kérni kisebb technikai problémák megoldásában. Természetesen ezek a feladat lényegét, a projektről hozott döntéseket nem érinthetik, de kivételes helyzetben akár az Interneten is tarthatunk találkozót.\\
+\textbf{Git tároló}: A feladatok megoldása közben keletkezett anyagokat egy, kizárólag a csapat tagjai által hozzáférhető helyen tároljuk (lásd fentebb). Így mindig elérhető a fejlesztések legfrissebb változata.\\
+\textbf{Ticket}: A fejlesztés során felmerülő problémákat, kérdéseket ticket formájában megírjuk egymásnak, amit később a kijelölt felelős személy megold, ha szükséges, akkor együtt konzultálunk a megoldás módjáról, menetéről.
+
+\subsection{Fejlesztési ütemterv}
+
+A program fejlesztésének három fő lépcsőfoka van. Ezek a következők:\\
+\textbf{Skeleton}: A cél az, hogy mind a dinamikus, mind az objektum modell jól legyen kitalálva. Ha ezek elkészültek, akkor a fejlesztés szempontjából sikeresen leraktuk az alapokat.\\
+\textbf{Prototípus}: Ez már szinte a teljes változat, csak a grafikus felület elemei hiányoznak. Ez a változat tökéletesen megfelelő arra, hogy az objektumok, rutinok, függvények szemantikai helyességét vizsgáljuk.\\
+\textbf{Grafikus változat}: A program teljes változata. Tulajdonképpen a prototípus a grafikus felülettel kiegészítve, esetleg kismértékben továbbfejlesztve.
+
+\subsection{Határidők}
+
+\begin{tabular}{l | l}
+febr. 11. & Csapat regisztráció \\
+febr. 21. & Követelmény, projekt, funkcionalitás \\
+febr. 28. & Analízis modell kidolgozása 1. \\
+márc. 7. & Analízis modell kidolgozása 2. \\
+márc. 14. & Szkeleton tervezése \\
+márc. 21. & Szkeleton \\
+márc. 28. & Prototípus koncepciója \\
+ápr.  4. & Részletes tervek \\
+ápr. 18. & Prototípus \\
+ápr. 26. & Grafikus felület specifikációja \\
+máj. 9. & Grafikus változat \\
+máj. 13. & Összefoglalás
+\end{tabular}
+
+\section{Feladatleírás}
+
+Az általunk készített alkalmazás segítségével a felhasználó egy előre elkészített áramköri listából kiválasztott digitális áramkör szimulációját végezheti el grafikus megjelenítéssel. A program az alábbi alkatrészeket támogatja áramköri elemként: ÉS kapu, VAGY kapu, INVERTER, Kijelző, Jelgenerátor, Kapcsoló. Ezek mindegyike egy vagy több ki- és/vagy bemenettel rendelkezik.\\
+
+\noindent A komponensek (alkatrészek) részletezése:
+
+\begin{itemize}
+\item Az ÉS kapu kettő vagy több bemenettel és egy kimenettel rendelkezik. A kimenetre a bemenetre kötött jelek logikai ÉS kapcsolata jelenik meg. 
+\item A VAGY kapu kettő vagy több bemenettel és egy kimenettel rendelkezik. A kimenetre a bemenetre kötött jelek logikai VAGY kapcsolata jelenik meg.
+\item Az INVERTER egyetlen kimenetén az egyetlen bemenetére kötött jel logikai negáltja jelenik meg.
+\end{itemize}
+
+Ezen elemeket általános elemként kezeljük. Működésük általánosan annyiból áll, hogy a bemenetükre érkező logikai értéket, a megfelelő logikai művelet elvégzése után a kimenetükön továbbítják.
+
+\begin{itemize}
+\item A Kijelző komponenssel a felhasználó a bementre kötött jelet vizuális formában tudja megjeleníteni. A megjelenítő színt piros, kék, sárga közül választhat.
+\end{itemize}
+	
+A Kijelző alkotja a komponensek második csoportját, mely a későbbiekben akár bővülhet más elemekkel (pl. hétszegmenses kijelző). Az ide tartozó elemek feladata a logikai értékek vizualizálása.
+
+\begin{itemize}
+\item Jelgenerátor segítségével egy bitsorozatot tárolhatunk el, amelyet a szimuláció során az egyetlen kimenetén ciklikusan kiad.
+\item A Kapcsolónak egy kimenete van, melynek értéke a kapcsoló állásától függ. „Be” állásban igaz, „Ki” állásban hamis értékű.
+\end{itemize}
+
+A harmadik csoport elemei jelforrások, amiket a felhasználó érdemben tud módosítani, vagyis a változtatások kihatnak az áramkör viselkedésére.\\
+
+Az összes alkatrészre igaz, hogy nem lehet olyan bemenetük, amelyek szabadok, vagyis sehova sincsenek bekötve, ellenkező esetben a szimulációt nem lehet elindítani és ezt jelzi a felhasználó felé.
+
+A felhasználó a fentebb említett alkatrészekből összeállított digitális áramkör szimulációját végezheti. Az alkatrészek és azok egymáshoz kötéseik (összeköttetések) grafikus formában kerül megjelenítésre.
+
+A szimuláció során bármelyik komponens pillanatnyi értékeit a felhasználó lekérdezheti az alkatrészre való kattintással, ezzel egyidejűleg a szimulációt szünetelteti. Az áramkör vizsgálata közben a Kapcsolók értékeit szabadon változtathatja, melyek hatása valós időben megjelenik. Szimuláció elkezdésekor az összes áramköri elem kimenete hamis értéket vesz fel. Ha a vizsgálandó áramkör bizonyos idő alatt nem áll be stacionárius állapotba, változatlan bemenetek mellett, akkor ez jelzésre kerül a felhasználó számára és a szimuláció automatikusan leáll. A szimuláció bármikor megszakítható majd újraindítható, illetve átválthat egy másik digitális áramkör vizsgálatára (az előre elkészített digitális áramkörök közül választva), amennyiben a jelenlegi áramkört nem kívánja tovább használni.
+
+A szimuláció sebessége a felhasználó által konfigurálható, ezáltal a Jelgenerátor kimenetein kiadott jelek ciklusideje változtatható.
+
+A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba helyezése érdekében lehet törölni minden addig elvégzett beállítást egyetlen paranccsal, majd elölről kezdeni az egyes elemek konfigurálását. Lehetőség lesz továbbá a jelforrások beállításainak elmentésére illetve későbbi visszatöltésére is. A konfigurációs fájl sikeres betöltődéséhez teljesülnie kell annak a feltételnek, hogy abban az összes meghatározott elem szerepeljen az áramkörben, amire használni szeretnénk a beállításokat. Amennyiben ez nem áll fent, akkor a nem specifikált jelforrások alapállapotban lesznek. Előfordulhat még, hogy a beállításokat tartalmazó fájlban olyan elemek (is) szerepelnek, amelyek az áramkörünkben nem, ekkor a program hibaüzenetet jelenít meg, és megszakítja a betöltés folyamatát.
+
+\section{Szótár}
+
+\begin{longtable}{r p{10cm}}
+\textbf{Előre elkészített lista} & Áramköröket tartalmazó előre elkészített gyűjtemény. \\
+\textbf{Áramkör} & A komponensek egymáshoz kötéséből létrejövő rendszer. \\
+\textbf{Komponensek egymáshoz kötése} & Egy olyan folyamat, amely során 2 komponenst oly módon kapcsolunk össze, hogy az egyik komponens bemenetére a másik komponens kimenetének logikai jelét kapja meg.\\
+\textbf{Logikai jel} & Az áramkörben levő komponensek által továbbított információ a többi komponens számára, mely igaz, és hamis értéket veheti fel.\\
+\textbf{Szimuláció} & Olyan folyamat, mely során minden alkatrész kimenetének logikai jel értékét kiszámoljuk a bemenetére érkező logikai jelekből.\\
+\textbf{Grafikus} & Az áramkör felhasználó számára felfogható, érzékelhető megjelenítése.\\
+\textbf{Alkatrész} & komponens szinonimája\\
+\textbf{ÉS kapu} & Logikai jeleken végez olyan műveletet mely során ha a bemenetére érkező logikai jelek közt található hamis érték, akkor kimenetén hamis értéket továbbít. \\
+\textbf{VAGY kapu} & Logikai jeleken végez olyan műveletet mely során ha a bemenetére érkező logikai jelek közt található igaz érték, akkor kimenetén igaz értéket továbbít. \\
+\textbf{INVERTER} & Bemenetére érkező logikai jel negáltját továbbítja a kimenetén. \\
+\textbf{Kijelző} & Bementére érkező logikai jelet a felhasználó számára érzékelhető módon szemlélteti. \\
+\textbf{Jelgenerátor} & Olyan egység, mely előre megadott bitsorozatot ad ki ciklikusan a kimenetén.\\
+\textbf{Bitsorozat} & Logikai jelekből létrejövő olyan sorozat, melynél az igaz értéket ’1’ szimbólum reprezentál, míg a hamis értéket ’0’.\\
+\textbf{Kapcsoló} & Olyan egység, mely felhasználói interakció hatására kimenetén igaz, vagy hamis értéket továbbít. \\
+\textbf{Felhasználói interakció} & Olyan folyamat, mely során a felhasználó egyes komponensek működését tudja befolyásolni \\
+\textbf{Kimenet} & A komponens olyan része, melyen keresztül logikai jeleket tud továbbítani más komponenseknek.\\
+\textbf{Jel továbbítás} & A logikai jel egyik komponenstől másik komponensig való áramlása.\\
+\textbf{Bemenet} & A komponensek olyan része, melyen keresztül fel tudják használni maguk szimulációjához szükséges logikai jeleket. \\
+\textbf{Komponens szimulációja} & Egy alkatrészre vonatkoztatott szimuláció.\\
+\textbf{Logikai negált} & Logikai jel érték változást jelent, oly módon, hogy igaz értékből hamis lesz, és hamis értékből igaz.\\
+\textbf{Igaz érték} & Logikai jel egysége.\\
+\textbf{Hamis érték} & Logika jel egysége.\\
+\textbf{Komponens} & Egy komponens 3 típusú lehet. Sima komponensek logikai jeleken végeznek műveleteket, és azt továbbítják további komponens/komponensek számára. Kijelző típusú források logikai jeleket szemléltetik a felhasználó számára érzékelhető módon. Jelforrás típusú komponensek közvetlen bemenet nélkül generálnak kimenetet és továbbítják további komponens/komponensek számára azt. \\
+\textbf{Közvetlen bemenet} & Egy komponensnek közvetlen bemenete van, ha a bemenetére a logikai jeleket más komponens továbbítja számára\\
+\textbf{Jelforrás} & Jelgenerátor szinonimája \\
+\textbf{Valós időben} & A felhasználó számára észrevehetetlen idő alatt \\
+\textbf{Stacionárius} & A rendszer egy stabil állapota, melyben olyan értékek jelennek meg a komponensek kimenetein, amelyek hatására (visszacsatolás esetén sem) változiknak a rendszer komponenseinek kimeneti értékei (Jelgenerátor esetén nincs stacionárius állapot)\\
+\textbf{Szimuláció sebessége} & Az a sebesség, ami a szimuláció egyes állapotai közötti váltás sebességét mutatja \\
+\textbf{Ciklusidő} & A szimuláció két állapotváltása között eltelt idő \\
+\textbf{Vizsgálat megszakítás} & \comment{TODO}\\
+\textbf{Állapot} & Az áramkör komponenseinek aktuális tulajdonságainak (kimeneti/bemeneti értékek) összessége \\
+\textbf{Alap állapot} & Az a kiindulási állapot, mely az áramkör betöltése után keletkezik
+\end{longtable}
+
+\section{Essential use-case-ek}
+
+\subsection{Use-case diagram}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics{chapters/chapter02/usecase.pdf}
+\caption{Essential use-case diagram}
+\label{fig:useCase1}
+\end{center}
+\end{figure}
+
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[width=17cm]{chapters/chapter02/use_case2.pdf}
+%\caption{x}
+%\label{fig:useCase2}
+%\end{center}
+%\end{figure}
+
+\subsection{Use-case leírások}
+
+\usecase{Szimuláció kezelés}{A felhasználó új szimulációt indít vagy leállít}{Felhasználó}{\comment{TODO}}
+
+\usecase{Digitális áramkör definiálása}{A felhasználó digitális áramkört betölti, szerkeszti}{Felhasználó}{\comment{TODO}}
