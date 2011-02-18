@@ -1,2 +1,10 @@
 LogSim/build/
 LogSim/nbproject/private/
+doc/tex/*.log
+doc/tex/*.ps
+doc/tex/*.toc
+doc/tex/*.aux
+doc/tex/*.dvi
+doc/tex/*.lof
+doc/tex/*.out
+
