@@ -8,14 +8,18 @@
 \comment{TODO ide a követelmény leírása??? vagy hagyjuk a fenébe???}
 
 \section{Követelmény definíció}
+\label{sec:reqdef}
 
 \subsection{A program célja, alapvető feladata}
 
 Az általunk kifejlesztett program célja egy előre megadott digitális áramkör szimulációja és annak megjelenítése, grafikus mindenki számára könnyen kezelhető, átlátható formában. Az alkalmazás az áramköri elemekből felépített digitális hálózat működését szemlélteti úgy, hogy felhasználói interakciók során a rendszer bemenetei átkonfigurálhatóak.
 
 \subsection{A fejlesztőkörnyezet}
+\label{sec:devenvironment}
 
-A fejlesztéshez NetBeans 6.9.1 szoftvert választottuk. Modellezéshez a Visual Paradigm for UML nevű alkalmazást használjuk, mely képes az osztály-diagramból Java forráskódot generálni és vica versa. Fejlesztés szem előtt tartjuk, hogy a program kompatibilis legyen az Oracle által gondozott Java 1.6-os verziójával. Természetesen a cél az, hogy a modellező program a Hallgatói Számítógép Központban rendszeresített JDK és JRE alatt fordítható és futtatható legyen. A dokumentumokat Microsoft Office és Open Office programokkal, DOCX formátumban készítjük. A unit-tesztekre a JUnit csomagot fogjuk használni.
+A fejlesztéshez NetBeans 6.9.1 szoftvert választottuk. Az UML diagramok elkészítéséhez a Visual Paradigm for UML nevű alkalmazást használjuk, mely képes az osztály-diagramból Java forráskódot generálni és vica versa. Fejlesztés során szem előtt tartjuk, hogy a program kompatibilis legyen az Oracle által gondozott Java 1.6-os verziójával. Természetesen a cél az, hogy a digitális áramkört modellező program a Hallgatói Számítógép Központban rendszeresített JDK és JRE alatt fordítható és futtatható legyen. A dokumentumokat \LaTeX{}-hel készítjük el a Texmaker nevű alkalmazás segítségével, melyet PDF-be fordítunk le. A unit-tesztekre a JUnit csomagot fogjuk használni.
+
+Mivel a fentebb felsoroltak közül mindegyik alkalmazás fut mind Windows, mind Linux operációs rendszeren, így az egész fejlesztés mindkét platformon megvalósítható.
 
 \subsection{A futtatáshoz szükséges környezet}
 
@@ -41,6 +45,7 @@ A kifejlesztett software akkor megfelelő, ha minél pontosabban megegyezik a fe
 A program kibocsátása először a forráskóddal együtt a konzulens felé fog történni.
 
 \section{Projekt terv}
+\label{sec:projectplan}
 
 \subsection{A fejlesztői csapat}
 
@@ -50,7 +55,7 @@ A program kibocsátása először a forráskóddal együtt a konzulens felé fog
 	\hline
 	Kriván Bálint & csapatvezető, kód, dokumentáció, szervezés \\ 
 	Jákli Gábor & kód, dokumentáció, ticket-koordinátor \\ 
-	Dévényi Attila & kód, dokumentáció \\ 
+	Dévényi Attila & kód, dokumentáció, GUI-felelős \\ 
 	Apagyi Gábor & kód, dokumentáció \\ 
 	Péter Tamás Pál & kód, dokumentáció 
 \end{tabular}
@@ -62,18 +67,21 @@ A feladat először a program megtervezése, mely a dinamikus és objektum model
 A következő feladat a prototípus elkészítése. A programnak ebben az állapotban könnyen tesztelhetőnek kell lennie, hogy a programozási és funkcionalitási logikai hibák könnyen felismerhetők legyenek. Ha már a prototípus is megfelelő, akkor kezdődhet a grafikus felület megvalósítása. Itt is fontosa tesztelés és a kiértékelés, mert a jó megjelenés sokat számít a modellező használhatóságában. Ha ennek kifejlesztése is sikeres, készen van a program első teljes változata. A kötelező feladat csak eddig tart. Ezt a változatot kell leadni a dokumentációval és a forráskóddal együtt.
 
 \subsection{Szervezési struktúra}
+\label{sec:orgstructure}
 
 A csapat öt emberből áll. A feladat szempontjából a tudásunk nem azonos, mindenki más-más területet érez a magáénak, illetve a feladat eltérő részeinek megoldásához van nagyobb kedvünk. Azt a felépítést választottuk, hogy mindenki az érdeklődésének és tudásának legmegfelelőbb részt kapja az egész feladatból. A feladatok szétosztását találkozókon, illetve az alább meghatározott kommunikációs csatornákon egyeztetjük, ahol az egyéni kívánságok mellett ügyelünk arra, hogy minden feladat kiosztásra kerüljön, valamint a csapattagok az egész feladat megoldásából nagyjából egyenlő mértékben vegyék ki a részüket. A találkozók keretében, mivel a szétosztott feladatok nagy mértékben függnek egymástól, javaslatokat teszünk egymásnak a feladat megoldásának körülményeit és a határidőt illetően.\\
 
-A forráskódot és minden a fejlesztés során elkészülő dokumentációt, illetve a projekthez tartozó egyéb fájlokat megegyezés alapján egy Git központi tárolóban tároljuk, melyhez a Codaset (http://codaset.com) nevű ingyenes szolgáltatását használjuk és erről mindenki egy saját klónt készít.\\
+A forráskódot és minden a fejlesztés során elkészülő dokumentációt, illetve a projekthez tartozó egyéb fájlokat megegyezés alapján egy Git központi tárolóban tároljuk, melyhez a Codaset (\url{http://codaset.com}) nevű ingyenes szolgáltatását használjuk és erről mindenki egy saját klónt készít.\\
 
 A kiosztott feladatokat a tulajdonosuk elvégzi a megbeszélt határidőig, de ha ez megváltozott funkcionalitást takar, akkor az adott csapattag köteles a megfelelő teszteseteket megírni, és azok sikeres lefutásáról meggyőződni. Abban az esetben, ha az alkalmazás nem fordul le, vagy valamelyik teszteset nem fut le sikeresen, az adott commit visszaállításra kerülhet annak kijavításáig, melyet a ticket-rendszerben jelezzük a másik felé.\\
-
-Hogy a fejlesztés minél hatékonyabb és zökkenőmentesebb legyen, a következő eszközöket alkalmazzuk:\\
-\textbf{E-mail}: Az egymás számára fontos anyagokat, melyeket a találkozókon előzetesen megbeszéltünk, levélben küldjük el.\\
-\textbf{Msn}: Felvettük egymást a Microsoft Messenger-be, hogy szükség esetén egymástól is segítséget tudjunk kérni kisebb technikai problémák megoldásában. Természetesen ezek a feladat lényegét, a projektről hozott döntéseket nem érinthetik, de kivételes helyzetben akár az Interneten is tarthatunk találkozót.\\
-\textbf{Git tároló}: A feladatok megoldása közben keletkezett anyagokat egy, kizárólag a csapat tagjai által hozzáférhető helyen tároljuk (lásd fentebb). Így mindig elérhető a fejlesztések legfrissebb változata.\\
-\textbf{Ticket}: A fejlesztés során felmerülő problémákat, kérdéseket ticket formájában megírjuk egymásnak, amit később a kijelölt felelős személy megold, ha szükséges, akkor együtt konzultálunk a megoldás módjáról, menetéről.
+\\
+Hogy a fejlesztés minél hatékonyabb és zökkenőmentesebb legyen, a következő eszközöket, technológiákat alkalmazzuk:
+\begin{description}
+\item[E-mail] Az egymás számára fontos anyagokat, melyeket a találkozókon előzetesen megbeszéltünk, levélben küldjük el.
+\item[Msn] Felvettük egymást a Microsoft Messenger-be, hogy szükség esetén egymástól is segítséget tudjunk kérni kisebb technikai problémák megoldásában. Természetesen ezek a feladat lényegét, a projektről hozott döntéseket nem érinthetik, de kivételes helyzetben akár az Interneten is tarthatunk találkozót.
+\item[Git tároló] A feladatok megoldása közben keletkezett anyagokat egy -- kizárólag a csapat tagjai által hozzáférhető -- helyen tároljuk (lásd fentebb). Így mindig elérhető a fejlesztések legfrissebb változata.
+\item[Ticket-rendszer] A fejlesztés során felmerülő problémákat, kérdéseket ticket formájában megírjuk egymásnak, amit később a kijelölt felelős személy megold, ha szükséges, akkor együtt konzultálunk a megoldás módjáról, menetéről.
+\end{description}
 
 \subsection{Fejlesztési ütemterv}
 
@@ -100,6 +108,7 @@ máj. 13. & Összefoglalás
 \end{tabular}
 
 \section{Feladatleírás}
+\label{sec:taskdesc}
 
 Az általunk készített alkalmazás segítségével a felhasználó egy előre elkészített áramköri listából kiválasztott digitális áramkör szimulációját végezheti el grafikus megjelenítéssel. A program az alábbi alkatrészeket támogatja áramköri elemként: ÉS kapu, VAGY kapu, INVERTER, Kijelző, Jelgenerátor, Kapcsoló. Ezek mindegyike egy vagy több ki- és/vagy bemenettel rendelkezik.\\
 
@@ -130,7 +139,7 @@ Az összes alkatrészre igaz, hogy nem lehet olyan bemenetük, amelyek szabadok,
 
 A felhasználó a fentebb említett alkatrészekből összeállított digitális áramkör szimulációját végezheti. Az alkatrészek és azok egymáshoz kötéseik (összeköttetések) grafikus formában kerül megjelenítésre.
 
-A szimuláció során bármelyik komponens pillanatnyi értékeit a felhasználó lekérdezheti az alkatrészre való kattintással, ezzel egyidejűleg a szimulációt szünetelteti. Az áramkör vizsgálata közben a Kapcsolók értékeit szabadon változtathatja, melyek hatása valós időben megjelenik. Szimuláció elkezdésekor az összes áramköri elem kimenete hamis értéket vesz fel. Ha a vizsgálandó áramkör bizonyos idő alatt nem áll be stacionárius állapotba, változatlan bemenetek mellett, akkor ez jelzésre kerül a felhasználó számára és a szimuláció automatikusan leáll. A szimuláció bármikor megszakítható majd újraindítható, illetve átválthat egy másik digitális áramkör vizsgálatára (az előre elkészített digitális áramkörök közül választva), amennyiben a jelenlegi áramkört nem kívánja tovább használni.
+A szimuláció során bármelyik komponens pillanatnyi értékeit a felhasználó lekérdezheti az alkatrészre való kattintással, ezzel egyidejűleg a szimulációt szünetelteti. Az áramkör vizsgálata közben a Kapcsolók értékeit szabadon változtathatja, melyek hatása valós időben megjelenik. Szimuláció elkezdésekor az összes áramköri elem kimenete hamis értéket vesz fel. Ha a vizsgálandó áramkör bizonyos idő alatt nem áll be stacionárius állapotba változatlan bemenetek mellett, akkor ez jelzésre kerül a felhasználó számára és a szimuláció automatikusan leáll. A szimuláció bármikor megszakítható majd újraindítható, illetve átválthat egy másik digitális áramkör vizsgálatára (az előre elkészített digitális áramkörök közül választva), amennyiben a jelenlegi áramkört nem kívánja tovább használni.
 
 A szimuláció sebessége a felhasználó által konfigurálható, ezáltal a Jelgenerátor kimenetein kiadott jelek ciklusideje változtatható.
 
