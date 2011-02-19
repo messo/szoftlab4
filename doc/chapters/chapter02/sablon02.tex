@@ -5,8 +5,6 @@
 
 \thispagestyle{fancy}
 
-\comment{TODO ide a követelmény leírása??? vagy hagyjuk a fenébe???}
-
 \section{Követelmény definíció}
 \label{sec:reqdef}
 
@@ -172,7 +170,7 @@ A szimuláció során bármelyik komponens pillanatnyi értékeit a felhasznál�
 
 A szimuláció sebessége a felhasználó által konfigurálható, ezáltal a Jelgenerátor kimenetein kiadott jelek váltakozásának sebessége változtatható.
 
-\comment{Itt lehet ki kéne venni a fájl fogalmát és csak általánosan megfogalmazni, hogy menteni betölteni, iletve, hogy van ellenőrzés} A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba helyezése érdekében lehet törölni minden addig elvégzett beállítást egyetlen paranccsal, majd elölről kezdeni az egyes elemek konfigurálását. Lehetőség lesz továbbá a jelforrások beállításainak elmentésére illetve későbbi visszatöltésére is. A konfigurációs fájl sikeres betöltődéséhez teljesülnie kell annak a feltételnek, hogy abban az összes meghatározott elem szerepeljen az áramkörben, amire használni szeretnénk a beállításokat. Amennyiben ez nem áll fent, akkor a nem specifikált jelforrások alapállapotban lesznek. Előfordulhat még, hogy a beállításokat tartalmazó fájlban olyan elemek (is) szerepelnek, amelyek az áramkörünkben nem, ekkor a program hibaüzenetet jelenít meg, és megszakítja a betöltés folyamatát.
+A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba helyezése érdekében lehet törölni minden addig elvégzett beállítást egyetlen paranccsal, majd elölről kezdeni az egyes elemek konfigurálását. Lehetőség lesz továbbá a jelforrások beállításainak elmentésére illetve későbbi visszatöltésére is. A konfiguráció sikeres betöltődéséhez teljesülnie kell annak a feltételnek, hogy abban az összes meghatározott elem szerepeljen az áramkörben, amire használni szeretnénk a beállításokat. Amennyiben ez nem áll fent, akkor a nem specifikált jelforrások alapállapotban lesznek. Előfordulhat még, hogy a konfigurációban olyan elemek szerepelnek, amelyek az áramkörünkben nem, ekkor hibaüzenet jelenik meg és a betöltés megszakad.
 
 \section{Szótár}
 \label{sec:dictionary}
@@ -210,14 +208,15 @@ A szimuláció sebessége a felhasználó által konfigurálható, ezáltal a Je
 \textbf{Stacionárius} & A rendszer egy stabil állapota, melyben olyan értékek jelennek meg a komponensek kimenetein, amelyek hatására (visszacsatolás esetén sem) változiknak a rendszer komponenseinek kimeneti értékei (Jelgenerátor esetén nincs stacionárius állapot)\\
 \textbf{Szimuláció megszakítása/leállítása} & A rendszer komponenseinek állapota nem változik, azok a megszakítás pillanatában felvett értékeket mutatják a következő indításig.\\
 \textbf{Állapot} & Az áramkör komponenseinek aktuális tulajdonságainak (kimeneti/bemeneti értékek) összessége \\
-\textbf{Alap állapot} & Az a kiindulási állapot, mely az áramkör betöltése után keletkezik. Ilyenkor az \emph{általános komponens}ek kimenetén a hamis érték van.
+\textbf{Alap állapot} & Az a kiindulási állapot, mely az áramkör betöltése után keletkezik. Ilyenkor az \emph{általános komponens}ek kimenetén a hamis érték van.\\
+\textbf{Jelforrások konfigurációja} & A jelforrások beállításainak (kapcsolók állapota, jelgenerátorok bitsorozata stb.) egy állapota.
 \end{longtable}
 
 \section{Essential use-case-ek}
 
 \subsection{Use-case diagram}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics{chapters/chapter02/usecase.pdf}
 \caption{Essential use-case diagram}
@@ -225,16 +224,48 @@ A szimuláció sebessége a felhasználó által konfigurálható, ezáltal a Je
 \end{center}
 \end{figure}
 
-%\begin{figure}[h]
-%\begin{center}
-%\includegraphics[width=17cm]{chapters/chapter02/use_case2.pdf}
-%\caption{x}
-%\label{fig:useCase2}
-%\end{center}
-%\end{figure}
-
 \subsection{Use-case leírások}
 
-\usecase{Szimuláció kezelés}{A felhasználó új szimulációt indít vagy leállít}{Felhasználó}{\comment{TODO}}
+\usecase{Szimuláció leállítás}
+{A futó szimuláció leállítása}
+{Felhasználó}
+{Az éppen futó szimulációt a felhasználó a "Stop" gombbal leállítja.}
 
-\usecase{Digitális áramkör definiálása}{A felhasználó digitális áramkört betölti, szerkeszti}{Felhasználó}{\comment{TODO}}
+\usecase{Szimuláció indítás}
+{A áramkör szimulációjának elindítása}
+{Felhasználó}
+{A felhasználó, az általa korábban kiválasztott áramkör szimulációját a "Start" gombbal elindítja}
+
+\usecase{Áramkör választás}
+{Szimulálni kívánt áramkör kiválasztása}
+{Felhasználó}
+{\vspace{-20pt}\begin{enumerate}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item A felhasználó a Megnyitás menüpontra kapcsol.
+\item Kiválaszt egy áramkört a felkínált listából.
+\item Az áramkör betöltődik a rendszerbe.
+\end{enumerate}\vspace{-20pt}}
+
+\usecase{Jelforrások betöltése}
+{Az áramkör jelforrásainak betöltése}
+{Felhasználó}
+{\vspace{-20pt}\begin{enumerate}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item A felhasználó a "Jelforrások betöltése" menüpontra kapcsol.
+\item Megadja, hogy melyik fájlt olvassa be a rendszer.
+\item Ha a fájl megfelelő, akkor a betöltés megtörténik, egyéb esetben a felhasználót figyelmeztetjük.
+\end{enumerate}\vspace{-20pt}}
+
+\usecase{Jelforrások mentése}
+{Az áramkör jelforrásainak mentése}
+{Felhasználó}
+{\vspace{-20pt}\begin{enumerate}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item A felhasználó a "Jelforrások mentése" menüpontra kapcsol.
+\item Megadja, hogy melyik fájlba történjen a mentés.
+\item A mentés megtörténik, amennyiben ez valami oknál fogva nem sikerült (nincs joga, nincs elég terület stb.), a felhasználót figyelmeztetjük.
+\end{enumerate}\vspace{-20pt}}
+
