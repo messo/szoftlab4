@@ -132,7 +132,7 @@ máj. 13. & Összefoglalás
 \section{Feladatleírás}
 \label{sec:taskdesc}
 
-Az általunk készített alkalmazás segítségével a felhasználó egy előre elkészített áramköri listából kiválasztott digitális áramkör szimulációját végezheti el grafikus megjelenítéssel. A program az alábbi alkatrészeket támogatja áramköri elemként: ÉS kapu, VAGY kapu, Inverter, Kijelző, Jelgenerátor, Kapcsoló, \comment{mindig igaz (Vcc), mindig hamis (Gnd) jel?}. Ezek mindegyike egy vagy több ki- és/vagy bemenettel rendelkezik.\\
+Az általunk készített alkalmazás segítségével a felhasználó egy előre elkészített áramköri listából kiválasztott digitális áramkör szimulációját végezheti el grafikus megjelenítéssel. A program az alábbi alkatrészeket támogatja áramköri elemként: ÉS kapu, VAGY kapu, Inverter, Kijelző, Jelgenerátor, Kapcsoló, Vcc és Gnd. Ezek mindegyike egy vagy több ki- és/vagy bemenettel rendelkezik.\\
 
 \noindent A komponensek (alkatrészek) részletezése:
 
@@ -153,12 +153,14 @@ Az általunk készített alkalmazás segítségével a felhasználó egy előre 
 \item A Kijelző komponenssel a felhasználó a bemenetre kötött jelet vizuális formában tudja megjeleníteni.
 \end{itemize}
 
-\item \textbf{Jelforrások}: A harmadik csoport elemei melyeket a felhasználó érdemben tud módosítani, ezáltal befolyásolva az áramkör működését.
+\item \textbf{Jelforrások}: A harmadik csoport elemei melyeknek nincs bemenete csak kimenete, ez vagy előre definiált (gnd és vcc) vagy a felhasználó által módosítható (kapcsoló, jelgenerátor), ezáltal változtatva az áramkör működését.
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \item Jelgenerátor segítségével egy bitsorozatot tárolhatunk el, amelyet a szimuláció során az egyetlen kimenetén ciklikusan kiad.
 \item A Kapcsolónak egy kimenete van, melynek értéke a kapcsoló állásától függ. „Be” állásban igaz, „Ki” állásban hamis értékű.
+\item Gnd (,,föld'') konstans 0-át (logikai hamis) kiadó jelforrás.
+\item Vcc (,,tápfeszültség'') konstans 1-et (logikai igaz) kiadó jelforrás.
 \end{itemize}
 \end{enumerate}
 
@@ -170,7 +172,7 @@ A szimuláció során bármelyik komponens pillanatnyi értékeit a felhasznál�
 
 A szimuláció sebessége a felhasználó által konfigurálható, ezáltal a Jelgenerátor kimenetein kiadott jelek váltakozásának sebessége változtatható.
 
-A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba helyezése érdekében lehet törölni minden addig elvégzett beállítást egyetlen paranccsal, majd elölről kezdeni az egyes elemek konfigurálását. Lehetőség lesz továbbá a jelforrások beállításainak elmentésére illetve későbbi visszatöltésére is. A konfiguráció sikeres betöltődéséhez teljesülnie kell annak a feltételnek, hogy abban az összes meghatározott elem szerepeljen az áramkörben, amire használni szeretnénk a beállításokat. Amennyiben ez nem áll fent, akkor a nem specifikált jelforrások alapállapotban lesznek. Előfordulhat még, hogy a konfigurációban olyan elemek szerepelnek, amelyek az áramkörünkben nem, ekkor hibaüzenet jelenik meg és a betöltés megszakad.
+A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba helyezése érdekében lehet törölni minden addig elvégzett beállítást egyetlen paranccsal, majd elölről kezdeni az egyes elemek konfigurálását. Lehetőség lesz továbbá a szerkeszthető jelforrások beállításainak elmentésére illetve későbbi visszatöltésére is. A konfiguráció sikeres betöltődéséhez teljesülnie kell annak a feltételnek, hogy abban az összes meghatározott elem szerepeljen az áramkörben, amire használni szeretnénk a beállításokat. Amennyiben ez nem áll fent, akkor a nem specifikált jelforrások alapállapotban lesznek. Előfordulhat még, hogy a konfigurációban olyan elemek szerepelnek, amelyek az áramkörünkben nem, ekkor hibaüzenet jelenik meg és a betöltés megszakad.
 
 \section{Szótár}
 \label{sec:dictionary}
@@ -189,7 +191,9 @@ A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba hely
 \textbf{Kimenet} & A komponens olyan része, melyen keresztül logikai jeleket tud továbbítani más komponenseknek.\\
 \textbf{Jel továbbítás} & A logikai jel egyik komponenstől másik komponensig való áramlása.\\
 \textbf{Megjelenítő} & Olyan komponens, mely a bemenet(ek)re érkező logikai jele(ke)t a felhasználó számára érzékelhető módon szemlélteti.\\
-\textbf{Jelforrás} & Olyan komponens, mely bemenet nélkül továbbítja a felhasználó által megadott jele(ek)t a kimenetén további komponens(ek) számára. \\
+\textbf{Jelforrás} & Olyan komponens, mely bemenet nélkül továbbítja az áramkörben specifikált vagy a felhasználó által megadott jele(ek)t a kimenetén további komponens(ek) számára. \\
+\textbf{Gnd} & Olyan komponens, mely konstans 0-át ad ki a kimenetén. \\
+\textbf{Vcc} & Olyan komponens, mely konstans 1-et ad ki a kimenetén. \\
 \textbf{Komponensek egymáshoz kötése} & Egy olyan folyamat, amely során 2 komponenst oly módon kapcso\-lunk össze, hogy az egyik komponens bemenetére a másik komponens kimenetének logikai jelét kapja meg.\\
 \textbf{Grafikus megjelenítés} & Az áramkör felhasználó számára felfogható, érzékelhető megjelenítése.\\
 \textbf{ÉS kapu} & \emph{Általános komponens}, melynek a bemenetére érkező logikai jelek közt található hamis érték, akkor kimenetén hamis értéket, ellenkező esetben (vagyis minden bemenete logikai igaz) igaz értéket továbbít. \\
@@ -209,7 +213,7 @@ A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba hely
 \textbf{Szimuláció megszakítása/leállítása} & A rendszer komponenseinek állapota nem változik, azok a megszakítás pillanatában felvett értékeket mutatják a következő indításig.\\
 \textbf{Állapot} & Az áramkör komponenseinek aktuális tulajdonságainak (kimeneti/bemeneti értékek) összessége \\
 \textbf{Alap állapot} & Az a kiindulási állapot, mely az áramkör betöltése után keletkezik. Ilyenkor az \emph{általános komponens}ek kimenetén a hamis érték van.\\
-\textbf{Jelforrások konfigurációja} & A jelforrások beállításainak (kapcsolók állapota, jelgenerátorok bitsorozata stb.) egy állapota.
+\textbf{Jelforrások konfigurációja} & A szerkeszthető jelforrások beállításainak (kapcsolók állapota, jelgenerátorok bitsorozata stb.) egy állapota.
 \end{longtable}
 
 \section{Essential use-case-ek}
