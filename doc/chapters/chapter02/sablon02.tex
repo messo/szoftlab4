@@ -132,7 +132,7 @@ máj. 13. & Összefoglalás
 \section{Feladatleírás}
 \label{sec:taskdesc}
 
-Az általunk készített alkalmazás segítségével a felhasználó egy előre elkészített áramköri listából kiválasztott digitális áramkör szimulációját végezheti el grafikus megjelenítéssel. A program az alábbi alkatrészeket támogatja áramköri elemként: ÉS kapu, VAGY kapu, Inverter, Kijelző, Jelgenerátor, Kapcsoló, Vcc és Gnd. Ezek mindegyike egy vagy több ki- és/vagy bemenettel rendelkezik.\\
+Az általunk készített alkalmazás segítségével a felhasználó egy előre elkészített áramköri listából kiválasztott digitális áramkör szimulációját végezheti el grafikus megjelenítéssel (későbbiekben a felhasználó készíthet saját áramkört a program által elvárt formátumban). A program az alábbi alkatrészeket támogatja áramköri elemként: ÉS kapu, VAGY kapu, Inverter, Kijelző, Jelgenerátor, Kapcsoló, Vcc és Gnd. Ezek mindegyike egy vagy több ki- és/vagy bemenettel rendelkezik.\\
 
 \noindent A komponensek (alkatrészek) részletezése:
 
@@ -144,6 +144,19 @@ Az általunk készített alkalmazás segítségével a felhasználó egy előre 
 \item Az ÉS kapu kettő vagy több bemenettel és egy kimenettel rendelkezik. A kimeneten a bemenetre kötött jelek logikai ÉS kapcsolata jelenik meg. 
 \item A VAGY kapu kettő vagy több bemenettel és egy kimenettel rendelkezik. A kimeneten a bemenetre kötött jelek logikai VAGY kapcsolata jelenik meg.
 \item Az Inverter egyetlen kimenetén az egyetlen bemenetére kötött jel logikai negáltja jelenik meg.
+\item 4-1-es multiplexer, amely 4 adatbemenettel, 2 kiválasztó-bemenettel és 1 kimenettel rendelkezik. A kiválasztó-bemenetekre adott értéktől függ, hogy melyik adatbemenet értéke jelenik meg az adatkimeneten.
+\item D flip-flop, melynek 2 bemenete van és 1 kimenete. A bemenetek közül egyik az adatbemenet a másik az órajel. Az órajel felfutó élére az adatbemeneten lévő érték fog beíródni a flip-flop memóriájába, és ez kerül kiadásra a kimenetén, mindaddig ez marad, amíg új érték nem íródik be. A rendszer indításakor alapértelmezetten 0 az eltárolt érték.
+\item JK flip-flop, melynek 3 bemenete van: J, K és órajel. Az órajel felfutó élére a J és K állapotától fuggő érték íródik be a belső memóriájába, ami a kimenetére kerül. Az alábbi táblázat mutatja, hogy az egyes J-K bemenet kombinációira milyen érték írodik be:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+J & K & memória\\\hline
+0 & 0 & marad\\\hline
+1 & 0 & 1\\\hline
+0 & 1 & 0\\\hline
+1 & 1 & negált\\\hline
+\end{tabular}
+\end{center}
 \end{itemize}
 
 \item \textbf{Megjelenítők}: Az ide tartozó elemek feladata a logikai értékek vizualizálása.
@@ -151,6 +164,7 @@ Az általunk készített alkalmazás segítségével a felhasználó egy előre 
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \item A Kijelző komponenssel a felhasználó a bemenetre kötött jelet vizuális formában tudja megjeleníteni.
+\item 7-szegmenses kijelző komponens, mely 7 bemenettel rendelkezik. Az egyes adatbemenetek megfeleltethetőek egy szegmensnek, melyek együtt egy 8-as alakot formálnak. Egy szegmens csak akkor világít, ha a neki megfelelő bemenetre igaz értéket adunk.
 \end{itemize}
 
 \item \textbf{Jelforrások}: A harmadik csoport elemei melyeknek nincs bemenete csak kimenete, ez vagy előre definiált (gnd és vcc) vagy a felhasználó által módosítható (kapcsoló, jelgenerátor), ezáltal változtatva az áramkör működését.
