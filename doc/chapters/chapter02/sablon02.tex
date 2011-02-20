@@ -166,10 +166,10 @@ Alapállapotban a belső memóriája a hamis értéket tárolja.
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \item A Kijelző komponenssel a felhasználó a bemenetre kötött jelet vizuális formában tudja megjeleníteni.
-\item 7-szegmenses kijelző komponens, mely 7 bemenettel rendelkezik. Az egyes adatbemenetek megfeleltethetőek egy szegmensnek, melyek együtt egy 8-as alakot formálnak. Egy szegmens csak akkor világít, ha a neki megfelelő bemenetre igaz értéket adunk.
+\item 7-szegmenses kijelző komponens, mely 7 bemenettel rendelkezik. Az egyes adatbemenetek megfe\-leltethetőek egy szegmensnek, melyek együtt egy 8-as alakot formálnak. Egy szegmens csak akkor világít, ha a neki megfelelő bemenetre igaz értéket adunk.
 \end{itemize}
 
-\item \textbf{Jelforrások}: A harmadik csoport elemei melyeknek nincs bemenete csak kimenete, ez vagy előre definiált (gnd és vcc) vagy a felhasználó által módosítható (kapcsoló, jelgenerátor), ezáltal változtatva az áramkör működését.
+\item \textbf{Jelforrások}: A harmadik csoport elemei melyeknek nincs bemenete csak kimenete, ez vagy előre defini\-ált (gnd és vcc) vagy a felhasználó által módosítható (kapcsoló, jelgenerátor), ezáltal változtatva az áramkör működését.
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
@@ -195,7 +195,7 @@ A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba hely
 \section{Szótár}
 \label{sec:dictionary}
 
-\begin{longtable}{r p{10.95cm}}
+\begin{longtable}{r p{10.7cm}}
 \textbf{Előre elkészített lista} & Áramköröket tartalmazó előre elkészített gyűjtemény. \\
 \textbf{Áramkör} & A komponensek egymáshoz kötéséből létrejövő rendszer. \\
 \textbf{Komponens} & Az áramkör alapegysége, mely 3 fajtájú lehet: \emph{általános komponens}, \emph{megjelenítő} és \emph{jelforrás}. \\
@@ -231,7 +231,9 @@ A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba hely
 \textbf{Szimuláció megszakítása/leállítása} & A rendszer komponenseinek állapota nem változik, azok a megszakítás pillanatában felvett értékeket mutatják a következő indításig.\\
 \textbf{Állapot} & Az áramkör komponenseinek aktuális tulajdonságainak (kimeneti/bemeneti értékek) összessége \\
 \textbf{Alap állapot} & Az a kiindulási állapot, mely az áramkör betöltése után keletkezik. Ilyenkor az \emph{általános komponens}ek kimenetén a hamis érték van.\\
-\textbf{Jelforrások konfigurációja} & A szerkeszthető jelforrások beállításainak (kapcsolók állapota, jelgenerátorok bitsorozata stb.) egy állapota.
+\textbf{Jelforrások konfigurációja} & A szerkeszthető jelforrások beállításainak (kapcsolók állapota, jelgenerátorok bitsorozata stb.) egy állapota.\\
+\textbf{Felfutó él} & Amikor a logikai érték az adott bemeneten/kimeneten hamisból igazba vált, akkor azt felfutó élnek nevezzük.\\
+\textbf{Flip-flop belső memóriája} & A flip-flopok a szimuláció során megőriznek egy logikai értéket, amit a kimenetükön folyamatosan kiadnak, ezt hívjuk belső memóriának.
 \end{longtable}
 
 \section{Essential use-case-ek}
@@ -292,5 +294,3 @@ A Kapcsolók, illetve a Jelgenerátorok gyors és egyszerű alap állapotba hely
 \item Megadja, hogy melyik fájlba történjen a mentés.
 \item A mentés megtörténik, amennyiben ez valami oknál fogva nem sikerült (nincs joga, nincs elég terület stb.), a felhasználót figyelmeztetjük.
 \end{enumerate}\vspace{-20pt}}
-
-\newpage
