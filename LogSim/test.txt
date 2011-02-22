@@ -1,2 +1,2 @@
-x = AND(0,1, 0)
-y=OR(1,0)
+x=seqgen(1,0)
+y=LED(x)

@@ -7,6 +7,17 @@ package hu.override.component;
 public class Led extends Component implements IsDisplay {
 
     @Override
-    public void init(String[] arguments) {
+    public boolean getImmediateValue() {
+        return getInputValue(0);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("LED(%s): %b", name, lastValue[0]);
+    }
+
+    @Override
+    protected void onEvaluation() {
+        currentValue[0] = inputs[0].evaluate(indices[0]);
     }
 }

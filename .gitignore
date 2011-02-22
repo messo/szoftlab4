@@ -1,4 +1,5 @@
 LogSim/build/
+LogSim/dist/
 LogSim/nbproject/private/
 doc/*.log
 doc/*.ps

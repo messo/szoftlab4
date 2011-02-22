@@ -7,6 +7,7 @@ package hu.override.component;
 public class Toggle extends Component implements IsSource {
 
     @Override
-    public void init(String[] arguments) {
+    protected void onEvaluation() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

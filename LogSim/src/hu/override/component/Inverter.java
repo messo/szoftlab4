@@ -7,6 +7,7 @@ package hu.override.component;
 public class Inverter extends Component {
 
     @Override
-    public void init(String[] arguments) {
+    protected void onEvaluation() {
+        currentValue[0] = !inputs[0].evaluate(indices[0]);
     }
 }

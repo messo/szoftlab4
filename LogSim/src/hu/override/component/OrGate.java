@@ -7,7 +7,14 @@ package hu.override.component;
 public class OrGate extends Component {
 
     @Override
-    public void init(String[] arguments) {
-        // minden paraméter egy bemenetnek számít
+    protected void onEvaluation() {
+        for (int i = 0; i < inputs.length; i++) {
+            if (inputs[i].evaluate(indices[i])) {
+                currentValue[0] = true;
+                return;
+            }
+        }
+
+        currentValue[0] = false;
     }
 }

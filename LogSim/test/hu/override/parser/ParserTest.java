@@ -2,13 +2,11 @@ package hu.override.parser;
 
 import hu.override.Circuit;
 import hu.override.component.AndGate;
-import hu.override.component.Component;
 import hu.override.component.Inverter;
 import hu.override.component.Led;
 import hu.override.component.OrGate;
 import hu.override.component.SequenceGenerator;
 import hu.override.component.Toggle;
-import java.util.HashMap;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,22 +24,31 @@ public class ParserTest {
 
     @Test
     public void componentTest() {
-        Circuit circuit = parser.parse("x=AND(0,1)", "y = OR()", "z = LED(0)",
-                "t=Toggle()", "u=SeqGen()", "v=NOT(0)");
-        HashMap<String, Component> componentMap = circuit.getComponentMap();
-        // minden elem szerepel
-        Assert.assertNotNull(componentMap.get("x"));
-        Assert.assertNotNull(componentMap.get("y"));
-        Assert.assertNotNull(componentMap.get("z"));
-        Assert.assertNotNull(componentMap.get("t"));
-        Assert.assertNotNull(componentMap.get("u"));
-        Assert.assertNotNull(componentMap.get("v"));
-        // a megfelelõ példányok létrejöttek
-        Assert.assertTrue(componentMap.get("x") instanceof AndGate);
-        Assert.assertTrue(componentMap.get("y") instanceof OrGate);
-        Assert.assertTrue(componentMap.get("z") instanceof Led);
-        Assert.assertTrue(componentMap.get("t") instanceof Toggle);
-        Assert.assertTrue(componentMap.get("u") instanceof SequenceGenerator);
-        Assert.assertTrue(componentMap.get("v") instanceof Inverter);
+        try {
+            Circuit circuit = parser.parse("x=AND(0,1)", "y = OR()", "z = LED(0)",
+                    "t=Toggle()", "u=SeqGen()", "v=NOT(0)");
+            // minden elem szerepel
+            Assert.assertNotNull(circuit.getComponentByName("x"));
+            Assert.assertNotNull(circuit.getComponentByName("y"));
+            Assert.assertNotNull(circuit.getComponentByName("z"));
+            Assert.assertNotNull(circuit.getComponentByName("t"));
+            Assert.assertNotNull(circuit.getComponentByName("u"));
+            Assert.assertNotNull(circuit.getComponentByName("v"));
+            // a megfelelõ példányok létrejöttek
+            Assert.assertTrue(circuit.getComponentByName("x") instanceof AndGate);
+            Assert.assertTrue(circuit.getComponentByName("y") instanceof OrGate);
+            Assert.assertTrue(circuit.getComponentByName("z") instanceof Led);
+            Assert.assertTrue(circuit.getComponentByName("t") instanceof Toggle);
+            Assert.assertTrue(circuit.getComponentByName("u") instanceof SequenceGenerator);
+            Assert.assertTrue(circuit.getComponentByName("v") instanceof Inverter);
+        } catch (Exception ex) {
+            ex.printStackTrace(System.err);
+            Assert.assertTrue(false);
+        }
+    }
+
+    @Test
+    public void inputTest() {
+        // howto?
     }
 }
