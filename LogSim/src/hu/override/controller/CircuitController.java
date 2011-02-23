@@ -2,8 +2,6 @@ package hu.override.controller;
 
 import hu.override.Circuit;
 import hu.override.view.View;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +13,8 @@ public class CircuitController extends Thread implements Controller {
     private final Circuit circuit;
     private int counter;
     private final View view;
+    private final Object synchObj = new Object();
+    private long pause = 3000;
 
     public CircuitController(Circuit circuit, View view) {
         this.circuit = circuit;
@@ -35,7 +35,7 @@ public class CircuitController extends Thread implements Controller {
                 }
                 counter++;
             }
-            if( counter == 100 ) {
+            if (counter == 100) {
                 System.out.println("HAL¡¡¡¡¡L!");
                 break;
             }
@@ -43,7 +43,9 @@ public class CircuitController extends Thread implements Controller {
             // GUI rajzol·s
             view.update(circuit);
             try {
-                sleep(1000);
+                synchronized (synchObj) {
+                    synchObj.wait(pause);
+                }
             } catch (InterruptedException ex) {
             }
         }
@@ -51,5 +53,12 @@ public class CircuitController extends Thread implements Controller {
 
     public void setShouldRun(boolean shouldRun) {
         this.shouldRun = shouldRun;
+    }
+
+    public void onUserAction() {
+        System.out.println("onUserAction");
+        synchronized (synchObj) {
+            synchObj.notify();
+        }
     }
 }
