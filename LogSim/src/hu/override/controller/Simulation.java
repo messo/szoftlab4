@@ -1,29 +1,34 @@
 package hu.override.controller;
 
 import hu.override.Circuit;
+import hu.override.SequenceGeneratorStepper;
 import hu.override.view.View;
 
 /**
  *
  * @author balint
  */
-public class CircuitController extends Thread implements Controller {
+public class Simulation extends Thread implements Controller {
 
     private boolean shouldRun;
     private final Circuit circuit;
     private int counter;
     private final View view;
     private final Object synchObj = new Object();
-    private long pause = 3000;
+    private final SequenceGeneratorStepper seqGenStepper;
 
-    public CircuitController(Circuit circuit, View view) {
+    public Simulation(Circuit circuit, View view) {
         this.circuit = circuit;
         this.view = view;
         this.view.setController(this);
+        this.seqGenStepper = new SequenceGeneratorStepper(this);
     }
 
     @Override
     public void run() {
+        // amikor elindul a szimuláció, akkor a steppert is indítsuk el.
+        seqGenStepper.start();
+
         shouldRun = true;
         while (shouldRun) {
             counter = 0;
@@ -36,29 +41,32 @@ public class CircuitController extends Thread implements Controller {
                 counter++;
             }
             if (counter == 100) {
-                System.out.println("HALÁÁÁÁÁL!");
+                System.out.println("Nincs stacionárius állapot!");
                 break;
             }
-            circuit.stepGenerators();
             // GUI rajzolás
             view.update(circuit);
+
+            // lefutott egy ciklus, várunk, hogy lesz-e változás
             try {
                 synchronized (synchObj) {
-                    synchObj.wait(pause);
+                    synchObj.wait();
                 }
             } catch (InterruptedException ex) {
             }
         }
     }
 
-    public void setShouldRun(boolean shouldRun) {
-        this.shouldRun = shouldRun;
-    }
-
-    public void onUserAction() {
-        System.out.println("onUserAction");
+    /**
+     * Megváltozott valamelyik jelforrás, szimuláció mehet újból
+     */
+    public void sourcesChanged() {
         synchronized (synchObj) {
             synchObj.notify();
         }
+    }
+
+    public Circuit getCircuit() {
+        return circuit;
     }
 }

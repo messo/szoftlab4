@@ -1,7 +1,7 @@
 package hu.override.view;
 
 import hu.override.Circuit;
-import hu.override.controller.CircuitController;
+import hu.override.controller.Simulation;
 
 /**
  *
@@ -11,5 +11,5 @@ public interface View {
 
     public void update(Circuit circuit);
 
-    public void setController(CircuitController controller);
+    public void setController(Simulation controller);
 }

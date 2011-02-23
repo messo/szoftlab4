@@ -1,6 +1,6 @@
 package hu.override;
 
-import hu.override.controller.CircuitController;
+import hu.override.controller.Simulation;
 import hu.override.exception.CircuitAlreadyExistsException;
 import hu.override.exception.InvalidCircuitDefinitionException;
 import hu.override.parser.Parser;
@@ -23,9 +23,8 @@ public class LogSim {
         try {
             Circuit c = new Parser().parse(new File("test.txt"));
             View v = new ConsoleView();
-            CircuitController cc = new CircuitController(c, v);
-            cc.start();
-            //c.list();
+            Simulation simulation = new Simulation(c, v);
+            simulation.start();
         } catch (CircuitAlreadyExistsException ex) {
             ex.printStackTrace(System.err);
         } catch (InvalidCircuitDefinitionException ex) {

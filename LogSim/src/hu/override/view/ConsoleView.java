@@ -2,7 +2,7 @@ package hu.override.view;
 
 import hu.override.Circuit;
 import hu.override.component.Component;
-import hu.override.controller.CircuitController;
+import hu.override.controller.Simulation;
 
 /**
  *
@@ -10,15 +10,16 @@ import hu.override.controller.CircuitController;
  */
 public class ConsoleView implements View {
 
-    private CircuitController controller;
+    private Simulation controller;
 
     public void update(Circuit circuit) {
         for (Component c : circuit.getDisplays()) {
             System.out.println(c);
         }
+        System.out.println("====");
     }
 
-    public void setController(CircuitController controller) {
+    public void setController(Simulation controller) {
         this.controller = controller;
     }
 }
