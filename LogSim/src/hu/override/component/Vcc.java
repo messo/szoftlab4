@@ -1,5 +1,7 @@
 package hu.override.component;
 
+import hu.override.Value;
+
 /**
  *
  * @author balint
@@ -7,17 +9,7 @@ package hu.override.component;
 public class Vcc extends Component {
 
     @Override
-    public String getName() {
-        return "TRUE";
-    }
-
-    @Override
-    public boolean getImmediateValue(int idx) {
-        return true;
-    }
-
-    @Override
     protected void onEvaluation() {
-        currentValue[0] = true;
+        currentValue[0] = Value.TRUE;
     }
 }

@@ -11,7 +11,7 @@ import hu.override.view.View;
 public class Simulation extends Thread implements Controller {
 
     private boolean shouldRun;
-    private final Circuit circuit;
+    private Circuit circuit;
     private int counter;
     private final View view;
     private final Object synchObj = new Object();
@@ -64,6 +64,10 @@ public class Simulation extends Thread implements Controller {
         synchronized (synchObj) {
             synchObj.notify();
         }
+    }
+
+    public void setCircuit(Circuit circuit) {
+        this.circuit = circuit;
     }
 
     public Circuit getCircuit() {

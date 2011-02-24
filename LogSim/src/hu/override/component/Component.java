@@ -1,13 +1,15 @@
 package hu.override.component;
 
+import hu.override.Value;
+
 /**
  *
  * @author balint
  */
 public abstract class Component {
 
-    protected boolean[] lastValue;
-    protected Boolean[] currentValue;
+    protected Value[] lastValue;
+    protected Value[] currentValue;
     protected String name;
     protected Component[] inputs;
     protected int[] indices;
@@ -19,8 +21,9 @@ public abstract class Component {
     }
 
     public void init() {
-        lastValue = new boolean[1];
-        currentValue = new Boolean[1];
+        lastValue = new Value[1];
+        currentValue = new Value[1];
+        lastValue[0] = Value.FALSE; // alapból innen indulunk.
     }
 
     public void setParent(HasDirtyFlag parent) {
@@ -53,18 +56,18 @@ public abstract class Component {
         setInput(inputSlot, component, 0);
     }
 
-    public boolean getImmediateValue() {
-        return getImmediateValue(0);
+    public Value getValue() {
+        return getValue(0);
     }
 
-    public boolean getImmediateValue(int idx) {
+    public Value getValue(int idx) {
         return lastValue[idx];
     }
 
     /**
      * Számolás:
      */
-    public boolean evaluate(int outputPin) {
+    public Value evaluate(int outputPin) {
         // 1. Ki vagy-e számolva?
         if (!alreadyEvaluated) {
             alreadyEvaluated = true;
@@ -81,7 +84,7 @@ public abstract class Component {
         return lastValue[outputPin];
     }
 
-    public boolean evaluate() {
+    public Value evaluate() {
         return evaluate(0);
     }
 
@@ -93,8 +96,8 @@ public abstract class Component {
         }
     }
 
-    protected boolean getInputValue(int inputPin) {
-        return inputs[inputPin].getImmediateValue(indices[inputPin]);
+    protected Value getInputValue(int inputPin) {
+        return inputs[inputPin].getValue(indices[inputPin]);
     }
 
     protected abstract void onEvaluation();

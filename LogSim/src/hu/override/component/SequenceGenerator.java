@@ -1,12 +1,14 @@
 package hu.override.component;
 
+import hu.override.Value;
+
 /**
  *
  * @author balint
  */
 public class SequenceGenerator extends Component implements IsSource {
 
-    boolean[] sequence;
+    Value[] sequence;
     private int idx;
 
     public void step() {
@@ -18,7 +20,7 @@ public class SequenceGenerator extends Component implements IsSource {
         currentValue[0] = sequence[idx];
     }
 
-    public void setSequence(boolean[] sequence) {
+    public void setValues(Value[] values) {
         this.sequence = sequence;
     }
 }

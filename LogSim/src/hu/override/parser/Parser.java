@@ -1,6 +1,7 @@
 package hu.override.parser;
 
 import hu.override.Circuit;
+import hu.override.Value;
 import hu.override.component.AndGate;
 import hu.override.component.Component;
 import hu.override.component.Gnd;
@@ -170,16 +171,16 @@ public class Parser {
                 Component component = circuit.getComponentByName(var);
                 if (component instanceof SequenceGenerator) {
                     SequenceGenerator seqGen = (SequenceGenerator) component;
-                    boolean[] sequence = new boolean[arguments.length];
+                    Value[] sequence = new Value[arguments.length];
                     for (int i = 0; i < arguments.length; i++) {
                         arg = arguments[i];
                         if (!arg.equals("0") && !arg.equals("1")) {
                             throw new InvalidCircuitDefinitionException("SeqGen kapott 1-estõl és 0-ástól különbözõ dolgot!");
                         } else {
-                            sequence[i] = arg.equals("1") ? true : false;
+                            sequence[i] = arg.equals("1") ? Value.TRUE : Value.FALSE;
                         }
                     }
-                    seqGen.setSequence(sequence);
+                    seqGen.setValues(sequence);
                 } else {
                     for (int i = 0; i < arguments.length; i++) {
                         arg = arguments[i];
