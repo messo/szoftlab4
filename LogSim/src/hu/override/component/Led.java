@@ -8,7 +8,7 @@ public class Led extends Component implements IsDisplay {
 
     @Override
     public String toString() {
-        return String.format("LED(%s): %b", name, lastValue[0]);
+        return String.format("LED(%s): %s", name, lastValue[0]);
     }
 
     @Override

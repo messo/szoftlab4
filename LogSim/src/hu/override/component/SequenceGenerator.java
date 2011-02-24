@@ -21,6 +21,6 @@ public class SequenceGenerator extends Component implements IsSource {
     }
 
     public void setValues(Value[] values) {
-        this.sequence = sequence;
+        this.sequence = values;
     }
 }
