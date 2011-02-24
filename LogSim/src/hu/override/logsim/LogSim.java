@@ -1,11 +1,11 @@
-package hu.override;
+package hu.override.logsim;
 
-import hu.override.controller.Simulation;
-import hu.override.exception.CircuitAlreadyExistsException;
-import hu.override.exception.InvalidCircuitDefinitionException;
-import hu.override.parser.Parser;
-import hu.override.view.ConsoleView;
-import hu.override.view.View;
+import hu.override.logsim.controller.Simulation;
+import hu.override.logsim.exception.CircuitAlreadyExistsException;
+import hu.override.logsim.exception.InvalidCircuitDefinitionException;
+import hu.override.logsim.parser.Parser;
+import hu.override.logsim.view.ConsoleView;
+import hu.override.logsim.view.View;
 import java.io.File;
 
 /**

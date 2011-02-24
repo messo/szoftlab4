@@ -1,6 +1,6 @@
-package hu.override.component;
+package hu.override.logsim.component;
 
-import hu.override.Value;
+import hu.override.logsim.Value;
 
 /**
  *

@@ -1,6 +1,7 @@
-package hu.override.component;
+package hu.override.logsim.component;
 
-import hu.override.Value;
+import hu.override.logsim.Circuit;
+import hu.override.logsim.Value;
 
 /**
  *
@@ -8,25 +9,21 @@ import hu.override.Value;
  */
 public abstract class Component {
 
+    private Circuit parent;
     protected Value[] lastValue;
     protected Value[] currentValue;
     protected String name;
     protected Component[] inputs;
     protected int[] indices;
     private boolean alreadyEvaluated = false;
-    private HasDirtyFlag parent;
 
     public Component() {
-        init();
-    }
-
-    public void init() {
         lastValue = new Value[1];
         currentValue = new Value[1];
         lastValue[0] = Value.FALSE; // alapból innen indulunk.
     }
 
-    public void setParent(HasDirtyFlag parent) {
+    public void setParent(Circuit parent) {
         this.parent = parent;
     }
 
@@ -76,7 +73,7 @@ public abstract class Component {
 
         for (int i = 0; i < lastValue.length; i++) {
             if (currentValue[i] != null && lastValue[i] != currentValue[i]) {
-                parent.setDirtyFlag();
+                parent.setUnstable(true);
                 lastValue[i] = currentValue[i];
             }
         }

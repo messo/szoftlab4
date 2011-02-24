@@ -1,8 +1,8 @@
-package hu.override.controller;
+package hu.override.logsim.controller;
 
-import hu.override.Circuit;
-import hu.override.SequenceGeneratorStepper;
-import hu.override.view.View;
+import hu.override.logsim.Circuit;
+import hu.override.logsim.SequenceGeneratorStepper;
+import hu.override.logsim.view.View;
 
 /**
  *
@@ -33,9 +33,8 @@ public class Simulation extends Thread implements Controller {
         while (shouldRun) {
             counter = 0;
             while (counter < 100) {
-                circuit.clearDirtyFlag();
-                circuit.simulate();
-                if (!circuit.isChanged()) {
+                circuit.doEvaluationCycle();
+                if (!circuit.isUnstable()) {
                     break;
                 }
                 counter++;

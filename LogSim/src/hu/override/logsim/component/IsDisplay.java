@@ -1,4 +1,4 @@
-package hu.override.component;
+package hu.override.logsim.component;
 
 /**
  *

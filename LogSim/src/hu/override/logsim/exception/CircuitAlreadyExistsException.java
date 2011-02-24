@@ -1,4 +1,4 @@
-package hu.override.exception;
+package hu.override.logsim.exception;
 
 /**
  *

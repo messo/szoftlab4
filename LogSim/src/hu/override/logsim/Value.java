@@ -1,4 +1,4 @@
-package hu.override;
+package hu.override.logsim;
 
 /**
  * Az áramkörben elõfordulható érték

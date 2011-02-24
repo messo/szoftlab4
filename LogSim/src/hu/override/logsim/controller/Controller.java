@@ -1,4 +1,4 @@
-package hu.override.controller;
+package hu.override.logsim.controller;
 
 /**
  *

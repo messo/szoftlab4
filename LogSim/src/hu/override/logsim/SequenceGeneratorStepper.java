@@ -1,6 +1,6 @@
-package hu.override;
+package hu.override.logsim;
 
-import hu.override.controller.Simulation;
+import hu.override.logsim.controller.Simulation;
 
 /**
  *

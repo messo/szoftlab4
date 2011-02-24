@@ -1,12 +1,13 @@
 package hu.override.parser;
 
-import hu.override.Circuit;
-import hu.override.component.AndGate;
-import hu.override.component.Inverter;
-import hu.override.component.Led;
-import hu.override.component.OrGate;
-import hu.override.component.SequenceGenerator;
-import hu.override.component.Toggle;
+import hu.override.logsim.parser.Parser;
+import hu.override.logsim.Circuit;
+import hu.override.logsim.component.impl.AndGate;
+import hu.override.logsim.component.impl.Inverter;
+import hu.override.logsim.component.impl.Led;
+import hu.override.logsim.component.impl.OrGate;
+import hu.override.logsim.component.impl.SequenceGenerator;
+import hu.override.logsim.component.impl.Toggle;
 import org.junit.Assert;
 import org.junit.Test;
 

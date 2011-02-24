@@ -1,8 +1,8 @@
-package hu.override.view;
+package hu.override.logsim.view;
 
-import hu.override.Circuit;
-import hu.override.component.Component;
-import hu.override.controller.Simulation;
+import hu.override.logsim.Circuit;
+import hu.override.logsim.component.Component;
+import hu.override.logsim.controller.Simulation;
 
 /**
  *
