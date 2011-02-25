@@ -3,6 +3,7 @@ package hu.override.logsim.controller;
 import hu.override.logsim.Circuit;
 import hu.override.logsim.SequenceGeneratorStepper;
 import hu.override.logsim.view.View;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
@@ -10,15 +11,18 @@ import hu.override.logsim.view.View;
  */
 public class Simulation extends Thread implements Controller {
 
+    private static final int cycleLimit = 100;
     private boolean shouldRun;
     private Circuit circuit;
-    private int counter;
+    private AtomicInteger counter = new AtomicInteger();
     private final View view;
     private final Object synchObj = new Object();
+    private final Object lock = new Object();
     private final SequenceGeneratorStepper seqGenStepper;
 
     public Simulation(Circuit circuit, View view) {
         this.circuit = circuit;
+        this.circuit.setSimulation(this);
         this.view = view;
         this.view.setController(this);
         this.seqGenStepper = new SequenceGeneratorStepper(this);
@@ -31,20 +35,21 @@ public class Simulation extends Thread implements Controller {
 
         shouldRun = true;
         while (shouldRun) {
-            counter = 0;
-            while (counter < 100) {
-                circuit.doEvaluationCycle();
-                if (!circuit.isUnstable()) {
+            synchronized (lock) {
+                counter.set(0);
+                while (counter.getAndIncrement() < cycleLimit) {
+                    circuit.doEvaluationCycle();
+                    if (circuit.isStable()) {
+                        break;
+                    }
+                }
+                if (counter.get() == cycleLimit) {
+                    System.out.println("Nincs stacionárius állapot!");
                     break;
                 }
-                counter++;
+                // GUI rajzolás
+                view.update(circuit);
             }
-            if (counter == 100) {
-                System.out.println("Nincs stacionárius állapot!");
-                break;
-            }
-            // GUI rajzolás
-            view.update(circuit);
 
             // lefutott egy ciklus, várunk, hogy lesz-e változás
             try {
@@ -71,5 +76,9 @@ public class Simulation extends Thread implements Controller {
 
     public Circuit getCircuit() {
         return circuit;
+    }
+
+    public Object getLock() {
+        return lock;
     }
 }

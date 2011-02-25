@@ -9,13 +9,13 @@ import hu.override.logsim.Value;
  */
 public abstract class Component {
 
-    private Circuit parent;
+    protected Circuit circuit;
     protected Value[] lastValue;
     protected Value[] currentValue;
     protected String name;
     protected Component[] inputs;
     protected int[] indices;
-    private boolean alreadyEvaluated = false;
+    protected boolean alreadyEvaluated = false;
 
     public Component() {
         lastValue = new Value[1];
@@ -23,8 +23,8 @@ public abstract class Component {
         lastValue[0] = Value.FALSE; // alapból innen indulunk.
     }
 
-    public void setParent(Circuit parent) {
-        this.parent = parent;
+    public void setCircuit(Circuit parent) {
+        this.circuit = parent;
     }
 
     public void setName(String name) {
@@ -73,7 +73,7 @@ public abstract class Component {
 
         for (int i = 0; i < lastValue.length; i++) {
             if (currentValue[i] != null && lastValue[i] != currentValue[i]) {
-                parent.setUnstable(true);
+                circuit.setStable(false);
                 lastValue[i] = currentValue[i];
             }
         }

@@ -10,7 +10,7 @@ public class SequenceGeneratorStepper extends Thread {
 
     private Simulation simulation;
     private boolean shouldRun;
-    private long pause = 3000;
+    private long pause = 50;
 
     public SequenceGeneratorStepper(Simulation simulation) {
         this.simulation = simulation;
@@ -26,8 +26,14 @@ public class SequenceGeneratorStepper extends Thread {
                 sleep(pause);
             } catch (InterruptedException ex) {
             }
-            simulation.getCircuit().stepGenerators();
-            simulation.sourcesChanged();
+            
+            new Thread() {
+
+                @Override
+                public void run() {
+                    simulation.getCircuit().stepGenerators();
+                }
+            }.start();
         }
     }
 }

@@ -12,14 +12,30 @@ public class Toggle extends Component implements IsSource {
 
     @Override
     protected void onEvaluation() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void setValues(Value[] values) {
         if (values.length != 1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Kapcsolónak csak egy értéke lehet!");
         }
 
-        throw new UnsupportedOperationException("Not supported yet.");
+        // ha új értéket kapott
+        if (values[0] != lastValue[0]) {
+            // még nincs kiértékelve
+            alreadyEvaluated = false;
+            // elmentjük az értéket
+            lastValue[0] = values[0];
+            circuit.simulationRefreshRequired();
+        }
+    }
+
+    /**
+     * Kapcsoló állapotát megváltoztatjuk
+     */
+    public void toggle() {
+        Value[] values = new Value[1];
+        values[0] = lastValue[0].invert();
+        setValues(values);
     }
 }

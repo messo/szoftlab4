@@ -1,2 +1,4 @@
-x=seqgen(1,0)
-y=LED(x)
+x=SEQGEN(0,1)
+y=TOGGLE()
+z=AND(x, y)
+led=LED(z)

@@ -2,6 +2,7 @@ package hu.override.logsim;
 
 import hu.override.logsim.component.Component;
 import hu.override.logsim.component.IsDisplay;
+import hu.override.logsim.component.IsSource;
 import hu.override.logsim.component.impl.SequenceGenerator;
 import hu.override.logsim.controller.Simulation;
 import java.util.ArrayList;
@@ -17,10 +18,15 @@ import java.util.List;
 public class Circuit {
 
     private HashMap<String, Component> componentMap;
-    private boolean unstable;
+    private boolean stable;
+    private Simulation simulation;
 
     public Circuit() {
         componentMap = new HashMap<String, Component>();
+    }
+
+    public void setSimulation(Simulation simulation) {
+        this.simulation = simulation;
     }
 
     /**
@@ -41,7 +47,7 @@ public class Circuit {
      * @return
      */
     public Component addComponent(Component component) {
-        component.setParent(this);
+        component.setCircuit(this);
         componentMap.put(component.getName(), component);
         return component;
     }
@@ -50,7 +56,7 @@ public class Circuit {
      * 
      */
     public void doEvaluationCycle() {
-        unstable = false;
+        setStable(true);
 
         // számold ki magad flagek törlése, mivel új ciklus indul
         // ezért mindenkinek ki kell magát számolni újból.
@@ -66,20 +72,24 @@ public class Circuit {
         }
     }
 
-    public boolean isUnstable() {
-        return unstable;
+    public boolean isStable() {
+        return stable;
     }
 
-    public void setUnstable(boolean unstable) {
-        this.unstable = unstable;
+    public void setStable(boolean stable) {
+        this.stable = stable;
     }
 
     public void stepGenerators() {
-        for (Component c : componentMap.values()) {
-            if (c instanceof SequenceGenerator) {
-                ((SequenceGenerator) c).step();
+        synchronized (simulation.getLock()) {
+            for (Component c : componentMap.values()) {
+                if (c instanceof SequenceGenerator) {
+                    ((SequenceGenerator) c).step();
+                }
             }
         }
+
+        simulationRefreshRequired();
     }
 
     /**
@@ -91,6 +101,25 @@ public class Circuit {
         List<Component> list = new ArrayList<Component>();
         for (Component c : componentMap.values()) {
             if (c instanceof IsDisplay) {
+                list.add(c);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 
+     */
+    public void simulationRefreshRequired() {
+        synchronized (simulation.getLock()) {
+            simulation.sourcesChanged();
+        }
+    }
+
+    public List<Component> getSources() {
+        List<Component> list = new ArrayList<Component>();
+        for (Component c : componentMap.values()) {
+            if (c instanceof IsSource) {
                 list.add(c);
             }
         }
