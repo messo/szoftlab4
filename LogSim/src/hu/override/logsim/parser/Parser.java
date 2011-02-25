@@ -124,7 +124,8 @@ public class Parser {
             inputs.put(variableName, arguments);
 
             try {
-                circuit.addComponent(createComponent(componentName, variableName, arguments.length));
+                circuit.addComponent(createComponent(componentName, variableName,
+                        arguments == null ? 0 : arguments.length));
             } catch (UnknownComponentException ex) {
                 System.err.println("nincs ilyen komponens!");
             }
