@@ -1,7 +1,5 @@
 package hu.override.logsim;
 
-import hu.override.logsim.controller.Simulation;
-
 /**
  *
  * @author balint
@@ -13,6 +11,7 @@ public class SequenceGeneratorStepper extends Thread {
     private long pause = 50;
 
     public SequenceGeneratorStepper(Simulation simulation) {
+        super("SequenceGeneratorStepper");
         this.simulation = simulation;
     }
 
@@ -35,5 +34,9 @@ public class SequenceGeneratorStepper extends Thread {
                 }
             }.start();
         }
+    }
+
+    void stopStepper() {
+        shouldRun = false;
     }
 }

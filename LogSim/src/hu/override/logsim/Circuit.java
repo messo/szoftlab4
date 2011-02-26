@@ -4,7 +4,6 @@ import hu.override.logsim.component.Component;
 import hu.override.logsim.component.IsDisplay;
 import hu.override.logsim.component.IsSource;
 import hu.override.logsim.component.impl.SequenceGenerator;
-import hu.override.logsim.controller.Simulation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,7 +112,7 @@ public class Circuit {
             }
         }
 
-        simulationRefreshRequired();
+        simulationShouldBeRunning();
     }
 
     /**
@@ -135,9 +134,9 @@ public class Circuit {
      * Jelzi a szimuláció felé, hogy új ciklust kell indítani. Ezt egy jelforrás
      * beállítása után hívjuk meg.
      */
-    public void simulationRefreshRequired() {
+    public void simulationShouldBeRunning() {
         synchronized (simulation.getLock()) {
-            simulation.sourcesChanged();
+            simulation.setState(Simulation.State.RUNNING);
         }
     }
 
