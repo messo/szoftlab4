@@ -1,0 +1,95 @@
+\subsection{Circuit}
+\begin{itemize}
+\item Felelősség\\
+Áramkört reprezentál, melyhez komponeseket lehet adni, és kiértékelési ciklusokat  lehet futtatni, utóbbi a \texttt{Simulation} feladata.
+\item Ősosztályok\ Object $\rightarrow{}$ Circuit.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private HashMap componentMap} 
+ % TODO
+	\item \texttt{private Simulation simulation} 
+ % TODO
+	\item \texttt{private boolean stable} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public Component addComponent(Component component)}: Komponens hozzáadása az áramkörhöz.
+	\item \texttt{public void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy  stabil (nem változott semelyik komponens kimenete az utolsó futtatás óta)  vagy instabil állapotban van-e.
+	\item \texttt{public Component getComponentByName(String name)}: Lekérünk egy komponenst az áramkörtől a neve alapján.
+	\item \texttt{public List getDisplays()}: Megjelenítő típusú komponeseket adja vissza.
+	\item \texttt{public List getSources()}: Jelforrás típusú komponenseket adja vissza.
+	\item \texttt{public boolean isStable()}: Áramkör stacionárius állapotának lekérdezése.
+	\item \texttt{public void setSimulation(Simulation simulation)}: Szimuláció beállítása.
+	\item \texttt{public void setStable(boolean stable)}: Áramkör stabilitásának beállítása.
+	\item \texttt{public void simulationRefreshRequired()}: Jelzi a szimuláció felé, hogy új ciklust kell indítani. Ezt egy jelforrás  beállítása után hívjuk meg.
+	\item \texttt{public void stepGenerators()}: Jelgenerátorok a szimuláció szemszögéből nézve, egyszerre történő  léptetése.
+\end{itemize}
+\end{itemize}
+
+\subsection{LogSim}
+\begin{itemize}
+\item Felelősség\\
+
+ % TODO
+\item Ősosztályok\ Object $\rightarrow{}$ LogSim.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public static void main(String[] args)}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{SequenceGeneratorStepper}
+\begin{itemize}
+\item Felelősség\\
+
+ % TODO
+\item Ősosztályok\ Object $\rightarrow{}$ Thread $\rightarrow{}$ SequenceGeneratorStepper.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private long pause} 
+ % TODO
+	\item \texttt{private boolean shouldRun} 
+ % TODO
+	\item \texttt{private Simulation simulation} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public void run()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Value}
+\begin{itemize}
+\item Felelősség\\
+Az áramkörben előfordulható érték
+\item Ősosztályok\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Value.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{public static final Value FALSE} 
+ % TODO
+	\item \texttt{public static final Value TRUE} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public Value invert()}: 
+ % TODO
+	\item \texttt{public static Value valueOf(String name)}: 
+ % TODO
+	\item \texttt{public static Value[] values()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+

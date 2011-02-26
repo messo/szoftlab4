@@ -1,0 +1,57 @@
+\subsection{Controller}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+
+ % TODO
+\item Ősosztályok\ Controller.
+\item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public void start()}: 
+ % TODO
+	\item \texttt{public void stop()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Simulation}
+\begin{itemize}
+\item Felelősség\\
+
+ % TODO
+\item Ősosztályok\ Object $\rightarrow{}$ Thread $\rightarrow{}$ Simulation.
+\item Interfészek Controller.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private Circuit circuit} 
+ % TODO
+	\item \texttt{private AtomicInteger counter} 
+ % TODO
+	\item \texttt{private static final int cycleLimit} 
+ % TODO
+	\item \texttt{private final Object lock} 
+ % TODO
+	\item \texttt{private final SequenceGeneratorStepper seqGenStepper} 
+ % TODO
+	\item \texttt{private boolean shouldRun} 
+ % TODO
+	\item \texttt{private final Object synchObj} 
+ % TODO
+	\item \texttt{private final View view} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public Circuit getCircuit()}: 
+ % TODO
+	\item \texttt{public Object getLock()}: 
+ % TODO
+	\item \texttt{public void run()}: 
+ % TODO
+	\item \texttt{public void setCircuit(Circuit circuit)}: 
+ % TODO
+	\item \texttt{public void sourcesChanged()}: Megváltozott valamelyik jelforrás, szimuláció mehet újból
+\end{itemize}
+\end{itemize}
+

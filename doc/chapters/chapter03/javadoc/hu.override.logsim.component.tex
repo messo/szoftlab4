@@ -1,0 +1,78 @@
+\subsection{Component}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelősség\\
+
+ % TODO
+\item Ősosztályok\ Object $\rightarrow{}$ Component.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{protected boolean alreadyEvaluated} 
+ % TODO
+	\item \texttt{protected Circuit circuit} 
+ % TODO
+	\item \texttt{protected Value[] currentValue} 
+ % TODO
+	\item \texttt{protected int[] indices} 
+ % TODO
+	\item \texttt{protected Component[] inputs} 
+ % TODO
+	\item \texttt{protected Value[] lastValue} 
+ % TODO
+	\item \texttt{protected String name} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public void clearEvaluatedFlag()}: 
+ % TODO
+	\item \texttt{public Value evaluate()}: 
+ % TODO
+	\item \texttt{public Value evaluate(int outputPin)}: Számolás:
+	\item \texttt{public String getName()}: 
+ % TODO
+	\item \texttt{public Value getValue()}: 
+ % TODO
+	\item \texttt{public Value getValue(int idx)}: 
+ % TODO
+	\item \texttt{public void setCircuit(Circuit parent)}: 
+ % TODO
+	\item \texttt{public void setInput(int inputSlot, Component component)}: 
+ % TODO
+	\item \texttt{public void setInput(int inputPin, Component component, int outputPin)}: Beállítunk egy bemenetet.
+	\item \texttt{public void setInputPinsCount(int inputPinsCount)}: 
+ % TODO
+	\item \texttt{public void setName(String name)}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{IsDisplay}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+
+ % TODO
+\item Ősosztályok\ IsDisplay.
+\item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\end{itemize}
+
+\subsection{IsSource}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+
+ % TODO
+\item Ősosztályok\ IsSource.
+\item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public void setValues(Value[] values)}: Beállítjuk a jelforrás értékét.
+\end{itemize}
+\end{itemize}
+

@@ -8,4 +8,6 @@ doc/*.aux
 doc/*.dvi
 doc/*.lof
 doc/*.out
+doc/chapters/chapter03/javadoc/*.aux
+doc/chapters/chapter03/javadoc/*.class
 
