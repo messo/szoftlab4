@@ -10,7 +10,7 @@ import hu.override.logsim.component.IsSource;
  */
 public class SequenceGenerator extends Component implements IsSource {
 
-    Value[] sequence;
+    private Value[] sequence;
     private int idx;
 
     public void step() {

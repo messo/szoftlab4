@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Áramkört reprezenetál, melyhez komponeseket lehet adni, és kiértékelési ciklusokat
+ * Áramkört reprezentál, melyhez komponeseket lehet adni, és kiértékelési ciklusokat
  * lehet futtatni, utóbbi a {@link Simulation} feladata.
  *
  * @author balint
@@ -25,12 +25,17 @@ public class Circuit {
         componentMap = new HashMap<String, Component>();
     }
 
+    /**
+     * Szimuláció beállítása.
+     *
+     * @param simulation
+     */
     public void setSimulation(Simulation simulation) {
         this.simulation = simulation;
     }
 
     /**
-     * Lekérünk egy komponenst az áramkörtõl a neve alapján
+     * Lekérünk egy komponenst az áramkörtõl a neve alapján.
      * 
      * @param name komponens neve
      * @return komponens
@@ -40,8 +45,7 @@ public class Circuit {
     }
 
     /**
-     * Komponens hozzáadása az áramkörhöz, meghívódik a
-     * {@link Component#setParent(hu.override.logsim.Circuit)} metódus is.
+     * Komponens hozzáadása az áramkörhöz.
      *
      * @param component
      * @return
@@ -53,9 +57,12 @@ public class Circuit {
     }
 
     /**
-     * 
+     * Egy kiértékelési ciklus lefuttatása. Az áramkörtõl ezután lekérdezhetõ, hogy
+     * stabil (nem változott semelyik komponens kimenete az utolsó futtatás óta)
+     * vagy instabil állapotban van-e.
      */
     public void doEvaluationCycle() {
+        // kezdetben stabil
         setStable(true);
 
         // számold ki magad flagek törlése, mivel új ciklus indul
@@ -67,19 +74,36 @@ public class Circuit {
         // a megjelenítõkre hívjuk meg az evaluate();
         for (Component c : componentMap.values()) {
             if (c instanceof IsDisplay) {
+                // miközben minden kiértékelõdik, lehet, hogy valamelyik
+                // komponens instabillá teszi az áramkört, mert változott
+                // az õ értéke.
                 c.evaluate();
             }
         }
     }
 
+    /**
+     * Áramkör stacionárius állapotának lekérdezése.
+     *
+     * @return stabil-e?
+     */
     public boolean isStable() {
         return stable;
     }
 
+    /**
+     * Áramkör stabilitásának beállítása.
+     *
+     * @param stable
+     */
     public void setStable(boolean stable) {
         this.stable = stable;
     }
 
+    /**
+     * Jelgenerátorok a szimuláció szemszögébõl nézve, egyszerre történõ
+     * léptetése.
+     */
     public void stepGenerators() {
         synchronized (simulation.getLock()) {
             for (Component c : componentMap.values()) {
@@ -108,7 +132,8 @@ public class Circuit {
     }
 
     /**
-     * 
+     * Jelzi a szimuláció felé, hogy új ciklust kell indítani. Ezt egy jelforrás
+     * beállítása után hívjuk meg.
      */
     public void simulationRefreshRequired() {
         synchronized (simulation.getLock()) {
@@ -116,6 +141,9 @@ public class Circuit {
         }
     }
 
+    /**
+     * Jelforrás típusú komponenseket adja vissza.
+     */
     public List<Component> getSources() {
         List<Component> list = new ArrayList<Component>();
         for (Component c : componentMap.values()) {

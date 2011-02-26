@@ -12,6 +12,7 @@ public class Toggle extends Component implements IsSource {
 
     @Override
     protected void onEvaluation() {
+        // nop
     }
 
     @Override
