@@ -4,11 +4,13 @@ import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
 import hu.override.logsim.component.Component;
 import hu.override.logsim.component.impl.Toggle;
-import hu.override.logsim.controller.Simulation;
+import hu.override.logsim.controller.Controller;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,19 +24,59 @@ import javax.swing.JPanel;
 public class GuiView extends JFrame implements View {
 
     private final JPanel top;
+    private final JPanel center;
     private final JPanel bottom;
     private HashMap<Component, JLabel> displayMap = new HashMap<Component, JLabel>();
     private HashMap<Component, JButton> sourceMap = new HashMap<Component, JButton>();
+    private final Controller controller;
 
-    public GuiView() {
+    public GuiView(final Controller controller) {
+        super("LogSim v0.1");
+
+        this.controller = controller;
+
         setLayout(new BorderLayout());
 
         add(top = new JPanel(), BorderLayout.NORTH);
+        add(center = new JPanel(), BorderLayout.CENTER);
         add(bottom = new JPanel(), BorderLayout.SOUTH);
         top.setLayout(new FlowLayout());
+        center.setLayout(new FlowLayout());
         bottom.setLayout(new FlowLayout());
+
+        final JButton start = new JButton("Start");
+        final JButton stop = new JButton("Stop");
+        stop.setEnabled(false);
+
+        top.add(start);
+        start.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent ae) {
+                controller.onStart();
+                start.setEnabled(false);
+                stop.setEnabled(true);
+            }
+        });
+        top.add(stop);
+        stop.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent ae) {
+                controller.onStop();
+                start.setEnabled(true);
+                stop.setEnabled(false);
+            }
+        });
+
+        addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent we) {
+                controller.onExit();
+            }
+        });
     }
 
+    @Override
     public void update(Circuit circuit) {
         for (Component c : circuit.getDisplays()) {
             displayMap.get(c).setText(String.format("%s = %s", c.getName(), c.getValue() == Value.TRUE ? "1" : "0"));
@@ -46,31 +88,28 @@ public class GuiView extends JFrame implements View {
         }
     }
 
-    public void setController(Simulation sim) {
-        Circuit circuit = sim.getCircuit();
-
-        JLabel label;
-        for (Component c : circuit.getDisplays()) {
-            displayMap.put(c, label = new JLabel("X"));
-            bottom.add(label);
-        }
-
-        JButton btn;
-        for (final Component c : circuit.getSources()) {
-            if (c instanceof Toggle) {
-                sourceMap.put(c, btn = new JButton());
-                btn.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent ae) {
-                        ((Toggle) c).toggle();
-                    }
-                });
-                top.add(btn);
-            }
-        }
-
-
+    public void layoutDone() {
         pack();
         setVisible(true);
+    }
+
+    public void addSource(final Component source) {
+        if (source instanceof Toggle) {
+            JButton btn = new JButton(String.format("%s = %s", source.getName(), "X"));
+            sourceMap.put(source, btn);
+            btn.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent ae) {
+                    ((Toggle) source).toggle();
+                }
+            });
+            center.add(btn);
+        }
+    }
+
+    public void addDisplay(final Component display) {
+        JLabel label = new JLabel("X");
+        displayMap.put(display, label);
+        bottom.add(label);
     }
 }

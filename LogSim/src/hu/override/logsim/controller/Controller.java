@@ -6,7 +6,11 @@ package hu.override.logsim.controller;
  */
 public interface Controller {
 
-    void start();
+    public void onCircuitUpdate();
 
-    void stop();
+    public void onStart();
+
+    public void onStop();
+
+    public void onExit();
 }
