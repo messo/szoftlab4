@@ -1,0 +1,4 @@
+%\usecase{Jelforrások módosítása}
+%{Az áramkör jelforrásainak módosítása}
+%{Felhasználó}
+%{A felhasználó, az általa kiválasztott jelforrás értékét vagy értékeit módosítja}
