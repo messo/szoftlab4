@@ -6,7 +6,7 @@ import hu.override.logsim.Value;
  *
  * @author balint
  */
-public interface IsSource {
+public interface IsSource extends Component {
 
     /**
      * Beállítjuk a jelforrás értékét.
@@ -14,4 +14,6 @@ public interface IsSource {
      * @param values
      */
     void setValues(Value[] values);
+
+    Value[] getValues();
 }

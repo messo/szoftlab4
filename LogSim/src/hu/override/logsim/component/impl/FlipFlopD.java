@@ -1,6 +1,6 @@
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.component.Component;
+import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.Value;
 /**
  *
@@ -12,7 +12,7 @@ import hu.override.logsim.Value;
 //input 0     clk
 //input 1     d
 //input 2     out
-public class FlipFlopD extends Component
+public class FlipFlopD extends AbstractComponent
 {
     @Override
     protected void onEvaluation()

@@ -1,14 +1,14 @@
 package hu.override.logsim.component.impl;
 
 import hu.override.logsim.Value;
-import hu.override.logsim.component.Component;
+import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.IsSource;
 
 /**
  *
  * @author balint
  */
-public class Toggle extends Component implements IsSource {
+public class Toggle extends AbstractComponent implements IsSource {
 
     @Override
     protected void onEvaluation() {
@@ -29,6 +29,12 @@ public class Toggle extends Component implements IsSource {
             lastValue[0] = values[0];
             circuit.simulationShouldBeRunning();
         }
+    }
+
+    public Value[] getValues() {
+        Value[] values = new Value[1];
+        values[0] = lastValue[0];
+        return values;
     }
 
     /**

@@ -4,5 +4,5 @@ package hu.override.logsim.component;
  *
  * @author balint
  */
-public interface IsDisplay {
+public interface IsDisplay extends Component {
 }

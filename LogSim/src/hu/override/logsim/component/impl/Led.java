@@ -1,13 +1,13 @@
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.component.Component;
+import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.IsDisplay;
 
 /**
  *
  * @author balint
  */
-public class Led extends Component implements IsDisplay {
+public class Led extends AbstractComponent implements IsDisplay {
 
     @Override
     public String toString() {

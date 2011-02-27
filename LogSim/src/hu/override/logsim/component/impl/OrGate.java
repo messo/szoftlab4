@@ -1,13 +1,13 @@
 package hu.override.logsim.component.impl;
 
 import hu.override.logsim.Value;
-import hu.override.logsim.component.Component;
+import hu.override.logsim.component.AbstractComponent;
 
 /**
  *
  * @author balint
  */
-public class OrGate extends Component {
+public class OrGate extends AbstractComponent {
 
     @Override
     protected void onEvaluation() {

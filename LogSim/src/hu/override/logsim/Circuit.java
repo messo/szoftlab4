@@ -1,6 +1,6 @@
 package hu.override.logsim;
 
-import hu.override.logsim.component.Component;
+import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.IsDisplay;
 import hu.override.logsim.component.IsSource;
 import hu.override.logsim.component.impl.SequenceGenerator;
@@ -16,12 +16,14 @@ import java.util.List;
  */
 public class Circuit {
 
-    private HashMap<String, Component> componentMap;
+    private HashMap<String, AbstractComponent> componentMap;
+    private List<SequenceGenerator> sequenceGens;
     private boolean stable;
     private Simulation simulation;
 
     public Circuit() {
-        componentMap = new HashMap<String, Component>();
+        componentMap = new HashMap<String, AbstractComponent>();
+        sequenceGens = new ArrayList<SequenceGenerator>();
     }
 
     /**
@@ -39,7 +41,7 @@ public class Circuit {
      * @param name komponens neve
      * @return komponens
      */
-    public Component getComponentByName(String name) {
+    public AbstractComponent getComponentByName(String name) {
         return componentMap.get(name);
     }
 
@@ -49,9 +51,12 @@ public class Circuit {
      * @param component
      * @return
      */
-    public Component addComponent(Component component) {
+    public AbstractComponent addComponent(AbstractComponent component) {
         component.setCircuit(this);
         componentMap.put(component.getName(), component);
+        if( component instanceof SequenceGenerator ) {
+            sequenceGens.add((SequenceGenerator) component);
+        }
         return component;
     }
 
@@ -66,12 +71,12 @@ public class Circuit {
 
         // számold ki magad flagek törlése, mivel új ciklus indul
         // ezért mindenkinek ki kell magát számolni újból.
-        for (Component c : componentMap.values()) {
+        for (AbstractComponent c : componentMap.values()) {
             c.clearEvaluatedFlag();
         }
 
         // a megjelenítõkre hívjuk meg az evaluate();
-        for (Component c : componentMap.values()) {
+        for (AbstractComponent c : componentMap.values()) {
             if (c instanceof IsDisplay) {
                 // miközben minden kiértékelõdik, lehet, hogy valamelyik
                 // komponens instabillá teszi az áramkört, mert változott
@@ -105,7 +110,7 @@ public class Circuit {
      */
     public void stepGenerators() {
         synchronized (simulation.getLock()) {
-            for (Component c : componentMap.values()) {
+            for (AbstractComponent c : componentMap.values()) {
                 if (c instanceof SequenceGenerator) {
                     ((SequenceGenerator) c).step();
                 }
@@ -120,9 +125,9 @@ public class Circuit {
      * 
      * @return
      */
-    public List<Component> getDisplays() {
-        List<Component> list = new ArrayList<Component>();
-        for (Component c : componentMap.values()) {
+    public List<AbstractComponent> getDisplays() {
+        List<AbstractComponent> list = new ArrayList<AbstractComponent>();
+        for (AbstractComponent c : componentMap.values()) {
             if (c instanceof IsDisplay) {
                 list.add(c);
             }
@@ -143,13 +148,17 @@ public class Circuit {
     /**
      * Jelforrás típusú komponenseket adja vissza.
      */
-    public List<Component> getSources() {
-        List<Component> list = new ArrayList<Component>();
-        for (Component c : componentMap.values()) {
+    public List<AbstractComponent> getSources() {
+        List<AbstractComponent> list = new ArrayList<AbstractComponent>();
+        for (AbstractComponent c : componentMap.values()) {
             if (c instanceof IsSource) {
                 list.add(c);
             }
         }
         return list;
+    }
+
+    public List<SequenceGenerator> getSequenceGenerators() {
+        return sequenceGens;
     }
 }

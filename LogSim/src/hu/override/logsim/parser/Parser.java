@@ -3,7 +3,7 @@ package hu.override.logsim.parser;
 import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
 import hu.override.logsim.component.impl.AndGate;
-import hu.override.logsim.component.Component;
+import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.impl.Gnd;
 import hu.override.logsim.component.impl.Inverter;
 import hu.override.logsim.component.impl.Led;
@@ -30,14 +30,14 @@ import java.util.regex.Pattern;
 public class Parser {
 
     private Circuit circuit;
-    private static final HashMap<String, Class<? extends Component>> availableComponents;
+    private static final HashMap<String, Class<? extends AbstractComponent>> availableComponents;
     private static Pattern componentPattern = Pattern.compile("(.*?)\\s*=\\s*(.*?)\\((.*?)\\)");
     private static Pattern inputPattern = Pattern.compile("(.*?)(?:\\[([0-9]+)\\])?");
     private HashMap<String, String[]> inputs = new HashMap<String, String[]>();
     private int constComps = 0;
 
     static {
-        availableComponents = new HashMap<String, Class<? extends Component>>(5);
+        availableComponents = new HashMap<String, Class<? extends AbstractComponent>>(5);
         availableComponents.put("and", AndGate.class);
         availableComponents.put("or", OrGate.class);
         availableComponents.put("not", Inverter.class);
@@ -134,11 +134,11 @@ public class Parser {
         }
     }
 
-    protected Component createComponent(String componentName, String variableName, int inputPinsCount)
+    protected AbstractComponent createComponent(String componentName, String variableName, int inputPinsCount)
             throws UnknownComponentException {
-        Class<? extends Component> clazz = availableComponents.get(componentName);
+        Class<? extends AbstractComponent> clazz = availableComponents.get(componentName);
         if (clazz != null) {
-            Component c = null;
+            AbstractComponent c = null;
             try {
                 c = clazz.newInstance();
             } catch (Exception ex) {
@@ -169,7 +169,7 @@ public class Parser {
             }
             // ha van, akkor egyesével feldolgozzuk és hozzáadjuk a komponenshez.
             try {
-                Component component = circuit.getComponentByName(var);
+                AbstractComponent component = circuit.getComponentByName(var);
                 if (component instanceof SequenceGenerator) {
                     SequenceGenerator seqGen = (SequenceGenerator) component;
                     Value[] sequence = new Value[arguments.length];
@@ -196,7 +196,7 @@ public class Parser {
                         } else {
                             Matcher matcher = inputPattern.matcher(arg);
                             if (matcher.matches()) {
-                                Component c = circuit.getComponentByName(matcher.group(1));
+                                AbstractComponent c = circuit.getComponentByName(matcher.group(1));
                                 String index = matcher.group(2);
                                 if (index == null) {
                                     circuit.getComponentByName(var).setInput(i, c);

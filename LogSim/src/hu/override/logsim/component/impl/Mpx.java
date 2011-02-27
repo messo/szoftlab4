@@ -1,6 +1,6 @@
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.component.Component;
+import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.Value;
 /**
  *
@@ -12,7 +12,7 @@ import hu.override.logsim.Value;
 //input 0-1     select
 //input 2-5     data in
 //input 6       out
-public class Mpx extends Component
+public class Mpx extends AbstractComponent
 {
     @Override
     protected void onEvaluation()
