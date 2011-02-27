@@ -11,33 +11,32 @@
 Áramkör értelmező objektum, feladata, hogy a paraméterként átadott, illetve fájlban elhelyezett komponenseket értelmezze, a kapcsolatokat feltérképezze, elvégezze az összeköttetéseket, és ezáltal felépítse az áramkört.
 
 \subsection{\bf Simulation}
-Szimuláció objektum. A szimulációért felelős. Elindítja a jelgenerátor léptetőt, s utasítja az áramkört a kiértékelésre, és figyeli ha az áramkörben változás történt. Ha változás megadott lépésen belül nem történt, tájékoztatja a felhasználót, hogy nincs stacionárius állapot. Továbbá a megadott grafikai megjelenítőt frissíti.
+Szimuláció objektum. A szimulációért felelős. Elindítja a jelgenerátor léptetőt, s utasítja az áramkört a kiértékelésre, és figyeli ha az áramkörben változás történt. Ha változás megadott lépésen belül nem történt, tájékoztatja a felhasználót, hogy nincs stacionárius állapot.
 
 \subsection{\bf Circuit}
 Az áramkör objektum. Ezen objektum feladata a jelgenerátor léptető kérésére a jelgenerátorok léptetése, az áramkörben található komponensek utasítása arra, hogy töröljék a "már kiértékelve" flaget, hogy ezáltal a következő kiértékelés kezdeményezésre továbbítsák azt bemeneteik számára is.
 Továbbá feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők kiértékelésével kezdődik.
 
-
 \subsection{\bf SequenceGeneratorStepper}
-Jelgenerátor léptető objektum. Feladata, hogy a szimulációt utasítsa, hogy az áramkörben megtalálható jelgenerátorokat léptesse.
+Jelgenerátor léptető objektum. Feladata, hogy az áramkört utasítsa a jelgenerátorok léptesésére.
 
 \subsection{\bf SequenceGenerator}
-Jelgenerátor, az áramkört felépítő egyik alapelem, kiértékelési kezdeményezés hatására az előre betáplált jelsorozatot soron következő elemét állítja be aktuális értékként, így azon komponensek melyek bemenetére a Jelgenerátor van kötve, elérik aktuális értékét. Bemenete nem komponens jellegű így nem kezel más komponenseket.
+Jelgenerátor, az áramkört felépítő egyik alapelem, kiértékelési kezdeményezés hatására az előre betáplált jelsorozatot soron következő elemét állítja be aktuális értékként, így azon komponensek melyek bemenetére a Jelgenerátor van kötve, elérik aktuális értékét. Bemenete nem komponens jellegű így nem kezel más komponenseket. Mikor az áramkör kéri tőle, hogy lépjen, akkor a bitsorozat következő elemére lép.
 
 \subsection{\bf AndGate}
-ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát valósítja meg, ezáltal a kimenetére kötött komponens eléri az aktuális értékét.Figyeli hogy ha már kiértékelődött akkor nem kezdeményezi a bemenetére kötött komponensek kiértékelését.
+ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát valósítja meg, amit a kimenetén kiad.
 
 \subsection{\bf OrGate}
-VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek kiértékelését kezdeményezi, s a kapott értékek logikai VAGY kapcsolatát valósítja meg, ezáltal a kimenetére kötött komponens eléri az aktuális értékét.Figyeli hogy ha már kiértékelődött akkor nem kezdeményezi a bemenetére kötött komponensek kiértékelését.
+VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek kiértékelését kezdeményezi, s a kapott értékek logikai VAGY kapcsolatát valósítja meg, amit a kimenetén kiad.
 
 \subsection{\bf Inverter}
-Invertáló, az áramkör alapelemei közé tartozik. A bemenetére érkező jel logikai negáltját valósítja meg, így a kimenetén levő komponens eléri aktuális értékét.
+Invertáló, az áramkör alapelemei közé tartozik. A bemenetére érkező jel logikai negáltját valósítja meg, amit a kimenetén kiad.
 
 \subsection{\bf Gnd}
-Föld, az áramkört felépítő egyik elem, aktuális értéke minden kiértékelési kérésre logikai hamis. Bemenete nem létezik, így nem kezdeményez további kiértékeléseket. Állandó értéke logikai hamis.
+Föld, az áramkört felépítő egyik elem, állandó értéke logikai hamis. Bemenete nem létezik, így nem kezdeményez további kiértékeléseket.
 
 \subsection{\bf Vcc}
-Áramkör alapeleme, mely kiértékelési kezdeményezésre aktuális értékét logikai igaz ra állítja be. Állandó értéke logikai igaz.
+Tápfeszültség, az áramkör egyik alapeleme, mely állandóan a logikai igazt adja ki a kimenetén.
 
 \subsection{\bf Led}
 Egy kijelző az áramkör alapeleme, bemenetére kötött komponens kiértékelését kezdeményezi, és ezáltal az aktuális értékét egy a felhasználó számára érzékelhető módon kijelzi.
@@ -46,16 +45,16 @@ Egy kijelző az áramkör alapeleme, bemenetére kötött komponens kiértékel�
 Kapcsoló, az áramkört felépítő elem, felhasználói interakciót követően, az aktuális értékét lehet állítani. Komponens bemenete nincs, így nem kezel további komponenseket.
 
 \subsection{\bf Value}
-A logikai értékeket megvalósító objektum.
+A logikai értékeket megvalósító objektum. Jelenleg két érték lehetséges: logikai igaz, logikai hamis.
 
 \subsection{\bf FlipFlopD}
-D flip flopot reprezentáló osztály. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenettől függően változtatja a kimeneti értékét.
+D flip flopot megvalósító objektum. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenettől függően változtatja a kimeneti értékét.
 
 \subsection{\bf FlipFlopJK}
-JK flip flopot reprezentáló osztály. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenetektől függően változtatja a kimeneti értékét.
+JK flip flopot megvalósító objektum. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenetektől függően változtatja a kimeneti értékét.
 
 \subsection{\bf Mpx}
-Multiplexer áramköri építőelemet tartalmazó objektum. Bemeneteire kötött komponensek kiértékelését kezdeményezi, a választó bemenet függvényében adja ki a kimeneten az egyik, vagy másik értékbemenetére kötött értéket.
+4-1-es multiplexer áramköri építőelemet megvalósító objektum. Bemeneteire kötött komponensek kiértékelését kezdeményezi, a választó bemenet függvényében adja ki a kimeneten az egyik, vagy másik értékbemenetére kötött értéket.
 
 \subsection{\bf SevenSegmentDisplay}
 Hétszegmenses kijelző objektuma. Minden bemenete egy-egy szegmensért felelős, melyek 8-as alakban helyezkednek el.
@@ -176,6 +175,22 @@ Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
 
 \begin{figure}[H]
 \begin{center}
+\includegraphics{chapters/chapter03/seqdiagrams/sim_stop.pdf}
+\caption{Szimuláció leállítása}
+\label{fig:sim_stop}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics{chapters/chapter03/seqdiagrams/sim_start.pdf}
+\caption{Szimuláció indítása}
+\label{fig:sim_start}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
 \includegraphics{chapters/chapter03/seqdiagrams/aramkor_valasztas.pdf}
 \caption{Áramkör választás}
 \label{fig:aramkor_valasztas}
@@ -219,6 +234,22 @@ Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
 \includegraphics[angle=90]{chapters/chapter03/seqdiagrams/jelforrasok_betoltese.pdf}
 \caption{Jelforrások betöltése}
 \label{fig:jelforrasok_betoltese}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics{chapters/chapter03/seqdiagrams/ff_bind.pdf}
+\caption{Flip-flopok órajel bemenetére jelgenerátor kötése}
+\label{fig:ff_bind}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics{chapters/chapter03/seqdiagrams/ff_vez_on_clk.pdf}
+\caption{Jelgenerátor lépésénél a feliratkozott FF-ek vezérlése}
+\label{fig:ff_vez_on_clk}
 \end{center}
 \end{figure}
 
