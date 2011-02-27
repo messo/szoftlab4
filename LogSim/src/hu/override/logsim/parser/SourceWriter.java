@@ -3,7 +3,7 @@ package hu.override.logsim.parser;
 import hu.override.logsim.component.IsSource;
 
 /**
- * Kiírja egy fájlba a jelforrásokat
+ * Kiírja egy fájlba a jelforrások értékeit
  *
  * @author Balint
  */

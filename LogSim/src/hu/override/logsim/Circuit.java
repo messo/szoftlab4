@@ -4,6 +4,8 @@ import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.IsDisplay;
 import hu.override.logsim.component.IsSource;
 import hu.override.logsim.component.impl.SequenceGenerator;
+import hu.override.logsim.parser.SourceReader;
+import hu.override.logsim.parser.SourceWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,13 +19,15 @@ import java.util.List;
 public class Circuit {
 
     private HashMap<String, AbstractComponent> componentMap;
-    private List<SequenceGenerator> sequenceGens;
+    private List<IsSource> sources;
+    private List<IsDisplay> displays;
     private boolean stable;
     private Simulation simulation;
 
     public Circuit() {
         componentMap = new HashMap<String, AbstractComponent>();
-        sequenceGens = new ArrayList<SequenceGenerator>();
+        sources = new ArrayList<IsSource>();
+        displays = new ArrayList<IsDisplay>();
     }
 
     /**
@@ -54,8 +58,11 @@ public class Circuit {
     public AbstractComponent addComponent(AbstractComponent component) {
         component.setCircuit(this);
         componentMap.put(component.getName(), component);
-        if( component instanceof SequenceGenerator ) {
-            sequenceGens.add((SequenceGenerator) component);
+        if (component instanceof IsDisplay) {
+            displays.add((IsDisplay) component);
+        }
+        if (component instanceof IsSource) {
+            sources.add((IsSource) component);
         }
         return component;
     }
@@ -110,29 +117,14 @@ public class Circuit {
      */
     public void stepGenerators() {
         synchronized (simulation.getLock()) {
-            for (AbstractComponent c : componentMap.values()) {
-                if (c instanceof SequenceGenerator) {
-                    ((SequenceGenerator) c).step();
+            for (IsSource source : sources) {
+                if (source instanceof SequenceGenerator) {
+                    ((SequenceGenerator) source).step();
                 }
             }
         }
 
         simulationShouldBeWorking();
-    }
-
-    /**
-     * Megjelenítõ típusú komponeseket adja vissza.
-     * 
-     * @return
-     */
-    public List<IsDisplay> getDisplays() {
-        List<IsDisplay> list = new ArrayList<IsDisplay>();
-        for (AbstractComponent c : componentMap.values()) {
-            if (c instanceof IsDisplay) {
-                list.add((IsDisplay) c);
-            }
-        }
-        return list;
     }
 
     /**
@@ -149,16 +141,43 @@ public class Circuit {
      * Jelforrás típusú komponenseket adja vissza.
      */
     public List<IsSource> getSources() {
-        List<IsSource> list = new ArrayList<IsSource>();
-        for (AbstractComponent c : componentMap.values()) {
-            if (c instanceof IsSource) {
-                list.add((IsSource) c);
-            }
-        }
-        return list;
+        return sources;
     }
 
-    public List<SequenceGenerator> getSequenceGenerators() {
-        return sequenceGens;
+    /**
+     * Megjelenítõ típusú komponeseket adja vissza.
+     *
+     * @return
+     */
+    public List<IsDisplay> getDisplays() {
+        return displays;
+    }
+
+    /**
+     * Fájlból betölti a jelforrások állapotát.
+     *
+     * @param fileName
+     * @return visszajelzés
+     */
+    public int loadSources(String fileName) {
+        SourceReader sr = new SourceReader(fileName);
+        sr.loadValuesToSources(sources);
+
+        return 0;
+    }
+
+    /**
+     * Elmenti fájlba a jelforrások állapotát.
+     *
+     * @return visszajelzés
+     */
+    public int saveSources(String fileName) {
+        SourceWriter sw = new SourceWriter(fileName);
+        for (IsSource source : sources) {
+            sw.add(source);
+        }
+        sw.close();
+
+        return 0;
     }
 }
