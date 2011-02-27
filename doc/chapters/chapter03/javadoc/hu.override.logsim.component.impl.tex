@@ -3,7 +3,7 @@
 \item Felelősség\\
 
  % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ Component $\rightarrow{}$ AndGate.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ AndGate.
 \item Interfészek (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -15,12 +15,51 @@
 \end{itemize}
 \end{itemize}
 
+\subsection{FlipFlopD}
+\begin{itemize}
+\item Felelősség\\
+D flipflop, mely felfutó órajelnél beírja a belső memóriába az adatbemeneten (D)  lévő értéket.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopD.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private static final int CLK} 
+ % TODO
+	\item \texttt{private static final int D} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlopJK}
+\begin{itemize}
+\item Felelősség\\
+JK flipflop, mely a belső memóriáját a Követelmények résznél leírt módon  a J és K bemenetektől függően változtatja.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopJK.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private static final int CLK} 
+ % TODO
+	\item \texttt{private static final int J} 
+ % TODO
+	\item \texttt{private static final int K} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\end{itemize}
+
 \subsection{Gnd}
 \begin{itemize}
 \item Felelősség\\
-
- % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ Component $\rightarrow{}$ Gnd.
+A "föld" komponens, mely állandóan a hamis értéket adja ki.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Gnd.
 \item Interfészek (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -35,9 +74,8 @@
 \subsection{Inverter}
 \begin{itemize}
 \item Felelősség\\
-
- % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ Component $\rightarrow{}$ Inverter.
+Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén  érkező jelet.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Inverter.
 \item Interfészek (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -52,13 +90,65 @@
 \subsection{Led}
 \begin{itemize}
 \item Felelősség\\
-
- % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ Component $\rightarrow{}$ Led.
+Egy LED-et reprezentál, mely világít, ha
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Led.
 \item Interfészek IsDisplay.
 \item Attribútumok $\ $
 \begin{itemize}
-\item (nincs)
+	\item \texttt{private Color color} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public Color getColor()}: Lekérdezzük a LED színét
+	\item \texttt{public void setColor(Color color)}: Beállítjuk a LED színét
+\end{itemize}
+\end{itemize}
+
+\subsection{Led.Color}
+\begin{itemize}
+\item Felelősség\\
+LED-színt reprezentáló enum
+\item Ősosztályok\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Led.Color.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{public static final Color BLUE} 
+ % TODO
+	\item \texttt{public static final Color RED} 
+ % TODO
+	\item \texttt{public static final Color YELLOW} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public static Color valueOf(String name)}: 
+ % TODO
+	\item \texttt{public static Color[] values()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Mpx}
+\begin{itemize}
+\item Felelősség\\
+4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következő:  D0, D1, D2, D3, S0, S1. Ahol Dx az adatbemenetek, Sy a kiválasztóbemenetek.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Mpx.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private static final int DATA0} 
+ % TODO
+	\item \texttt{private static final int DATA1} 
+ % TODO
+	\item \texttt{private static final int DATA2} 
+ % TODO
+	\item \texttt{private static final int DATA3} 
+ % TODO
+	\item \texttt{private static final int SEL0} 
+ % TODO
+	\item \texttt{private static final int SEL1} 
+ % TODO
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
@@ -69,9 +159,8 @@
 \subsection{OrGate}
 \begin{itemize}
 \item Felelősség\\
-
- % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ Component $\rightarrow{}$ OrGate.
+Vagy kaput reprezentál, melynek akkor van igaz érték a kimenetén, ha legalább  egy bemenetén van igaz érték.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ OrGate.
 \item Interfészek (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -86,9 +175,8 @@
 \subsection{SequenceGenerator}
 \begin{itemize}
 \item Felelősség\\
-
- % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ Component $\rightarrow{}$ SequenceGenerator.
+Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A  SequenceGeneratorStepper feladata, hogy a step() metódust meghívja ezen osztály  példányain.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SequenceGenerator.
 \item Interfészek IsSource.
 \item Attribútumok $\ $
 \begin{itemize}
@@ -99,19 +187,35 @@
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
+	\item \texttt{public Value[] getValues()}: 
+ % TODO
 	\item \texttt{public void setValues(Value[] values)}: 
  % TODO
-	\item \texttt{public void step()}: 
- % TODO
+	\item \texttt{public void step()}: A jelgenerátor lép, a bitsorozat következő elemére ugrik. A következő léptetésig  ez kerül kiadásra a kimeneteken.
+\end{itemize}
+\end{itemize}
+
+\subsection{SevenSegmentDisplay}
+\begin{itemize}
+\item Felelősség\\
+7-szegmenses kijelzőt reprezentál, melyen 7 bemenete vezérli a megfelelő szegmenseket.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SevenSegmentDisplay.
+\item Interfészek IsDisplay.
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+\item (nincs)
 \end{itemize}
 \end{itemize}
 
 \subsection{Toggle}
 \begin{itemize}
 \item Felelősség\\
-
- % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ Component $\rightarrow{}$ Toggle.
+Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Toggle.
 \item Interfészek IsSource.
 \item Attribútumok $\ $
 \begin{itemize}
@@ -119,6 +223,8 @@
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
+	\item \texttt{public Value[] getValues()}: 
+ % TODO
 	\item \texttt{public void setValues(Value[] values)}: 
  % TODO
 	\item \texttt{public void toggle()}: Kapcsoló állapotát megváltoztatjuk
@@ -128,9 +234,8 @@
 \subsection{Vcc}
 \begin{itemize}
 \item Felelősség\\
-
- % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ Component $\rightarrow{}$ Vcc.
+A tápfeszültés komponens, ami konstans igaz értéket ad.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Vcc.
 \item Interfészek (nincs)
 \item Attribútumok $\ $
 \begin{itemize}

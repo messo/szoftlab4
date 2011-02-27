@@ -77,12 +77,19 @@ public class Simulation extends Thread {
         System.out.println("Simulation is stopped!");
     }
 
-    public void saveSources(String fileName) {
+    /**
+     * Elmenti fájlba a jelforrások állapotát. 
+     *
+     * @return visszajelzés
+     */
+    public int saveSources(String fileName) {
         SourceWriter sw = new SourceWriter(fileName);
         for (IsSource source : circuit.getSources()) {
             sw.add(source);
         }
         sw.close();
+
+        return 0;
     }
 
     public void setCircuit(Circuit circuit) {

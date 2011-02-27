@@ -8,6 +8,8 @@
 \begin{itemize}
 	\item \texttt{private HashMap componentMap} 
  % TODO
+	\item \texttt{private List sequenceGens} 
+ % TODO
 	\item \texttt{private Simulation simulation} 
  % TODO
 	\item \texttt{private boolean stable} 
@@ -15,15 +17,17 @@
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public Component addComponent(Component component)}: Komponens hozzáadása az áramkörhöz.
+	\item \texttt{public AbstractComponent addComponent(AbstractComponent component)}: Komponens hozzáadása az áramkörhöz.
 	\item \texttt{public void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy  stabil (nem változott semelyik komponens kimenete az utolsó futtatás óta)  vagy instabil állapotban van-e.
-	\item \texttt{public Component getComponentByName(String name)}: Lekérünk egy komponenst az áramkörtől a neve alapján.
+	\item \texttt{public AbstractComponent getComponentByName(String name)}: Lekérünk egy komponenst az áramkörtől a neve alapján.
 	\item \texttt{public List getDisplays()}: Megjelenítő típusú komponeseket adja vissza.
+	\item \texttt{public List getSequenceGenerators()}: 
+ % TODO
 	\item \texttt{public List getSources()}: Jelforrás típusú komponenseket adja vissza.
 	\item \texttt{public boolean isStable()}: Áramkör stacionárius állapotának lekérdezése.
 	\item \texttt{public void setSimulation(Simulation simulation)}: Szimuláció beállítása.
 	\item \texttt{public void setStable(boolean stable)}: Áramkör stabilitásának beállítása.
-	\item \texttt{public void simulationRefreshRequired()}: Jelzi a szimuláció felé, hogy új ciklust kell indítani. Ezt egy jelforrás  beállítása után hívjuk meg.
+	\item \texttt{public void simulationShouldBeWorking()}: Jelzi a szimuláció felé, hogy új ciklust kell indítani. Ezt egy jelforrás  beállítása után hívjuk meg.
 	\item \texttt{public void stepGenerators()}: Jelgenerátorok a szimuláció szemszögéből nézve, egyszerre történő  léptetése.
 \end{itemize}
 \end{itemize}
@@ -34,14 +38,29 @@
 
  % TODO
 \item Ősosztályok\ Object $\rightarrow{}$ LogSim.
-\item Interfészek (nincs)
+\item Interfészek Controller.
 \item Attribútumok $\ $
 \begin{itemize}
-\item (nincs)
+	\item \texttt{ Circuit circuit} 
+ % TODO
+	\item \texttt{ Simulation simulation} 
+ % TODO
+	\item \texttt{ View view} 
+ % TODO
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
+	\item \texttt{public Simulation getFreshSimulation()}: 
+ % TODO
 	\item \texttt{public static void main(String[] args)}: 
+ % TODO
+	\item \texttt{public void onCircuitUpdate()}: 
+ % TODO
+	\item \texttt{public void onExit()}: 
+ % TODO
+	\item \texttt{public void onStart()}: 
+ % TODO
+	\item \texttt{public void onStop()}: 
  % TODO
 \end{itemize}
 \end{itemize}
@@ -65,6 +84,72 @@
 \item Metódusok$\ $
 \begin{itemize}
 	\item \texttt{public void run()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Simulation}
+\begin{itemize}
+\item Felelősség\\
+
+ % TODO
+\item Ősosztályok\ Object $\rightarrow{}$ Thread $\rightarrow{}$ Simulation.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private Circuit circuit} 
+ % TODO
+	\item \texttt{private final Controller controller} 
+ % TODO
+	\item \texttt{private AtomicInteger counter} 
+ % TODO
+	\item \texttt{private State currentState} 
+ % TODO
+	\item \texttt{private static final int cycleLimit} 
+ % TODO
+	\item \texttt{private final Object lock} 
+ % TODO
+	\item \texttt{private SequenceGeneratorStepper seqGenStepper} 
+ % TODO
+	\item \texttt{private boolean shouldRun} 
+ % TODO
+	\item \texttt{private final Object synchObj} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public Circuit getCircuit()}: 
+ % TODO
+	\item \texttt{public Object getLock()}: 
+ % TODO
+	\item \texttt{public void run()}: 
+ % TODO
+	\item \texttt{public void saveSources(String fileName)}: 
+ % TODO
+	\item \texttt{public void setCircuit(Circuit circuit)}: 
+ % TODO
+	\item \texttt{public void setState(State state)}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Simulation.State}
+\begin{itemize}
+\item Felelősség\\
+Szimuláció állapotait írja le
+\item Ősosztályok\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Simulation.State.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{public static final State PAUSED} Szimuláció szüneteltetve van, a következő jelforrás változásig.
+	\item \texttt{public static final State STOPPED} Szimuláció leállt, ahhoz, hogy bármi történjen az áramkörre újra kell indítani.
+	\item \texttt{public static final State WORKING} Szimuláció éppen dolgozik, egy konkrét jelforrás-kombinációt alkalmazva dolgoztatja az áramkört
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public static State valueOf(String name)}: 
+ % TODO
+	\item \texttt{public static State[] values()}: 
  % TODO
 \end{itemize}
 \end{itemize}

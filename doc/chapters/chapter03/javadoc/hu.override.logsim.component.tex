@@ -1,11 +1,11 @@
-\subsection{Component}
+\subsection{AbstractComponent}
 Absztrakt osztály.
 \begin{itemize}
 \item Felelősség\\
 
  % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ Component.
-\item Interfészek (nincs)
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent.
+\item Interfészek Component.
 \item Attribútumok $\ $
 \begin{itemize}
 	\item \texttt{protected boolean alreadyEvaluated} 
@@ -16,7 +16,7 @@ Absztrakt osztály.
  % TODO
 	\item \texttt{protected int[] indices} 
  % TODO
-	\item \texttt{protected Component[] inputs} 
+	\item \texttt{protected AbstractComponent[] inputs} 
  % TODO
 	\item \texttt{protected Value[] lastValue} 
  % TODO
@@ -38,9 +38,9 @@ Absztrakt osztály.
  % TODO
 	\item \texttt{public void setCircuit(Circuit parent)}: 
  % TODO
-	\item \texttt{public void setInput(int inputSlot, Component component)}: 
+	\item \texttt{public void setInput(int inputSlot, AbstractComponent component)}: 
  % TODO
-	\item \texttt{public void setInput(int inputPin, Component component, int outputPin)}: Beállítunk egy bemenetet.
+	\item \texttt{public void setInput(int inputPin, AbstractComponent component, int outputPin)}: Beállítunk egy bemenetet.
 	\item \texttt{public void setInputPinsCount(int inputPinsCount)}: 
  % TODO
 	\item \texttt{public void setName(String name)}: 
@@ -48,14 +48,55 @@ Absztrakt osztály.
 \end{itemize}
 \end{itemize}
 
-\subsection{IsDisplay}
+\subsection{Component}
 Interfész.
 \begin{itemize}
 \item Felelősség\\
 
  % TODO
-\item Ősosztályok\ IsDisplay.
+\item Ősosztályok\ Component.
 \item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public String getName()}: 
+ % TODO
+	\item \texttt{public Value getValue()}: 
+ % TODO
+	\item \texttt{public Value getValue(int idx)}: 
+ % TODO
+	\item \texttt{public void setName(String name)}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlop}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelősség\\
+
+ % TODO
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private boolean active} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public boolean isActive()}: 
+ % TODO
+	\item \texttt{public void setActive(boolean active)}: Felfutó élnél a SequenceGenerator-nak meg kell hívni ezt a hozzá kötött  FlipFlopokra, egyéb esetben törölnie az active flaget. Így tudja az FF, hogy  mikor kell ténylegesen számolnia.
+\end{itemize}
+\end{itemize}
+
+\subsection{IsDisplay}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+Megjelenítő típusú komponenst reprezentál. Ezt kell implementálnia a megjelenítőknek.
+\item Ősosztályok\ IsDisplay.
+\item Interfészek Component.
 \item Metódusok$\ $
 \begin{itemize}
 \item (nincs)
@@ -66,13 +107,13 @@ Interfész.
 Interfész.
 \begin{itemize}
 \item Felelősség\\
-
- % TODO
+Jelforrás típusú komponenst reprezentál. Ezt kell implementálnia a jelforrásoknak.
 \item Ősosztályok\ IsSource.
-\item Interfészek (nincs)
+\item Interfészek Component.
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public void setValues(Value[] values)}: Beállítjuk a jelforrás értékét.
+	\item \texttt{public Value[] getValues()}: Lekérjük a jelforrás értékeit, hogy el tudjuk menteni.
+	\item \texttt{public void setValues(Value[] values)}: Beállítjuk a jelforrás értékét. Kapcsoló esetén csak 1 elemű tömb  adható paraméterként!
 \end{itemize}
 \end{itemize}
 

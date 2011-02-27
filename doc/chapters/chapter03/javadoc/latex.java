@@ -1,4 +1,3 @@
-
 /**
  * $ javac -classpath /usr/lib/jvm/java-6-sun/lib/tools.jar latex.java 
  * $ javadoc -private -doclet latex ../src/{controller,view}/*.java | \
