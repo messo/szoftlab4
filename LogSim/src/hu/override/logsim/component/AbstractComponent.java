@@ -89,19 +89,37 @@ public abstract class AbstractComponent implements Component {
 
     public void setInputPinsCount(int inputPinsCount) {
         inputs = new AbstractComponent[inputPinsCount];
-        indices = new int[inputPinsCount];
-        for (int i = 0; i < inputPinsCount; i++) {
-            indices[i] = 0;
+        if (isInputPinsCountValid(inputPinsCount)) {
+            indices = new int[inputPinsCount];
+            for (int i = 0; i < inputPinsCount; i++) {
+                indices[i] = 0;
+            }
+        } else {
+            throw new IllegalArgumentException("Nem jó a bemenetek száma!");
         }
     }
 
-    protected Value getInputValue(int inputPin) {
-        return inputs[inputPin].getValue(indices[inputPin]);
+    protected Value evaluateInput(int inputPin) {
+        return inputs[inputPin].evaluate(indices[inputPin]);
     }
-
-    protected abstract void onEvaluation();
 
     public void clearEvaluatedFlag() {
         alreadyEvaluated = false;
+    }
+
+    /**
+     * Ebben a metódusban kell implementálni az alkatrész logikáját, vagyis
+     * az adott bemenet(ek) függvényében mit kell kiadnia a kimenet(ek)en.
+     */
+    protected abstract void onEvaluation();
+
+    /**
+     * Az alkomponensek itt implementálhatják a bemenetek számának ellenõrzési
+     * logikáját.
+     *
+     * @return
+     */
+    protected boolean isInputPinsCountValid(int inputPinsCount) {
+        return true;
     }
 }

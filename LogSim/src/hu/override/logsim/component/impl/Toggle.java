@@ -5,6 +5,7 @@ import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.IsSource;
 
 /**
+ * Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
  *
  * @author balint
  */
@@ -44,5 +45,10 @@ public class Toggle extends AbstractComponent implements IsSource {
         Value[] values = new Value[1];
         values[0] = lastValue[0].invert();
         setValues(values);
+    }
+
+    @Override
+    protected boolean isInputPinsCountValid(int inputPinsCount) {
+        return inputPinsCount == 0;
     }
 }

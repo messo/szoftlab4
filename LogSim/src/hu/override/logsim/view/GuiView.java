@@ -79,7 +79,7 @@ public class GuiView extends JFrame implements View {
     @Override
     public void update(Circuit circuit) {
         for (AbstractComponent c : circuit.getDisplays()) {
-            displayMap.get(c).setText(String.format("%s = %s", c.getName(), c.getValue() == Value.TRUE ? "1" : "0"));
+            displayMap.get(c).setText(c.toString());
         }
         for (AbstractComponent c : circuit.getSources()) {
             if (c instanceof Toggle) {

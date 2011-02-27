@@ -1,63 +1,38 @@
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.Value;
+import hu.override.logsim.component.FlipFlop;
+
 /**
+ * JK flipflop, mely a belsõ memóriáját a Követelmények résznél leírt módon
+ * a J és K bemenetektõl függõen változtatja.
  *
  * @author gabooo
  */
+public class FlipFlopJK extends FlipFlop {
 
-//clk-j-k-q
+    private static final int CLK = 0;
+    private static final int J = 1;
+    private static final int K = 2;
 
-//input 0     clk
-//input 1     j
-//input 2     k
-//input 3     out
-
-public class FlipFlopJK extends AbstractComponent
-{
     @Override
-    protected void onEvaluation()
-    {
-        if ((inputs[0].evaluate(indices[1]) == Value.TRUE))
-        {
-            //van órajel
-            int state = 0;
-            if (inputs[1].evaluate(indices[1]) == Value.TRUE)
-            {
-                state += 2;
-            }
-            if (inputs[2].evaluate(indices[2]) == Value.TRUE)
-            {
-                state += 1;
-            }
+    protected void onEvaluation() {
+        if (isActive()) {
+            Value j = evaluateInput(J);
+            Value k = evaluateInput(K);
 
-            switch (state)
-            {
-                case 0:
-                    //itt elvileg nem változik semmit
-                    break;
-                case 1:
-                    currentValue[0] = Value.FALSE;
-                    break;
-                case 2:
-                    currentValue[0] = Value.TRUE;
-                    break;
-                case 3:
-                    currentValue[0] = currentValue[0].invert();
-                    break;
-                default:
-                    //ilyen úgyse lehet spec szerint
-                    break;
+            if (j == Value.TRUE && k == Value.TRUE) {
+                // invertálunk
+                currentValue[0] = currentValue[0].invert();
+            } else if (j == Value.TRUE && k == Value.FALSE) {
+                // beír
+                currentValue[0] = Value.TRUE;
+            } else if (j == Value.FALSE && k == Value.TRUE) {
+                // töröl
+                currentValue[0] = Value.FALSE;
+            } else {
+                // marad.
             }
-
-
-        }else
-        {
-            //nincs órajel
         }
-
-        
-
     }
 }

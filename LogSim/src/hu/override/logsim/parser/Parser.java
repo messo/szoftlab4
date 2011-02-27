@@ -9,6 +9,7 @@ import hu.override.logsim.component.impl.Inverter;
 import hu.override.logsim.component.impl.Led;
 import hu.override.logsim.component.impl.OrGate;
 import hu.override.logsim.component.impl.SequenceGenerator;
+import hu.override.logsim.component.impl.SevenSegmentDisplay;
 import hu.override.logsim.component.impl.Toggle;
 import hu.override.logsim.component.impl.Vcc;
 import hu.override.logsim.exception.CircuitAlreadyExistsException;
@@ -46,6 +47,7 @@ public class Parser {
         availableComponents.put("led", Led.class);
         availableComponents.put("gnd", Gnd.class);
         availableComponents.put("vcc", Vcc.class);
+        availableComponents.put("7seg", SevenSegmentDisplay.class);
     }
 
     /**

@@ -1,28 +1,23 @@
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.component.AbstractComponent;
-import hu.override.logsim.Value;
+import hu.override.logsim.component.FlipFlop;
+
 /**
+ * D flipflop, mely felfutó órajelnél beírja a belsõ memóriába az adatbemeneten (D)
+ * lévõ értéket.
  *
  * @author gabooo
  */
+public class FlipFlopD extends FlipFlop {
 
-//clk-d-q
+    private static final int CLK = 0;
+    private static final int D = 1;
 
-//input 0     clk
-//input 1     d
-//input 2     out
-public class FlipFlopD extends AbstractComponent
-{
     @Override
-    protected void onEvaluation()
-    {
-        if (inputs[0].evaluate(indices[0]) == Value.TRUE)
-        {
-            //órajel van
-            currentValue[0] = inputs[1].evaluate(indices[1]);
+    protected void onEvaluation() {
+        if (isActive()) {
+            // FIXME - órajel van, de ez így nem jó, mert felfutó ÉL KELL!!!
+            currentValue[0] = evaluateInput(D);
         }
-
-
     }
 }

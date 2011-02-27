@@ -4,10 +4,21 @@ import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.IsDisplay;
 
 /**
+ * Egy LED-et reprezentál, mely világít, ha
  *
  * @author balint
  */
 public class Led extends AbstractComponent implements IsDisplay {
+
+    private Color color;
+
+    /**
+     * LED-színt reprezentáló enum
+     */
+    public static enum Color {
+
+        RED, YELLOW, BLUE
+    }
 
     @Override
     public String toString() {
@@ -16,6 +27,29 @@ public class Led extends AbstractComponent implements IsDisplay {
 
     @Override
     protected void onEvaluation() {
-        currentValue[0] = inputs[0].evaluate(indices[0]);
+        currentValue[0] = evaluateInput(0);
+    }
+
+    @Override
+    protected boolean isInputPinsCountValid(int inputPinsCount) {
+        return inputPinsCount == 1;
+    }
+
+    /**
+     * Beállítjuk a LED színét
+     *
+     * @param color
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * Lekérdezzük a LED színét
+     * 
+     * @return
+     */
+    public Color getColor() {
+        return color;
     }
 }

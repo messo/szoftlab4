@@ -2,49 +2,33 @@ package hu.override.logsim.component.impl;
 
 import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.Value;
+
 /**
+ * 4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következõ:
+ * D0, D1, D2, D3, S0, S1. Ahol Dx az adatbemenetek, Sy a kiválasztóbemenetek.
  *
  * @author gabooo
  */
+public class Mpx extends AbstractComponent {
 
-//s1-s0-d3-d2-d1-d0-q
+    private static final int DATA0 = 0; // LSB
+    private static final int DATA1 = 1;
+    private static final int DATA2 = 2;
+    private static final int DATA3 = 3;
+    private static final int SEL0 = 4; // LSB
+    private static final int SEL1 = 5;
 
-//input 0-1     select
-//input 2-5     data in
-//input 6       out
-public class Mpx extends AbstractComponent
-{
     @Override
-    protected void onEvaluation()
-    {
+    protected void onEvaluation() {
         int selected = 0;
-        if (inputs[0].evaluate(indices[0]) == Value.TRUE)
-        {
-            selected += 2;
-        }
-        if (inputs[1].evaluate(indices[0]) == Value.TRUE)
-        {
+        if (evaluateInput(SEL0) == Value.TRUE) {
             selected += 1;
         }
-
-        switch (selected)
-        {
-            case 0:
-                currentValue[0] = inputs[5].evaluate(indices[5]);
-                break;
-            case 1:
-                currentValue[0] = inputs[4].evaluate(indices[4]);
-                break;
-            case 2:
-                currentValue[0] = inputs[3].evaluate(indices[3]);
-                break;
-            case 3:
-                currentValue[0] = inputs[2].evaluate(indices[2]);
-                break;
-            default:
-                //ilyen úgyse lehet spec szerint
-                break;
+        if (evaluateInput(SEL1) == Value.TRUE) {
+            selected += 2;
         }
 
+        // selected értéke pont egy DATAx lesz.
+        currentValue[0] = inputs[selected].evaluate(indices[selected]);
     }
 }
