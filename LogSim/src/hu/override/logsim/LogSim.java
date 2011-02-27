@@ -1,6 +1,8 @@
 package hu.override.logsim;
 
 import hu.override.logsim.component.AbstractComponent;
+import hu.override.logsim.component.IsDisplay;
+import hu.override.logsim.component.IsSource;
 import hu.override.logsim.controller.Controller;
 import hu.override.logsim.exception.CircuitAlreadyExistsException;
 import hu.override.logsim.exception.InvalidCircuitDefinitionException;
@@ -24,10 +26,10 @@ public class LogSim implements Controller {
         circuit = new Parser().parse(new File("test.txt"));
         view = new GuiView(this);
 
-        for (AbstractComponent c : circuit.getSources()) {
+        for (IsSource c : circuit.getSources()) {
             view.addSource(c);
         }
-        for (AbstractComponent c : circuit.getDisplays()) {
+        for (IsDisplay c : circuit.getDisplays()) {
             view.addDisplay(c);
         }
 

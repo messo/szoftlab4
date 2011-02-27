@@ -55,10 +55,12 @@ public abstract class AbstractComponent implements Component {
         setInput(inputSlot, component, 0);
     }
 
+    @Override
     public Value getValue() {
         return getValue(0);
     }
 
+    @Override
     public Value getValue(int idx) {
         return lastValue[idx];
     }

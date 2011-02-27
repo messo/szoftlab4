@@ -1,6 +1,8 @@
 package hu.override.logsim;
 
+import hu.override.logsim.component.IsSource;
 import hu.override.logsim.controller.Controller;
+import hu.override.logsim.parser.SourceWriter;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -73,6 +75,14 @@ public class Simulation extends Thread {
         }
 
         System.out.println("Simulation is stopped!");
+    }
+
+    public void saveSources(String fileName) {
+        SourceWriter sw = new SourceWriter(fileName);
+        for (IsSource source : circuit.getSources()) {
+            sw.add(source);
+        }
+        sw.close();
     }
 
     public void setCircuit(Circuit circuit) {

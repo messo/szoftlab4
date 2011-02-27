@@ -125,11 +125,11 @@ public class Circuit {
      * 
      * @return
      */
-    public List<AbstractComponent> getDisplays() {
-        List<AbstractComponent> list = new ArrayList<AbstractComponent>();
+    public List<IsDisplay> getDisplays() {
+        List<IsDisplay> list = new ArrayList<IsDisplay>();
         for (AbstractComponent c : componentMap.values()) {
             if (c instanceof IsDisplay) {
-                list.add(c);
+                list.add((IsDisplay) c);
             }
         }
         return list;
@@ -148,11 +148,11 @@ public class Circuit {
     /**
      * Jelforrás típusú komponenseket adja vissza.
      */
-    public List<AbstractComponent> getSources() {
-        List<AbstractComponent> list = new ArrayList<AbstractComponent>();
+    public List<IsSource> getSources() {
+        List<IsSource> list = new ArrayList<IsSource>();
         for (AbstractComponent c : componentMap.values()) {
             if (c instanceof IsSource) {
-                list.add(c);
+                list.add((IsSource) c);
             }
         }
         return list;

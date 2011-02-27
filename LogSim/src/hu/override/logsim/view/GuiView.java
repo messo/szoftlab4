@@ -2,7 +2,8 @@ package hu.override.logsim.view;
 
 import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
-import hu.override.logsim.component.AbstractComponent;
+import hu.override.logsim.component.IsDisplay;
+import hu.override.logsim.component.IsSource;
 import hu.override.logsim.component.impl.Toggle;
 import hu.override.logsim.controller.Controller;
 import java.awt.BorderLayout;
@@ -26,8 +27,8 @@ public class GuiView extends JFrame implements View {
     private final JPanel top;
     private final JPanel center;
     private final JPanel bottom;
-    private HashMap<AbstractComponent, JLabel> displayMap = new HashMap<AbstractComponent, JLabel>();
-    private HashMap<AbstractComponent, JButton> sourceMap = new HashMap<AbstractComponent, JButton>();
+    private HashMap<IsDisplay, JLabel> displayMap = new HashMap<IsDisplay, JLabel>();
+    private HashMap<IsSource, JButton> sourceMap = new HashMap<IsSource, JButton>();
     private final Controller controller;
 
     public GuiView(final Controller controller) {
@@ -78,10 +79,10 @@ public class GuiView extends JFrame implements View {
 
     @Override
     public void update(Circuit circuit) {
-        for (AbstractComponent c : circuit.getDisplays()) {
+        for (IsDisplay c : circuit.getDisplays()) {
             displayMap.get(c).setText(c.toString());
         }
-        for (AbstractComponent c : circuit.getSources()) {
+        for (IsSource c : circuit.getSources()) {
             if (c instanceof Toggle) {
                 sourceMap.get(c).setText(String.format("%s = %s", c.getName(), c.getValue() == Value.TRUE ? "1" : "0"));
             }
@@ -93,7 +94,7 @@ public class GuiView extends JFrame implements View {
         setVisible(true);
     }
 
-    public void addSource(final AbstractComponent source) {
+    public void addSource(final IsSource source) {
         if (source instanceof Toggle) {
             JButton btn = new JButton(String.format("%s = %s", source.getName(), "X"));
             sourceMap.put(source, btn);
@@ -107,7 +108,7 @@ public class GuiView extends JFrame implements View {
         }
     }
 
-    public void addDisplay(final AbstractComponent display) {
+    public void addDisplay(final IsDisplay display) {
         JLabel label = new JLabel("X");
         displayMap.put(display, label);
         bottom.add(label);
