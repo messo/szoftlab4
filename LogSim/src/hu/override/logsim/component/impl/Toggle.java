@@ -27,7 +27,7 @@ public class Toggle extends AbstractComponent implements IsSource {
             alreadyEvaluated = false;
             // elmentjük az értéket
             lastValue[0] = values[0];
-            circuit.simulationShouldBeRunning();
+            circuit.simulationShouldBeWorking();
         }
     }
 

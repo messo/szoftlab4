@@ -117,7 +117,7 @@ public class Circuit {
             }
         }
 
-        simulationShouldBeRunning();
+        simulationShouldBeWorking();
     }
 
     /**
@@ -139,9 +139,9 @@ public class Circuit {
      * Jelzi a szimuláció felé, hogy új ciklust kell indítani. Ezt egy jelforrás
      * beállítása után hívjuk meg.
      */
-    public void simulationShouldBeRunning() {
+    public void simulationShouldBeWorking() {
         synchronized (simulation.getLock()) {
-            simulation.setState(Simulation.State.RUNNING);
+            simulation.setState(Simulation.State.WORKING);
         }
     }
 

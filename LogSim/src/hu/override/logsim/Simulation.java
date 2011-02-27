@@ -15,9 +15,9 @@ public class Simulation extends Thread {
     public static enum State {
 
         /**
-         * Szimuláció éppen fut, egy konkrét jelforrás-kombinációt alkalmazva dolgoztatja az áramkört
+         * Szimuláció éppen dolgozik, egy konkrét jelforrás-kombinációt alkalmazva dolgoztatja az áramkört
          */
-        RUNNING,
+        WORKING,
         /**
          * Szimuláció leállt, ahhoz, hogy bármi történjen az áramkörre újra kell indítani.
          */
@@ -91,7 +91,7 @@ public class Simulation extends Thread {
         currentState = state;
 
         switch (state) {
-            case RUNNING:
+            case WORKING:
                 // csak, ha él a szál, akkor mehet a menet.
                 if (isAlive()) {
                     synchronized (synchObj) {
