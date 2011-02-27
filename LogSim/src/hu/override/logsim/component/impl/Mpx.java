@@ -6,6 +6,7 @@ import hu.override.logsim.Value;
 /**
  * 4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következõ:
  * D0, D1, D2, D3, S0, S1. Ahol Dx az adatbemenetek, Sy a kiválasztóbemenetek.
+ * Kimenetén a kiválasztóbemenetektõl függõen valamelyik adatbemenet kerül kiadásra.
  *
  * @author gabooo
  */
@@ -29,6 +30,6 @@ public class Mpx extends AbstractComponent {
         }
 
         // selected értéke pont egy DATAx lesz.
-        currentValue[0] = inputs[selected].evaluate(indices[selected]);
+        currentValue[0] = evaluateInput(selected);
     }
 }

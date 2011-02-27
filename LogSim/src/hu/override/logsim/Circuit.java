@@ -11,17 +11,36 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Áramkört reprezentál, melyhez komponeseket lehet adni, és kiértékelési ciklusokat
- * lehet futtatni, utóbbi a {@link Simulation} feladata.
+ * Feladata a jelgenerátor léptetõ kérésére a jelgenerátorok léptetése, a feldolgozó
+ * által létrehozott komponensek felvétele az áramkörbe, illetve ezek utasítása arra,
+ * hogy töröljék a "már kiértékelve" flaget egy adott kiértékelési ciklus elõtt, hogy ezáltal a
+ * ciklusban minden kimenet értéke frissülhessen.
+ * Továbbá feladata a kiértékelés elindítása az összes kijelzõre, mert a rendszer kiértékelése
+ * a kijelzõk kiértékelésével kezdõdik.
  *
  * @author balint
  */
 public class Circuit {
 
+    /**
+     * Komponenseket tartalmazó HashMap
+     */
     private HashMap<String, AbstractComponent> componentMap;
+    /**
+     * Jelforrás típusú komponensek
+     */
     private List<IsSource> sources;
+    /**
+     * Megjelenítõ típusú komponensek
+     */
     private List<IsDisplay> displays;
+    /**
+     * Áramkör stabilitása
+     */
     private boolean stable;
+    /**
+     * Áramkört éppen szimuláló objektum
+     */
     private Simulation simulation;
 
     public Circuit() {
@@ -31,7 +50,7 @@ public class Circuit {
     }
 
     /**
-     * Szimuláció beállítása.
+     * Szimuláció beállítása. Ez a szimuláció létrejöttekor hívódik meg.
      *
      * @param simulation
      */

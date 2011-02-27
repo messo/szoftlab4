@@ -4,7 +4,7 @@ import hu.override.logsim.component.IsSource;
 import java.util.List;
 
 /**
- * Beolvassa egy fájlból a jelforrások értékeit
+ * A jelforrások értékeinek fájlból történõ beolvasására szolgáló osztály.
  *
  * @author balint
  */
@@ -16,6 +16,7 @@ public class SourceReader {
      * @param fileName
      */
     public SourceReader(String fileName) {
+        // TODO - implement
     }
 
     /**
@@ -25,5 +26,6 @@ public class SourceReader {
      * @param sources
      */
     public void loadValuesToSources(List<IsSource> sources) {
+        // TODO - implement
     }
 }

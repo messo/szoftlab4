@@ -10,13 +10,15 @@ import hu.override.logsim.component.FlipFlop;
  */
 public class FlipFlopD extends FlipFlop {
 
-    private static final int CLK = 0;
+    /**
+     * D bemenet lábának a száma.
+     */
     private static final int D = 1;
 
     @Override
     protected void onEvaluation() {
         if (isActive()) {
-            // FIXME - órajel van, de ez így nem jó, mert felfutó ÉL KELL!!!
+            // bemenetén lévõ értéket beírjuk.
             currentValue[0] = evaluateInput(D);
         }
     }

@@ -1,10 +1,9 @@
 \subsection{AndGate}
 \begin{itemize}
 \item Felelősség\\
-
- % TODO
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ AndGate.
-\item Interfészek (nincs)
+ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek  kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát  valósítja meg, amit a kimenetén kiad.
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ AndGate.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)
@@ -19,14 +18,11 @@
 \begin{itemize}
 \item Felelősség\\
 D flipflop, mely felfutó órajelnél beírja a belső memóriába az adatbemeneten (D)  lévő értéket.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopD.
-\item Interfészek (nincs)
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopD.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private static final int CLK} 
- % TODO
-	\item \texttt{private static final int D} 
- % TODO
+	\item \texttt{private static final int D}: D bemenet lábának a száma.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
@@ -38,16 +34,12 @@ D flipflop, mely felfutó órajelnél beírja a belső memóriába az adatbemene
 \begin{itemize}
 \item Felelősség\\
 JK flipflop, mely a belső memóriáját a Követelmények résznél leírt módon  a J és K bemenetektől függően változtatja.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopJK.
-\item Interfészek (nincs)
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopJK.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private static final int CLK} 
- % TODO
-	\item \texttt{private static final int J} 
- % TODO
-	\item \texttt{private static final int K} 
- % TODO
+	\item \texttt{private static final int J}: J bemenet lábának a száma
+	\item \texttt{private static final int K}: K bemenet lábának a száma
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
@@ -58,9 +50,9 @@ JK flipflop, mely a belső memóriáját a Követelmények résznél leírt mód
 \subsection{Gnd}
 \begin{itemize}
 \item Felelősség\\
-A "föld" komponens, mely állandóan a hamis értéket adja ki.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Gnd.
-\item Interfészek (nincs)
+A "föld" komponens, mely állandóan a hamis értéket adja ki. Nincs bemenete.
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Gnd.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)
@@ -75,8 +67,8 @@ A "föld" komponens, mely állandóan a hamis értéket adja ki.
 \begin{itemize}
 \item Felelősség\\
 Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén  érkező jelet.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Inverter.
-\item Interfészek (nincs)
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Inverter.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)
@@ -90,13 +82,12 @@ Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén  érkez�
 \subsection{Led}
 \begin{itemize}
 \item Felelősség\\
-Egy LED-et reprezentál, mely világít, ha
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Led.
-\item Interfészek IsDisplay.
+Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.  3 féle színe lehet, ezeket a Color enumeráció határozza meg.
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Led.
+\item Interfészek: IsDisplay.
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private Color color} 
- % TODO
+	\item \texttt{private Color color}: Led jelenlegi színe
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
@@ -108,9 +99,9 @@ Egy LED-et reprezentál, mely világít, ha
 \subsection{Led.Color}
 \begin{itemize}
 \item Felelősség\\
-LED-színt reprezentáló enum
-\item Ősosztályok\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Led.Color.
-\item Interfészek (nincs)
+LED-színt reprezentáló enum.
+\item Ősosztályok:\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Led.Color.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 	\item \texttt{public static final Color BLUE} 
@@ -132,9 +123,9 @@ LED-színt reprezentáló enum
 \subsection{Mpx}
 \begin{itemize}
 \item Felelősség\\
-4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következő:  D0, D1, D2, D3, S0, S1. Ahol Dx az adatbemenetek, Sy a kiválasztóbemenetek.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Mpx.
-\item Interfészek (nincs)
+4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következő:  D0, D1, D2, D3, S0, S1. Ahol Dx az adatbemenetek, Sy a kiválasztóbemenetek.  Kimenetén a kiválasztóbemenetektől függően valamelyik adatbemenet kerül kiadásra.
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Mpx.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 	\item \texttt{private static final int DATA0} 
@@ -159,9 +150,9 @@ LED-színt reprezentáló enum
 \subsection{OrGate}
 \begin{itemize}
 \item Felelősség\\
-Vagy kaput reprezentál, melynek akkor van igaz érték a kimenetén, ha legalább  egy bemenetén van igaz érték.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ OrGate.
-\item Interfészek (nincs)
+VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek  kiértékelését kezdeményezi, s a kapott értékek logikai VAGY kapcsolatát  valósítja meg, amit a kimenetén kiad.
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ OrGate.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)
@@ -175,22 +166,20 @@ Vagy kaput reprezentál, melynek akkor van igaz érték a kimenetén, ha legalá
 \subsection{SequenceGenerator}
 \begin{itemize}
 \item Felelősség\\
-Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A  SequenceGeneratorStepper feladata, hogy a step() metódust meghívja ezen osztály  példányain.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SequenceGenerator.
-\item Interfészek IsSource.
+Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A  SequenceGeneratorStepper feladata, hogy a step() metódust meghívja ezen osztály  példányain. Azokat a FF-eket vezérli, melyek CLK bemenetére ez a komponens van kötve,  vagyis ha éppen felfutó él jön, akkor ezeket engedélyezi különben nem.
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SequenceGenerator.
+\item Interfészek: IsSource.
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private int idx} 
- % TODO
-	\item \texttt{private Value[] sequence} 
- % TODO
+	\item \texttt{private List ffList}: Azon FF-ek listája, melyekre ez a jelgenerátor van bekötve a CLK bemenetre.
+	\item \texttt{private int idx}: Bitsorozat egy indexe, ez határozza meg, hogy éppen melyik értéket adja ki.
+	\item \texttt{private Value[] sequence}: Tárolt bitsorozat
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public Value[] getValues()}: 
- % TODO
-	\item \texttt{public void setValues(Value[] values)}: 
- % TODO
+	\item \texttt{public void addFlipFlop(FlipFlop ff)}: A flipflop-ot feliratkoztatjuk a jelgenerátorhoz, így ha felfutó él lesz,  akkor tudunk neki jelezni.
+	\item \texttt{public Value[] getValues()}: Jelgenerátor bitsorozatának lekérdezése
+	\item \texttt{public void setValues(Value[] values)}: Jelgenerátor bitsorozatának beállítása
 	\item \texttt{public void step()}: A jelgenerátor lép, a bitsorozat következő elemére ugrik. A következő léptetésig  ez kerül kiadásra a kimeneteken.
 \end{itemize}
 \end{itemize}
@@ -198,9 +187,9 @@ Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A  Seque
 \subsection{SevenSegmentDisplay}
 \begin{itemize}
 \item Felelősség\\
-7-szegmenses kijelzőt reprezentál, melyen 7 bemenete vezérli a megfelelő szegmenseket.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SevenSegmentDisplay.
-\item Interfészek IsDisplay.
+7-szegmenses kijelzőt reprezentál, melynek 7 bemenete vezérli a  megfelelő szegmenseket, ezek világítanak, ha az adott bemenetre logikai  igaz van kötve.
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SevenSegmentDisplay.
+\item Interfészek: IsDisplay.
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)
@@ -215,28 +204,26 @@ Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A  Seque
 \begin{itemize}
 \item Felelősség\\
 Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Toggle.
-\item Interfészek IsSource.
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Toggle.
+\item Interfészek: IsSource.
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public Value[] getValues()}: 
- % TODO
-	\item \texttt{public void setValues(Value[] values)}: 
- % TODO
-	\item \texttt{public void toggle()}: Kapcsoló állapotát megváltoztatjuk
+	\item \texttt{public Value[] getValues()}: Lekérjük a kapcsoló értékét (1 elemű tömb)
+	\item \texttt{public void setValues(Value[] values)}: Kapcsoló állapotának változtatása, csak 1 elemű tömböt kaphat paraméterül.
+	\item \texttt{public void toggle()}: Kapcsoló állapotát megváltoztathatjuk. Kényelmesebb, mint a setValues() hívása
 \end{itemize}
 \end{itemize}
 
 \subsection{Vcc}
 \begin{itemize}
 \item Felelősség\\
-A tápfeszültés komponens, ami konstans igaz értéket ad.
-\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Vcc.
-\item Interfészek (nincs)
+A tápfeszültés komponens, ami konstans igaz értéket ad. Nincs bemenete.
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Vcc.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)

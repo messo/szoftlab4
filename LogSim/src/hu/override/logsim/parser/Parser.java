@@ -4,9 +4,12 @@ import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
 import hu.override.logsim.component.impl.AndGate;
 import hu.override.logsim.component.AbstractComponent;
+import hu.override.logsim.component.impl.FlipFlopD;
+import hu.override.logsim.component.impl.FlipFlopJK;
 import hu.override.logsim.component.impl.Gnd;
 import hu.override.logsim.component.impl.Inverter;
 import hu.override.logsim.component.impl.Led;
+import hu.override.logsim.component.impl.Mpx;
 import hu.override.logsim.component.impl.OrGate;
 import hu.override.logsim.component.impl.SequenceGenerator;
 import hu.override.logsim.component.impl.SevenSegmentDisplay;
@@ -25,19 +28,42 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * Áramkör értelmezõ objektum, feladata, hogy a paraméterként átadott, illetve
+ * fájlban elhelyezett komponenseket értelmezze, a kapcsolatokat feltérképezze,
+ * elvégezze az összeköttetéseket, és ezáltal felépítse az áramkört.
+ * Fontos, hogy egy ilyen objektum csak egyszer használható, új áramkörhöz, újat
+ * kell létrehozni.
  *
  * @author balint
  */
 public class Parser {
 
+    /**
+     * A leíróból létrehozott áramkör.
+     */
     private Circuit circuit;
+    /**
+     * Minden komponens-névhez eltároljuk a bemeneteket, késõbbi feldolgozás miatt.
+     */
     private static final HashMap<String, Class<? extends AbstractComponent>> availableComponents;
+    /**
+     * Regex minta egy leíró-sor feldolgozásához
+     */
     private static Pattern componentPattern = Pattern.compile("(.*?)\\s*=\\s*(.*?)\\((.*?)\\)");
+    /**
+     * Regex minta egy komponens bemeneteinek a feldolgozásához
+     */
     private static Pattern inputPattern = Pattern.compile("(.*?)(?:\\[([0-9]+)\\])?");
     private HashMap<String, String[]> inputs = new HashMap<String, String[]>();
+    /**
+     * Egy számláló, hogy a vcc és gnd komponenseknek eltérõ változónevet tudjunk adni.
+     */
     private int constComps = 0;
 
     static {
+        /**
+         * Feldolgozó által ismert komponensek listája.
+         */
         availableComponents = new HashMap<String, Class<? extends AbstractComponent>>(5);
         availableComponents.put("and", AndGate.class);
         availableComponents.put("or", OrGate.class);
@@ -48,10 +74,14 @@ public class Parser {
         availableComponents.put("gnd", Gnd.class);
         availableComponents.put("vcc", Vcc.class);
         availableComponents.put("7seg", SevenSegmentDisplay.class);
+        availableComponents.put("mpx", Mpx.class);
+        availableComponents.put("jk", FlipFlopJK.class);
+        availableComponents.put("d", FlipFlopD.class);
     }
 
     /**
      * Létrehoz egy áramkört az argumentumokban megadott komponensekbõl
+     * (olyan, mintha mindegyik paraméter egy leíró fájl egy sora lenne)
      *
      * @param content a komponensek, amiket hozzá akarunk adni
      * @return

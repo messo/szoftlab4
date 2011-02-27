@@ -18,9 +18,9 @@ public interface IsSource extends Component {
     void setValues(Value[] values);
 
     /**
-     * Lekérjük a jelforrás értékeit, hogy el tudjuk menteni.
+     * Lekérhetjük a jelforrás értékeit, hogy el tudjuk menteni.
      *
-     * @return
+     * @return értékek (kapcsolónak egy elemû)
      */
     Value[] getValues();
 }

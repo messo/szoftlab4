@@ -4,7 +4,7 @@ import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
 
 /**
- * A "föld" komponens, mely állandóan a hamis értéket adja ki.
+ * A "föld" komponens, mely állandóan a hamis értéket adja ki. Nincs bemenete.
  *
  * @author balint
  */

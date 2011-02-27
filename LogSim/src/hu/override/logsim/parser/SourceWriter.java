@@ -3,9 +3,9 @@ package hu.override.logsim.parser;
 import hu.override.logsim.component.IsSource;
 
 /**
- * Kiírja egy fájlba a jelforrások értékeit
+ * Segítségével kiírhatjuk egy fájlba a jelforrások értékeit.
  *
- * @author Balint
+ * @author balint
  */
 public class SourceWriter {
 
@@ -28,8 +28,9 @@ public class SourceWriter {
     }
 
     /**
-     * Bezárjuk a fájlt.
+     * Bezárjuk a fájlt, ha végeztünk, ezt meg kell hívnunk.
      */
     public void close() {
+        // TODO - implement
     }
 }

@@ -16,6 +16,11 @@ public class Toggle extends AbstractComponent implements IsSource {
         // nop
     }
 
+    /**
+     * Kapcsoló állapotának változtatása, csak 1 elemû tömböt kaphat paraméterül.
+     *
+     * @param values
+     */
     @Override
     public void setValues(Value[] values) {
         if (values.length != 1) {
@@ -32,6 +37,9 @@ public class Toggle extends AbstractComponent implements IsSource {
         }
     }
 
+    /**
+     * Lekérjük a kapcsoló értékét (1 elemû tömb)
+     */
     public Value[] getValues() {
         Value[] values = new Value[1];
         values[0] = lastValue[0];
@@ -39,7 +47,7 @@ public class Toggle extends AbstractComponent implements IsSource {
     }
 
     /**
-     * Kapcsoló állapotát megváltoztatjuk
+     * Kapcsoló állapotát megváltoztathatjuk. Kényelmesebb, mint a setValues() hívása
      */
     public void toggle() {
         Value[] values = new Value[1];

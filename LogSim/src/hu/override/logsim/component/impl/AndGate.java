@@ -4,6 +4,9 @@ import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
 
 /**
+ * ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek
+ * kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát
+ * valósítja meg, amit a kimenetén kiad.
  *
  * @author balint
  */

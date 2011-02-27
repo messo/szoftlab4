@@ -5,7 +5,9 @@ import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.IsDisplay;
 
 /**
- * 7-szegmenses kijelzõt reprezentál, melyen 7 bemenete vezérli a megfelelõ szegmenseket.
+ * 7-szegmenses kijelzõt reprezentál, melynek 7 bemenete vezérli a
+ * megfelelõ szegmenseket, ezek világítanak, ha az adott bemenetre logikai
+ * igaz van kötve.
  *
  * @author balint
  */

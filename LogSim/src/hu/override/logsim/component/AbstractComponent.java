@@ -4,17 +4,44 @@ import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
 
 /**
+ * Egy komponens absztrakt megvalósítása, ebbõl származik az összes többi
+ * komponens. A közös logikát valósítja meg. A gyakran használt dolgokra
+ * ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.)
  *
  * @author balint
  */
 public abstract class AbstractComponent implements Component {
 
+    /**
+     * Õt tartalmazó áramkör
+     */
     protected Circuit circuit;
+    /**
+     * Kimenetek tényleges értékei, számolás után ide rögtön visszaírjuk.
+     * Ez kérdezhetõ le a felhasználó által.
+     */
     protected Value[] lastValue;
+    /**
+     * Jelenlegi (számolás közben) érték, ezt csak rövid ideig tároljuk,
+     * ahhoz kell, hogy tudjuk változik-e a lastValue-hoz képest.
+     */
     protected Value[] currentValue;
+    /**
+     * Komponens neve (változó neve, ahogy a leíróban azonosítjuk)
+     */
     protected String name;
+    /**
+     * Az adott bemenetekre kötött komponensek.
+     */
     protected AbstractComponent[] inputs;
+    /**
+     * Itt tároljuk, hogy melyik bemenetre, az adott komponens melyik kimenetét kötöttük.
+     */
     protected int[] indices;
+    /**
+     * "Kiértékelt" flag, ha ez be van billenve, akkor nem számolunk újra,
+     * csak visszaadjuk az elõzõleg kiszámolt értéket.
+     */
     protected boolean alreadyEvaluated = false;
 
     public AbstractComponent() {
@@ -23,15 +50,30 @@ public abstract class AbstractComponent implements Component {
         lastValue[0] = Value.FALSE; // alapból innen indulunk.
     }
 
+    /**
+     * Szülõ beállítása
+     * 
+     * @param parent
+     */
     public void setCircuit(Circuit parent) {
         this.circuit = parent;
     }
 
+    /**
+     * Név beállítása (változó, amivel azonosítjuk)
+     *
+     * @param name
+     */
     @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Név lekérdezése
+     * 
+     * @return
+     */
     @Override
     public String getName() {
         return name;
@@ -51,22 +93,37 @@ public abstract class AbstractComponent implements Component {
         indices[inputPin] = outputPin;
     }
 
+    /**
+     * Shortcut a másik setInput()-hoz, outputPin = 0-val.
+     *
+     * @param inputSlot
+     * @param component
+     */
     public void setInput(int inputSlot, AbstractComponent component) {
         setInput(inputSlot, component, 0);
     }
 
-    @Override
-    public Value getValue() {
-        return getValue(0);
-    }
-
+    /**
+     * Adott kimeneti lábon lévõ értéke lekérdezése.
+     */
     @Override
     public Value getValue(int idx) {
         return lastValue[idx];
     }
 
     /**
-     * Számolás:
+     * 0-ás kimeneti lábon lévõ értéke lekérdezése.
+     */
+    @Override
+    public Value getValue() {
+        return getValue(0);
+    }
+
+    /**
+     * Komponens kimeneteinek kiértékelése (ha még nem volt) és a megadott
+     * kimeneti lábon lévõ érték visszaadása.
+     *
+     * @param outputPin
      */
     public Value evaluate(int outputPin) {
         // 1. Ki vagy-e számolva?
@@ -85,10 +142,20 @@ public abstract class AbstractComponent implements Component {
         return lastValue[outputPin];
     }
 
+    /**
+     * Lekérjük a 0. kimenetén lévõ értéket.
+     * 
+     * @return
+     */
     public Value evaluate() {
         return evaluate(0);
     }
 
+    /**
+     * Bemenetek számának beállítása
+     * 
+     * @param inputPinsCount
+     */
     public void setInputPinsCount(int inputPinsCount) {
         inputs = new AbstractComponent[inputPinsCount];
         if (isInputPinsCountValid(inputPinsCount)) {
@@ -101,10 +168,19 @@ public abstract class AbstractComponent implements Component {
         }
     }
 
+    /**
+     * Lekérjük egy adott bemenetre kötött értéket
+     *
+     * @param inputPin bemenet, amely érdekel minket.
+     * @return
+     */
     protected Value evaluateInput(int inputPin) {
         return inputs[inputPin].evaluate(indices[inputPin]);
     }
 
+    /**
+     * Töröljük a komponens "kiértékelt" flagjét.
+     */
     public void clearEvaluatedFlag() {
         alreadyEvaluated = false;
     }
@@ -117,9 +193,9 @@ public abstract class AbstractComponent implements Component {
 
     /**
      * Az alkomponensek itt implementálhatják a bemenetek számának ellenõrzési
-     * logikáját.
+     * logikáját. Ha ez hamissal tér vissza, akkor nem érvényes a komponens bementeinek száma.
      *
-     * @return
+     * @return érvényes-e a bemenetek száma
      */
     protected boolean isInputPinsCountValid(int inputPinsCount) {
         return true;

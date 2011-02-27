@@ -11,8 +11,13 @@ import hu.override.logsim.component.FlipFlop;
  */
 public class FlipFlopJK extends FlipFlop {
 
-    private static final int CLK = 0;
+    /**
+     * J bemenet lábának a száma
+     */
     private static final int J = 1;
+    /**
+     * K bemenet lábának a száma
+     */
     private static final int K = 2;
 
     @Override

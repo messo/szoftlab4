@@ -4,8 +4,9 @@ import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
 
 /**
- * Vagy kaput reprezentál, melynek akkor van igaz érték a kimenetén, ha legalább
- * egy bemenetén van igaz érték.
+ * VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek
+ * kiértékelését kezdeményezi, s a kapott értékek logikai VAGY kapcsolatát
+ * valósítja meg, amit a kimenetén kiad.
  *
  * @author balint
  */

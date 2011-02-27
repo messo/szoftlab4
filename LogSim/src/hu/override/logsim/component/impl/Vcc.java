@@ -4,7 +4,7 @@ import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
 
 /**
- * A tápfeszültés komponens, ami konstans igaz értéket ad.
+ * A tápfeszültés komponens, ami konstans igaz értéket ad. Nincs bemenete.
  *
  * @author balint
  */

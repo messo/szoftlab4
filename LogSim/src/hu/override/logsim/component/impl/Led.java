@@ -4,12 +4,16 @@ import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.IsDisplay;
 
 /**
- * Egy LED-et reprezentál, mely világít, ha
+ * Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
+ * 3 féle színe lehet, ezeket a Color enumeráció határozza meg.
  *
  * @author balint
  */
 public class Led extends AbstractComponent implements IsDisplay {
 
+    /**
+     * Led jelenlegi színe
+     */
     private Color color;
 
     /**

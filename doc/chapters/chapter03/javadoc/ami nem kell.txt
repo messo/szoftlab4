@@ -1,0 +1,4 @@
+Ami nem kell:
+
+LogSim
+Simulation(Circuit, CONTROLLER!!!)
