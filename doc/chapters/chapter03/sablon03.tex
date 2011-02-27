@@ -48,6 +48,27 @@ Egy kijelző az áramkör alapeleme, bemenetére kötött komponens kiértékel�
 \subsection{\bf Toggle}
 Kapcsoló, az áramkört felépítő elem, felhasználói interakciót követően, az aktuális értékét lehet állítani. Komponens bemenete nincs, így nem kezel további komponenseket.
 
+\subsection{\bf Value}
+A logikai értékeket megvalósító objektum.
+
+\subsection{\bf FlipFlopD}
+D flip flopot reprezentáló osztály. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenettől függően változtatja a kimeneti értékét.
+
+\subsection{\bf FlipFlopJK}
+JK flip flopot reprezentáló osztály. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenetektől függően változtatja a kimeneti értékét.
+
+\subsection{\bf Mpx}
+Multiplexer áramköri építőelemet tartalmazó objektum. Bemeneteire kötött komponensek kiértékelését kezdeményezi, a választó bemenet függvényében adja ki a kimeneten az egyik, vagy másik értékbemenetére kötött értéket.
+
+\subsection{\bf SevenSegmentDisplay}
+Hétszegmenses kijelző objektuma. Minden bemenete egy-egy szegmensért felelős, melyek 8-as alakban helyezkednek el.
+
+\subsection{\bf SourceWriter}
+Ez az objektum végzi el a konfigurálható elemek beállításainak fájlba írását a felhasználó kérésére.
+
+\subsection{\bf SourceReader}
+Ez az objektum végzi el a konfigurálható elemek beállításainak fájlból beolvasását a felhasználó kérésére.
+
 \section{Osztályok leírása}
 \comment{Az előző alfejezetben tárgyalt objektumok felelősségének formalizálása attribútumokká, metódusokká. Csak publikus metódusok szerepelhetnek. Ebben az alfejezetben megjelennek az interfészek, az öröklés, az absztrakt osztályok. Segédosztályokra még mindig nincs szükség. Az osztályok ABC sorrendben kövessék egymást. Interfészek esetén az Interfészek, Attribútumok pontok kimaradnak.}
 
