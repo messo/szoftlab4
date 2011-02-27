@@ -66,7 +66,6 @@ Ez az objektum végzi el a konfigurálható elemek beállításainak fájlba ír
 Ez az objektum végzi el a konfigurálható elemek beállításainak fájlból beolvasását a felhasználó kérésére.
 
 \section{Osztályok leírása}
-\comment{Az előző alfejezetben tárgyalt objektumok felelősségének formalizálása attribútumokká, metódusokká. Csak publikus metódusok szerepelhetnek. Ebben az alfejezetben megjelennek az interfészek, az öröklés, az absztrakt osztályok. Segédosztályokra még mindig nincs szükség. Az osztályok ABC sorrendben kövessék egymást. Interfészek esetén az Interfészek, Attribútumok pontok kimaradnak.}
 
 \input{chapters/chapter03/javadoc/hu.override.logsim}
 \input{chapters/chapter03/javadoc/hu.override.logsim.component}
@@ -74,18 +73,41 @@ Ez az objektum végzi el a konfigurálható elemek beállításainak fájlból b
 \input{chapters/chapter03/javadoc/hu.override.logsim.parser}
 
 \section{Statikus struktúra diagramok}
-\comment{Az előző alfejezet osztályainak kapcsolatait és publikus metódusait bemutató osztálydiagram(ok). Tipikus hibalehetőségek: csillag-topológia, szigetek.}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
-%\includegraphics[width=17cm]{chapters/chapter03/example.pdf}
-\caption{x}
-\label{fig:example1}
+\includegraphics*[angle=90, width=13cm, viewport = 0 475 765 930]{chapters/chapter03/classdiagram/class_diagram.pdf}
+\caption{Statikus struktúra nézet (bal felső)}
+\label{fig:class_diagram}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics*[angle=90, width=13cm, viewport = 765 475 1530 930]{chapters/chapter03/classdiagram/class_diagram.pdf}
+\caption{Statikus struktúra nézet (jobb felső)}
+\label{fig:class_diagram}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics*[angle=90, width=13cm, viewport = 0 0 765 475]{chapters/chapter03/classdiagram/class_diagram.pdf}
+\caption{Statikus struktúra nézet (bal alsó)}
+\label{fig:class_diagram}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics*[angle=90, width=13cm, viewport = 765 0 1530 475]{chapters/chapter03/classdiagram/class_diagram.pdf}
+\caption{Statikus struktúra nézet (jobb alsó)}
+\label{fig:class_diagram}
 \end{center}
 \end{figure}
 
 \section{Szekvencia diagramok}
-\comment{Inicializálásra, use-case-ekre, belső működésre. Konzisztens kell legyen az előző alfejezettel. Minden metódus, ami ott szerepel, fel kell tűnjön valamelyik szekvenciában. Minden metódusnak, ami szekvenciában szerepel, szereplnie kell a valamelyik osztálydiagramon.}
+Inicializálásra nem készült szekvencia diagram, mert amikor a rendszer elindul tulajdonképpen csak egy felhasználónk van. Amint az betölt egy áramkört lesz áramkör, és ha indít szimulációt akkor lesz szimuláció. Addig gyakorlatilag semmi se jön létre.
 
 \begin{figure}[H]
 \begin{center}
