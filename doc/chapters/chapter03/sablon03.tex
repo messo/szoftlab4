@@ -10,9 +10,6 @@
 \subsection{\bf Parser}
 Áramkör értelmező objektum, feladata, hogy a paraméterként átadott, illetve fájlban elhelyezett komponenseket értelmezze, a kapcsolatokat feltérképezze, elvégezze az összeköttetéseket, és ezáltal felépítse az áramkört.
 
-\subsection{\bf ConsoleView}
-Az áramkör karakteres megjelenítéséért, és a szimuláció során a változások megjelenítésének frissítéséért felelős objektum.
-
 \subsection{\bf Simulation}
 Szimuláció objektum. A szimulációért felelős. Elindítja a jelgenerátor léptetőt, s utasítja az áramkört a kiértékelésre, és figyeli ha az áramkörben változás történt. Ha változás megadott lépésen belül nem történt, tájékoztatja a felhasználót, hogy nincs stacionárius állapot. Továbbá a megadott grafikai megjelenítőt frissíti.
 
@@ -179,22 +176,6 @@ Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/sim_stop.pdf}
-\caption{Szimuláció leállítása}
-\label{fig:sim_stop}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/sim_start.pdf}
-\caption{Szimuláció indítása}
-\label{fig:sim_start}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
 \includegraphics{chapters/chapter03/seqdiagrams/aramkor_valasztas.pdf}
 \caption{Áramkör választás}
 \label{fig:aramkor_valasztas}
@@ -238,22 +219,6 @@ Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
 \includegraphics[angle=90]{chapters/chapter03/seqdiagrams/jelforrasok_betoltese.pdf}
 \caption{Jelforrások betöltése}
 \label{fig:jelforrasok_betoltese}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/ff_bind.pdf}
-\caption{Flip-flopok órajel bemenetére jelgenerátor kötése}
-\label{fig:ff_bind}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/ff_vez_on_clk.pdf}
-\caption{Jelgenerátor lépésénél a feliratkozott FF-ek vezérlése}
-\label{fig:ff_vez_on_clk}
 \end{center}
 \end{figure}
 
