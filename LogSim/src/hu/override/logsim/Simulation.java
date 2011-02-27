@@ -46,6 +46,13 @@ public class Simulation extends Thread {
         this.controller = controller;
     }
 
+    public Simulation(Circuit circuit, String fileName) {
+        super("Simulation");
+        this.circuit = circuit;
+        this.circuit.setSimulation(this);
+        this.controller = controller;
+    }
+
     @Override
     public void run() {
         // amikor elindul a szimuláció, akkor a steppert is indítsuk el.
@@ -90,6 +97,14 @@ public class Simulation extends Thread {
         sw.close();
 
         return 0;
+    }
+
+    /**
+     * Betöltjük a fájlból a jelforrások állapotait, de mindenképp új szimulációt hozunk létre,
+     * hiszen
+     */
+    public Simulation loadSources(String fileName) {
+
     }
 
     public void setCircuit(Circuit circuit) {
