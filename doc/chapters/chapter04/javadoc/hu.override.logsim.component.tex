@@ -1,0 +1,96 @@
+\subsection{AbstractComponent}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelősség\\
+Egy komponens absztrakt megvalósítása, ebből származik az összes többi  komponens. A közös logikát valósítja meg. A gyakran használt dolgokra  ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.)
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent.
+\item Interfészek: Component.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{protected boolean alreadyEvaluated} "Kiértékelt" flag, ha ez be van billenve, akkor nem számolunk újra, csak visszaadjuk az előzőleg kiszámolt értéket.
+	\item \texttt{protected Circuit circuit} Őt tartalmazó áramkör
+	\item \texttt{protected Value[] currentValue} Jelenlegi (számolás közben) érték, ezt csak rövid ideig tároljuk, ahhoz kell, hogy tudjuk változik-e a lastValue-hoz képest.
+	\item \texttt{protected int[] indices} Itt tároljuk, hogy melyik bemenetre, az adott komponens melyik kimenetét kötöttük.
+	\item \texttt{protected AbstractComponent[] inputs} Az adott bemenetekre kötött komponensek.
+	\item \texttt{protected Value[] lastValue} Kimenetek tényleges értékei, számolás után ide rögtön visszaírjuk. Ez kérdezhető le a felhasználó által.
+	\item \texttt{protected String name} Komponens neve (változó neve, ahogy a leíróban azonosítjuk)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public void clearEvaluatedFlag()}: Töröljük a komponens "kiértékelt" flagjét.
+	\item \texttt{public Value evaluate()}: Lekérjük a 0. kimenetén lévő értéket.
+	\item \texttt{public Value evaluate(int outputPin)}: Komponens kimeneteinek kiértékelése (ha még nem volt) és a megadott  kimeneti lábon lévő érték visszaadása.
+	\item \texttt{public String getName()}: Név lekérdezése
+	\item \texttt{public Value getValue()}: 0-ás kimeneti lábon lévő értéke lekérdezése.
+	\item \texttt{public Value getValue(int idx)}: Adott kimeneti lábon lévő értéke lekérdezése.
+	\item \texttt{public void setCircuit(Circuit parent)}: Szülő beállítása
+	\item \texttt{public void setInput(int inputSlot, AbstractComponent component)}: Shortcut a másik setInput()-hoz, outputPin = 0-val.
+	\item \texttt{public void setInput(int inputPin, AbstractComponent component, int outputPin)}: Beállítunk egy bemenetet.
+	\item \texttt{public void setInputPinsCount(int inputPinsCount)}: Bemenetek számának beállítása
+	\item \texttt{public void setName(String name)}: Név beállítása (változó, amivel azonosítjuk)
+\end{itemize}
+\end{itemize}
+
+\subsection{Component}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+Komponens interfész, ebből származik az IsDisplay és az IsSource interfész.  Legalapvetőbb dolgokat írja le (minden komponensnek van neve és értékei).
+\item Ősosztályok: (nincs)
+\item Interfészek: (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public String getName()}: Név lekérdezése.
+	\item \texttt{public Value getValue()}: Értéke lekérdezése a 0. kimeneten.
+	\item \texttt{public Value getValue(int idx)}: Érték lekérdezése az adott kimeneten.
+	\item \texttt{public void setName(String name)}: Név beállítása.
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlop}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelősség\\
+Flipflopok ősosztálya, minden flipflop 0. bemenete az órajel!
+\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private boolean active} Ebben tároljuk, hogy a FF számolhat-e vagy sem. (felfutó él)
+	\item \texttt{protected static final int CLK} Fixen a 0. bemenet az órajel
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public boolean isActive()}: Számolhat-e az FF? Ezt hívja meg az FF-ek onEvaluation() metódusa, mielőtt  bármit is csinálnának.
+	\item \texttt{public void setActive(boolean active)}: Felfutó élnél a SequenceGenerator-nak meg kell hívni ezt a hozzá kötött  FlipFlopokra, egyéb esetben törölnie az active flaget. Így tudja az FF, hogy  mikor kell ténylegesen számolnia.
+	\item \texttt{public void setInput(int inputPin, AbstractComponent component, int outputPin)}: Ősosztály implementációjának meghívása, illetve ha egy SequenceGeneratort kötünk éppen a CLK bemenetre, akkor az addFlipFlop() metódus meghívása rajta.
+\end{itemize}
+\end{itemize}
+
+\subsection{IsDisplay}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+Megjelenítő típusú komponenst reprezentál. Ezt kell implementálnia a megjelenítőknek.
+\item Ősosztályok:\ (nincs).
+\item Interfészek: Component.
+\item Metódusok$\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\end{itemize}
+
+\subsection{IsSource}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+Jelforrás típusú komponenst reprezentál. Ezt kell implementálnia a jelforrásoknak.
+\item Ősosztályok:\ (nincs).
+\item Interfészek: Component.
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public Value[] getValues()}: Lekérhetjük a jelforrás értékeit, hogy el tudjuk menteni.
+	\item \texttt{public void setValues(Value[] values)}: Beállítjuk a jelforrás értékét. Kapcsoló esetén csak 1 elemű tömb  adható paraméterként!
+\end{itemize}
+\end{itemize}
+

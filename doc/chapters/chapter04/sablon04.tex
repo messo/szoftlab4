@@ -7,93 +7,276 @@
 
 \section{Objektum katalógus}
 
-\comment{Minden, a feladatban szereplő objektum rövid, egy-két bekezdés hosszú ismertetése. Meg kell jelenjen minden objektumhoz, hogy mi a felelőssége. Informális leírás, ezért nem kell foglalkozni az örökléssel, az interfészekkel, az absztrakt osztályokkal, a segédosztályokkal.}
+\subsection{\bf Parser}
+Áramkör értelmező objektum, feladata, hogy a paraméterként átadott, illetve fájlban elhelyezett komponenseket értelmezze, a kapcsolatokat feltérképezze, elvégezze az összeköttetéseket, és ezáltal felépítse az áramkört.
 
-\subsection{Objektum1}
-\comment{Felelősség informális leírása}
+\subsection{\bf Simulation}
+Szimuláció objektum. A szimulációért felelős. Elindítja a jelgenerátor léptetőt, s utasítja az áramkört több kiértékelési ciklus lefuttatásához, amíg az áramkörben van változás. Ha a változás megadott lépésen belül nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot. Amikor leállítódik, a jelgenerátor-léptetőt is leállítja.
 
-\subsection{Objektum2}
-\comment{Felelősség informális leírása}
+\subsection{\bf Circuit}
+Az áramkör objektum. Ezen objektum feladata a jelgenerátor léptető kérésére a jelgenerátorok léptetése, az áramkörben található komponensek utasítása arra, hogy töröljék a "már kiértékelve" flaget egy adott kiértékelési ciklus előtt, hogy ezáltal a ciklusban minden kimenet értéke frissülhessen.
+Továbbá feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők kiértékelésével kezdődik.
+
+\subsection{\bf SequenceGeneratorStepper}
+Jelgenerátor léptető objektum. Feladata, hogy az áramkört utasítsa a jelgenerátorok léptesésére.
+
+\subsection{\bf SequenceGenerator}
+Jelgenerátor, az áramkört felépítő egyik alapelem, kiértékelési kezdeményezés hatására az előre betáplált jelsorozatot soron következő elemét állítja be aktuális értékként, így azon komponensek melyek bemenetére a Jelgenerátor van kötve, elérik aktuális értékét. Bemenete nem komponens jellegű így nem kezel más komponenseket. Mikor az áramkör kéri tőle, hogy lépjen, akkor a bitsorozat következő elemére lép.
+
+\subsection{\bf AndGate}
+ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát valósítja meg, amit a kimenetén kiad.
+
+\subsection{\bf OrGate}
+VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek kiértékelését kezdeményezi, s a kapott értékek logikai VAGY kapcsolatát valósítja meg, amit a kimenetén kiad.
+
+\subsection{\bf Inverter}
+Invertáló, az áramkör alapelemei közé tartozik. A bemenetére érkező jel logikai negáltját valósítja meg, amit a kimenetén kiad.
+
+\subsection{\bf Gnd}
+Föld, az áramkört felépítő egyik elem, állandó értéke logikai hamis. Bemenete nem létezik, így nem kezdeményez további kiértékeléseket.
+
+\subsection{\bf Vcc}
+Tápfeszültség, az áramkör egyik alapeleme, mely állandóan a logikai igazt adja ki a kimenetén.
+
+\subsection{\bf Led}
+Egy kijelző az áramkör alapeleme, bemenetére kötött komponens kiértékelését kezdeményezi, és ezáltal az aktuális értékét egy a felhasználó számára érzékelhető módon kijelzi.
+
+\subsection{\bf Toggle}
+Kapcsoló, az áramkört felépítő elem, felhasználói interakciót követően, az aktuális értékét lehet állítani. Komponens bemenete nincs, így nem kezel további komponenseket.
+
+\subsection{\bf Value}
+A logikai értékeket megvalósító objektum. Jelenleg két érték lehetséges: logikai igaz, logikai hamis.
+
+\subsection{\bf FlipFlopD}
+D flip flopot megvalósító objektum. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenettől függően változtatja a kimeneti értékét.
+
+\subsection{\bf FlipFlopJK}
+JK flip flopot megvalósító objektum. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenetektől függően változtatja a kimeneti értékét.
+
+\subsection{\bf Mpx}
+4-1-es multiplexer áramköri építőelemet megvalósító objektum. Bemeneteire kötött komponensek kiértékelését kezdeményezi, a választó bemenet függvényében adja ki a kimeneten az egyik, vagy másik értékbemenetére kötött értéket.
+
+\subsection{\bf SevenSegmentDisplay}
+Hétszegmenses kijelző objektuma. Minden bemenete egy-egy szegmensért felelős, melyek 8-as alakban helyezkednek el.
+
+\subsection{\bf SourceWriter}
+Ez az objektum végzi el a konfigurálható elemek beállításainak fájlba írását a felhasználó kérésére.
+
+\subsection{\bf SourceReader}
+Ez az objektum végzi el a konfigurálható elemek beállításainak fájlból beolvasását a felhasználó kérésére.
 
 \section{Osztályok leírása}
-\comment{Az előző alfejezetben tárgyalt objektumok felelősségének formalizálása attribútumokká, metódusokká. Csak publikus metódusok szerepelhetnek. Ebben az alfejezetben megjelennek az interfészek, az öröklés, az absztrakt osztályok. Segédosztályokra még mindig nincs szükség. Az osztályok ABC sorrendben kövessék egymást. Interfészek esetén az Interfészek, Attribútumok pontok kimaradnak.}
 
-\subsection{Osztály1}
-\begin{itemize}
-\item Felelősség\\
-\comment{Mi az osztály felelőssége. Kb 1 bekezdés.}
-\item Ősosztályok\\
-\comment{Mely osztályokból származik (öröklési hierarchia)\newline
-Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
-\item Interfészek\\
-\comment{Mely interfészeket valósítja meg.}
-\item Attribútumok\\
-\comment{Milyen attribútumai vannak}
-	\begin{itemize}
-		\item attribútum1: attribútum jellemzése: mire való
-		\item attribútum2: attribútum jellemzése: mire való
-	\end{itemize}
-\item Metódusok\\
-\comment{Milyen publikus metódusokkal rendelkezik. Metódusonként egy-három mondat arról, hogy a metódus mit csinál.}
-	\begin{itemize}
-		\item int foo(Osztály3 o1, Osztály4 o2): metódus leírása
-		\item int bar(Osztály5 o1): metódus leírása
-	\end{itemize}
-\end{itemize}
-
-\subsection{Osztály2}
-\begin{itemize}
-\item Felelősség\\
-\comment{Mi az osztály felelőssége. Kb 1 bekezdés.}
-\item Ősosztályok\\
-\comment{Mely osztályokból származik (öröklési hierarchia)\newline
-Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
-\item Interfészek\\
-\comment{Mely interfészeket valósítja meg.}
-\item Attribútumok\\
-\comment{Milyen attribútumai vannak}
-	\begin{itemize}
-		\item attribútum1: attribútum jellemzése: mire való
-		\item attribútum2: attribútum jellemzése: mire való
-	\end{itemize}
-\item Metódusok\\
-\comment{Milyen publikus metódusokkal rendelkezik. Metódusonként egy-három mondat arról, hogy a metódus mit csinál.}
-	\begin{itemize}
-		\item int foo(Osztály3 o1, Osztály4 o2): metódus leírása
-		\item int bar(Osztály5 o1): metódus leírása
-	\end{itemize}
-\end{itemize}
+\input{chapters/chapter04/javadoc/hu.override.logsim}
+\input{chapters/chapter04/javadoc/hu.override.logsim.component}
+\input{chapters/chapter04/javadoc/hu.override.logsim.component.impl}
+\input{chapters/chapter04/javadoc/hu.override.logsim.parser}
 
 \section{Statikus struktúra diagramok}
-\comment{Az előző alfejezet osztályainak kapcsolatait és publikus metódusait bemutató osztálydiagram(ok). Tipikus hibalehetőségek: csillag-topológia, szigetek.}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
-%\includegraphics[width=17cm]{chapters/chapter04/example.pdf}
-\caption{x}
-\label{fig:example3}
+\includegraphics[angle=90, width=17cm]{chapters/chapter04/classdiagram/class.pdf}
+\caption{Statikus struktúra nézet}
+\label{fig:class_diagram}
 \end{center}
 \end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[angle=90, width=14cm, viewport = 765 475 1530 930]{chapters/chapter03/classdiagram/class_diagram.pdf}
+%\caption{Statikus struktúra nézet (jobb felső)}
+%\label{fig:class_diagram}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[angle=90, width=14cm, viewport = 0 0 765 475]{chapters/chapter03/classdiagram/class_diagram.pdf}
+%\caption{Statikus struktúra nézet (bal alsó)}
+%\label{fig:class_diagram}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[angle=90, width=14cm, viewport = 765 0 1530 475]{chapters/chapter03/classdiagram/class_diagram.pdf}
+%\caption{Statikus struktúra nézet (jobb alsó)}
+%\label{fig:class_diagram}
+%\end{center}
+%\end{figure}
 
 \section{Szekvencia diagramok}
-\comment{Inicializálásra, use-case-ekre, belső működésre. Konzisztens kell legyen az előző alfejezettel. Minden metódus, ami ott szerepel, fel kell tűnjön valamelyik szekvenciában. Minden metódusnak, ami szekvenciában szerepel, szereplnie kell a valamelyik osztálydiagramon.}
+Inicializálásra nem készült szekvencia diagram, mert amikor a rendszer elindul tulajdonképpen csak egy felhasználónk van. Amint az betölt egy áramkört lesz áramkör, és ha indít szimulációt akkor lesz szimuláció. Addig gyakorlatilag semmi se jön létre.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
-%\includegraphics[width=17cm]{chapters/chapter04/example.pdf}
-\caption{x}
-\label{fig:example3}
+\includegraphics{chapters/chapter04/seqdiagrams/felhasznalo_szimulacio.pdf}
+\caption{Szimuláció futás közben}
+\label{fig:user_sim}
 \end{center}
 \end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics{chapters/chapter04/seqdiagrams/aramkor_szimulacio.pdf}
+\caption{Áramkör kiértékelési ciklus}
+\label{fig:circuit_sim}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+%\includegraphics{chapters/chapter04/seqdiagrams/aramkor_szimulacio.pdf}
+\caption{Komponens kiértékelése}
+\label{fig:component_sim}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics{chapters/chapter04/seqdiagrams/jelgeneratorok_leptetese.pdf}
+\caption{Jelgenerátorok léptetése}
+\label{fig:step_gens}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics{chapters/chapter04/seqdiagrams/aramkor_valasztas.pdf}
+\caption{Áramkör választás}
+\label{fig:aramkor_valasztas}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=17cm]{chapters/chapter04/seqdiagrams/aramkor_betoltes.pdf}
+\caption{Áramkör betöltés fájlból}
+\label{fig:aramkor_betoltes}
+\end{center}
+\end{figure}
+
+
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[width = 23.5cm, angle = 90, viewport = 0 0 830 500]{chapters/chapter03/seqdiagrams/sim_running.pdf}
+%\caption{Szimuláció futás közben 2. rész}
+%\label{fig:sim_running2}
+%\end{center}
+%\end{figure}
+
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[angle = 90]{chapters/chapter03/seqdiagrams/sim_evaluate.pdf}
+%\caption{Komponens kiértékelése}
+%\label{fig:sim_evaluate}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/sim_stepGenerators.pdf}
+%\caption{Jelgenerátorok léptetése}
+%\label{fig:sim_stepGenerators}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/sim_allapotvaltozasai.pdf}
+%\caption{Szimuláció állapotváltozásai}
+%\label{fig:sim_allapotvaltozasai}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/sim_stop.pdf}
+%\caption{Szimuláció leállítása}
+%\label{fig:sim_stop}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/sim_start.pdf}
+%\caption{Szimuláció indítása}
+%\label{fig:sim_start}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/aramkor_valasztas.pdf}
+%\caption{Áramkör választás}
+%\label{fig:aramkor_valasztas}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[viewport = 0 581 500 990]{chapters/chapter03/seqdiagrams/aramkor_betoltese_fajlbol.pdf}
+%\caption{Áramkör betöltése fájlból 1. rész (vágva)}
+%\label{fig:aramkor_betoltese_fajlbol}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[viewport = 0 0 500 581]{chapters/chapter03/seqdiagrams/aramkor_betoltese_fajlbol.pdf}
+%\caption{Áramkör betöltése fájlból 2. rész}
+%\label{fig:aramkor_betoltese_fajlbol}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[width=17cm]{chapters/chapter03/seqdiagrams/jelforrasok_mentese.pdf}
+%\caption{Jelforrások mentése}
+%\label{fig:jelforrasok_mentese}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/jelforrasok_modositasa.pdf}
+%\caption{Jelforrások módosítása}
+%\label{fig:jelforrasok_modositasa}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[angle=90]{chapters/chapter03/seqdiagrams/jelforrasok_betoltese.pdf}
+%\caption{Jelforrások betöltése}
+%\label{fig:jelforrasok_betoltese}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/ff_bind.pdf}
+%\caption{Flip-flopok órajel bemenetére jelgenerátor kötése}
+%\label{fig:ff_bind}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/ff_vez_on_clk.pdf}
+%\caption{Jelgenerátor lépésénél a feliratkozott FF-ek vezérlése}
+%\label{fig:ff_vez_on_clk}
+%\end{center}
+%\end{figure}
 
 \section{State-chartok}
-\comment{Csak azokhoz az osztályokhoz, ahol van értelme. Egyetlen állapotból álló state-chartok ne szerepeljenek. A játék működését bemutató state-chart-ot készíteni tilos.}
 
-\begin{figure}[h]
-\begin{center}
-%\includegraphics[width=17cm]{chapters/chapter04/example.pdf}
-\caption{x}
-\label{fig:example3}
-\end{center}
-\end{figure}
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[width=17cm]{chapters/chapter03/seqdiagrams/sim_states.pdf}
+%\caption{Szimuláció állapotai}
+%\label{fig:sim_states}
+%\end{center}
+%\end{figure}
 

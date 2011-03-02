@@ -1,0 +1,120 @@
+\subsection{Circuit}
+\begin{itemize}
+\item Felelősség\\
+Feladata a jelgenerátor léptető kérésére a jelgenerátorok léptetése, a feldolgozó  által létrehozott komponensek felvétele az áramkörbe, illetve ezek utasítása arra,  hogy töröljék a "már kiértékelve" flaget egy adott kiértékelési ciklus előtt, hogy ezáltal a  ciklusban minden kimenet értéke frissülhessen.  Továbbá feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése  a kijelzők kiértékelésével kezdődik.
+\item Ősosztályok:\ Object $\rightarrow{}$ Circuit.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private HashMap componentMap} Komponenseket tartalmazó HashMap
+	\item \texttt{private List displays} Megjelenítő típusú komponensek
+	\item \texttt{private Simulation simulation} Áramkört éppen szimuláló objektum
+	\item \texttt{private List sources} Jelforrás típusú komponensek
+	\item \texttt{private boolean stable} Áramkör stabilitása
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public AbstractComponent addComponent(AbstractComponent component)}: Komponens hozzáadása az áramkörhöz.
+	\item \texttt{public void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy  stabil (nem változott semelyik komponens kimenete az utolsó futtatás óta)  vagy instabil állapotban van-e.
+	\item \texttt{public AbstractComponent getComponentByName(String name)}: Lekérünk egy komponenst az áramkörtől a neve alapján.
+	\item \texttt{public List getDisplays()}: Megjelenítő típusú komponeseket adja vissza.
+	\item \texttt{public List getSources()}: Jelforrás típusú komponenseket adja vissza.
+	\item \texttt{public boolean isStable()}: Áramkör stacionárius állapotának lekérdezése.
+	\item \texttt{public int loadSources(String fileName)}: Fájlból betölti a jelforrások állapotát.
+	\item \texttt{public int saveSources(String fileName)}: Elmenti fájlba a jelforrások állapotát.
+	\item \texttt{public void setSimulation(Simulation simulation)}: Szimuláció beállítása. Ez a szimuláció létrejöttekor hívódik meg.
+	\item \texttt{public void setStable(boolean stable)}: Áramkör stabilitásának beállítása.
+	\item \texttt{public void simulationShouldBeWorking()}: Jelzi a szimuláció felé, hogy új ciklust kell indítani. Ezt egy jelforrás  beállítása után hívjuk meg.
+	\item \texttt{public void stepGenerators()}: Jelgenerátorok a szimuláció szemszögéből nézve, egyszerre történő  léptetése.
+\end{itemize}
+\end{itemize}
+
+\subsection{SequenceGeneratorStepper}
+\begin{itemize}
+\item Felelősség\\
+Jelgenerátor-léptető szál. Feladata, hogy az áramkört utasítsa a jelgenerátorok léptesésére  a felhasználó által konfigurálható időközönként.
+\item Ősosztályok:\ Object $\rightarrow{}$ Thread $\rightarrow{}$ SequenceGeneratorStepper.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private long pause} Szünet két léptetés között -- felhasználó által konfigurálható
+	\item \texttt{private boolean shouldRun} A futási ciklus változója; ha ez hamis lesz, akkor leáll a szál
+	\item \texttt{private Simulation simulation} A szimuláció, aki számára lépteti a jelgenerátorokat
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public void run()}: Megadott időközönként az áramkörön meghívjuk a stepGenerators() metódust.
+	\item \texttt{public void setPause(long pause)}: Két léptetés között eltelt idő állítása (léptetési sebesség)
+\end{itemize}
+\end{itemize}
+
+\subsection{Simulation}
+\begin{itemize}
+\item Felelősség\\
+Egy szimulációt reprezentáló objektum.  Futásakor elindítja a jelgenerátor léptetőt, s utasítja az áramkört több kiértékelési  ciklus lefuttatásához, amíg az áramkörben van változás. Ha a változás megadott lépésen belül  nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot.  Amikor leállítódik, a jelgenerátor-léptetőt is leállítja.  A szál természetéből adódóan többet nem indítható el, új szimulációhoz új példányt kell létrehozni.
+\item Ősosztályok:\ Object $\rightarrow{}$ Thread $\rightarrow{}$ Simulation.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private Circuit circuit} Szimulált áramkör
+	\item \texttt{private int counter} ciklusszámláló, amely ha eléri a \textit{cycleLimit}-et, akkor leáll a szimuláció és jelezzük a felhasználónak.
+	\item \texttt{private State currentState} Szimuláció jelenlegi állapota
+	\item \texttt{private static final int cycleLimit} cikluslimit
+	\item \texttt{private final Object lock} segéd lock objektum
+	\item \texttt{private SequenceGeneratorStepper seqGenStepper} Jelgenerátor-léptető, amit elindítunk, ha elindul a szimuláció.
+	\item \texttt{private boolean shouldRun} A futási ciklus változója; ha ez hamis lesz, akkor leáll a szál
+	\item \texttt{private final Object synchObj} segéd sync objektum, ami a szál altatásához kell.
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public Circuit getCircuit()}: Szimulált áramkör lekérdezése
+	\item \texttt{public Object getLock()}: Egy lock objektum, a szálak egymást kizáráshoz kell.
+	\item \texttt{public void run()}: A szál futása közben történő dolgokat valósítjuk meg. Lásd \ref{fig:sim_running1} és \ref{fig:sim_running2} ábra.
+	\item \texttt{public void setState(State state)}: Állapot beállítása.
+\end{itemize}
+\end{itemize}
+
+\subsection{Simulation.State}
+\begin{itemize}
+\item Felelősség\\
+Szimuláció állapotait írja le
+\item Ősosztályok:\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Simulation.State.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{public static final State PAUSED} Szimuláció szüneteltetve van, a következő jelforrás változásig.
+	\item \texttt{public static final State STOPPED} Szimuláció leállt, ahhoz, hogy bármi történjen az áramkörre újra kell indítani.
+	\item \texttt{public static final State WORKING} Szimuláció éppen dolgozik, egy konkrét jelforrás-kombinációt alkalmazva dolgoztatja az áramkört
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public static State valueOf(String name)}: 
+ % TODO
+	\item \texttt{public static State[] values()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Value}
+\begin{itemize}
+\item Felelősség\\
+Az áramkörben előfordulható értéket reprezentál.
+\item Ősosztályok:\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Value.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{public static final Value FALSE} 
+ % TODO
+	\item \texttt{public static final Value TRUE} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{public Value invert()}: Invertálja az adott értéket. Ennek addig van értelme, amíg 2 féle  állapot fordulhat elő a rendszerben.
+	\item \texttt{public static Value valueOf(String name)}: 
+ % TODO
+	\item \texttt{public static Value[] values()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
