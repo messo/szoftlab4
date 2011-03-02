@@ -19,22 +19,22 @@
         <path d="M-3 -3 L127 -3 L127 357 L-3 357 L-3 -3 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath5">
-        <path d="M-3 -3 L197 -3 L197 207 L-3 207 L-3 -3 Z" />
+        <path d="M-3 -3 L207 -3 L207 207 L-3 207 L-3 -3 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath6">
         <path d="M0 0 L33 0 L33 18 L0 18 L0 0 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath7">
-        <path d="M-3 -3 L15 -3 L15 47 L-3 47 L-3 -3 Z" />
+        <path d="M-3 -3 L207 -3 L207 189 L-3 189 L-3 -3 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath8">
-        <path d="M-3 -3 L197 -3 L197 189 L-3 189 L-3 -3 Z" />
+        <path d="M0 0 L128 0 L128 15 L0 15 L0 0 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath9">
-        <path d="M0 0 L132 0 L132 15 L0 15 L0 0 Z" />
+        <path d="M0 0 L0 4 L200 4 L200 0 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath10">
-        <path d="M0 0 L0 4 L190 4 L190 0 Z" />
+        <path d="M-3 -3 L15 -3 L15 47 L-3 47 L-3 -3 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath11">
         <path d="M-3 -3 L137 -3 L137 77 L-3 77 L-3 -3 Z" />
@@ -46,7 +46,7 @@
         <path d="M-3 -3 L137 -3 L137 59 L-3 59 L-3 -3 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath14">
-        <path d="M0 0 L68 0 L68 15 L0 15 L0 0 Z" />
+        <path d="M0 0 L99 0 L99 15 L0 15 L0 0 Z" />
       </clipPath>
       <clipPath clipPathUnits="userSpaceOnUse" id="clipPath15">
         <path d="M0 0 L0 4 L130 4 L130 0 Z" />
@@ -126,47 +126,47 @@
       <rect x="0" y="0" width="115" style="clip-path:url(#clipPath4); fill:none;" height="35" />
       <line x1="57" x2="57" y1="35" style="clip-path:url(#clipPath4); fill:none; stroke-linejoin:bevel; stroke-dasharray:8,3;" y2="350" />
     </g>
-    <g transform="translate(182,134)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round; font-weight:bold; stroke-miterlimit:0;">
-      <rect x="0" y="0" width="190" style="clip-path:url(#clipPath5); fill:none;" height="200" />
+    <g transform="translate(172,134)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round; font-weight:bold; stroke-miterlimit:0;">
+      <rect x="0" y="0" width="200" style="clip-path:url(#clipPath5); fill:none;" height="200" />
     </g>
-    <g transform="translate(182,134)" style="font-size:11; fill:white; text-rendering:geometricPrecision; font-family:sans-serif; stroke:white; font-weight:bold;">
+    <g transform="translate(172,134)" style="font-size:11; fill:white; text-rendering:geometricPrecision; font-family:sans-serif; stroke:white; font-weight:bold;">
       <path d="M32 0 L32 9 L26 17 L0 17 L0 0 Z" style="clip-path:url(#clipPath5); stroke:none;" />
     </g>
-    <g transform="translate(182,134)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round; font-weight:bold; stroke-miterlimit:0;">
+    <g transform="translate(172,134)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round; font-weight:bold; stroke-miterlimit:0;">
       <path d="M32 0 L32 9 L26 17 L0 17 L0 0 Z" style="fill:none; clip-path:url(#clipPath5);" />
     </g>
-    <g transform="translate(182,134)" style="text-rendering:geometricPrecision; font-size:11; font-weight:bold; font-family:sans-serif;">
+    <g transform="translate(172,134)" style="text-rendering:geometricPrecision; font-size:11; font-weight:bold; font-family:sans-serif;">
       <text x="4" y="12" style="clip-path:url(#clipPath6); stroke:none;" xml:space="preserve">loop</text>
     </g>
+    <g transform="translate(172,152)" style="font-size:11; fill:white; text-rendering:geometricPrecision; font-family:sans-serif; stroke:white;">
+      <rect x="28" y="5" width="128" style="clip-path:url(#clipPath7); stroke:none;" height="15" />
+    </g>
+    <g style="text-rendering:geometricPrecision; font-size:11; font-family:sans-serif;" transform="translate(200,157)">
+      <text x="10" y="12" style="clip-path:url(#clipPath8); stroke:none;" xml:space="preserve">[minden komponensre]</text>
+    </g>
     <g transform="translate(348,204)" style="font-size:11; fill:white; text-rendering:geometricPrecision; font-family:sans-serif; stroke:white;">
-      <rect x="0" y="0" width="8" style="clip-path:url(#clipPath7); stroke:none;" height="40" />
+      <rect x="0" y="0" width="8" style="clip-path:url(#clipPath10); stroke:none;" height="40" />
     </g>
     <g transform="translate(348,204)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round; stroke-miterlimit:0;">
-      <rect x="0" y="0" width="8" style="clip-path:url(#clipPath7); fill:none;" height="40" />
+      <rect x="0" y="0" width="8" style="clip-path:url(#clipPath10); fill:none;" height="40" />
     </g>
-    <g transform="translate(182,152)" style="font-size:11; fill:white; text-rendering:geometricPrecision; font-family:sans-serif; stroke:white;">
-      <rect x="28" y="5" width="132" style="clip-path:url(#clipPath8); stroke:none;" height="15" />
-    </g>
-    <g style="text-rendering:geometricPrecision; font-size:11; font-family:sans-serif;" transform="translate(210,157)">
-      <text x="12" y="12" style="clip-path:url(#clipPath9); stroke:none;" xml:space="preserve">[minden komponensre]</text>
-    </g>
-    <g transform="translate(192,254)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round; font-weight:bold; stroke-miterlimit:0;">
+    <g transform="translate(182,254)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round; font-weight:bold; stroke-miterlimit:0;">
       <rect x="0" y="0" width="130" style="clip-path:url(#clipPath11); fill:none;" height="70" />
     </g>
-    <g transform="translate(192,254)" style="font-size:11; fill:white; text-rendering:geometricPrecision; font-family:sans-serif; stroke:white; font-weight:bold;">
+    <g transform="translate(182,254)" style="font-size:11; fill:white; text-rendering:geometricPrecision; font-family:sans-serif; stroke:white; font-weight:bold;">
       <path d="M26 0 L26 9 L20 17 L0 17 L0 0 Z" style="clip-path:url(#clipPath11); stroke:none;" />
     </g>
-    <g transform="translate(192,254)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round; font-weight:bold; stroke-miterlimit:0;">
+    <g transform="translate(182,254)" style="font-size:11; stroke-linecap:butt; text-rendering:geometricPrecision; font-family:sans-serif; stroke-linejoin:round; font-weight:bold; stroke-miterlimit:0;">
       <path d="M26 0 L26 9 L20 17 L0 17 L0 0 Z" style="fill:none; clip-path:url(#clipPath11);" />
     </g>
-    <g transform="translate(192,254)" style="text-rendering:geometricPrecision; font-size:11; font-weight:bold; font-family:sans-serif;">
+    <g transform="translate(182,254)" style="text-rendering:geometricPrecision; font-size:11; font-weight:bold; font-family:sans-serif;">
       <text x="4" y="12" style="clip-path:url(#clipPath12); stroke:none;" xml:space="preserve">opt</text>
     </g>
-    <g transform="translate(192,272)" style="font-size:11; fill:white; text-rendering:geometricPrecision; font-family:sans-serif; stroke:white;">
-      <rect x="28" y="5" width="68" style="clip-path:url(#clipPath13); stroke:none;" height="15" />
+    <g transform="translate(182,272)" style="font-size:11; fill:white; text-rendering:geometricPrecision; font-family:sans-serif; stroke:white;">
+      <rect x="28" y="5" width="99" style="clip-path:url(#clipPath13); stroke:none;" height="15" />
     </g>
-    <g style="text-rendering:geometricPrecision; font-size:11; font-family:sans-serif;" transform="translate(220,277)">
-      <text x="10" y="12" style="clip-path:url(#clipPath14); stroke:none;" xml:space="preserve">[changed]</text>
+    <g style="text-rendering:geometricPrecision; font-size:11; font-family:sans-serif;" transform="translate(210,277)">
+      <text x="9" y="12" style="clip-path:url(#clipPath14); stroke:none;" xml:space="preserve">[changed==true]</text>
     </g>
     <g style="text-rendering:geometricPrecision; font-size:11; font-family:sans-serif;" transform="translate(292,34)">
       <text x="26" y="12" style="clip-path:url(#clipPath16); stroke:none;" xml:space="preserve">components :</text>
