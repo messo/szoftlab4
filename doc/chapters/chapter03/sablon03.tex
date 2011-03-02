@@ -76,165 +76,190 @@ Ez az objektum végzi el a konfigurálható elemek beállításainak fájlból b
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics*[angle=90, width=13cm, viewport = 0 475 765 930]{chapters/chapter03/classdiagram/class_diagram.pdf}
-\caption{Statikus struktúra nézet (bal felső)}
+\includegraphics[angle=90, width=17cm]{chapters/chapter03/classdiagram/class.pdf}
+\caption{Statikus struktúra nézet}
 \label{fig:class_diagram}
 \end{center}
 \end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics*[angle=90, width=14cm, viewport = 765 475 1530 930]{chapters/chapter03/classdiagram/class_diagram.pdf}
-\caption{Statikus struktúra nézet (jobb felső)}
-\label{fig:class_diagram}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics*[angle=90, width=14cm, viewport = 0 0 765 475]{chapters/chapter03/classdiagram/class_diagram.pdf}
-\caption{Statikus struktúra nézet (bal alsó)}
-\label{fig:class_diagram}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics*[angle=90, width=14cm, viewport = 765 0 1530 475]{chapters/chapter03/classdiagram/class_diagram.pdf}
-\caption{Statikus struktúra nézet (jobb alsó)}
-\label{fig:class_diagram}
-\end{center}
-\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[angle=90, width=14cm, viewport = 765 475 1530 930]{chapters/chapter03/classdiagram/class_diagram.pdf}
+%\caption{Statikus struktúra nézet (jobb felső)}
+%\label{fig:class_diagram}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[angle=90, width=14cm, viewport = 0 0 765 475]{chapters/chapter03/classdiagram/class_diagram.pdf}
+%\caption{Statikus struktúra nézet (bal alsó)}
+%\label{fig:class_diagram}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[angle=90, width=14cm, viewport = 765 0 1530 475]{chapters/chapter03/classdiagram/class_diagram.pdf}
+%\caption{Statikus struktúra nézet (jobb alsó)}
+%\label{fig:class_diagram}
+%\end{center}
+%\end{figure}
 
 \section{Szekvencia diagramok}
 Inicializálásra nem készült szekvencia diagram, mert amikor a rendszer elindul tulajdonképpen csak egy felhasználónk van. Amint az betölt egy áramkört lesz áramkör, és ha indít szimulációt akkor lesz szimuláció. Addig gyakorlatilag semmi se jön létre.
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics*[width = 23.5cm, angle = 90, viewport = 0 375 830 900]{chapters/chapter03/seqdiagrams/sim_running.pdf}
-\caption{Szimuláció futás közben 1. rész (átfedéssel)}
-\label{fig:sim_running1}
+\includegraphics{chapters/chapter03/seqdiagrams/felhasznalo_szimulacio.pdf}
+\caption{Szimuláció futás közben}
+\label{fig:user_sim}
 \end{center}
 \end{figure}
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics*[width = 23.5cm, angle = 90, viewport = 0 0 830 500]{chapters/chapter03/seqdiagrams/sim_running.pdf}
-\caption{Szimuláció futás közben 2. rész}
-\label{fig:sim_running2}
+\includegraphics{chapters/chapter03/seqdiagrams/aramkor_szimulacio.pdf}
+\caption{Áramkör kiértékelési ciklus}
+\label{fig:circuit_sim}
 \end{center}
 \end{figure}
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[angle = 90]{chapters/chapter03/seqdiagrams/sim_evaluate.pdf}
+%\includegraphics{chapters/chapter03/seqdiagrams/aramkor_szimulacio.pdf}
 \caption{Komponens kiértékelése}
-\label{fig:sim_evaluate}
+\label{fig:component_sim}
 \end{center}
 \end{figure}
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/sim_stepGenerators.pdf}
+\includegraphics{chapters/chapter03/seqdiagrams/jelgeneratorok_leptetese.pdf}
 \caption{Jelgenerátorok léptetése}
-\label{fig:sim_stepGenerators}
+\label{fig:step_gens}
 \end{center}
 \end{figure}
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/sim_allapotvaltozasai.pdf}
-\caption{Szimuláció állapotváltozásai}
-\label{fig:sim_allapotvaltozasai}
-\end{center}
-\end{figure}
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/sim_stop.pdf}
-\caption{Szimuláció leállítása}
-\label{fig:sim_stop}
-\end{center}
-\end{figure}
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[width = 23.5cm, angle = 90, viewport = 0 0 830 500]{chapters/chapter03/seqdiagrams/sim_running.pdf}
+%\caption{Szimuláció futás közben 2. rész}
+%\label{fig:sim_running2}
+%\end{center}
+%\end{figure}
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/sim_start.pdf}
-\caption{Szimuláció indítása}
-\label{fig:sim_start}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/aramkor_valasztas.pdf}
-\caption{Áramkör választás}
-\label{fig:aramkor_valasztas}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics*[viewport = 0 581 500 990]{chapters/chapter03/seqdiagrams/aramkor_betoltese_fajlbol.pdf}
-\caption{Áramkör betöltése fájlból 1. rész (vágva)}
-\label{fig:aramkor_betoltese_fajlbol}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics*[viewport = 0 0 500 581]{chapters/chapter03/seqdiagrams/aramkor_betoltese_fajlbol.pdf}
-\caption{Áramkör betöltése fájlból 2. rész}
-\label{fig:aramkor_betoltese_fajlbol}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=17cm]{chapters/chapter03/seqdiagrams/jelforrasok_mentese.pdf}
-\caption{Jelforrások mentése}
-\label{fig:jelforrasok_mentese}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/jelforrasok_modositasa.pdf}
-\caption{Jelforrások módosítása}
-\label{fig:jelforrasok_modositasa}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[angle=90]{chapters/chapter03/seqdiagrams/jelforrasok_betoltese.pdf}
-\caption{Jelforrások betöltése}
-\label{fig:jelforrasok_betoltese}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/ff_bind.pdf}
-\caption{Flip-flopok órajel bemenetére jelgenerátor kötése}
-\label{fig:ff_bind}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics{chapters/chapter03/seqdiagrams/ff_vez_on_clk.pdf}
-\caption{Jelgenerátor lépésénél a feliratkozott FF-ek vezérlése}
-\label{fig:ff_vez_on_clk}
-\end{center}
-\end{figure}
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[angle = 90]{chapters/chapter03/seqdiagrams/sim_evaluate.pdf}
+%\caption{Komponens kiértékelése}
+%\label{fig:sim_evaluate}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/sim_stepGenerators.pdf}
+%\caption{Jelgenerátorok léptetése}
+%\label{fig:sim_stepGenerators}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/sim_allapotvaltozasai.pdf}
+%\caption{Szimuláció állapotváltozásai}
+%\label{fig:sim_allapotvaltozasai}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/sim_stop.pdf}
+%\caption{Szimuláció leállítása}
+%\label{fig:sim_stop}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/sim_start.pdf}
+%\caption{Szimuláció indítása}
+%\label{fig:sim_start}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/aramkor_valasztas.pdf}
+%\caption{Áramkör választás}
+%\label{fig:aramkor_valasztas}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[viewport = 0 581 500 990]{chapters/chapter03/seqdiagrams/aramkor_betoltese_fajlbol.pdf}
+%\caption{Áramkör betöltése fájlból 1. rész (vágva)}
+%\label{fig:aramkor_betoltese_fajlbol}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics*[viewport = 0 0 500 581]{chapters/chapter03/seqdiagrams/aramkor_betoltese_fajlbol.pdf}
+%\caption{Áramkör betöltése fájlból 2. rész}
+%\label{fig:aramkor_betoltese_fajlbol}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[width=17cm]{chapters/chapter03/seqdiagrams/jelforrasok_mentese.pdf}
+%\caption{Jelforrások mentése}
+%\label{fig:jelforrasok_mentese}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/jelforrasok_modositasa.pdf}
+%\caption{Jelforrások módosítása}
+%\label{fig:jelforrasok_modositasa}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[angle=90]{chapters/chapter03/seqdiagrams/jelforrasok_betoltese.pdf}
+%\caption{Jelforrások betöltése}
+%\label{fig:jelforrasok_betoltese}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/ff_bind.pdf}
+%\caption{Flip-flopok órajel bemenetére jelgenerátor kötése}
+%\label{fig:ff_bind}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics{chapters/chapter03/seqdiagrams/ff_vez_on_clk.pdf}
+%\caption{Jelgenerátor lépésénél a feliratkozott FF-ek vezérlése}
+%\label{fig:ff_vez_on_clk}
+%\end{center}
+%\end{figure}
 
 \section{State-chartok}
 
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=17cm]{chapters/chapter03/seqdiagrams/sim_states.pdf}
-\caption{Szimuláció állapotai}
-\label{fig:sim_states}
-\end{center}
-\end{figure}
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[width=17cm]{chapters/chapter03/seqdiagrams/sim_states.pdf}
+%\caption{Szimuláció állapotai}
+%\label{fig:sim_states}
+%\end{center}
+%\end{figure}
