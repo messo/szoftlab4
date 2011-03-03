@@ -10,8 +10,10 @@ import java.util.List;
 /**
  * Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A
  * SequenceGeneratorStepper feladata, hogy a step() metódust meghívja ezen osztály
- * példányain. Azokat a FF-eket vezérli, melyek CLK bemenetére ez a komponens van kötve,
+ * példányain. Azokat a FF-eket vezérli, melyek órajel bemenetére ez a komponens van kötve,
  * vagyis ha éppen felfutó él jön, akkor ezeket engedélyezi különben nem.
+ * Alapértelmezetten (amíg a felhasználó nem állítja be, vagy tölt be másikat) a 0,1-es
+ * szekvenciát tárolja.
  *
  * @author balint
  */
@@ -29,6 +31,15 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
      * Azon FF-ek listája, melyekre ez a jelgenerátor van bekötve a CLK bemenetre.
      */
     private List<FlipFlop> ffList = new ArrayList<FlipFlop>();
+
+    /**
+     * Konstruktor, ami alapállapotban a 0,1-es szekvenciát állítja be.
+     */
+    public SequenceGenerator() {
+        sequence = new Value[2];
+        sequence[0] = Value.FALSE;
+        sequence[1] = Value.TRUE;
+    }
 
     /**
      * A jelgenerátor lép, a bitsorozat következõ elemére ugrik. A következõ léptetésig
@@ -75,7 +86,7 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
 
     @Override
     protected boolean isInputPinsCountValid(int inputPinsCount) {
-        return inputPinsCount > 0;
+        return inputPinsCount == 0;
     }
 
     /**

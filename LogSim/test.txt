@@ -1,4 +1,4 @@
-x=SEQGEN(0,1)
+x=SEQGEN()
 y=TOGGLE()
 J=TOGGLE()
 K=TOGGLE()
