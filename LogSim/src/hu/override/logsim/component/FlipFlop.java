@@ -1,5 +1,6 @@
 package hu.override.logsim.component;
 
+import hu.override.logsim.Value;
 import hu.override.logsim.component.impl.SequenceGenerator;
 
 /**
@@ -17,6 +18,10 @@ public abstract class FlipFlop extends AbstractComponent {
      * Ebben tároljuk, hogy a FF számolhat-e vagy sem. (felfutó él)
      */
     private boolean active = false;
+    /**
+     * Belsõ memóriája, ami a kimenetén megjelenik, órajel felfutó élénél változhat az állapota.
+     */
+    protected Value q = Value.FALSE;
 
     /**
      * Felfutó élnél a SequenceGenerator-nak meg kell hívni ezt a hozzá kötött
@@ -27,6 +32,11 @@ public abstract class FlipFlop extends AbstractComponent {
      */
     public void setActive(boolean active) {
         this.active = active;
+        if (active) {
+            // ami a kimenetén jelenleg kint van, azt most elmentjük, mint belsõ állapot, ezzel kell
+            // a továbbiakban számolni, amíg aktív a flag.
+            q = values[0];
+        }
     }
 
     /**

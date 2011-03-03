@@ -12,19 +12,6 @@ import hu.override.logsim.component.IsDisplay;
  */
 public class Led extends AbstractComponent implements IsDisplay {
 
-    /**
-     * Led jelenlegi színe
-     */
-    private Color color;
-
-    /**
-     * LED-színt reprezentáló enum
-     */
-    public static enum Color {
-
-        RED, YELLOW, BLUE
-    }
-
     @Override
     public String toString() {
         return String.format("LED(%s): %s", name, values[0]);
@@ -41,23 +28,5 @@ public class Led extends AbstractComponent implements IsDisplay {
     @Override
     protected boolean isInputPinsCountValid(int inputPinsCount) {
         return inputPinsCount == 1;
-    }
-
-    /**
-     * Beállítjuk a LED színét
-     *
-     * @param color
-     */
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    /**
-     * Lekérdezzük a LED színét
-     * 
-     * @return
-     */
-    public Color getColor() {
-        return color;
     }
 }

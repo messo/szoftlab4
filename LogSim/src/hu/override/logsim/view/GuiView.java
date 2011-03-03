@@ -88,7 +88,9 @@ public class GuiView extends JFrame implements View {
             btn.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent ae) {
-                    ((Toggle) source).toggle();
+                    Value[] values = new Value[1];
+                    values[0] = source.getValues()[0].invert();
+                    source.setValues(values);
                 }
             });
             center.add(btn);

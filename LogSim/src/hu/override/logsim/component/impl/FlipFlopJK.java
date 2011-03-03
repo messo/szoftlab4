@@ -30,7 +30,7 @@ public class FlipFlopJK extends FlipFlop {
 
             if (j == Value.TRUE && k == Value.TRUE) {
                 // invertálunk
-                result[0] = values[0].invert();
+                result[0] = q.invert();
             } else if (j == Value.TRUE && k == Value.FALSE) {
                 // beír
                 result[0] = Value.TRUE;
