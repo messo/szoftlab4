@@ -15,12 +15,7 @@ public abstract class AbstractComponent implements Component {
      * Kimenetek tényleges értékei, számolás után ide rögtön visszaírjuk.
      * Ez kérdezhetõ le a felhasználó által.
      */
-    protected Value[] lastValue;
-    /**
-     * Jelenlegi (számolás közben) érték, ezt csak rövid ideig tároljuk,
-     * ahhoz kell, hogy tudjuk változik-e a lastValue-hoz képest.
-     */
-    protected Value[] currentValue;
+    protected Value[] values;
     /**
      * Komponens neve (változó neve, ahogy a leíróban azonosítjuk)
      */
@@ -41,9 +36,8 @@ public abstract class AbstractComponent implements Component {
     private boolean changed;
 
     public AbstractComponent() {
-        lastValue = new Value[1];
-        currentValue = new Value[1];
-        lastValue[0] = Value.FALSE; // alapból innen indulunk.
+        values = new Value[1];
+        values[0] = Value.FALSE; // alapból innen indulunk.
     }
 
     /**
@@ -95,7 +89,7 @@ public abstract class AbstractComponent implements Component {
      */
     @Override
     public Value getValue(int idx) {
-        return lastValue[idx];
+        return values[idx];
     }
 
     /**
@@ -113,21 +107,23 @@ public abstract class AbstractComponent implements Component {
      * @param outputPin
      */
     public Value[] evaluate() {
+        Value[] tmpValues;
+
+        changed = false;
+
         // 1. Ki vagy-e számolva?
         if (!alreadyEvaluated) {
             alreadyEvaluated = true;
-            onEvaluation();
-        }
-
-        changed = false;
-        for (int i = 0; i < lastValue.length; i++) {
-            if (currentValue[i] != null && lastValue[i] != currentValue[i]) {
-                lastValue[i] = currentValue[i];
-                changed = true;
+            tmpValues = onEvaluation();
+            for (int i = 0; i < values.length; i++) {
+                if (values[i] != tmpValues[i]) {
+                    changed = true;
+                }
+                values[i] = tmpValues[i];
             }
         }
 
-        return lastValue;
+        return values;
     }
 
     /**
@@ -176,7 +172,7 @@ public abstract class AbstractComponent implements Component {
      * Ebben a metódusban kell implementálni az alkatrész logikáját, vagyis
      * az adott bemenet(ek) függvényében mit kell kiadnia a kimenet(ek)en.
      */
-    protected abstract void onEvaluation();
+    protected abstract Value[] onEvaluation();
 
     /**
      * Az alkomponensek itt implementálhatják a bemenetek számának ellenõrzési

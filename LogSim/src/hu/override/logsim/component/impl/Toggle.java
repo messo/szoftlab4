@@ -11,28 +11,27 @@ import hu.override.logsim.component.IsSource;
  */
 public class Toggle extends AbstractComponent implements IsSource {
 
-    @Override
-    protected void onEvaluation() {
-        // nop
+    protected Value[] onEvaluation() {
+        return values;
     }
 
     /**
      * Kapcsoló állapotának változtatása, csak 1 elemû tömböt kaphat paraméterül.
      *
-     * @param values
+     * @param newValues
      */
     @Override
-    public void setValues(Value[] values) {
-        if (values.length != 1) {
+    public void setValues(Value[] newValues) {
+        if (newValues.length != 1) {
             throw new IllegalArgumentException("Kapcsolónak csak egy értéke lehet!");
         }
 
         // ha új értéket kapott
-        if (values[0] != lastValue[0]) {
+        if (newValues[0] != values[0]) {
             // még nincs kiértékelve
             alreadyEvaluated = false;
             // elmentjük az értéket
-            lastValue[0] = values[0];
+            values[0] = newValues[0];
         }
     }
 
@@ -40,8 +39,6 @@ public class Toggle extends AbstractComponent implements IsSource {
      * Lekérjük a kapcsoló értékét (1 elemû tömb)
      */
     public Value[] getValues() {
-        Value[] values = new Value[1];
-        values[0] = lastValue[0];
         return values;
     }
 
@@ -49,9 +46,7 @@ public class Toggle extends AbstractComponent implements IsSource {
      * Kapcsoló állapotát megváltoztathatjuk. Kényelmesebb, mint a setValues() hívása
      */
     public void toggle() {
-        Value[] values = new Value[1];
-        values[0] = lastValue[0].invert();
-        setValues(values);
+        values[0] = values[0].invert();
     }
 
     @Override

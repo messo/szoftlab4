@@ -10,9 +10,12 @@ import hu.override.logsim.component.AbstractComponent;
  */
 public class Gnd extends AbstractComponent {
 
-    @Override
-    protected void onEvaluation() {
-        currentValue[0] = Value.FALSE;
+    protected Value[] onEvaluation() {
+        Value[] result = new Value[values.length];
+
+        result[0] = Value.FALSE;
+
+        return values;
     }
 
     @Override

@@ -13,15 +13,18 @@ import hu.override.logsim.component.AbstractComponent;
 public class OrGate extends AbstractComponent {
 
     @Override
-    protected void onEvaluation() {
+    protected Value[] onEvaluation() {
+        Value[] result = new Value[values.length];
+
+        result[0] = Value.FALSE;
         for (int i = 0; i < inputs.length; i++) {
             if (evaluateInput(i) == Value.TRUE) {
-                currentValue[0] = Value.TRUE;
-                return;
+                result[0] = Value.TRUE;
+                break;
             }
         }
 
-        currentValue[0] = Value.FALSE;
+        return result;
     }
 
     @Override

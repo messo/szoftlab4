@@ -1,5 +1,6 @@
 package hu.override.logsim.component.impl;
 
+import hu.override.logsim.Value;
 import hu.override.logsim.component.FlipFlop;
 
 /**
@@ -16,10 +17,17 @@ public class FlipFlopD extends FlipFlop {
     private static final int D = 1;
 
     @Override
-    protected void onEvaluation() {
+    protected Value[] onEvaluation() {
+        Value[] result = new Value[values.length];
+
         if (isActive()) {
             // bemenetén lévõ értéket beírjuk.
-            currentValue[0] = evaluateInput(D);
+            result[0] = evaluateInput(D);
+        } else {
+            // marad a régi.
+            result[0] = values[0];
         }
+
+        return result;
     }
 }

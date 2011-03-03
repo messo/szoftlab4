@@ -14,26 +14,28 @@ import hu.override.logsim.component.IsDisplay;
 public class SevenSegmentDisplay extends AbstractComponent implements IsDisplay {
 
     public SevenSegmentDisplay() {
-        lastValue = new Value[7];
-        currentValue = new Value[7];
+        values = new Value[7];
         for (int i = 0; i < 7; i++) {
-            lastValue[i] = Value.FALSE; // alapból innen indulunk.
+            values[i] = Value.FALSE; // alapból innen indulunk.
         }
     }
 
     @Override
     public String toString() {
         return String.format("7SEG(%s): %s,%s,%s,%s,%s,%s,%s", name,
-                lastValue[0], lastValue[1], lastValue[2], lastValue[3], lastValue[4],
-                lastValue[5], lastValue[6]);
+                values[0], values[1], values[2], values[3], values[4],
+                values[5], values[6]);
     }
 
     @Override
-    protected void onEvaluation() {
+    protected Value[] onEvaluation() {
+        Value[] result = new Value[values.length];
+
         // a 7 bemeneten érkezõ jelet elmentjük.
         for (int i = 0; i < 7; i++) {
-            currentValue[i] = evaluateInput(i);
+            result[i] = evaluateInput(i);
         }
+        return result;
     }
 
     @Override

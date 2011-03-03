@@ -11,8 +11,10 @@ import hu.override.logsim.component.AbstractComponent;
 public class Vcc extends AbstractComponent {
 
     @Override
-    protected void onEvaluation() {
-        currentValue[0] = Value.TRUE;
+    protected Value[] onEvaluation() {
+        Value[] result = new Value[values.length];
+        result[0] = Value.TRUE;
+        return values;
     }
 
     @Override

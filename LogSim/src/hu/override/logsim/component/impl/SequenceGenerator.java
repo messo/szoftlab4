@@ -46,8 +46,11 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
     }
 
     @Override
-    protected void onEvaluation() {
-        currentValue[0] = sequence[index];
+    protected Value[] onEvaluation() {
+        Value[] result = new Value[values.length];
+
+        result[0] = sequence[index];
+        return result;
     }
 
     /**
