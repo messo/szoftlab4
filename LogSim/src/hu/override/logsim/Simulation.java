@@ -33,18 +33,18 @@ public class Simulation {
          */
         WORKING,
         /**
-         * Szimuláció leállt, ahhoz, hogy bármi történjen az áramkörre újra kell indítani.
+         * A szimuláció kész a futásra. Ilyenkor hívható rajta a start() metódus
          */
-        STOPPED,
+        READY,
         /**
-         * Szimuláció szüneteltetve van, a következõ jelforrás változásig.
+         * A szimuláció leállt, mert az áramkörnek nincs stacionárius állapota.
          */
-        PAUSED
+        FAILED
     }
     /**
      * Szimuláció jelenlegi állapota
      */
-    private State currentState;
+    private State state = State.READY;
     /**
      * cikluslimit
      */
@@ -70,6 +70,7 @@ public class Simulation {
      */
     public void start() {
         // amikor elindul a szimuláció, akkor a steppert is indítsuk el.
+        state = State.WORKING;
         counter = 0;
         while (counter < cycleLimit) {
             circuit.doEvaluationCycle();
@@ -78,6 +79,7 @@ public class Simulation {
             }
         }
         if (counter == cycleLimit) {
+            state = State.FAILED;
             System.out.println("Nincs stacionárius állapot!");
             return;
         }
@@ -85,6 +87,7 @@ public class Simulation {
         // GUI rajzolás
         controller.onCircuitUpdate();
 
+        state = State.READY;
         System.out.println("Simulation is done!");
     }
 
@@ -107,39 +110,11 @@ public class Simulation {
     }
 
     /**
-     * Állapot beállítása.
+     * Szimuláció állapotának lekérdezése.
      *
-     * @param state várt állapot
+     * @return állapot
      */
-    public void setState(State state) {
-        currentState = state;
-
-        /*switch (state) {
-        case WORKING:
-        // csak, ha él a szál, akkor mehet a menet.
-        if (isAlive()) {
-        synchronized (synchObj) {
-        synchObj.notify();
-        }
-        }
-        break;
-        case PAUSED:
-        try {
-        synchronized (synchObj) {
-        if (interrupted()) {
-        shouldRun = false;
-        } else {
-        synchObj.wait();
-        }
-        }
-        } catch (InterruptedException ex) {
-        shouldRun = false;
-        }
-        break;
-        case STOPPED:
-        System.out.println("Simulation is being stopped!");
-        seqGenStepper.stopStepper();
-        interrupt();
-        }*/
+    public State getState() {
+        return state;
     }
 }

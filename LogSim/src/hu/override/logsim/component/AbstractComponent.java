@@ -75,16 +75,6 @@ public abstract class AbstractComponent implements Component {
     }
 
     /**
-     * Shortcut a másik setInput()-hoz, outputPin = 0-val.
-     *
-     * @param inputSlot
-     * @param component
-     */
-    public void setInput(int inputSlot, AbstractComponent component) {
-        setInput(inputSlot, component, 0);
-    }
-
-    /**
      * Adott kimeneti lábon lévõ értéke lekérdezése.
      */
     @Override

@@ -94,7 +94,7 @@ public class Parser {
             parseLine(line);
         }
 
-        setArguments();
+        connectComponents();
 
         return circuit;
     }
@@ -117,7 +117,7 @@ public class Parser {
                 parseLine(line);
             }
 
-            setArguments();
+            connectComponents();
 
             return circuit;
         } catch (FileNotFoundException ex) {
@@ -190,7 +190,7 @@ public class Parser {
         return null;
     }
 
-    private void setArguments() throws InvalidCircuitDefinitionException {
+    private void connectComponents() throws InvalidCircuitDefinitionException {
         String[] arguments;
         String arg;
         for (String var : inputs.keySet()) {
@@ -202,39 +202,26 @@ public class Parser {
             // ha van, akkor egyesével feldolgozzuk és hozzáadjuk a komponenshez.
             try {
                 AbstractComponent component = circuit.getComponentByName(var);
-                if (component instanceof SequenceGenerator) {
-                    SequenceGenerator seqGen = (SequenceGenerator) component;
-                    Value[] sequence = new Value[arguments.length];
-                    for (int i = 0; i < arguments.length; i++) {
-                        arg = arguments[i];
-                        if (!arg.equals("0") && !arg.equals("1")) {
-                            throw new InvalidCircuitDefinitionException("SeqGen kapott 1-estõl és 0-ástól különbözõ dolgot!");
-                        } else {
-                            sequence[i] = arg.equals("1") ? Value.TRUE : Value.FALSE;
-                        }
-                    }
-                    seqGen.setValues(sequence);
-                } else {
-                    for (int i = 0; i < arguments.length; i++) {
-                        arg = arguments[i];
-                        if (arg.equals("0")) {
-                            circuit.getComponentByName(var).setInput(i,
-                                    circuit.addComponent(
-                                    createComponent("gnd", "0" + (constComps++), 0)));
-                        } else if (arg.equals("1")) {
-                            circuit.getComponentByName(var).setInput(i,
-                                    circuit.addComponent(
-                                    createComponent("vcc", "0" + (constComps++), 0)));
-                        } else {
-                            Matcher matcher = inputPattern.matcher(arg);
-                            if (matcher.matches()) {
-                                AbstractComponent c = circuit.getComponentByName(matcher.group(1));
-                                String index = matcher.group(2);
-                                if (index == null) {
-                                    circuit.getComponentByName(var).setInput(i, c);
-                                } else {
-                                    circuit.getComponentByName(var).setInput(i, c, Integer.parseInt(index));
-                                }
+                for (int i = 0; i < arguments.length; i++) {
+                    arg = arguments[i];
+                    if (arg.equals("0")) {
+                        component.setInput(i,
+                                circuit.addComponent(
+                                createComponent("gnd", "0" + (constComps++), 0)), 0);
+                    } else if (arg.equals("1")) {
+                        component.setInput(i,
+                                circuit.addComponent(
+                                createComponent("vcc", "0" + (constComps++), 0)), 0);
+                    } else {
+                        Matcher matcher = inputPattern.matcher(arg);
+                        if (matcher.matches()) {
+                            AbstractComponent c = circuit.getComponentByName(matcher.group(1));
+                            String index = matcher.group(2);
+                            if (index == null) {
+                                // nincs index, tehát 0. kimenetet kötjük ki.
+                                component.setInput(i, c, 0);
+                            } else {
+                                component.setInput(i, c, Integer.parseInt(index));
                             }
                         }
                     }
