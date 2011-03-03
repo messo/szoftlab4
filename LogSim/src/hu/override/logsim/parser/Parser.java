@@ -94,7 +94,7 @@ public class Parser {
             parseLine(line);
         }
 
-        setArguments();
+        connectComponents();
 
         return circuit;
     }
@@ -117,7 +117,7 @@ public class Parser {
                 parseLine(line);
             }
 
-            setArguments();
+            connectComponents();
 
             return circuit;
         } catch (FileNotFoundException ex) {
@@ -190,7 +190,7 @@ public class Parser {
         return null;
     }
 
-    private void setArguments() throws InvalidCircuitDefinitionException {
+    private void connectComponents() throws InvalidCircuitDefinitionException {
         String[] arguments;
         String arg;
         for (String var : inputs.keySet()) {
