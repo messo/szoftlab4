@@ -24,7 +24,7 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
     /**
      * Bitsorozat egy indexe, ez határozza meg, hogy éppen melyik értéket adja ki.
      */
-    private int idx;
+    private int index;
     /**
      * Azon FF-ek listája, melyekre ez a jelgenerátor van bekötve a CLK bemenetre.
      */
@@ -35,9 +35,9 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
      * ez kerül kiadásra a kimeneteken.
      */
     public void step() {
-        Value prev = sequence[idx];
-        idx = (idx + 1) % sequence.length;
-        Value current = sequence[idx];
+        Value prev = sequence[index];
+        index = (index + 1) % sequence.length;
+        Value current = sequence[index];
 
         // a feliratkozott ff-ek aktívak lesznek, ha felfutó él, különben nem
         for (FlipFlop ff : ffList) {
@@ -47,7 +47,7 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
 
     @Override
     protected void onEvaluation() {
-        currentValue[0] = sequence[idx];
+        currentValue[0] = sequence[index];
     }
 
     /**
