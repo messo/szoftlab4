@@ -17,40 +17,34 @@ import java.io.File;
  */
 public class LogSim implements Controller {
 
-    Circuit circuit;
-    Simulation simulation;
+    Simulation simulation = new Simulation(this);
     View view;
 
     public LogSim() throws CircuitAlreadyExistsException,
             InvalidCircuitDefinitionException {
-        circuit = new Parser().parse(new File("test.txt"));
+        simulation.loadCircuitFromFile("test.txt");
         view = new GuiView(this);
 
-        for (IsSource c : circuit.getSources()) {
+        for (IsSource c : simulation.getCircuit().getSources()) {
             view.addSource(c);
         }
-        for (IsDisplay c : circuit.getDisplays()) {
+        for (IsDisplay c : simulation.getCircuit().getDisplays()) {
             view.addDisplay(c);
         }
 
         view.layoutDone();
     }
 
-    public Simulation getFreshSimulation() {
-        return new Simulation(circuit, this);
-    }
-
     public void onCircuitUpdate() {
-        view.update(circuit);
+        view.update(simulation.getCircuit());
     }
 
     public void onStart() {
-        simulation = getFreshSimulation();
         simulation.start();
     }
 
     public void onStop() {
-        simulation.setState(Simulation.State.STOPPED);
+        //simulation.setState(Simulation.State.STOPPED);
     }
 
     /**
@@ -67,7 +61,7 @@ public class LogSim implements Controller {
     }
 
     public void onExit() {
-        try {
+        /*try {
             if (simulation != null) {
                 // leállítjuk a szimulációt
                 simulation.setState(Simulation.State.STOPPED);
@@ -75,7 +69,7 @@ public class LogSim implements Controller {
                 simulation.getStepperThread().join();
             }
         } catch (InterruptedException ex) {
-        }
+        }*/
         System.exit(0);
     }
 }

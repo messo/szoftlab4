@@ -75,7 +75,6 @@ public class Circuit {
      * @return
      */
     public AbstractComponent addComponent(AbstractComponent component) {
-        component.setCircuit(this);
         componentMap.put(component.getName(), component);
         if (component instanceof IsDisplay) {
             displays.add((IsDisplay) component);
@@ -92,9 +91,6 @@ public class Circuit {
      * vagy instabil állapotban van-e.
      */
     public void doEvaluationCycle() {
-        // kezdetben stabil
-        setStable(true);
-
         // számold ki magad flagek törlése, mivel új ciklus indul
         // ezért mindenkinek ki kell magát számolni újból.
         for (AbstractComponent c : componentMap.values()) {
@@ -113,46 +109,13 @@ public class Circuit {
     }
 
     /**
-     * Áramkör stacionárius állapotának lekérdezése.
-     *
-     * @return stabil-e?
-     */
-    public boolean isStable() {
-        return stable;
-    }
-
-    /**
-     * Áramkör stabilitásának beállítása.
-     *
-     * @param stable
-     */
-    public void setStable(boolean stable) {
-        this.stable = stable;
-    }
-
-    /**
-     * Jelgenerátorok a szimuláció szemszögébõl nézve, egyszerre történõ
-     * léptetése.
+     * Jelgenerátorok léptetése
      */
     public void stepGenerators() {
-        synchronized (simulation.getLock()) {
-            for (IsSource source : sources) {
-                if (source instanceof SequenceGenerator) {
-                    ((SequenceGenerator) source).step();
-                }
+        for (IsSource source : sources) {
+            if (source instanceof SequenceGenerator) {
+                ((SequenceGenerator) source).step();
             }
-        }
-
-        simulationShouldBeWorking();
-    }
-
-    /**
-     * Jelzi a szimuláció felé, hogy új ciklust kell indítani. Ezt egy jelforrás
-     * beállítása után hívjuk meg.
-     */
-    public void simulationShouldBeWorking() {
-        synchronized (simulation.getLock()) {
-            simulation.setState(Simulation.State.WORKING);
         }
     }
 
@@ -198,5 +161,14 @@ public class Circuit {
         sw.close();
 
         return 0;
+    }
+
+    public boolean isChanged() {
+        for (AbstractComponent c : componentMap.values()) {
+            if (c.isChanged()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

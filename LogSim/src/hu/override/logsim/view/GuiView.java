@@ -45,26 +45,13 @@ public class GuiView extends JFrame implements View {
         center.setLayout(new FlowLayout());
         bottom.setLayout(new FlowLayout());
 
-        final JButton start = new JButton("Start");
-        final JButton stop = new JButton("Stop");
-        stop.setEnabled(false);
+        final JButton start = new JButton("Step");
 
         top.add(start);
         start.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
                 controller.onStart();
-                start.setEnabled(false);
-                stop.setEnabled(true);
-            }
-        });
-        top.add(stop);
-        stop.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent ae) {
-                controller.onStop();
-                start.setEnabled(true);
-                stop.setEnabled(false);
             }
         });
 

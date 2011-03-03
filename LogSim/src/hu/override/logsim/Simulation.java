@@ -1,7 +1,10 @@
 package hu.override.logsim;
 
 import hu.override.logsim.controller.Controller;
-import java.util.concurrent.atomic.AtomicInteger;
+import hu.override.logsim.exception.CircuitAlreadyExistsException;
+import hu.override.logsim.exception.InvalidCircuitDefinitionException;
+import hu.override.logsim.parser.Parser;
+import java.io.File;
 
 /**
  * Egy szimulációt reprezentáló objektum.
@@ -13,7 +16,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author balint
  */
-public class Simulation extends Thread {
+public class Simulation {
+
+    public void loadCircuitFromFile(String fileName)
+            throws CircuitAlreadyExistsException, InvalidCircuitDefinitionException {
+        circuit = new Parser().parse(new File(fileName));
+    }
 
     /**
      * Szimuláció állapotait írja le
@@ -42,10 +50,6 @@ public class Simulation extends Thread {
      */
     private static final int cycleLimit = 100;
     /**
-     * A futási ciklus változója; ha ez hamis lesz, akkor leáll a szál
-     */
-    private boolean shouldRun;
-    /**
      * Szimulált áramkör
      */
     private Circuit circuit;
@@ -53,57 +57,35 @@ public class Simulation extends Thread {
      * ciklusszámláló, amely ha eléri a 100-at, akkor leáll a szimuláció és
      * jelezzük a felhasználónak.
      */
-    private AtomicInteger counter = new AtomicInteger();
+    private int counter;
     private final Controller controller;
-    /**
-     * segéd sync objektum, ami a szál altatásához kell.
-     */
-    private final Object synchObj = new Object();
-    private final Object lock = new Object();
-    /**
-     * Jelgenerátor-léptetõ, amit elindítunk, ha elindul a szimuláció
-     */
-    private SequenceGeneratorStepper seqGenStepper;
 
-    public Simulation(Circuit circuit, Controller controller) {
-        super("Simulation");
-        this.circuit = circuit;
-        this.circuit.setSimulation(this);
+    public Simulation(Controller controller) {
         this.controller = controller;
     }
 
     /**
-     * A szál futása közben történõ dolgokat valósítjuk meg. Lásd \ref{fig:sim_running} diagram.
+     * Egy adott bemeneti kombinációkra szimulálja a hálózatot, amíg be nem áll a
+     * stacionárius állapot.
      */
-    @Override
-    public void run() {
+    public void start() {
         // amikor elindul a szimuláció, akkor a steppert is indítsuk el.
-        seqGenStepper = new SequenceGeneratorStepper(this);
-        seqGenStepper.start();
-
-        shouldRun = true;
-        while (shouldRun) {
-            synchronized (lock) {
-                counter.set(0);
-                while (counter.getAndIncrement() < cycleLimit) {
-                    circuit.doEvaluationCycle();
-                    if (circuit.isStable()) {
-                        break;
-                    }
-                }
-                if (counter.get() == cycleLimit) {
-                    System.out.println("Nincs stacionárius állapot!");
-                    break;
-                }
-                // GUI rajzolás
-                controller.onCircuitUpdate();
+        counter = 0;
+        while (counter < cycleLimit) {
+            circuit.doEvaluationCycle();
+            if (!circuit.isChanged()) {
+                break;
             }
-
-            // lefutott egy ciklus, várunk, hogy lesz-e változás
-            setState(State.PAUSED);
         }
+        if (counter == cycleLimit) {
+            System.out.println("Nincs stacionárius állapot!");
+            return;
+        }
+        circuit.stepGenerators();
+        // GUI rajzolás
+        controller.onCircuitUpdate();
 
-        System.out.println("Simulation is stopped!");
+        System.out.println("Simulation is done!");
     }
 
     /**
@@ -116,12 +98,12 @@ public class Simulation extends Thread {
     }
 
     /**
-     * Egy lock objektum, a szálak egymást kizáráshoz kell.
-     *
-     * @return
+     * Szimulált áramkör beállítása
+     * 
+     * @param circuit
      */
-    public Object getLock() {
-        return lock;
+    public void setCircuit(Circuit circuit) {
+        this.circuit = circuit;
     }
 
     /**
@@ -132,41 +114,32 @@ public class Simulation extends Thread {
     public void setState(State state) {
         currentState = state;
 
-        switch (state) {
-            case WORKING:
-                // csak, ha él a szál, akkor mehet a menet.
-                if (isAlive()) {
-                    synchronized (synchObj) {
-                        synchObj.notify();
-                    }
-                }
-                break;
-            case PAUSED:
-                try {
-                    synchronized (synchObj) {
-                        if (interrupted()) {
-                            shouldRun = false;
-                        } else {
-                            synchObj.wait();
-                        }
-                    }
-                } catch (InterruptedException ex) {
-                    shouldRun = false;
-                }
-                break;
-            case STOPPED:
-                System.out.println("Simulation is being stopped!");
-                seqGenStepper.stopStepper();
-                interrupt();
+        /*switch (state) {
+        case WORKING:
+        // csak, ha él a szál, akkor mehet a menet.
+        if (isAlive()) {
+        synchronized (synchObj) {
+        synchObj.notify();
         }
-    }
-
-    /**
-     * Léptetõ-szál lekérése.
-     *
-     * @return
-     */
-    Thread getStepperThread() {
-        return seqGenStepper;
+        }
+        break;
+        case PAUSED:
+        try {
+        synchronized (synchObj) {
+        if (interrupted()) {
+        shouldRun = false;
+        } else {
+        synchObj.wait();
+        }
+        }
+        } catch (InterruptedException ex) {
+        shouldRun = false;
+        }
+        break;
+        case STOPPED:
+        System.out.println("Simulation is being stopped!");
+        seqGenStepper.stopStepper();
+        interrupt();
+        }*/
     }
 }

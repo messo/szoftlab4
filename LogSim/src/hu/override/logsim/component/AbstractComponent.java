@@ -1,6 +1,5 @@
 package hu.override.logsim.component;
 
-import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
 
 /**
@@ -12,10 +11,6 @@ import hu.override.logsim.Value;
  */
 public abstract class AbstractComponent implements Component {
 
-    /**
-     * Õt tartalmazó áramkör
-     */
-    protected Circuit circuit;
     /**
      * Kimenetek tényleges értékei, számolás után ide rögtön visszaírjuk.
      * Ez kérdezhetõ le a felhasználó által.
@@ -43,20 +38,12 @@ public abstract class AbstractComponent implements Component {
      * csak visszaadjuk az elõzõleg kiszámolt értéket.
      */
     protected boolean alreadyEvaluated = false;
+    private boolean changed;
 
     public AbstractComponent() {
         lastValue = new Value[1];
         currentValue = new Value[1];
         lastValue[0] = Value.FALSE; // alapból innen indulunk.
-    }
-
-    /**
-     * Szülõ beállítása
-     * 
-     * @param parent
-     */
-    public void setCircuit(Circuit parent) {
-        this.circuit = parent;
     }
 
     /**
@@ -125,30 +112,22 @@ public abstract class AbstractComponent implements Component {
      *
      * @param outputPin
      */
-    public Value evaluate(int outputPin) {
+    public Value[] evaluate() {
         // 1. Ki vagy-e számolva?
         if (!alreadyEvaluated) {
             alreadyEvaluated = true;
             onEvaluation();
         }
 
+        changed = false;
         for (int i = 0; i < lastValue.length; i++) {
             if (currentValue[i] != null && lastValue[i] != currentValue[i]) {
-                circuit.setStable(false);
                 lastValue[i] = currentValue[i];
+                changed = true;
             }
         }
 
-        return lastValue[outputPin];
-    }
-
-    /**
-     * Lekérjük a 0. kimenetén lévõ értéket.
-     * 
-     * @return
-     */
-    public Value evaluate() {
-        return evaluate(0);
+        return lastValue;
     }
 
     /**
@@ -175,7 +154,7 @@ public abstract class AbstractComponent implements Component {
      * @return
      */
     protected Value evaluateInput(int inputPin) {
-        return inputs[inputPin].evaluate(indices[inputPin]);
+        return inputs[inputPin].evaluate()[indices[inputPin]];
     }
 
     /**
@@ -183,6 +162,14 @@ public abstract class AbstractComponent implements Component {
      */
     public void clearEvaluatedFlag() {
         alreadyEvaluated = false;
+    }
+
+    public boolean isChanged() {
+        return changed;
+    }
+
+    public void setChanged(boolean changed) {
+        this.changed = changed;
     }
 
     /**
