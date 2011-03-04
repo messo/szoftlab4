@@ -15,29 +15,14 @@ public abstract class FlipFlop extends AbstractComponent {
      */
     protected static final int CLK = 0;
     /**
-     * Ebben tároljuk, hogy a FF számolhat-e vagy sem. (felfutó él)
-     */
-    private boolean active = false;
-    /**
      * Belsõ memóriája, ami a kimenetén megjelenik, órajel felfutó élénél változhat az állapota.
      */
     protected Value q = Value.FALSE;
-
     /**
-     * Felfutó élnél a SequenceGenerator-nak meg kell hívni ezt a hozzá kötött
-     * FlipFlopokra, egyéb esetben törölnie az active flaget. Így tudja az FF, hogy
-     * mikor kell ténylegesen számolnia.
-     *
-     * @param active
+     * Elõzõ érvényes órajel, ettõl és a kiértékelés pillanatában lévõ órajel értékétõl
+     * függõen észlelhetjük, hogy felfutó él van-e vagy sem.
      */
-    public void setActive(boolean active) {
-        this.active = active;
-        if (active) {
-            // ami a kimenetén jelenleg kint van, azt most elmentjük, mint belsõ állapot, ezzel kell
-            // a továbbiakban számolni, amíg aktív a flag.
-            q = values[0];
-        }
-    }
+    protected Value clk = Value.FALSE;
 
     /**
      * Számolhat-e az FF? Ezt hívja meg az FF-ek onEvaluation() metódusa, mielõtt
@@ -46,24 +31,11 @@ public abstract class FlipFlop extends AbstractComponent {
      * @return engedélyezett-e
      */
     public boolean isActive() {
-        return active;
+        return clk == Value.FALSE && evaluateInput(CLK) == Value.TRUE;
     }
 
-    /**
-     * Õsosztály implementációjának meghívása, illetve ha egy SequenceGeneratort kötünk
-     * éppen a CLK bemenetre, akkor az addFlipFlop() metódus meghívása rajta.
-     *
-     * @param inputPin
-     * @param component
-     * @param outputPin
-     */
-    @Override
-    public void setInput(int inputPin, AbstractComponent component, int outputPin) {
-        super.setInput(inputPin, component, outputPin);
-
-        if (inputPin == CLK && component instanceof SequenceGenerator) {
-            // CLK bemenetre egy jelgenerátort kötünk, ez lesz az órajel!
-            ((SequenceGenerator) component).addFlipFlop(this);
-        }
+    public void commit() {
+        q = values[0];
+        clk = evaluateInput(CLK);
     }
 }

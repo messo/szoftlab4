@@ -27,10 +27,6 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
      * Bitsorozat egy indexe, ez határozza meg, hogy éppen melyik értéket adja ki.
      */
     private int index;
-    /**
-     * Azon FF-ek listája, melyekre ez a jelgenerátor van bekötve a CLK bemenetre.
-     */
-    private List<FlipFlop> ffList = new ArrayList<FlipFlop>();
 
     /**
      * Konstruktor, ami alapállapotban a 0,1-es szekvenciát állítja be.
@@ -46,14 +42,7 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
      * ez kerül kiadásra a kimeneteken.
      */
     public void step() {
-        Value prev = sequence[index];
         index = (index + 1) % sequence.length;
-        Value current = sequence[index];
-
-        // a feliratkozott ff-ek aktívak lesznek, ha felfutó él, különben nem
-        for (FlipFlop ff : ffList) {
-            ff.setActive(current == Value.TRUE && prev == Value.FALSE);
-        }
     }
 
     @Override
@@ -87,15 +76,5 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
     @Override
     protected boolean isInputPinsCountValid(int inputPinsCount) {
         return inputPinsCount == 0;
-    }
-
-    /**
-     * A flipflop-ot feliratkoztatjuk a jelgenerátorhoz, így ha felfutó él lesz,
-     * akkor tudunk neki jelezni.
-     *
-     * @param ff feliratkozandó ff
-     */
-    public void addFlipFlop(FlipFlop ff) {
-        ffList.add(ff);
     }
 }

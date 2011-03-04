@@ -1,6 +1,7 @@
 package hu.override.logsim;
 
 import hu.override.logsim.component.AbstractComponent;
+import hu.override.logsim.component.FlipFlop;
 import hu.override.logsim.component.IsDisplay;
 import hu.override.logsim.component.IsSource;
 import hu.override.logsim.component.impl.SequenceGenerator;
@@ -35,27 +36,15 @@ public class Circuit {
      */
     private List<IsDisplay> displays;
     /**
-     * Áramkör stabilitása
+     * Flipflopok listája
      */
-    private boolean stable;
-    /**
-     * Áramkört éppen szimuláló objektum
-     */
-    private Simulation simulation;
+    private List<FlipFlop> flipFlops;
 
     public Circuit() {
         componentMap = new HashMap<String, AbstractComponent>();
         sources = new ArrayList<IsSource>();
         displays = new ArrayList<IsDisplay>();
-    }
-
-    /**
-     * Szimuláció beállítása. Ez a szimuláció létrejöttekor hívódik meg.
-     *
-     * @param simulation
-     */
-    public void setSimulation(Simulation simulation) {
-        this.simulation = simulation;
+        flipFlops = new ArrayList<FlipFlop>();
     }
 
     /**
@@ -81,6 +70,9 @@ public class Circuit {
         }
         if (component instanceof IsSource) {
             sources.add((IsSource) component);
+        }
+        if (component instanceof FlipFlop) {
+            flipFlops.add((FlipFlop) component);
         }
         return component;
     }
@@ -116,6 +108,16 @@ public class Circuit {
             if (source instanceof SequenceGenerator) {
                 ((SequenceGenerator) source).step();
             }
+        }
+    }
+
+    /**
+     * A flipflopok jelenlegi kimenetét elmentjük belsõ állapotnak, és az órajel
+     * bemenetén lévõ értéket pedig eltároljuk az éldetektálás érdekében.
+     */
+    public void commitFlipFlops() {
+        for (FlipFlop ff : flipFlops) {
+            ff.commit();
         }
     }
 

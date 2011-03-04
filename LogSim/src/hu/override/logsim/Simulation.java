@@ -1,5 +1,6 @@
 package hu.override.logsim;
 
+import hu.override.logsim.component.FlipFlop;
 import hu.override.logsim.controller.Controller;
 import hu.override.logsim.exception.CircuitAlreadyExistsException;
 import hu.override.logsim.exception.InvalidCircuitDefinitionException;
@@ -17,7 +18,6 @@ import java.io.File;
  * @author balint
  */
 public class Simulation {
-
     public void loadCircuitFromFile(String fileName)
             throws CircuitAlreadyExistsException, InvalidCircuitDefinitionException {
         circuit = new Parser().parse(new File(fileName));
@@ -83,6 +83,7 @@ public class Simulation {
             System.out.println("Nincs stacionárius állapot!");
             return;
         }
+        circuit.commitFlipFlops();
         circuit.stepGenerators();
         // GUI rajzolás
         controller.onCircuitUpdate();
