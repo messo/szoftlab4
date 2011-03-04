@@ -8,43 +8,16 @@ Feladata a jelgenerátor léptető kérésére a jelgenerátorok léptetése, a 
 \begin{itemize}
 	\item \texttt{private HashMap componentMap} Komponenseket tartalmazó HashMap
 	\item \texttt{private List displays} Megjelenítő típusú komponensek
-	\item \texttt{private Simulation simulation} Áramkört éppen szimuláló objektum
 	\item \texttt{private List sources} Jelforrás típusú komponensek
-	\item \texttt{private boolean stable} Áramkör stabilitása
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public AbstractComponent addComponent(AbstractComponent component)}: Komponens hozzáadása az áramkörhöz.
-	\item \texttt{public void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy  stabil (nem változott semelyik komponens kimenete az utolsó futtatás óta)  vagy instabil állapotban van-e.
-	\item \texttt{public AbstractComponent getComponentByName(String name)}: Lekérünk egy komponenst az áramkörtől a neve alapján.
-	\item \texttt{public List getDisplays()}: Megjelenítő típusú komponeseket adja vissza.
-	\item \texttt{public List getSources()}: Jelforrás típusú komponenseket adja vissza.
-	\item \texttt{public boolean isStable()}: Áramkör stacionárius állapotának lekérdezése.
-	\item \texttt{public int loadSources(String fileName)}: Fájlból betölti a jelforrások állapotát.
-	\item \texttt{public int saveSources(String fileName)}: Elmenti fájlba a jelforrások állapotát.
-	\item \texttt{public void setSimulation(Simulation simulation)}: Szimuláció beállítása. Ez a szimuláció létrejöttekor hívódik meg.
-	\item \texttt{public void setStable(boolean stable)}: Áramkör stabilitásának beállítása.
-	\item \texttt{public void simulationShouldBeWorking()}: Jelzi a szimuláció felé, hogy új ciklust kell indítani. Ezt egy jelforrás  beállítása után hívjuk meg.
-	\item \texttt{public void stepGenerators()}: Jelgenerátorok a szimuláció szemszögéből nézve, egyszerre történő  léptetése.
-\end{itemize}
-\end{itemize}
-
-\subsection{SequenceGeneratorStepper}
-\begin{itemize}
-\item Felelősség\\
-Jelgenerátor-léptető szál. Feladata, hogy az áramkört utasítsa a jelgenerátorok léptesésére  a felhasználó által konfigurálható időközönként.
-\item Ősosztályok:\ Object $\rightarrow{}$ Thread $\rightarrow{}$ SequenceGeneratorStepper.
-\item Interfészek: (nincs)
-\item Attribútumok $\ $
-\begin{itemize}
-	\item \texttt{private long pause} Szünet két léptetés között -- felhasználó által konfigurálható
-	\item \texttt{private boolean shouldRun} A futási ciklus változója; ha ez hamis lesz, akkor leáll a szál
-	\item \texttt{private Simulation simulation} A szimuláció, aki számára lépteti a jelgenerátorokat
-\end{itemize}
-\item Metódusok$\ $
-\begin{itemize}
-	\item \texttt{public void run()}: Megadott időközönként az áramkörön meghívjuk a stepGenerators() metódust.
-	\item \texttt{public void setPause(long pause)}: Két léptetés között eltelt idő állítása (léptetési sebesség)
+	\item \texttt{AbstractComponent addComponent(AbstractComponent component)}: Komponens hozzáadása az áramkörhöz.
+	\item \texttt{void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy  stabil (nem változott semelyik komponens kimenete az utolsó futtatás óta)  vagy instabil állapotban van-e.
+	\item \texttt{List getDisplays()}: Megjelenítő típusú komponeseket adja vissza.
+	\item \texttt{List getSources()}: Jelforrás típusú komponenseket adja vissza.
+	\item \texttt{void stepGenerators()}: Jelgenerátorok a szimuláció szemszögéből nézve, egyszerre történő  léptetése.
+	\item \texttt{void init()}: Előre meghatározott áramköri modell felépítése, objektumok létrehozása, kapcsolatok beállítása
 \end{itemize}
 \end{itemize}
 
@@ -57,20 +30,13 @@ Egy szimulációt reprezentáló objektum.  Futásakor elindítja a jelgeneráto
 \item Attribútumok $\ $
 \begin{itemize}
 	\item \texttt{private Circuit circuit} Szimulált áramkör
-	\item \texttt{private int counter} ciklusszámláló, amely ha eléri a \textit{cycleLimit}-et, akkor leáll a szimuláció és jelezzük a felhasználónak.
-	\item \texttt{private State currentState} Szimuláció jelenlegi állapota
-	\item \texttt{private static final int cycleLimit} cikluslimit
-	\item \texttt{private final Object lock} segéd lock objektum
-	\item \texttt{private SequenceGeneratorStepper seqGenStepper} Jelgenerátor-léptető, amit elindítunk, ha elindul a szimuláció.
-	\item \texttt{private boolean shouldRun} A futási ciklus változója; ha ez hamis lesz, akkor leáll a szál
-	\item \texttt{private final Object synchObj} segéd sync objektum, ami a szál altatásához kell.
+	\item \texttt{private State state} Szimuláció jelenlegi állapota
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public Circuit getCircuit()}: Szimulált áramkör lekérdezése
-	\item \texttt{public Object getLock()}: Egy lock objektum, a szálak egymást kizáráshoz kell.
-	\item \texttt{public void run()}: A szál futása közben történő dolgokat valósítjuk meg. Lásd \ref{fig:sim_running1} és \ref{fig:sim_running2} ábra.
-	\item \texttt{public void setState(State state)}: Állapot beállítása.
+	\item \texttt{Circuit getCircuit()}: Szimulált áramkör lekérdezése
+	\item \texttt{void start()}: Szimuláció elindítása
+	\item \texttt{void getState(State state)}: Szimuláció állapotának lekérdezése
 \end{itemize}
 \end{itemize}
 
@@ -88,9 +54,9 @@ Szimuláció állapotait írja le
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public static State valueOf(String name)}: 
+	\item \texttt{static State valueOf(String name)}: 
  % TODO
-	\item \texttt{public static State[] values()}: 
+	\item \texttt{static State[] values()}: 
  % TODO
 \end{itemize}
 \end{itemize}
@@ -110,11 +76,7 @@ Az áramkörben előfordulható értéket reprezentál.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public Value invert()}: Invertálja az adott értéket. Ennek addig van értelme, amíg 2 féle  állapot fordulhat elő a rendszerben.
-	\item \texttt{public static Value valueOf(String name)}: 
- % TODO
-	\item \texttt{public static Value[] values()}: 
- % TODO
+	\item \texttt{Value invert()}: Invertálja az adott értéket. Ennek addig van értelme, amíg 2 féle  állapot fordulhat elő a rendszerben.
 \end{itemize}
 \end{itemize}
 

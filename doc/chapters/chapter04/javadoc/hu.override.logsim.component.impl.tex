@@ -22,7 +22,7 @@ D flipflop, mely felfutó órajelnél beírja a belső memóriába az adatbemene
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private static final int D}: D bemenet lábának a száma.
+\item (nincs)
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
@@ -38,8 +38,7 @@ JK flipflop, mely a belső memóriáját a Követelmények résznél leírt mód
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private static final int J}: J bemenet lábának a száma
-	\item \texttt{private static final int K}: K bemenet lábának a száma
+\item (nincs)
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
@@ -87,36 +86,11 @@ Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.  3 fél
 \item Interfészek: IsDisplay.
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private Color color}: Led jelenlegi színe
+\item (nincs)
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public Color getColor()}: Lekérdezzük a LED színét
-	\item \texttt{public void setColor(Color color)}: Beállítjuk a LED színét
-\end{itemize}
-\end{itemize}
-
-\subsection{Led.Color}
-\begin{itemize}
-\item Felelősség\\
-LED-színt reprezentáló enum.
-\item Ősosztályok:\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Led.Color.
-\item Interfészek: (nincs)
-\item Attribútumok $\ $
-\begin{itemize}
-	\item \texttt{public static final Color BLUE} 
- % TODO
-	\item \texttt{public static final Color RED} 
- % TODO
-	\item \texttt{public static final Color YELLOW} 
- % TODO
-\end{itemize}
-\item Metódusok$\ $
-\begin{itemize}
-	\item \texttt{public static Color valueOf(String name)}: 
- % TODO
-	\item \texttt{public static Color[] values()}: 
- % TODO
+\item (nincs)
 \end{itemize}
 \end{itemize}
 
@@ -128,18 +102,7 @@ LED-színt reprezentáló enum.
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private static final int DATA0} 
- % TODO
-	\item \texttt{private static final int DATA1} 
- % TODO
-	\item \texttt{private static final int DATA2} 
- % TODO
-	\item \texttt{private static final int DATA3} 
- % TODO
-	\item \texttt{private static final int SEL0} 
- % TODO
-	\item \texttt{private static final int SEL1} 
- % TODO
+\item (nincs)
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
@@ -172,15 +135,15 @@ Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A  Seque
 \item Attribútumok $\ $
 \begin{itemize}
 	\item \texttt{private List ffList}: Azon FF-ek listája, melyekre ez a jelgenerátor van bekötve a CLK bemenetre.
-	\item \texttt{private int idx}: Bitsorozat egy indexe, ez határozza meg, hogy éppen melyik értéket adja ki.
+	\item \texttt{private int index}: Bitsorozat egy indexe, ez határozza meg, hogy éppen melyik értéket adja ki.
 	\item \texttt{private Value[] sequence}: Tárolt bitsorozat
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public void addFlipFlop(FlipFlop ff)}: A flipflop-ot feliratkoztatjuk a jelgenerátorhoz, így ha felfutó él lesz,  akkor tudunk neki jelezni.
-	\item \texttt{public Value[] getValues()}: Jelgenerátor bitsorozatának lekérdezése
-	\item \texttt{public void setValues(Value[] values)}: Jelgenerátor bitsorozatának beállítása
-	\item \texttt{public void step()}: A jelgenerátor lép, a bitsorozat következő elemére ugrik. A következő léptetésig  ez kerül kiadásra a kimeneteken.
+	\item \texttt{void addFlipFlop(FlipFlop ff)}: A flipflop-ot feliratkoztatjuk a jelgenerátorhoz, így ha felfutó él lesz,  akkor tudunk neki jelezni.
+	\item \texttt{Value[] getValues()}: Jelgenerátor bitsorozatának lekérdezése
+	\item \texttt{void setValues(Value[] values)}: Jelgenerátor bitsorozatának beállítása
+	\item \texttt{void step()}: A jelgenerátor lép, a bitsorozat következő elemére ugrik. A következő léptetésig  ez kerül kiadásra a kimeneteken.
 \end{itemize}
 \end{itemize}
 
@@ -212,9 +175,8 @@ Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public Value[] getValues()}: Lekérjük a kapcsoló értékét (1 elemű tömb)
-	\item \texttt{public void setValues(Value[] values)}: Kapcsoló állapotának változtatása, csak 1 elemű tömböt kaphat paraméterül.
-	\item \texttt{public void toggle()}: Kapcsoló állapotát megváltoztathatjuk. Kényelmesebb, mint a setValues() hívása
+	\item \texttt{Value[] getValues()}: Lekérjük a kapcsoló értékét (1 elemű tömb)
+	\item \texttt{void setValues(Value[] values)}: Kapcsoló állapotának változtatása, csak 1 elemű tömböt kaphat paraméterül.
 \end{itemize}
 \end{itemize}
 
