@@ -2,8 +2,8 @@ package hu.override.logsim;
 
 import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.FlipFlop;
-import hu.override.logsim.component.IsDisplay;
-import hu.override.logsim.component.IsSource;
+import hu.override.logsim.component.DisplayComponent;
+import hu.override.logsim.component.SourceComponent;
 import hu.override.logsim.component.impl.SequenceGenerator;
 import hu.override.logsim.parser.SourceReader;
 import hu.override.logsim.parser.SourceWriter;
@@ -28,23 +28,28 @@ public class Circuit {
      */
     private HashMap<String, AbstractComponent> componentMap;
     /**
-     * Jelforrás típusú komponensek
+     * Jelforrás típusú komponensek listája (kapcsoló, jelgenerátor)
      */
-    private List<IsSource> sources;
+    private List<SourceComponent> sources;
     /**
-     * Megjelenítõ típusú komponensek
+     * Megjelenítõ típusú komponensek listája (kijelzõ, 7-szegmenses kijelzõ)
      */
-    private List<IsDisplay> displays;
+    private List<DisplayComponent> displays;
     /**
-     * Flipflopok listája
+     * Flipflopok listája (D és JK flipflopok)
      */
     private List<FlipFlop> flipFlops;
+    /**
+     * Jelgenerátorok listája
+     */
+    private List<SequenceGenerator> seqGens;
 
     public Circuit() {
         componentMap = new HashMap<String, AbstractComponent>();
-        sources = new ArrayList<IsSource>();
-        displays = new ArrayList<IsDisplay>();
+        sources = new ArrayList<SourceComponent>();
+        displays = new ArrayList<DisplayComponent>();
         flipFlops = new ArrayList<FlipFlop>();
+        seqGens = new ArrayList<SequenceGenerator>();
     }
 
     /**
@@ -57,24 +62,24 @@ public class Circuit {
         return componentMap.get(name);
     }
 
-    /**
-     * Komponens hozzáadása az áramkörhöz.
-     *
-     * @param component
-     * @return
-     */
-    public AbstractComponent addComponent(AbstractComponent component) {
-        componentMap.put(component.getName(), component);
-        if (component instanceof IsDisplay) {
-            displays.add((IsDisplay) component);
-        }
-        if (component instanceof IsSource) {
-            sources.add((IsSource) component);
-        }
-        if (component instanceof FlipFlop) {
-            flipFlops.add((FlipFlop) component);
-        }
-        return component;
+    public void add(AbstractComponent c) {
+        componentMap.put(c.getName(), c);
+    }
+
+    public void add(SourceComponent sc) {
+        sources.add(sc);
+    }
+
+    public void add(FlipFlop ff) {
+        flipFlops.add(ff);
+    }
+
+    public void add(SequenceGenerator sg) {
+        seqGens.add(sg);
+    }
+
+    public void add(DisplayComponent dc) {
+        displays.add(dc);
     }
 
     /**
@@ -90,13 +95,11 @@ public class Circuit {
         }
 
         // a megjelenítõkre hívjuk meg az evaluate();
-        for (AbstractComponent c : componentMap.values()) {
-            if (c instanceof IsDisplay) {
-                // miközben minden kiértékelõdik, lehet, hogy valamelyik
-                // komponens instabillá teszi az áramkört, mert változott
-                // az õ értéke.
-                c.evaluate();
-            }
+        for (DisplayComponent c : displays) {
+            // miközben minden kiértékelõdik, lehet, hogy valamelyik
+            // komponens instabillá teszi az áramkört, mert változott
+            // az õ értéke.
+            c.evaluate();
         }
     }
 
@@ -104,10 +107,8 @@ public class Circuit {
      * Jelgenerátorok léptetése
      */
     public void stepGenerators() {
-        for (IsSource source : sources) {
-            if (source instanceof SequenceGenerator) {
-                ((SequenceGenerator) source).step();
-            }
+        for (SequenceGenerator sg : seqGens) {
+            sg.step();
         }
     }
 
@@ -124,7 +125,7 @@ public class Circuit {
     /**
      * Jelforrás típusú komponenseket adja vissza.
      */
-    public List<IsSource> getSources() {
+    public List<SourceComponent> getSources() {
         return sources;
     }
 
@@ -133,7 +134,7 @@ public class Circuit {
      *
      * @return
      */
-    public List<IsDisplay> getDisplays() {
+    public List<DisplayComponent> getDisplays() {
         return displays;
     }
 
@@ -157,7 +158,7 @@ public class Circuit {
      */
     public int saveSources(String fileName) {
         SourceWriter sw = new SourceWriter(fileName);
-        for (IsSource source : sources) {
+        for (SourceComponent source : sources) {
             sw.add(source);
         }
         sw.close();

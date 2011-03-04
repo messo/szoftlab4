@@ -1,8 +1,7 @@
 package hu.override.logsim.component.impl;
 
 import hu.override.logsim.Value;
-import hu.override.logsim.component.AbstractComponent;
-import hu.override.logsim.component.IsDisplay;
+import hu.override.logsim.component.DisplayComponent;
 
 /**
  * 7-szegmenses kijelzõt reprezentál, melynek 7 bemenete vezérli a
@@ -11,7 +10,7 @@ import hu.override.logsim.component.IsDisplay;
  *
  * @author balint
  */
-public class SevenSegmentDisplay extends AbstractComponent implements IsDisplay {
+public class SevenSegmentDisplay extends DisplayComponent {
 
     public SevenSegmentDisplay() {
         values = new Value[7];

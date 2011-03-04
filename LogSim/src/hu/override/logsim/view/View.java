@@ -1,8 +1,8 @@
 package hu.override.logsim.view;
 
 import hu.override.logsim.Circuit;
-import hu.override.logsim.component.IsDisplay;
-import hu.override.logsim.component.IsSource;
+import hu.override.logsim.component.DisplayComponent;
+import hu.override.logsim.component.SourceComponent;
 
 /**
  *
@@ -12,9 +12,9 @@ public interface View {
 
     void update(Circuit circuit);
 
-    void addSource(IsSource source);
+    void addSource(SourceComponent source);
 
-    void addDisplay(IsDisplay display);
+    void addDisplay(DisplayComponent display);
 
     void layoutDone();
 }

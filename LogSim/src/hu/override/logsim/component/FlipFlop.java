@@ -1,7 +1,7 @@
 package hu.override.logsim.component;
 
+import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
-import hu.override.logsim.component.impl.SequenceGenerator;
 
 /**
  * Flipflopok õsosztálya, minden flipflop 0. bemenete az órajel!
@@ -37,5 +37,11 @@ public abstract class FlipFlop extends AbstractComponent {
     public void commit() {
         q = values[0];
         clk = evaluateInput(CLK);
+    }
+
+    @Override
+    public void addTo(Circuit circuit) {
+        super.addTo(circuit);
+        circuit.add(this);
     }
 }

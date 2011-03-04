@@ -1,5 +1,6 @@
 package hu.override.logsim.component.impl;
 
+import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
 

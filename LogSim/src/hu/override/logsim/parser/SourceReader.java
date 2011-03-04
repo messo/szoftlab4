@@ -1,6 +1,6 @@
 package hu.override.logsim.parser;
 
-import hu.override.logsim.component.IsSource;
+import hu.override.logsim.component.SourceComponent;
 import java.util.List;
 
 /**
@@ -25,7 +25,7 @@ public class SourceReader {
      *
      * @param sources
      */
-    public void loadValuesToSources(List<IsSource> sources) {
+    public void loadValuesToSources(List<SourceComponent> sources) {
         // TODO - implement
     }
 }

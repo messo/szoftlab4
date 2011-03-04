@@ -1,7 +1,6 @@
 package hu.override.logsim.parser;
 
 import hu.override.logsim.Circuit;
-import hu.override.logsim.Value;
 import hu.override.logsim.component.impl.AndGate;
 import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.impl.FlipFlopD;
@@ -156,8 +155,8 @@ public class Parser {
             inputs.put(variableName, arguments);
 
             try {
-                circuit.addComponent(createComponent(componentName, variableName,
-                        arguments == null ? 0 : arguments.length));
+                createComponent(componentName, variableName,
+                        arguments == null ? 0 : arguments.length).addTo(circuit);
             } catch (UnknownComponentException ex) {
                 System.err.println("nincs ilyen komponens!");
             }
@@ -205,13 +204,13 @@ public class Parser {
                 for (int i = 0; i < arguments.length; i++) {
                     arg = arguments[i];
                     if (arg.equals("0")) {
-                        component.setInput(i,
-                                circuit.addComponent(
-                                createComponent("gnd", "0" + (constComps++), 0)), 0);
+                        AbstractComponent c = createComponent("gnd", "0" + (constComps++), 0);
+                        c.addTo(circuit);
+                        component.setInput(i, c, 0);
                     } else if (arg.equals("1")) {
-                        component.setInput(i,
-                                circuit.addComponent(
-                                createComponent("vcc", "0" + (constComps++), 0)), 0);
+                        AbstractComponent c = createComponent("vcc", "0" + (constComps++), 0);
+                        c.addTo(circuit);
+                        component.setInput(i, c, 0);
                     } else {
                         Matcher matcher = inputPattern.matcher(arg);
                         if (matcher.matches()) {

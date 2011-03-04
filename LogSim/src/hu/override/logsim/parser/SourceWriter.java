@@ -1,6 +1,6 @@
 package hu.override.logsim.parser;
 
-import hu.override.logsim.component.IsSource;
+import hu.override.logsim.component.SourceComponent;
 
 /**
  * Segítségével kiírhatjuk egy fájlba a jelforrások értékeit.
@@ -23,7 +23,7 @@ public class SourceWriter {
      *
      * @param source
      */
-    public void add(IsSource source) {
+    public void add(SourceComponent source) {
         // beírjuk a fájlba.
     }
 

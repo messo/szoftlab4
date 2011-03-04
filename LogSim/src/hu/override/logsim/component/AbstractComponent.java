@@ -1,5 +1,6 @@
 package hu.override.logsim.component;
 
+import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
 
 /**
@@ -9,7 +10,7 @@ import hu.override.logsim.Value;
  *
  * @author balint
  */
-public abstract class AbstractComponent implements Component {
+public abstract class AbstractComponent {
 
     /**
      * Kimenetek tényleges értékei, számolás után ide rögtön visszaírjuk.
@@ -45,7 +46,6 @@ public abstract class AbstractComponent implements Component {
      *
      * @param name
      */
-    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -55,7 +55,6 @@ public abstract class AbstractComponent implements Component {
      * 
      * @return
      */
-    @Override
     public String getName() {
         return name;
     }
@@ -77,24 +76,15 @@ public abstract class AbstractComponent implements Component {
     /**
      * Adott kimeneti lábon lévõ értéke lekérdezése.
      */
-    @Override
     public Value getValue(int idx) {
         return values[idx];
     }
 
     /**
-     * 0-ás kimeneti lábon lévõ értéke lekérdezése.
-     */
-    @Override
-    public Value getValue() {
-        return getValue(0);
-    }
-
-    /**
-     * Komponens kimeneteinek kiértékelése (ha még nem volt) és a megadott
-     * kimeneti lábon lévõ érték visszaadása.
+     * Komponens kimeneteinek kiértékelése (ha még nem volt) és a kimeneti lábakon
+     * lévõ értékek visszaadása.
      *
-     * @param outputPin
+     * @return kimenetek
      */
     public Value[] evaluate() {
         Value[] tmpValues;
@@ -172,5 +162,9 @@ public abstract class AbstractComponent implements Component {
      */
     protected boolean isInputPinsCountValid(int inputPinsCount) {
         return true;
+    }
+
+    public void addTo(Circuit circuit) {
+        circuit.add(this);
     }
 }

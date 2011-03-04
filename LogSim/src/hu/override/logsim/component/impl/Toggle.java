@@ -1,15 +1,14 @@
 package hu.override.logsim.component.impl;
 
 import hu.override.logsim.Value;
-import hu.override.logsim.component.AbstractComponent;
-import hu.override.logsim.component.IsSource;
+import hu.override.logsim.component.SourceComponent;
 
 /**
  * Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
  *
  * @author balint
  */
-public class Toggle extends AbstractComponent implements IsSource {
+public class Toggle extends SourceComponent {
 
     @Override
     protected Value[] onEvaluation() {

@@ -2,7 +2,7 @@ package hu.override.logsim.component.impl;
 
 import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
-import hu.override.logsim.component.IsDisplay;
+import hu.override.logsim.component.DisplayComponent;
 
 /**
  * Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
@@ -10,7 +10,7 @@ import hu.override.logsim.component.IsDisplay;
  *
  * @author balint
  */
-public class Led extends AbstractComponent implements IsDisplay {
+public class Led extends DisplayComponent {
 
     @Override
     public String toString() {

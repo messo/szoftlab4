@@ -2,8 +2,8 @@ package hu.override.logsim.view;
 
 import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
-import hu.override.logsim.component.IsDisplay;
-import hu.override.logsim.component.IsSource;
+import hu.override.logsim.component.DisplayComponent;
+import hu.override.logsim.component.SourceComponent;
 import hu.override.logsim.component.impl.Toggle;
 import hu.override.logsim.controller.Controller;
 import java.awt.BorderLayout;
@@ -27,8 +27,8 @@ public class GuiView extends JFrame implements View {
     private final JPanel top;
     private final JPanel center;
     private final JPanel bottom;
-    private HashMap<IsDisplay, JLabel> displayMap = new HashMap<IsDisplay, JLabel>();
-    private HashMap<IsSource, JButton> sourceMap = new HashMap<IsSource, JButton>();
+    private HashMap<DisplayComponent, JLabel> displayMap = new HashMap<DisplayComponent, JLabel>();
+    private HashMap<SourceComponent, JButton> sourceMap = new HashMap<SourceComponent, JButton>();
     private final Controller controller;
 
     public GuiView(final Controller controller) {
@@ -66,12 +66,12 @@ public class GuiView extends JFrame implements View {
 
     @Override
     public void update(Circuit circuit) {
-        for (IsDisplay c : circuit.getDisplays()) {
+        for (DisplayComponent c : circuit.getDisplays()) {
             displayMap.get(c).setText(c.toString());
         }
-        for (IsSource c : circuit.getSources()) {
+        for (SourceComponent c : circuit.getSources()) {
             if (c instanceof Toggle) {
-                sourceMap.get(c).setText(String.format("%s = %s", c.getName(), c.getValue() == Value.TRUE ? "1" : "0"));
+                sourceMap.get(c).setText(String.format("%s = %s", c.getName(), c.getValue(0) == Value.TRUE ? "1" : "0"));
             }
         }
     }
@@ -81,7 +81,7 @@ public class GuiView extends JFrame implements View {
         setVisible(true);
     }
 
-    public void addSource(final IsSource source) {
+    public void addSource(final SourceComponent source) {
         if (source instanceof Toggle) {
             JButton btn = new JButton(String.format("%s = %s", source.getName(), "X"));
             sourceMap.put(source, btn);
@@ -97,7 +97,7 @@ public class GuiView extends JFrame implements View {
         }
     }
 
-    public void addDisplay(final IsDisplay display) {
+    public void addDisplay(final DisplayComponent display) {
         JLabel label = new JLabel("X");
         displayMap.put(display, label);
         bottom.add(label);

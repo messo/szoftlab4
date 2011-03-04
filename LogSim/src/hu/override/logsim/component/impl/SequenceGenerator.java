@@ -1,11 +1,9 @@
 package hu.override.logsim.component.impl;
 
+import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
-import hu.override.logsim.component.FlipFlop;
-import hu.override.logsim.component.IsSource;
-import java.util.ArrayList;
-import java.util.List;
+import hu.override.logsim.component.SourceComponent;
 
 /**
  * Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A
@@ -17,7 +15,7 @@ import java.util.List;
  *
  * @author balint
  */
-public class SequenceGenerator extends AbstractComponent implements IsSource {
+public class SequenceGenerator extends SourceComponent {
 
     /**
      * Tárolt bitsorozat
@@ -76,5 +74,11 @@ public class SequenceGenerator extends AbstractComponent implements IsSource {
     @Override
     protected boolean isInputPinsCountValid(int inputPinsCount) {
         return inputPinsCount == 0;
+    }
+
+    @Override
+    public void addTo(Circuit circuit) {
+        super.addTo(circuit);
+        circuit.add(this);
     }
 }
