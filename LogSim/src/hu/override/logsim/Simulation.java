@@ -1,6 +1,5 @@
 package hu.override.logsim;
 
-import hu.override.logsim.component.FlipFlop;
 import hu.override.logsim.controller.Controller;
 import hu.override.logsim.exception.CircuitAlreadyExistsException;
 import hu.override.logsim.exception.InvalidCircuitDefinitionException;
@@ -53,11 +52,6 @@ public class Simulation {
      * Szimulált áramkör
      */
     private Circuit circuit;
-    /**
-     * ciklusszámláló, amely ha eléri a 100-at, akkor leáll a szimuláció és
-     * jelezzük a felhasználónak.
-     */
-    private int counter;
     private final Controller controller;
 
     public Simulation(Controller controller) {
@@ -71,7 +65,7 @@ public class Simulation {
     public void start() {
         // amikor elindul a szimuláció, akkor a steppert is indítsuk el.
         state = State.WORKING;
-        counter = 0;
+        int counter = 0;
         while (counter < cycleLimit) {
             circuit.doEvaluationCycle();
             if (!circuit.isChanged()) {
