@@ -3,47 +3,28 @@ Absztrakt osztály.
 \begin{itemize}
 \item Felelősség\\
 Egy komponens absztrakt megvalósítása, ebből származik az összes többi  komponens. A közös logikát valósítja meg. A gyakran használt dolgokra  ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.)
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent.
-\item Interfészek: Component.
-\item Attribútumok $\ $
-\begin{itemize}
-	\item \texttt{private boolean changed} Azt mutatja meg, hogy változott-e a komponens értéke
-	\item \texttt{protected boolean alreadyEvaluated} "Kiértékelt" flag, ha ez be van billenve, akkor nem számolunk újra, csak visszaadjuk az előzőleg kiszámolt értéket.
-	
-	\item \texttt{protected Value[] Values} Jelenlegi (számolás közben) érték, ezt csak rövid ideig tároljuk, ahhoz kell, hogy tudjuk változik-e a lastValue-hoz képest.
-	
-	\item \texttt{protected int[] indices} Itt tároljuk, hogy melyik bemenetre, az adott komponens melyik kimenetét kötöttük.
-	
-	\item \texttt{protected AbstractComponent[] inputs} Az adott bemenetekre kötött komponensek.
-	\item \texttt{protected String name} Komponens neve (változó neve, ahogy a leíróban azonosítjuk)
-\end{itemize}
-\item Metódusok$\ $
-\begin{itemize}
-	\item \texttt{void clearEvaluatedFlag()}: Töröljük a komponens "kiértékelt" flagjét.
-	\item \texttt{Value evaluate()}: Lekérjük a 0. kimenetén lévő értéket.
-	\item \texttt{String getName()}: Név lekérdezése
-	\item \texttt{void setName(String name)}: Név beállítása (változó, amivel azonosítjuk)
-	\item \texttt{void setInput(int inputSlot, AbstractComponent component)}: Shortcut a másik setInput()-hoz, outputPin = 0-val.
-	\item \texttt{void setInput(int inputPin, AbstractComponent component, int outputPin)}: Beállítunk egy bemenetet.
-	\item \texttt{boolean isChanged()}: Volt-e változás, vagy nem?
-
-	
-\end{itemize}
-\end{itemize}
-
-\subsection{Component}
-Interfész.
-\begin{itemize}
-\item Felelősség\\
-Komponens interfész, ebből származik az IsDisplay és az IsSource interfész.  Legalapvetőbb dolgokat írja le (minden komponensnek van neve és értékei).
 \item Ősosztályok: (nincs)
 \item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{protected String name}: Komponens neve (ahogy az áramkörben azonosítjuk)
+	\item \texttt{private boolean changed}: Azt mutatja meg, hogy változott-e valamelyik kimenete a komponensnek. Ez a flag az \texttt{evaluate()} meghívásánál számolódik ki, vagyis azt jelzi, hogy két kiértékelés között változott-e a kimenet.
+	\item \texttt{protected boolean alreadyEvaluated}: "Kiértékelt" flag, ha ez be van billenve, akkor nem számolunk újra, csak visszaadjuk az előzőleg kiszámolt értéket.
+	\item \texttt{protected Value[] values}: Kimeneteken lévő értékek. Ez frissül az \texttt{evaluate()} meghívására, ha még nem volt kiértékelve.
+	\item \texttt{protected AbstractComponent[] inputs}: A bemenetekre kötött komponensek.
+	\item \texttt{protected int[] indices}: Itt tároljuk, hogy melyik bemenetre, az adott komponens melyik kimenetét kötöttük.
+\end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{String getName()}: Név lekérdezése.
-	\item \texttt{Value getValue()}: Értéke lekérdezése a 0. kimeneten.
-	\item \texttt{Value getValue(int idx)}: Érték lekérdezése az adott kimeneten.
-	\item \texttt{void setName(String name)}: Név beállítása.
+	\item \texttt{String getName()}: Név lekérdezése
+	\item \texttt{void setName(String name)}: Név beállítása (változó, amivel azonosítjuk)
+	\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(AbstractComponent ac)} metódusát.
+	\item \texttt{Value[] evaluate()}: Komponens kimenetein lévő értékek újraszámolása (ha a kiértékelt flag, nincs beállítva) a bemenetek alapján. A kimeneteken lévő értékekkel tér vissza.
+	\item \texttt{void clearEvaluatedFlag()}: Töröljük a komponens "kiértékelt" flagjét.
+	\item \texttt{getValue(int idx)}: Visszaadja a paraméterben megadott indexű kimenet értékét.
+	\item \texttt{boolean isChanged()}: Changed flag lekérdező metódusa.
+	\item \texttt{void setInput(int inputPin, AbstractComponent component, int outputPin)}: Beállítunk egy bemenetet (adott bemeneti lábra rákötjük az adott komponens adott kimeneti lábát).
+	\item \texttt{void setInputPinsCount()}: \comment{KELL EZ? (impl.ben igen, de most a rajzon nem szerepel}
 \end{itemize}
 \end{itemize}
 
@@ -51,46 +32,55 @@ Komponens interfész, ebből származik az IsDisplay és az IsSource interfész.
 Absztrakt osztály.
 \begin{itemize}
 \item Felelősség\\
-Flipflopok ősosztálya, minden flipflop 0. bemenete az órajel!
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop.
+Flipflopok ősosztálya, itt vannak leírva a flipflopok közös logikája.
+\item Ősosztályok:\ AbstractComponent
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private boolean active} Ebben tároljuk, hogy a FF számolhat-e vagy sem. (felfutó él)
-	\item \texttt{protected Value q} A flip-flopban tárolt érték
+	\item \texttt{protected Value q}: A flip-flopban tárolt érték (az előző állapot)
+	\item \texttt{protected Value clk}: A rendszer előző stabil állapotánál mért flip-flop órajel-bemenetére érkező érték (ennek segítségével tudunk detektálni élváltozást).
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{boolean getActive()}: Számolhat-e az FF? Ezt hívja meg az FF-ek onEvaluation() metódusa, mielőtt  bármit is csinálnának.
-	\item \texttt{void setActive(boolean active)}: Felfutó élnél a SequenceGenerator-nak meg kell hívni ezt a hozzá kötött  FlipFlopokra, egyéb esetben törölnie az active flaget. Így tudja az FF, hogy  mikor kell ténylegesen számolnia.
-	\item \texttt{void setInput(int inputPin, AbstractComponent component, int outputPin)}: Ősosztály implementációjának meghívása, illetve ha egy SequenceGeneratort kötünk éppen a CLK bemenetre, akkor az addFlipFlop() metódus meghívása rajta.
+	\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(FlipFlop ff)} metódusát.
+	\item \texttt{void commit()}: Az FF jelenlegi kimenetét és az órajel bemenetét elmentjük a \texttt{q} és \texttt{clk} attribútumba. Ezt akkor kell meghívni, amikor az áramkör az adott áramköri bemenetekre stabil állapotba ért.
+	\item \texttt{boolean isActive()}: Számolhat-e az FF? Ezt kell ellenőrizniük a konkrét flipflop implementációknak, hiszen ekkor kellhet a belső állapottól eltérő állapotot kiadni.
 \end{itemize}
 \end{itemize}
 
-\subsection{IsDisplay}
-Interfész.
+\subsection{DisplayComponent}
+Absztrakt osztály.
 \begin{itemize}
 \item Felelősség\\
-Megjelenítő típusú komponenst reprezentál. Ezt kell implementálnia a megjelenítőknek.
-\item Ősosztályok:\ (nincs).
-\item Interfészek: Component.
+Megjelenítő típusú komponensek ősosztálya.
+\item Ősosztályok:\ AbstractComponent.
+\item Interfészek: (nincs).
+\item Attribútumok $\ $
+\begin{itemize}
+	\item (nincs)
+\end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-\item (nincs)
+\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(DisplayComponent dc)} metódusát (és az ősosztály implementációját is -- hiszen ugyanúgy kell regisztrálni a megjelenítőket is, mint a többi komponenst).
 \end{itemize}
 \end{itemize}
 
-\subsection{IsSource}
-Interfész.
+\subsection{SourceComponent}
+Absztrakt osztály.
 \begin{itemize}
 \item Felelősség\\
-Jelforrás típusú komponenst reprezentál. Ezt kell implementálnia a jelforrásoknak.
-\item Ősosztályok:\ (nincs).
-\item Interfészek: Component.
+Jelforrás típusú komponensek ősosztálya.
+\item Ősosztályok:\ AbstractComponent.
+\item Interfészek: (nincs).
+\item Attribútumok $\ $
+\begin{itemize}
+	\item (nincs)
+\end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{public Value[] getValues()}: Lekérhetjük a jelforrás értékeit, hogy el tudjuk menteni.
-	\item \texttt{public void setValues(Value[] values)}: Beállítjuk a jelforrás értékét. Kapcsoló esetén csak 1 elemű tömb  adható paraméterként!
+\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(SourceComponent dc)} metódusát (és az ősosztály implementációját is -- hiszen ugyanúgy kell regisztrálni a jelforrásokat is, mint a többi komponenst).
+	\item \texttt{abstract Value[] getValues()}: Lekérhetjük a jelforrás értékeit. Ennek megvalósítása a konkrét implementációk feladata.
+	\item \texttt{abstract setValues(Value[] values)}: Beállítjuk a jelforrás értékét. Ennek megvalósítása a konkrét implementációk feladata. (pl. kapcsoló csak 1 elemű tömböt kaphat)
 \end{itemize}
 \end{itemize}
 

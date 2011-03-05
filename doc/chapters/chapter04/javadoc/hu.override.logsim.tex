@@ -1,42 +1,45 @@
 \subsection{Circuit}
 \begin{itemize}
 \item Felelősség\\
-Feladata a jelgenerátor léptető kérésére a jelgenerátorok léptetése, a feldolgozó  által létrehozott komponensek felvétele az áramkörbe, illetve ezek utasítása arra,  hogy töröljék a "már kiértékelve" flaget egy adott kiértékelési ciklus előtt, hogy ezáltal a  ciklusban minden kimenet értéke frissülhessen.  Továbbá feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése  a kijelzők kiértékelésével kezdődik.
-\item Ősosztályok:\ Object $\rightarrow{}$ Circuit.
+A komponensek létrehozása és összekötése a szimuláció elején, szimuláció által indított kiértékelési ciklus végrehajtása.
+\item Ősosztályok: (nincs)
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private HashMap componentMap} Komponenseket tartalmazó HashMap
-	\item \texttt{private List displays} Megjelenítő típusú komponensek
-	\item \texttt{private List sources} Jelforrás típusú komponensek
+	\item \texttt{private Map componentMap}: Komponenseket tartalmazó Map, mely segítségével név szerint megtalálható egy komponens.
+	\item \texttt{private List displays}: Megjelenítő típusú komponensek listája (kijelző, 7-szegmenses kijelző)
+	\item \texttt{private List sources}: Jelforrás típusú komponensek listája (kapcsoló, jelgenerátor)
+	\item \texttt{private List flipFlops}: Flipflopok listája (D és JK flipflopok)
+	\item \texttt{private List seqGens}: Jelgenerátorok listája
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{AbstractComponent addComponent(AbstractComponent component)}: Komponens hozzáadása az áramkörhöz.
-	\item \texttt{void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy  stabil (nem változott semelyik komponens kimenete az utolsó futtatás óta)  vagy instabil állapotban van-e.
-	\item \texttt{List getDisplays()}: Megjelenítő típusú komponeseket adja vissza.
-	\item \texttt{List getSources()}: Jelforrás típusú komponenseket adja vissza.
-	\item \texttt{void stepGenerators()}: Jelgenerátorok a szimuláció szemszögéből nézve, egyszerre történő  léptetése.
-	\item \texttt{void init()}: Előre meghatározott áramköri modell felépítése, objektumok létrehozása, kapcsolatok beállítása
+	\item \texttt{void init()}: Áramkör inicializálása; komponensek létrehozása és összekötése.
+	\item \texttt{void add(AbstractComponent component)}: Komponens hozzáadása az áramkörhöz.
+	\item \comment{TODO többi add() mi legyen a szöveg?}
+	\item \texttt{void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy változott-e a rendszer állapota, azaz valamelyik komponens eltérő kimenetet ad-e, mint az előző ciklusban.
+	\item \texttt{boolean isChanged()}: Áramkör változásának lekérdezése. Igazzal tér vissza, ha van olyan komponens, ami azt jelzi magáról, hogy változott a kimenete.
+	\item \texttt{void commitFlipFlops()}: A flipflopok jelenlegi kimenetének elmentése belső állapotnak, és az órajel bemenetén lévő érték eltárolása az éldetektálás érdekében.
+	\item \texttt{void stepGenerators()}: Jelgenerátorok léptetése.
 \end{itemize}
 \end{itemize}
 
 \subsection{Simulation}
 \begin{itemize}
 \item Felelősség\\
-Egy szimulációt reprezentáló objektum.  Futásakor elindítja a jelgenerátor léptetőt, s utasítja az áramkört több kiértékelési  ciklus lefuttatásához, amíg az áramkörben van változás. Ha a változás megadott lépésen belül  nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot.  Amikor leállítódik, a jelgenerátor-léptetőt is leállítja.  A szál természetéből adódóan többet nem indítható el, új szimulációhoz új példányt kell létrehozni.
-\item Ősosztályok:\ Object $\rightarrow{}$ Thread $\rightarrow{}$ Simulation.
+Az áramkörön kiértékelési ciklusok futtatása az adott áramkör bemenetekre (kapcsolók állapota, jelgenerátorok jelenlegi értéke) nézve addig, amíg az áramkör nem stabilizálódik.
+\item Ősosztályok: (nincs)
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private Circuit circuit} Szimulált áramkör
-	\item \texttt{private State state} Szimuláció jelenlegi állapota
+	\item \texttt{private Circuit circuit}: Szimulált áramkör
+	\item \texttt{private State state}: Szimuláció jelenlegi állapota
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
 	\item \texttt{Circuit getCircuit()}: Szimulált áramkör lekérdezése
-	\item \texttt{void start()}: Szimuláció elindítása
-	\item \texttt{void getState(State state)}: Szimuláció állapotának lekérdezése
+	\item \texttt{void start()}: Szimuláció elindítása a jelenlegi áramköri bemenetekre (kapcsolók állapota, jelgenerátorok jelenlegi értéke). Amennyiben stacionárius állapot jött létre, léptetjük a jelgenerátorokat és elmentjük a flipflopok állapotát. Így újbóli hívásra már a következő időpillanatban érvényes áramköri bemenetekre lehet szimulálni az áramkört.
+	\item \texttt{void getState(State state)}: Szimuláció állapotának lekérdezése.
 \end{itemize}
 \end{itemize}
 
@@ -48,16 +51,13 @@ Szimuláció állapotait írja le
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{public static final State PAUSED} Szimuláció szüneteltetve van, a következő jelforrás változásig.
-	\item \texttt{public static final State STOPPED} Szimuláció leállt, ahhoz, hogy bármi történjen az áramkörre újra kell indítani.
-	\item \texttt{public static final State WORKING} Szimuláció éppen dolgozik, egy konkrét jelforrás-kombinációt alkalmazva dolgoztatja az áramkört
+	\item \texttt{public static final State READY} A szimuláció kész a futásra. Ilyenkor hívható rajta a start() metódus.
+	\item \texttt{public static final State WORKING} Szimuláció éppen dolgozik, egy konkrét jelforrás-kombinációt alkalmazva szimulálja az áramkört.
+	\item \texttt{public static final State FAILED} A szimuláció leállt, mert az áramkörnek nincs stacionárius állapota. A start() metódus újra hívható (ha a bemenetek nem változnak, továbbra is le fog állni).
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{static State valueOf(String name)}: 
- % TODO
-	\item \texttt{static State[] values()}: 
- % TODO
+\item (nincs)
 \end{itemize}
 \end{itemize}
 

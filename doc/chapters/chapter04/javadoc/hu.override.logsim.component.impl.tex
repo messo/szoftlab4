@@ -1,8 +1,8 @@
 \subsection{AndGate}
 \begin{itemize}
 \item Felelősség\\
-ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek  kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát  valósítja meg, amit a kimenetén kiad.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ AndGate.
+ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött értékeken a logikai ÉS műveletet hajtva végre, és ennek eredményét adja ki a kimenetén.
+\item Ősosztályok:\ AbstractComponent
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -17,8 +17,8 @@
 \subsection{FlipFlopD}
 \begin{itemize}
 \item Felelősség\\
-D flipflop, mely felfutó órajelnél beírja a belső memóriába az adatbemeneten (D)  lévő értéket.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopD.
+D flipflop, mely felfutó órajelnél beírja a belső állapotába az adatbemeneten lévő értéket. Kimenetén a belső állapota jelenik meg.
+\item Ősosztályok:\ AbstractComponent $\rightarrow{}$ FlipFlop.
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -33,8 +33,8 @@ D flipflop, mely felfutó órajelnél beírja a belső memóriába az adatbemene
 \subsection{FlipFlopJK}
 \begin{itemize}
 \item Felelősség\\
-JK flipflop, mely a belső memóriáját a Követelmények résznél leírt módon  a J és K bemenetektől függően változtatja.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopJK.
+JK flipflop, mely felfutó órajelnél a Követelmények résznél leírt módon a J és K bemenetén lévő értéktől függően változtatja a belső állapotát. Kimenetén a belső állapota jelenik meg.
+\item Ősosztályok:\ AbstractComponent $\rightarrow{}$ FlipFlop.
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -50,7 +50,7 @@ JK flipflop, mely a belső memóriáját a Követelmények résznél leírt mód
 \begin{itemize}
 \item Felelősség\\
 A "föld" komponens, mely állandóan a hamis értéket adja ki. Nincs bemenete.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Gnd.
+\item Ősosztályok:\ AbstractComponent.
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -65,8 +65,8 @@ A "föld" komponens, mely állandóan a hamis értéket adja ki. Nincs bemenete.
 \subsection{Inverter}
 \begin{itemize}
 \item Felelősség\\
-Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén  érkező jelet.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Inverter.
+Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén érkező jelet.
+\item Ősosztályok:\ AbstractComponent.
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -81,9 +81,9 @@ Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén  érkez�
 \subsection{Led}
 \begin{itemize}
 \item Felelősség\\
-Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.  3 féle színe lehet, ezeket a Color enumeráció határozza meg.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Led.
-\item Interfészek: IsDisplay.
+Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
+\item Ősosztályok:\ AbstractComponent $\rightarrow{}$ DisplayComponent.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)
@@ -97,8 +97,8 @@ Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.  3 fél
 \subsection{Mpx}
 \begin{itemize}
 \item Felelősség\\
-4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következő:  D0, D1, D2, D3, S0, S1. Ahol Dx az adatbemenetek, Sy a kiválasztóbemenetek.  Kimenetén a kiválasztóbemenetektől függően valamelyik adatbemenet kerül kiadásra.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Mpx.
+4-1-es multiplexer, amely 4 adatbemenettel, 2 kiválasztó-bemenettel és 1 kimenettel rendelkezik. A kiválasztó-bemenetekre adott értéktől függ, hogy melyik adatbemenet értéke jelenik meg az adatkimeneten.
+\item Ősosztályok:\ AbstractComponent.
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -113,8 +113,8 @@ Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.  3 fél
 \subsection{OrGate}
 \begin{itemize}
 \item Felelősség\\
-VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek  kiértékelését kezdeményezi, s a kapott értékek logikai VAGY kapcsolatát  valósítja meg, amit a kimenetén kiad.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ OrGate.
+VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött értékeken a logikai VAGY műveletet hajtva végre, és ennek eredményét adja ki a kimenetén.
+\item Ősosztályok:\ AbstractComponent.
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
@@ -129,30 +129,29 @@ VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek  kiér
 \subsection{SequenceGenerator}
 \begin{itemize}
 \item Felelősség\\
-Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A  SequenceGeneratorStepper feladata, hogy a step() metódust meghívja ezen osztály  példányain. Azokat a FF-eket vezérli, melyek CLK bemenetére ez a komponens van kötve,  vagyis ha éppen felfutó él jön, akkor ezeket engedélyezi különben nem.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SequenceGenerator.
-\item Interfészek: IsSource.
+Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki.
+\item Ősosztályok:\ AbstractComponent $\rightarrow{}$ SourceComponent.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private List ffList}: Azon FF-ek listája, melyekre ez a jelgenerátor van bekötve a CLK bemenetre.
-	\item \texttt{private int index}: Bitsorozat egy indexe, ez határozza meg, hogy éppen melyik értéket adja ki.
+	\item \texttt{private int index}: A bitsorozat egy indexe, ez határozza meg, hogy éppen melyik értéket adja ki a kimenetén.
 	\item \texttt{private Value[] sequence}: Tárolt bitsorozat
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{void addFlipFlop(FlipFlop ff)}: A flipflop-ot feliratkoztatjuk a jelgenerátorhoz, így ha felfutó él lesz,  akkor tudunk neki jelezni.
+\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(SequenceGenerator sg)} metódusát (és az ősosztály implementációját is -- hiszen ugyanúgy kell regisztrálni a jelforrásokat is, mint a többi komponenst).
 	\item \texttt{Value[] getValues()}: Jelgenerátor bitsorozatának lekérdezése
 	\item \texttt{void setValues(Value[] values)}: Jelgenerátor bitsorozatának beállítása
-	\item \texttt{void step()}: A jelgenerátor lép, a bitsorozat következő elemére ugrik. A következő léptetésig  ez kerül kiadásra a kimeneteken.
+	\item \texttt{void step()}: A jelgenerátor lép, a bitsorozat következő elemére ugrik. A következő léptetésig ez kerül kiadásra a kimeneteken.
 \end{itemize}
 \end{itemize}
 
 \subsection{SevenSegmentDisplay}
 \begin{itemize}
 \item Felelősség\\
-7-szegmenses kijelzőt reprezentál, melynek 7 bemenete vezérli a  megfelelő szegmenseket, ezek világítanak, ha az adott bemenetre logikai  igaz van kötve.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SevenSegmentDisplay.
-\item Interfészek: IsDisplay.
+7-szegmenses kijelzőt reprezentál, melynek 7 bemenete vezérli a  megfelelő szegmenseket, ezek világítanak, ha az adott bemenetre logikai igaz van kötve.
+\item Ősosztályok:\ AbstractComponent $\rightarrow{}$ DisplayComponent.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)
@@ -166,9 +165,9 @@ Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A  Seque
 \subsection{Toggle}
 \begin{itemize}
 \item Felelősség\\
-Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Toggle.
-\item Interfészek: IsSource.
+Kapcsoló jelforrás, melynek két állapota lehet; egyikben logikai igazat, másikban logikai hamist ad ki.
+\item Ősosztályok:\ AbstractComponent $\rightarrow{}$ SourceComponent.
+\item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
 \item (nincs)
@@ -184,7 +183,7 @@ Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
 \begin{itemize}
 \item Felelősség\\
 A tápfeszültés komponens, ami konstans igaz értéket ad. Nincs bemenete.
-\item Ősosztályok:\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Vcc.
+\item Ősosztályok:\ AbstractComponent.
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}

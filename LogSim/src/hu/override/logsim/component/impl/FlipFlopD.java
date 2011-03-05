@@ -25,7 +25,7 @@ public class FlipFlopD extends FlipFlop {
             result[0] = evaluateInput(D);
         } else {
             // marad a régi.
-            result[0] = values[0];
+            result[0] = q;
         }
 
         return result;

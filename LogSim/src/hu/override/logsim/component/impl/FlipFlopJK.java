@@ -38,10 +38,10 @@ public class FlipFlopJK extends FlipFlop {
                 // töröl
                 result[0] = Value.FALSE;
             } else {
-                result[0] = values[0];
+                result[0] = q;
             }
         } else {
-            result[0] = values[0];
+            result[0] = q;
         }
 
         return result;
