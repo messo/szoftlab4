@@ -10,6 +10,7 @@ import hu.override.logsim.parser.SourceWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Feladata a jelgenerátor léptetõ kérésére a jelgenerátorok léptetése, a feldolgozó
@@ -26,7 +27,7 @@ public class Circuit {
     /**
      * Komponenseket tartalmazó HashMap
      */
-    private HashMap<String, AbstractComponent> componentMap;
+    private Map<String, AbstractComponent> componentMap;
     /**
      * Jelforrás típusú komponensek listája (kapcsoló, jelgenerátor)
      */

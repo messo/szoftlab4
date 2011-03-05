@@ -1,15 +1,12 @@
 package hu.override.logsim;
 
-import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.DisplayComponent;
 import hu.override.logsim.component.SourceComponent;
 import hu.override.logsim.controller.Controller;
 import hu.override.logsim.exception.CircuitAlreadyExistsException;
 import hu.override.logsim.exception.InvalidCircuitDefinitionException;
-import hu.override.logsim.parser.Parser;
 import hu.override.logsim.view.GuiView;
 import hu.override.logsim.view.View;
-import java.io.File;
 
 /**
  *

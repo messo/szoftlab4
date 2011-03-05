@@ -17,10 +17,6 @@ import java.io.File;
  * @author balint
  */
 public class Simulation {
-    public void loadCircuitFromFile(String fileName)
-            throws CircuitAlreadyExistsException, InvalidCircuitDefinitionException {
-        circuit = new Parser().parse(new File(fileName));
-    }
 
     /**
      * Szimuláció állapotait írja le
@@ -36,7 +32,8 @@ public class Simulation {
          */
         READY,
         /**
-         * A szimuláció leállt, mert az áramkörnek nincs stacionárius állapota.
+         * A szimuláció leállt, mert az áramkörnek nincs stacionárius állapota. A start() metódus
+         * újra hívható (ha a bemenetek nem változnak, továbbra is le fog állni).
          */
         FAILED
     }
@@ -111,5 +108,10 @@ public class Simulation {
      */
     public State getState() {
         return state;
+    }
+
+    public void loadCircuitFromFile(String fileName)
+            throws CircuitAlreadyExistsException, InvalidCircuitDefinitionException {
+        circuit = new Parser().parse(new File(fileName));
     }
 }
