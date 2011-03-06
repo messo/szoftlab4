@@ -8,14 +8,22 @@
 \section{Objektum katalógus}
 
 \subsection{\bf Simulation}
-Szimuláció objektum. A szimulációért felelős. Elindítja a jelgenerátor léptetőt, s utasítja az áramkört több kiértékelési ciklus lefuttatásához, amíg az áramkörben van változás. Ha a változás megadott lépésen belül nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot. Amikor leállítódik, a jelgenerátor-léptetőt is leállítja.
+%Szimuláció objektum. A szimulációért felelős. Elindítja a jelgenerátor léptetőt, s utasítja az áramkört %több kiértékelési ciklus lefuttatásához, amíg az áramkörben van változás. Ha a változás megadott lépésen %belül nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot. Amikor leállítódik, a %jelgenerátor-léptetőt is leállítja.
+A szimulációért felelős objektum. Létrehozza a szimulálni kívánt ármakört. Utasítja az áramkört több kiértékelési ciklus lefuttatásához, amíg az áramkörben van változás. Ha a változás megadott lépés szám limiten belül nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot.
+
+\subsection{\bf State}
+A szimuláció állapotát megvalósító objektum. 3 állapota van: WORKING, READY, FAILED
 
 \subsection{\bf Circuit}
-Az áramkör objektum. Ezen objektum feladata a jelgenerátor léptető kérésére a jelgenerátorok léptetése, az áramkörben található komponensek utasítása arra, hogy töröljék a "már kiértékelve" flaget egy adott kiértékelési ciklus előtt, hogy ezáltal a ciklusban minden kimenet értéke frissülhessen.
-Továbbá feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők kiértékelésével kezdődik.
+%Az áramkör objektum. Ezen objektum feladata a jelgenerátor léptető kérésére a jelgenerátorok léptetése, %az áramkörben található komponensek utasítása arra, hogy töröljék a "már kiértékelve" flaget egy adott %kiértékelési ciklus előtt, hogy ezáltal a ciklusban minden kimenet értéke frissülhessen.
+%Továbbá feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők %kiértékelésével kezdődik.
+Az áramkör objektum. Ez az objektum hozza létre és köti össze egymással az áramköri elemeket. Törli az egyes elemek "már kiértékelt" flagjét a kiértékelési ciklus előtt, hogy ezáltal a ciklusban minden kimenet értéke frissülhessen. További feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők kiértékelésével kezdődik. A flip-flopokat utasítja arra, hogy mentsék el a jelenlegi kimenetüket, a saját belső memóriájukba. Megmondja, hogy az áramköri elemek értéke megváltoztak-e. Ezen kívül lépteti a jelgenerátorokat.
 
 \subsection{\bf SequenceGenerator}
 Jelgenerátor, az áramkört felépítő egyik alapelem, kiértékelési kezdeményezés hatására az előre betáplált jelsorozatot soron következő elemét állítja be aktuális értékként, így azon komponensek melyek bemenetére a Jelgenerátor van kötve, elérik aktuális értékét. Bemenete nem komponens jellegű így nem kezel más komponenseket. Mikor az áramkör kéri tőle, hogy lépjen, akkor a bitsorozat következő elemére lép.
+
+\subsection{\bf Value}
+A logikai értékeket megvalósító objektum. Jelenleg két érték lehetséges: logikai igaz, logikai hamis.
 
 \subsection{\bf AndGate}
 ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát valósítja meg, amit a kimenetén kiad.
