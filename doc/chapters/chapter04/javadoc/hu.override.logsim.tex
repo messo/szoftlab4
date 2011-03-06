@@ -15,8 +15,11 @@ A komponensek létrehozása és összekötése a szimuláció elején, szimulác
 \item Metódusok$\ $
 \begin{itemize}
 	\item \texttt{void init()}: Áramkör inicializálása; komponensek létrehozása és összekötése.
-	\item \texttt{void add(AbstractComponent component)}: Komponens hozzáadása az áramkörhöz.
-	\item \comment{TODO többi add() mi legyen a szöveg?}
+	\item \texttt{void add(AbstractComponent component)}: Komponens hozzáadása a \texttt{componentMap}-hez. Ezt minden komponensre meg kell hívni.
+	\item \texttt{void add(SourceComponent sc)}: Jelforrás hozzáadása a \texttt{sources} listához.
+	\item \texttt{void add(FlipFlop ff)}: FlipFlop hozzáadása a \texttt{flipFlops} listához.
+	\item \texttt{void add(SequenceGenerator sg)}: Jelgenerátor hozzáadása a \texttt{seqGens} listához.
+	\item \texttt{void add(DisplayComponent dc)}: Megjelenítő hozzáadása a \texttt{displays} listához.
 	\item \texttt{void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy változott-e a rendszer állapota, azaz valamelyik komponens eltérő kimenetet ad-e, mint az előző ciklusban.
 	\item \texttt{boolean isChanged()}: Áramkör változásának lekérdezése. Igazzal tér vissza, ha van olyan komponens, ami azt jelzi magáról, hogy változott a kimenete.
 	\item \texttt{void commitFlipFlops()}: A flipflopok jelenlegi kimenetének elmentése belső állapotnak, és az órajel bemenetén lévő érték eltárolása az éldetektálás érdekében.
@@ -44,10 +47,11 @@ Az áramkörön kiértékelési ciklusok futtatása az adott áramkör bemenetek
 \end{itemize}
 
 \subsection{Simulation.State}
+Enumeráció.
 \begin{itemize}
 \item Felelősség\\
 Szimuláció állapotait írja le
-\item Ősosztályok:\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Simulation.State.
+\item Ősosztályok: (nincs)
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
