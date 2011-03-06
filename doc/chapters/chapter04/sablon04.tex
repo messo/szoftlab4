@@ -12,7 +12,7 @@
 A szimulációért felelős objektum. Létrehozza a szimulálni kívánt áramkört. Utasítja az áramkört több kiértékelési ciklus lefuttatásához, amíg az áramkörben van változás. Ha a változás megadott lépés szám limiten belül nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot.
 
 \subsection{\bf State}
-A szimuláció állapotát megvalósító objektum. 3 állapota van:
+A szimuláció állapotát megvalósító objektum. 3 állapotot különböztetünk meg:
 \begin{itemize}
 \item a szimuláció fut \item a szimuláció sikeresen lefutott \item a szimuláció során hiba történt
 \end{itemize}
@@ -67,22 +67,20 @@ Hétszegmenses kijelző objektuma. Minden bemenete egy-egy szegmensért felelős
 Absztrakt osztály.
 \begin{itemize}
 \item Felelősség\\
-Egy komponens absztrakt megvalósítása, ebből származik az összes többi  komponens. A közös logikát valósítja meg. A gyakran használt feladatokra ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.)
+Egy komponens absztrakt megvalósítása, ebből származik az összes többi  komponens. A közös logikát valósítja meg. A gyakran használt feladatokra ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.). Tudja magáról, hogy kiértékelték-e már az adott áramköri kiértékelési ciklusban, illetve, hogy a legutóbbi két kiértékelés között változtak-e a kimenetei.
 \item Ősosztályok: (nincs)
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private boolean changed}: Azt mutatja meg, hogy változott-e valamelyik kimenete a komponensnek. Ez a flag az \texttt{evaluate()} meghívásánál számolódik ki, vagyis azt jelzi, hogy két kiértékelés között változott-e a kimenet.
-	\item \texttt{protected boolean alreadyEvaluated}: "Kiértékelt" flag, ha ez be van billenve, akkor nem számolunk újra, csak visszaadjuk az előzőleg kiszámolt értéket.
 	\item \texttt{protected Value[] values}: Kimeneteken lévő értékek. Ez frissül az \texttt{evaluate()} meghívására, ha még nem volt kiértékelve.
 	\item \texttt{protected AbstractComponent[] inputs}: A bemenetekre kötött komponensek.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
 	\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(AbstractComponent ac)} metódusát.
-	\item \texttt{Value[] evaluate()}: Komponens kimenetein lévő értékek újraszámolása (ha a kiértékelt flag, nincs beállítva) a bemenetek alapján. A kimeneteken lévő értékekkel tér vissza.
+	\item \texttt{Value[] evaluate()}: Komponens kimenetein lévő értékek újraszámolása (ha még nem volt kiértékelve) a bemenetek alapján. A kimeneteken lévő értékekkel tér vissza.
 	\item \texttt{void clearEvaluatedFlag()}: Töröljük a komponens "kiértékelt" flagjét.
-	\item \texttt{boolean isChanged()}: Changed flag lekérdező metódusa.
+	\item \texttt{boolean isChanged()}: Visszaadja, hogy a legutóbbi két kiértékelés között változtak-e a kimenetek.
 	\item \raggedright \texttt{void setInput(int inputPin, AbstractComponent component, int outputPin)}: Beállítunk egy bemenetet (adott bemeneti lábra rákötjük az adott komponens adott kimeneti lábát).
 \end{itemize}
 \end{itemize}
@@ -121,10 +119,10 @@ A komponensek létrehozása és összekötése a szimuláció elején, szimulác
 \begin{itemize}
 	\item \texttt{void init()}: Áramkör inicializálása; komponensek létrehozása és összekötése.
 	\item \texttt{void add(AbstractComponent component)}: Komponens hozzáadása a \texttt{components}-hez. Ezt minden komponensre meg kell hívni.
-	\item \texttt{void add(SourceComponent sc)}: Jelforrás hozzáadása a \texttt{sources}-hoz.
-	\item \texttt{void add(FlipFlop ff)}: FlipFlop hozzáadása a \texttt{flipFlops}-hoz.
-	\item \texttt{void add(SequenceGenerator sg)}: Jelgenerátor hozzáadása a \texttt{sequenceGens}-hez.
-	\item \texttt{void add(DisplayComponent dc)}: Megjelenítő hozzáadása a \texttt{displays}-hez.
+	\item \raggedright \texttt{void add(SourceComponent sc)}: Jelforrás hozzáadása a \texttt{sources}-hoz és az \texttt{add(AbstractComponent component)} meghívása.
+	\item \raggedright \texttt{void add(FlipFlop ff)}: FlipFlop hozzáadása a \texttt{flipFlops}-hoz és az \texttt{add(AbstractComponent component)} meghívása.
+	\item \raggedright \texttt{void add(SequenceGenerator sg)}: Jelgenerátor hozzáadása a \texttt{sequenceGens}-hez és az \texttt{add(AbstractComponent component)} meghívása.
+	\item \raggedright \texttt{void add(DisplayComponent dc)}: Megjelenítő hozzáadása a \texttt{displays}-hez és az \texttt{add(AbstractComponent component)} meghívása.
 	\item \texttt{void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy változott-e a rendszer állapota, azaz valamelyik komponens eltérő kimenetet ad-e, mint az előző ciklusban.
 	\item \texttt{boolean isChanged()}: Áramkör változásának lekérdezése. Igazzal tér vissza, ha van olyan komponens, ami azt jelzi magáról, hogy változott a kimenete az előző kiértékeléshez képest.
 	\item \texttt{void commitFlipFlops()}: A flipflopok jelenlegi kimenetének elmentése belső állapotnak, és az órajel bemenetén lévő érték eltárolása az éldetektálás érdekében.
@@ -145,7 +143,7 @@ Megjelenítő típusú komponensek ősosztálya.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(DisplayComponent dc)} metódusát (és az ősosztály implementációját is -- hiszen ugyanúgy kell regisztrálni a megjelenítőket is, mint a többi komponenst).
+\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(DisplayComponent dc)} metódusát.
 \end{itemize}
 \end{itemize}
 
@@ -295,7 +293,7 @@ Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(SequenceGenerator sg)} metódusát (és az ősosztály implementációját is -- hiszen ugyanúgy kell regisztrálni a jelforrásokat is, mint a többi komponenst).
+\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(SequenceGenerator sg)} metódusát.
 	\item \texttt{Value[] getValues()}: Jelgenerátor bitsorozatának lekérdezése
 	\item \texttt{void setValues(Value[] values)}: Jelgenerátor bitsorozatának beállítása
 	\item \texttt{void step()}: A jelgenerátor lép, a bitsorozat következő elemére ugrik. A következő léptetésig ez kerül kiadásra a kimeneteken.
@@ -367,7 +365,7 @@ Jelforrás típusú komponensek ősosztálya.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(SourceComponent dc)} metódusát (és az ősosztály implementációját is -- hiszen ugyanúgy kell regisztrálni a jelforrásokat is, mint a többi komponenst).
+\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(SourceComponent dc)} metódusát.
 	\item \texttt{abstract Value[] getValues()}: Lekérhetjük a jelforrás értékeit. Ennek megvalósítása a konkrét implementációk feladata.
 	\item \texttt{abstract setValues(Value[] values)}: Beállítjuk a jelforrás értékét. Ennek megvalósítása a konkrét implementációk feladata. (pl. kapcsoló csak 1 elemű tömböt kaphat)
 \end{itemize}
@@ -434,7 +432,7 @@ A tápfeszültés komponens, ami konstans igaz értéket ad. Nincs bemenete.
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics*[angle=90, width=17cm, viewport = 30 30 740 565]{chapters/chapter04/classdiagram/class.pdf}
+\includegraphics*[angle=90, width=17cm, viewport = 25 30 695 565]{chapters/chapter04/classdiagram/class.pdf}
 \caption{Statikus struktúra nézet}
 \label{fig:class_diagram}
 \end{center}
