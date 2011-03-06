@@ -20,7 +20,7 @@ A szimuláció állapotát megvalósító objektum. 3 állapotot különböztet�
 \subsection{\bf Circuit}
 %Az áramkör objektum. Ezen objektum feladata a jelgenerátor léptető kérésére a jelgenerátorok léptetése, %az áramkörben található komponensek utasítása arra, hogy töröljék a "már kiértékelve" flaget egy adott %kiértékelési ciklus előtt, hogy ezáltal a ciklusban minden kimenet értéke frissülhessen.
 %Továbbá feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők %kiértékelésével kezdődik.
-Az áramkör objektum. Ez az objektum hozza létre és köti össze egymással az áramköri elemeket. Törli az egyes elemek "már kiértékelt" flagjét a kiértékelési ciklus előtt, hogy ezáltal a ciklusban minden kimenet értéke frissülhessen. További feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők kiértékelésével kezdődik. A flip-flopokat utasítja arra, hogy mentsék el a jelenlegi kimenetüket, a saját belső memóriájukba. Megmondja, hogy az áramköri elemek értékei megváltoztak-e. Ezen kívül lépteti a jelgenerátorokat.
+Az áramkör objektum. Ez az objektum hozza létre és köti össze egymással az áramköri elemeket. Törli az egyes elemek "már kiértékelt" flagjét a kiértékelési ciklus előtt, hogy ezáltal a ciklusban minden kimenet értéke frissülhessen. További feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők kiértékelésével kezdődik. A flip-flopokat utasítja arra, hogy mentsék el a jelenlegi kimenetüket belső állapotként és az órajel bemenetén lévő értéket az éldetektálás érdekében. Megmondja, hogy az áramköri elemek értékei megváltoztak-e. Ezen kívül lépteti a jelgenerátorokat.
 
 \subsection{\bf SequenceGenerator}
 Jelgenerátor, az áramkört felépítő egyik alapelem, kiértékelési kezdeményezés hatására az előre betáplált jelsorozat éppen aktuális elemét adja ki a kimenetén. Nincs áramköri bemenete. Mikor az áramkör kéri tőle, hogy lépjen, akkor a bitsorozat következő elemét fogja kiadni kimenetén.
@@ -53,7 +53,7 @@ Kapcsoló, az áramkör egyik eleme, melynek aktuális értéke állítható, ez
 D flip flopot megvalósító objektum. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenettől függően változtatja a kimeneti értékét.
 
 \subsection{\bf FlipFlopJK}
-JK flip flopot megvalósító objektum. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenetektől függően változtatja a kimeneti értékét.
+JK flip flopot megvalósító objektum. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenetektől és a belső állapotától függően változtatja a kimeneti értékét.
 
 \subsection{\bf Mpx}
 4-1-es multiplexer áramköri építőelemet megvalósító objektum. Bemeneteire kötött komponensek kiértékelését kezdeményezi, a választó bemenet függvényében adja ki a kimeneten az egyik, vagy másik értékbemenetére kötött értéket.
@@ -187,7 +187,7 @@ D flipflop, mely felfutó órajelnél beírja a belső állapotába az adatbemen
 \subsection{FlipFlopJK}
 \begin{itemize}
 \item Felelősség\\
-JK flipflop, mely felfutó órajelnél a Követelmények résznél leírt módon a J és K bemenetén lévő értéktől függően változtatja a belső állapotát. Kimenetén a belső állapota jelenik meg.
+JK flipflop, mely felfutó órajelnél a Követelmények résznél leírt módon a J és K bemenetén lévő értéktől és belső állapotától függően változtatja a belső állapotát. Kimenetén a belső állapota jelenik meg.
 \item Ősosztályok:\ AbstractComponent $\rightarrow{}$ FlipFlop.
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
