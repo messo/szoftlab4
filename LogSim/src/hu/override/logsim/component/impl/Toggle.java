@@ -11,8 +11,7 @@ import hu.override.logsim.component.SourceComponent;
 public class Toggle extends SourceComponent {
 
     @Override
-    protected Value[] onEvaluation() {
-        return values;
+    protected void onEvaluation() {
     }
 
     /**
@@ -20,6 +19,8 @@ public class Toggle extends SourceComponent {
      */
     @Override
     public Value[] getValues() {
+        Value[] values = new Value[1];
+        values[0] = outputs[0].getValue();
         return values;
     }
 
@@ -35,11 +36,11 @@ public class Toggle extends SourceComponent {
         }
 
         // ha új értéket kapott
-        if (newValues[0] != values[0]) {
+        if (newValues[0] != outputs[0].getValue()) {
             // még nincs kiértékelve
             alreadyEvaluated = false;
             // elmentjük az értéket
-            values[0] = newValues[0];
+            outputs[0].setValue(newValues[0]);
         }
     }
 

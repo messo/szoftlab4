@@ -20,9 +20,7 @@ public class Mpx extends AbstractComponent {
     private static final int SEL1 = 5;
 
     @Override
-    protected Value[] onEvaluation() {
-        Value[] result = new Value[values.length];
-
+    protected void onEvaluation() {
         int selected = 0;
         if (evaluateInput(SEL0) == Value.TRUE) {
             selected += 1;
@@ -32,7 +30,6 @@ public class Mpx extends AbstractComponent {
         }
 
         // selected értéke pont egy DATAx lesz.
-        result[0] = evaluateInput(selected);
-        return result;
+        outputs[0].setValue(evaluateInput(selected));
     }
 }

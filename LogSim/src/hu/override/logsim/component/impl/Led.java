@@ -1,7 +1,5 @@
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.Value;
-import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.DisplayComponent;
 
 /**
@@ -14,15 +12,11 @@ public class Led extends DisplayComponent {
 
     @Override
     public String toString() {
-        return String.format("LED(%s): %s", name, values[0]);
+        return String.format("LED(%s): %s", name, inputs[0].getValue());
     }
 
     @Override
-    protected Value[] onEvaluation() {
-        Value[] result = new Value[values.length];
-
-        result[0] = evaluateInput(0);
-        return result;
+    protected void onEvaluation() {
     }
 
     @Override

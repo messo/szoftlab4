@@ -35,7 +35,7 @@ public abstract class FlipFlop extends AbstractComponent {
     }
 
     public void commit() {
-        q = values[0];
+        q = outputs[0].getValue();
         clk = evaluateInput(CLK);
     }
 

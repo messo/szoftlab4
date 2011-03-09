@@ -1,6 +1,5 @@
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
 
 /**
@@ -12,13 +11,9 @@ import hu.override.logsim.component.AbstractComponent;
 public class Inverter extends AbstractComponent {
 
     @Override
-    protected Value[] onEvaluation() {
-        Value[] result = new Value[values.length];
-
+    protected void onEvaluation() {
         // bemenetén lévõ értéket invertálja.
-        result[0] = evaluateInput(0).invert();
-
-        return result;
+        outputs[0].setValue(evaluateInput(0).invert());
     }
 
     @Override

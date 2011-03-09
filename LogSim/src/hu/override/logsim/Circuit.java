@@ -96,11 +96,13 @@ public class Circuit {
         }
 
         // a megjelenítõkre hívjuk meg az evaluate();
-        for (DisplayComponent c : displays) {
+        for (AbstractComponent c : componentMap.values()) {
             // miközben minden kiértékelõdik, lehet, hogy valamelyik
             // komponens instabillá teszi az áramkört, mert változott
             // az õ értéke.
-            c.evaluate();
+            if (!(c instanceof DisplayComponent))  {
+                c.evaluate();
+            }
         }
     }
 

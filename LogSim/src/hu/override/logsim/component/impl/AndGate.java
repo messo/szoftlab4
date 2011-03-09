@@ -1,6 +1,5 @@
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
 
@@ -14,18 +13,14 @@ import hu.override.logsim.component.AbstractComponent;
 public class AndGate extends AbstractComponent {
 
     @Override
-    protected Value[] onEvaluation() {
-        Value[] result = new Value[values.length];
-
-        result[0] = Value.TRUE;
+    protected void onEvaluation() {
+        outputs[0].setValue(Value.TRUE);
         for (int i = 0; i < inputs.length; i++) {
             if (evaluateInput(i) == Value.FALSE) {
-                result[0] = Value.FALSE;
-                break;
+                outputs[0].setValue(Value.FALSE);
+                return;
             }
         }
-
-        return result;
     }
 
     @Override

@@ -1,11 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.Wire;
 
@@ -16,18 +10,14 @@ import hu.override.logsim.component.Wire;
 public class Node extends AbstractComponent {
 
     @Override
-    protected Value[] onEvaluation() {
-        for(int i=0; i<outputs.length;i++)
-        {
-            outputs[i] = inputs[0];
+    protected void onEvaluation() {
+        for (int i = 0; i < outputs.length; i++) {
+            outputs[i].setValue(inputs[0].getValue());
         }
-
     }
 
-    public Node(int outputPinsCount)
-    {
+    public Node(int outputPinsCount) {
         outputs = new Wire[outputPinsCount];
 
     }
-
 }

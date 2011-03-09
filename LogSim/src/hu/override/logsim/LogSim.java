@@ -19,7 +19,7 @@ public class LogSim implements Controller {
 
     public LogSim() throws CircuitAlreadyExistsException,
             InvalidCircuitDefinitionException {
-        simulation.loadCircuitFromFile("test.txt");
+        simulation.loadDefault();
         view = new GuiView(this);
 
         for (SourceComponent c : simulation.getCircuit().getSources()) {

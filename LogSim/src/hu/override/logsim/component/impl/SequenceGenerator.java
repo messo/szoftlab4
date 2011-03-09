@@ -2,7 +2,6 @@ package hu.override.logsim.component.impl;
 
 import hu.override.logsim.Circuit;
 import hu.override.logsim.Value;
-import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.SourceComponent;
 
 /**
@@ -44,11 +43,8 @@ public class SequenceGenerator extends SourceComponent {
     }
 
     @Override
-    protected Value[] onEvaluation() {
-        Value[] result = new Value[values.length];
-
-        result[0] = sequence[index];
-        return result;
+    protected void onEvaluation() {
+        outputs[0].setValue(sequence[index]);
     }
 
     /**

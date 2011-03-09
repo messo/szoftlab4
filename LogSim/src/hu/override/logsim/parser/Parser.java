@@ -190,7 +190,7 @@ public class Parser {
     }
 
     private void connectComponents() throws InvalidCircuitDefinitionException {
-        String[] arguments;
+        /*String[] arguments;
         String arg;
         for (String var : inputs.keySet()) {
             arguments = inputs.get(var);
@@ -230,7 +230,7 @@ public class Parser {
             } catch (UnknownComponentException ex) {
                 throw new InvalidCircuitDefinitionException("Nem létezik a komponens!");
             }
-        }
+        }*/
 
     }
 }

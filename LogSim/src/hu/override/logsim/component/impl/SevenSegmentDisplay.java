@@ -1,6 +1,5 @@
 package hu.override.logsim.component.impl;
 
-import hu.override.logsim.Value;
 import hu.override.logsim.component.DisplayComponent;
 
 /**
@@ -12,29 +11,16 @@ import hu.override.logsim.component.DisplayComponent;
  */
 public class SevenSegmentDisplay extends DisplayComponent {
 
-    public SevenSegmentDisplay() {
-        values = new Value[7];
-        for (int i = 0; i < 7; i++) {
-            values[i] = Value.FALSE; // alapból innen indulunk.
-        }
-    }
-
     @Override
     public String toString() {
         return String.format("7SEG(%s): %s,%s,%s,%s,%s,%s,%s", name,
-                values[0], values[1], values[2], values[3], values[4],
-                values[5], values[6]);
+                outputs[0].getValue(), outputs[1].getValue(), outputs[2].getValue(),
+                outputs[3].getValue(), outputs[4].getValue(), outputs[5].getValue(),
+                outputs[6].getValue());
     }
 
     @Override
-    protected Value[] onEvaluation() {
-        Value[] result = new Value[values.length];
-
-        // a 7 bemeneten érkezõ jelet elmentjük.
-        for (int i = 0; i < 7; i++) {
-            result[i] = evaluateInput(i);
-        }
-        return result;
+    protected void onEvaluation() {
     }
 
     @Override

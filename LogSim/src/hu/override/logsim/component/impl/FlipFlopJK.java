@@ -21,29 +21,25 @@ public class FlipFlopJK extends FlipFlop {
     private static final int K = 2;
 
     @Override
-    protected Value[] onEvaluation() {
-        Value[] result = new Value[values.length];
-
+    protected void onEvaluation() {
         if (isActive()) {
             Value j = evaluateInput(J);
             Value k = evaluateInput(K);
 
             if (j == Value.TRUE && k == Value.TRUE) {
                 // invertálunk
-                result[0] = q.invert();
+                outputs[0].setValue(q.invert());
             } else if (j == Value.TRUE && k == Value.FALSE) {
                 // beír
-                result[0] = Value.TRUE;
+                outputs[0].setValue(Value.TRUE);
             } else if (j == Value.FALSE && k == Value.TRUE) {
                 // töröl
-                result[0] = Value.FALSE;
+                outputs[0].setValue(Value.FALSE);
             } else {
-                result[0] = q;
+                outputs[0].setValue(q);
             }
         } else {
-            result[0] = q;
+            outputs[0].setValue(q);
         }
-
-        return result;
     }
 }
