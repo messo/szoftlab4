@@ -17,7 +17,16 @@ public class Node extends AbstractComponent {
     }
 
     public Node(int outputPinsCount) {
+        inputs = new Wire[1];
         outputs = new Wire[outputPinsCount];
+
+    }
+
+    public void setInput(Wire wire){
+        inputs[0] = wire;
+    }
+
+    public void addOutput(Wire wire){
 
     }
 }
