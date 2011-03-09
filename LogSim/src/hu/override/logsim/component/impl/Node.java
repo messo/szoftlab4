@@ -9,6 +9,7 @@ import hu.override.logsim.component.Wire;
  */
 public class Node extends AbstractComponent {
 
+    private int outputCounter = 0;
     @Override
     protected void onEvaluation() {
         for (int i = 0; i < outputs.length; i++) {
@@ -27,6 +28,13 @@ public class Node extends AbstractComponent {
     }
 
     public void addOutput(Wire wire){
-
+        if(outputCounter<outputs.length)
+        {
+            outputs[outputCounter] = wire;
+            outputCounter++;
+        }
+        else{
+            System.out.println("minden kimenetre már kötöttünk cuccot");
+        }
     }
 }

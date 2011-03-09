@@ -4,6 +4,7 @@ import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.FlipFlop;
 import hu.override.logsim.component.DisplayComponent;
 import hu.override.logsim.component.SourceComponent;
+import hu.override.logsim.component.impl.Node;
 import hu.override.logsim.component.impl.SequenceGenerator;
 import hu.override.logsim.parser.SourceReader;
 import hu.override.logsim.parser.SourceWriter;
@@ -43,6 +44,8 @@ public class Circuit {
     /**
      * Jelgenerátorok listája
      */
+
+
     private List<SequenceGenerator> seqGens;
 
     public Circuit() {
@@ -51,6 +54,7 @@ public class Circuit {
         displays = new ArrayList<DisplayComponent>();
         flipFlops = new ArrayList<FlipFlop>();
         seqGens = new ArrayList<SequenceGenerator>();
+
     }
 
     /**
@@ -82,6 +86,7 @@ public class Circuit {
     public void add(DisplayComponent dc) {
         displays.add(dc);
     }
+
 
     /**
      * Egy kiértékelési ciklus lefuttatása. Az áramkörtõl ezután lekérdezhetõ, hogy
