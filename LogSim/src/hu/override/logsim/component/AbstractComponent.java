@@ -24,11 +24,20 @@ public abstract class AbstractComponent {
     /**
      * Az adott bemenetekre kötött komponensek.
      */
-    protected AbstractComponent[] inputs;
+    //protected AbstractComponent[] inputs;
+
+    /**
+     * Bemenetekre kötött vezetékek
+     */
+    protected Wire[] inputs;
+    /*
+     * Kimenetekre kötött vezetékek
+     */
+    protected Wire[] outputs;
     /**
      * Itt tároljuk, hogy melyik bemenetre, az adott komponens melyik kimenetét kötöttük.
      */
-    protected int[] indices;
+    //protected int[] indices;
     /**
      * "Kiértékelt" flag, ha ez be van billenve, akkor nem számolunk újra,
      * csak visszaadjuk az elõzõleg kiszámolt értéket.
@@ -39,6 +48,8 @@ public abstract class AbstractComponent {
     public AbstractComponent() {
         values = new Value[1];
         values[0] = Value.FALSE; // alapból innen indulunk.
+
+        outputs = new Wire[1];
     }
 
     /**
@@ -66,11 +77,21 @@ public abstract class AbstractComponent {
      * @param component melyik komponenst kötjük rá az adott komponesre
      * @param outputPin a rákötött komponens, melyik kimenetét használjuk.
      */
-    public void setInput(int inputPin, AbstractComponent component, int outputPin) {
-        System.out.println(String.format("Component: %s, inputSlot: %d. Connected component: %s[%d]",
-                getName(), inputPin, component.getName(), outputPin));
-        inputs[inputPin] = component;
-        indices[inputPin] = outputPin;
+    //
+    //public void setInput(int inputPin, AbstractComponent component, int outputPin) {
+    //    System.out.println(String.format("Component: %s, inputSlot: %d. Connected component: %s[%d]",
+    //            getName(), inputPin, component.getName(), outputPin));
+    //    inputs[inputPin] = component;
+    //    indices[inputPin] = outputPin;
+    //}
+    /*
+     * Beállítunk egy bemenetet
+     *
+     * @param inputPin melyik bemenetet állítjuk
+     * @param wire melyik vezetéket kötjük rá
+     */
+    public void setInput(int inputPin, Wire wire) {
+        inputs[inputPin] = wire;
     }
 
     /**
@@ -111,16 +132,23 @@ public abstract class AbstractComponent {
      * 
      * @param inputPinsCount
      */
+//    public void setInputPinsCount(int inputPinsCount) {
+//        inputs = new AbstractComponent[inputPinsCount];
+//        if (isInputPinsCountValid(inputPinsCount)) {
+//            indices = new int[inputPinsCount];
+//            for (int i = 0; i < inputPinsCount; i++) {
+//                indices[i] = 0;
+//            }
+//        } else {
+//            throw new IllegalArgumentException("Nem jó a bemenetek száma!");
+//        }
+//    }
     public void setInputPinsCount(int inputPinsCount) {
-        inputs = new AbstractComponent[inputPinsCount];
-        if (isInputPinsCountValid(inputPinsCount)) {
-            indices = new int[inputPinsCount];
-            for (int i = 0; i < inputPinsCount; i++) {
-                indices[i] = 0;
-            }
-        } else {
+        inputs = new Wire[inputPinsCount];
+        if (!isInputPinsCountValid(inputPinsCount)) {
             throw new IllegalArgumentException("Nem jó a bemenetek száma!");
         }
+
     }
 
     /**
@@ -129,8 +157,18 @@ public abstract class AbstractComponent {
      * @param inputPin bemenet, amely érdekel minket.
      * @return
      */
+//    protected Value evaluateInput(int inputPin) {
+//        return inputs[inputPin].evaluate()[indices[inputPin]];
+//    }
+
+    /*
+     * Lekérjük egy adott bemenetre kötött értéket
+     *
+     * @param inputPin bemenet, amely érdekel minket
+     * @return bementen lévõ érték
+     */
     protected Value evaluateInput(int inputPin) {
-        return inputs[inputPin].evaluate()[indices[inputPin]];
+        return inputs[inputPin].getValue();
     }
 
     /**
