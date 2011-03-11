@@ -94,20 +94,12 @@ public class Circuit {
      * vagy instabil állapotban van-e.
      */
     public void doEvaluationCycle() {
-        // számold ki magad flagek törlése, mivel új ciklus indul
-        // ezért mindenkinek ki kell magát számolni újból.
-        for (AbstractComponent c : componentMap.values()) {
-            c.clearEvaluatedFlag();
-        }
-
         // a megjelenítõkre hívjuk meg az evaluate();
         for (AbstractComponent c : componentMap.values()) {
             // miközben minden kiértékelõdik, lehet, hogy valamelyik
             // komponens instabillá teszi az áramkört, mert változott
             // az õ értéke.
-            if (!(c instanceof DisplayComponent))  {
-                c.evaluate();
-            }
+            c.evaluate();
         }
     }
 

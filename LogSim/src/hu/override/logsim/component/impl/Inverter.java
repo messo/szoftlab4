@@ -15,9 +15,4 @@ public class Inverter extends AbstractComponent {
         // bemenetén lévõ értéket invertálja.
         outputs[0].setValue(evaluateInput(0).invert());
     }
-
-    @Override
-    protected boolean isInputPinsCountValid(int inputPinsCount) {
-        return inputPinsCount == 1;
-    }
 }

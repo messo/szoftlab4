@@ -29,6 +29,7 @@ public class SequenceGenerator extends SourceComponent {
      * Konstruktor, ami alapállapotban a 0,1-es szekvenciát állítja be.
      */
     public SequenceGenerator() {
+        super();
         sequence = new Value[2];
         sequence[0] = Value.FALSE;
         sequence[1] = Value.TRUE;
@@ -65,11 +66,6 @@ public class SequenceGenerator extends SourceComponent {
     @Override
     public Value[] getValues() {
         return sequence;
-    }
-
-    @Override
-    protected boolean isInputPinsCountValid(int inputPinsCount) {
-        return inputPinsCount == 0;
     }
 
     @Override

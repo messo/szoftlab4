@@ -10,6 +10,11 @@ import hu.override.logsim.Value;
  */
 public abstract class SourceComponent extends AbstractComponent {
 
+    public SourceComponent() {
+        inputs = new Wire[0];
+        outputs = new Wire[1];
+    }
+
     /**
      * Beállítjuk a jelforrás értékét. Kapcsoló esetén csak 1 elemû tömb
      * adható paraméterként!

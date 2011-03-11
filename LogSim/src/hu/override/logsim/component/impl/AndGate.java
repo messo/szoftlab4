@@ -2,6 +2,7 @@ package hu.override.logsim.component.impl;
 
 import hu.override.logsim.Value;
 import hu.override.logsim.component.AbstractComponent;
+import hu.override.logsim.component.Wire;
 
 /**
  * ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek
@@ -12,6 +13,11 @@ import hu.override.logsim.component.AbstractComponent;
  */
 public class AndGate extends AbstractComponent {
 
+    public AndGate(int inputPinsCount) {
+        inputs = new Wire[inputPinsCount];
+        outputs = new Wire[1];
+    }
+
     @Override
     protected void onEvaluation() {
         outputs[0].setValue(Value.TRUE);
@@ -21,10 +27,5 @@ public class AndGate extends AbstractComponent {
                 return;
             }
         }
-    }
-
-    @Override
-    protected boolean isInputPinsCountValid(int inputPinsCount) {
-        return inputPinsCount > 0;
     }
 }

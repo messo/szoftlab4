@@ -178,7 +178,6 @@ public class Parser {
             }
 
             if (c != null) {
-                c.setInputPinsCount(inputPinsCount);
                 c.setName(variableName);
                 return c;
             }

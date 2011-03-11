@@ -1,6 +1,7 @@
 package hu.override.logsim.component.impl;
 
 import hu.override.logsim.component.DisplayComponent;
+import hu.override.logsim.component.Wire;
 
 /**
  * 7-szegmenses kijelzõt reprezentál, melynek 7 bemenete vezérli a
@@ -10,6 +11,11 @@ import hu.override.logsim.component.DisplayComponent;
  * @author balint
  */
 public class SevenSegmentDisplay extends DisplayComponent {
+
+    public SevenSegmentDisplay() {
+        outputs = new Wire[0];
+        inputs = new Wire[7];
+    }
 
     @Override
     public String toString() {
@@ -21,10 +27,5 @@ public class SevenSegmentDisplay extends DisplayComponent {
 
     @Override
     protected void onEvaluation() {
-    }
-
-    @Override
-    protected boolean isInputPinsCountValid(int inputPinsCount) {
-        return inputPinsCount == 7;
     }
 }

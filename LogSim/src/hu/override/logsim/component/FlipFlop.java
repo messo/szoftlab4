@@ -24,6 +24,11 @@ public abstract class FlipFlop extends AbstractComponent {
      */
     protected Value clk = Value.FALSE;
 
+    public FlipFlop() {
+        inputs = new Wire[3];
+        outputs = new Wire[1];
+    }
+
     /**
      * Számolhat-e az FF? Ezt hívja meg az FF-ek onEvaluation() metódusa, mielõtt
      * bármit is csinálnának.

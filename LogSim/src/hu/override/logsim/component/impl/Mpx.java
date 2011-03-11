@@ -2,6 +2,7 @@ package hu.override.logsim.component.impl;
 
 import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.Value;
+import hu.override.logsim.component.Wire;
 
 /**
  * 4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következõ:
@@ -18,6 +19,11 @@ public class Mpx extends AbstractComponent {
     private static final int DATA3 = 3;
     private static final int SEL0 = 4; // LSB
     private static final int SEL1 = 5;
+
+    public Mpx() {
+        super();
+        inputs = new Wire[6];
+    }
 
     @Override
     protected void onEvaluation() {

@@ -1,6 +1,7 @@
 package hu.override.logsim.component.impl;
 
 import hu.override.logsim.component.DisplayComponent;
+import hu.override.logsim.component.Wire;
 
 /**
  * Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
@@ -10,6 +11,11 @@ import hu.override.logsim.component.DisplayComponent;
  */
 public class Led extends DisplayComponent {
 
+    public Led() {
+        outputs = new Wire[0];
+        inputs = new Wire[1];
+    }
+
     @Override
     public String toString() {
         return String.format("LED(%s): %s", name, inputs[0].getValue());
@@ -17,10 +23,5 @@ public class Led extends DisplayComponent {
 
     @Override
     protected void onEvaluation() {
-    }
-
-    @Override
-    protected boolean isInputPinsCountValid(int inputPinsCount) {
-        return inputPinsCount == 1;
     }
 }

@@ -37,15 +37,8 @@ public class Toggle extends SourceComponent {
 
         // ha új értéket kapott
         if (newValues[0] != outputs[0].getValue()) {
-            // még nincs kiértékelve
-            alreadyEvaluated = false;
             // elmentjük az értéket
             outputs[0].setValue(newValues[0]);
         }
-    }
-
-    @Override
-    protected boolean isInputPinsCountValid(int inputPinsCount) {
-        return inputPinsCount == 0;
     }
 }

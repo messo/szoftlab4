@@ -19,8 +19,6 @@ public abstract class AbstractComponent {
     /**
      * Az adott bemenetekre kötött komponensek.
      */
-    //protected AbstractComponent[] inputs;
-
     /**
      * Bemenetekre kötött vezetékek
      */
@@ -29,18 +27,10 @@ public abstract class AbstractComponent {
      * Kimenetekre kötött vezetékek
      */
     protected Wire[] outputs;
-    /**
-     * Itt tároljuk, hogy melyik bemenetre, az adott komponens melyik kimenetét kötöttük.
-     */
-    //protected int[] indices;
-    /**
-     * "Kiértékelt" flag, ha ez be van billenve, akkor nem számolunk újra,
-     * csak visszaadjuk az elõzõleg kiszámolt értéket.
-     */
-    protected boolean alreadyEvaluated = false;
     private boolean changed;
 
     public AbstractComponent() {
+        inputs = new Wire[1];
         outputs = new Wire[1];
     }
 
@@ -62,20 +52,6 @@ public abstract class AbstractComponent {
         return name;
     }
 
-    /**
-     * Beállítunk egy bemenetet.
-     *
-     * @param inputPin melyik bemenetet állítjuk be
-     * @param component melyik komponenst kötjük rá az adott komponesre
-     * @param outputPin a rákötött komponens, melyik kimenetét használjuk.
-     */
-    //
-    //public void setInput(int inputPin, AbstractComponent component, int outputPin) {
-    //    System.out.println(String.format("Component: %s, inputSlot: %d. Connected component: %s[%d]",
-    //            getName(), inputPin, component.getName(), outputPin));
-    //    inputs[inputPin] = component;
-    //    indices[inputPin] = outputPin;
-    //}
     /*
      * Beállítunk egy bemenetet
      *
@@ -91,72 +67,33 @@ public abstract class AbstractComponent {
     }
 
     /**
-     * Adott kimeneti lábon lévõ értéke lekérdezése.
+     * Adott kimeneti lábon lévõ érték lekérdezése.
      */
     public Value getValue(int idx) {
         return outputs[idx].getValue();
     }
 
     /**
-     * Komponens kimeneteinek kiértékelése (ha még nem volt) és a kimeneti lábakon
-     * lévõ értékek visszaadása.
+     * Komponens kimeneti lábain lévõ vezetékeken lévõ értékek újraszámolása
+     * a bemenetek alapján.
      *
      * @return kimenetek
      */
     public void evaluate() {
         changed = false;
 
-        // 1. Ki vagy-e számolva?
-        if (!alreadyEvaluated) {
-            alreadyEvaluated = true;
+        Value[] tmp = new Value[outputs.length];
+        for (int i = 0; i < outputs.length; i++) {
+            tmp[i] = outputs[i].getValue();
+        }
 
-            Value[] tmp = new Value[outputs.length];
-            for(int i = 0; i< outputs.length; i++) {
-                tmp[i] = outputs[i].getValue();
-            }
-
-            onEvaluation();
-            for (int i = 0; i < outputs.length; i++) {
-                if (tmp[i] != outputs[i].getValue()) {
-                    changed = true;
-                }
+        onEvaluation();
+        for (int i = 0; i < outputs.length; i++) {
+            if (tmp[i] != outputs[i].getValue()) {
+                changed = true;
             }
         }
     }
-
-    /**
-     * Bemenetek számának beállítása
-     * 
-     * @param inputPinsCount
-     */
-//    public void setInputPinsCount(int inputPinsCount) {
-//        inputs = new AbstractComponent[inputPinsCount];
-//        if (isInputPinsCountValid(inputPinsCount)) {
-//            indices = new int[inputPinsCount];
-//            for (int i = 0; i < inputPinsCount; i++) {
-//                indices[i] = 0;
-//            }
-//        } else {
-//            throw new IllegalArgumentException("Nem jó a bemenetek száma!");
-//        }
-//    }
-    public void setInputPinsCount(int inputPinsCount) {
-        inputs = new Wire[inputPinsCount];
-        if (!isInputPinsCountValid(inputPinsCount)) {
-            throw new IllegalArgumentException("Nem jó a bemenetek száma!");
-        }
-
-    }
-
-    /**
-     * Lekérjük egy adott bemenetre kötött értéket
-     *
-     * @param inputPin bemenet, amely érdekel minket.
-     * @return
-     */
-//    protected Value evaluateInput(int inputPin) {
-//        return inputs[inputPin].evaluate()[indices[inputPin]];
-//    }
 
     /*
      * Lekérjük egy adott bemenetre kötött értéket
@@ -166,13 +103,6 @@ public abstract class AbstractComponent {
      */
     protected Value evaluateInput(int inputPin) {
         return inputs[inputPin].getValue();
-    }
-
-    /**
-     * Töröljük a komponens "kiértékelt" flagjét.
-     */
-    public void clearEvaluatedFlag() {
-        alreadyEvaluated = false;
     }
 
     public boolean isChanged() {
@@ -188,16 +118,6 @@ public abstract class AbstractComponent {
      * az adott bemenet(ek) függvényében mit kell kiadnia a kimenet(ek)en.
      */
     protected abstract void onEvaluation();
-
-    /**
-     * Az alkomponensek itt implementálhatják a bemenetek számának ellenõrzési
-     * logikáját. Ha ez hamissal tér vissza, akkor nem érvényes a komponens bementeinek száma.
-     *
-     * @return érvényes-e a bemenetek száma
-     */
-    protected boolean isInputPinsCountValid(int inputPinsCount) {
-        return true;
-    }
 
     public void addTo(Circuit circuit) {
         circuit.add(this);

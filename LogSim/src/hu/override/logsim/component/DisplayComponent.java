@@ -9,10 +9,6 @@ import hu.override.logsim.Circuit;
  */
 public abstract class DisplayComponent extends AbstractComponent {
 
-    public DisplayComponent() {
-        outputs = null;
-    }
-
     @Override
     public void addTo(Circuit circuit) {
         super.addTo(circuit);
