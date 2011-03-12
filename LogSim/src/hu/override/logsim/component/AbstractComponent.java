@@ -17,9 +17,6 @@ public abstract class AbstractComponent {
      */
     protected String name;
     /**
-     * Az adott bemenetekre kötött komponensek.
-     */
-    /**
      * Bemenetekre kötött vezetékek
      */
     protected Wire[] inputs;

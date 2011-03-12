@@ -18,9 +18,13 @@ A szimuláció állapotát megvalósító objektum. 3 állapotot különböztet�
 \end{itemize}
 
 \subsection{\bf Circuit}
-%Az áramkör objektum. Ezen objektum feladata a jelgenerátor léptető kérésére a jelgenerátorok léptetése, %az áramkörben található komponensek utasítása arra, hogy töröljék a "már kiértékelve" flaget egy adott %kiértékelési ciklus előtt, hogy ezáltal a ciklusban minden kimenet értéke frissülhessen.
-%Továbbá feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők %kiértékelésével kezdődik.
-Az áramkör objektum. Ez az objektum hozza létre és köti össze egymással az áramköri elemeket. Törli az egyes elemek "már kiértékelt" flagjét a kiértékelési ciklus előtt, hogy ezáltal a ciklusban minden kimenet értéke frissülhessen. További feladata a kiértékelés elindítása az összes kijelzőre, mert a rendszer kiértékelése a kijelzők kiértékelésével kezdődik. A flip-flopokat utasítja arra, hogy mentsék el a jelenlegi kimenetüket belső állapotként és az órajel bemenetén lévő értéket az éldetektálás érdekében. Megmondja, hogy az áramköri elemek értékei megváltoztak-e. Ezen kívül lépteti a jelgenerátorokat.
+Az áramkör objektum. Ez az objektum hozza létre és köti össze egymással az áramköri elemeket. Egy kiértékelési ciklusban minden komponenst kiértékel. A flip-flopokat utasítja arra, hogy mentsék el a jelenlegi kimenetüket belső állapotként és az órajel bemenetén lévő értéket az éldetektálás érdekében. Megmondja, hogy az áramköri elemek értékei megváltoztak-e. Ezen kívül lépteti a jelgenerátorokat.
+
+\subsection{\bf Wire}
+Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vezeték egy darab kimenet és egy darab bemenetet köt össze. A rajta lévő értéket le lehet tőle kérdezni, illetve be lehet azt állítani.
+
+\subsection{\bf Node}
+Csomópont, mely a bemenetén lévő értéket a kimeneteire adja. Segítségével lehet egy vezetéket ,,szétágaztatni''.
 
 \subsection{\bf SequenceGenerator}
 Jelgenerátor, az áramkört felépítő egyik alapelem, kiértékelési kezdeményezés hatására az előre betáplált jelsorozat éppen aktuális elemét adja ki a kimenetén. Nincs áramköri bemenete. Mikor az áramkör kéri tőle, hogy lépjen, akkor a bitsorozat következő elemét fogja kiadni kimenetén.
@@ -29,22 +33,22 @@ Jelgenerátor, az áramkört felépítő egyik alapelem, kiértékelési kezdem�
 A logikai értékeket megvalósító objektum. Jelenleg két érték lehetséges: logikai igaz, logikai hamis.
 
 \subsection{\bf AndGate}
-ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát valósítja meg, melynek eredményét a kimenetén kiadja.
+ÉS kapu, az áramkör egyik alapeleme. Bemenetein lévő értékek logikai ÉS kapcsolatát valósítja meg, melynek eredményét a kimenetén kiadja.
 
 \subsection{\bf OrGate}
-VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek kiértékelését kezdeményezi, s a kapott értékek logikai VAGY kapcsolatát valósítja meg, melynek eredményét a kimenetén kiadja.
+VAGY kapu, az áramkör egyik alapeleme. Bemenetein lévő értékek logikai VAGY kapcsolatát valósítja meg, melynek eredményét a kimenetén kiadja.
 
 \subsection{\bf Inverter}
 Invertáló, az áramkör alapelemei közé tartozik. A bemenetére érkező jel logikai negáltját valósítja meg, amit a kimenetén kiad.
 
 \subsection{\bf Gnd}
-Föld, az áramkört felépítő egyik elem, állandó értéke logikai hamis. Bemenete nem létezik, így nem kezdeményez további kiértékeléseket.
+Föld, az áramkört felépítő egyik elem, állandó értéke logikai hamis. Bemenete nem létezik.
 
 \subsection{\bf Vcc}
 Tápfeszültség, az áramkör egyik alapeleme, mely állandóan a logikai igazt adja ki a kimenetén.
 
 \subsection{\bf Led}
-Egy kijelző, az áramkör alapeleme, bemenetére kötött komponens kiértékelését kezdeményezi, és ezáltal az aktuális értékét egy a felhasználó számára érzékelhető módon kijelzi.
+Egy kijelző, az áramkör alapeleme, bemenetén lévő értéket jelzi egy a felhasználó számára érzékelhető módon.
 
 \subsection{\bf Toggle}
 Kapcsoló, az áramkör egyik eleme, melynek aktuális értéke állítható, ez jelenik meg a kimenetén. Áramköri bemenete nincs.
@@ -56,7 +60,7 @@ D flip flopot megvalósító objektum. Csak akkor lép működésbe, mikor az ó
 JK flip flopot megvalósító objektum. Csak akkor lép működésbe, mikor az órajelbemenetén a logikai érték hamisról igazra változik, ekkor az értékbemenetektől és a belső állapotától függően változtatja a kimeneti értékét.
 
 \subsection{\bf Mpx}
-4-1-es multiplexer áramköri építőelemet megvalósító objektum. Bemeneteire kötött komponensek kiértékelését kezdeményezi, a választó bemenet függvényében adja ki a kimeneten az egyik, vagy másik értékbemenetére kötött értéket.
+4-1-es multiplexer áramköri építőelemet megvalósító objektum. A választó bemenet függvényében adja ki a kimeneten az egyik, vagy másik értékbemenetére kötött értéket.
 
 \subsection{\bf SevenSegmentDisplay}
 Hétszegmenses kijelző objektuma. Minden bemenete egy-egy szegmensért felelős, melyek 8-as alakban helyezkednek el, és a bemenetre kötött érték függvényében világítanak.
@@ -67,21 +71,21 @@ Hétszegmenses kijelző objektuma. Minden bemenete egy-egy szegmensért felelős
 Absztrakt osztály.
 \begin{itemize}
 \item Felelősség\\
-Egy komponens absztrakt megvalósítása, ebből származik az összes többi  komponens. A közös logikát valósítja meg. A gyakran használt feladatokra ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.). Tudja magáról, hogy kiértékelték-e már az adott áramköri kiértékelési ciklusban, illetve, hogy a legutóbbi két kiértékelés között változtak-e a kimenetei.
+Egy komponens absztrakt megvalósítása, ebből származik az összes többi  komponens. A közös logikát valósítja meg. A gyakran használt feladatokra ad alapértelmezett implementációt (pl. vezetékek bekötése). Tudja magáról, hogy a legutóbbi két kiértékelés között változtak-e a kimenetei.
 \item Ősosztályok: (nincs)
 \item Interfészek: (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{protected Value[] values}: Kimeneteken lévő értékek. Ez frissül az \texttt{evaluate()} meghívására, ha még nem volt kiértékelve.
-	\item \texttt{protected AbstractComponent[] inputs}: A bemenetekre kötött komponensek.
+	\item \texttt{protected Wire[] inputs}: Bemeneteire kötött vezetékek.
+	\item \texttt{protected Wire[] outputs}: Kimeneteire kötött vezetékek.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
 	\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(AbstractComponent ac)} metódusát.
-	\item \texttt{Value[] evaluate()}: Komponens kimenetein lévő értékek újraszámolása (ha még nem volt kiértékelve) a bemenetek alapján. A kimeneteken lévő értékekkel tér vissza.
-	\item \texttt{void clearEvaluatedFlag()}: Töröljük a komponens "kiértékelt" flagjét.
+	\item \texttt{void evaluate()}: Komponens kimenetein lévő értékek kiszámolása a bemenetek alapján.
 	\item \texttt{boolean isChanged()}: Visszaadja, hogy a legutóbbi két kiértékelés között változtak-e a kimenetek.
-	\item \raggedright \texttt{void setInput(int inputPin, AbstractComponent component, int outputPin)}: Beállítunk egy bemenetet (adott bemeneti lábra rákötjük az adott komponens adott kimeneti lábát).
+	\item \texttt{void setInput(int inputPin, Wire wire)}: Az adott bemeneti lábára rákötjük a megadott vezetéket.
+	\item \texttt{void setOutput(int outputPin, Wire wire)}: Az adott kimeneti lábára rákötjük a megadott vezetéket.
 \end{itemize}
 \end{itemize}
 
@@ -264,6 +268,23 @@ Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
 \end{itemize}
 \end{itemize}
 
+
+\subsection{Node}
+\begin{itemize}
+\item Felelősség\\
+Csomópont, mely a bemenetén lévő értéket a kimeneteire adja. Segítségével lehet egy vezetéket ,,szétágaztatni''.
+\item Ősosztályok:\ AbstractComponent.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\end{itemize}
+
 \subsection{OrGate}
 \begin{itemize}
 \item Felelősség\\
@@ -365,14 +386,11 @@ Jelforrás típusú komponensek ősosztálya.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(SourceComponent dc)} metódusát.
+	\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(SourceComponent dc)} metódusát.
 	\item \texttt{abstract Value[] getValues()}: Lekérhetjük a jelforrás értékeit. Ennek megvalósítása a konkrét implementációk feladata.
 	\item \texttt{abstract setValues(Value[] values)}: Beállítjuk a jelforrás értékét. Ennek megvalósítása a konkrét implementációk feladata. (pl. kapcsoló csak 1 elemű tömböt kaphat)
 \end{itemize}
 \end{itemize}
-
-
-
 
 
 \subsection{Toggle}
@@ -428,11 +446,28 @@ A tápfeszültés komponens, ami konstans igaz értéket ad. Nincs bemenete.
 \end{itemize}
 \end{itemize}
 
+\subsection{Wire}
+\begin{itemize}
+\item Felelősség\\
+Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vezeték egy darab kimenet és egy darab bemenetet köt össze. A rajta lévő értéket le lehet tőle kérdezni, illetve be lehet azt állítani.
+\item Ősosztályok:\ AbstractComponent.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private Value value}: Vezetéken lévő érték
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{Value getValue()}: Visszaadja a vezetéken lévő értéket.
+	\item \texttt{void settValue(Value v)}: Beállítja a vezetéken lévő értéket.
+\end{itemize}
+\end{itemize}
+
 \section{Statikus struktúra diagramok}
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics*[angle=90, width=17cm, viewport = 25 30 695 565]{chapters/chapter04/classdiagram/class.pdf}
+\includegraphics*[angle=90, width=17cm, viewport = 25 30 705 565]{chapters/chapter04/classdiagram/class.pdf}
 \caption{Statikus struktúra nézet}
 \label{fig:class_diagram}
 \end{center}
