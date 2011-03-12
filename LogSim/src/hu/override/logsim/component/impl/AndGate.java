@@ -18,6 +18,7 @@ public class AndGate extends AbstractComponent {
         outputs = new Wire[1];
     }
 
+
     @Override
     protected void onEvaluation() {
         outputs[0].setValue(Value.TRUE);
