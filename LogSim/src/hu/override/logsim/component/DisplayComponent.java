@@ -11,7 +11,8 @@ public abstract class DisplayComponent extends AbstractComponent {
 
     @Override
     public void addTo(Circuit circuit) {
-        super.addTo(circuit);
+        System.out.println("CALL " + name + ".addTo(circuit)");
         circuit.add(this);
+        System.out.println("RETURN");
     }
 }

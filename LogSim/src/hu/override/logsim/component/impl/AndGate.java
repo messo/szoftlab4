@@ -18,15 +18,18 @@ public class AndGate extends AbstractComponent {
         outputs = new Wire[1];
     }
 
-
     @Override
     protected void onEvaluation() {
         outputs[0].setValue(Value.TRUE);
         for (int i = 0; i < inputs.length; i++) {
             if (evaluateInput(i) == Value.FALSE) {
                 outputs[0].setValue(Value.FALSE);
+                System.out.println("      CALL outputs[0].setValue( [" + Value.FALSE + "] )");
+                System.out.println("      RETURN");
                 return;
             }
         }
+        System.out.println("      CALL outputs[0].setValue( [" + Value.TRUE + "] )");
+        System.out.println("      RETURN");
     }
 }

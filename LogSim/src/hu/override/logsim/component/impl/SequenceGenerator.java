@@ -70,7 +70,8 @@ public class SequenceGenerator extends SourceComponent {
 
     @Override
     public void addTo(Circuit circuit) {
-        super.addTo(circuit);
+        System.out.println("CALL " + name + ".addTo(circuit)");
         circuit.add(this);
+        System.out.println("RETURN");
     }
 }

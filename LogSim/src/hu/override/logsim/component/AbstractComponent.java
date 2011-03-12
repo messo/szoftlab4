@@ -80,19 +80,24 @@ public abstract class AbstractComponent {
      * @return kimenetek
      */
     public void evaluate() {
+        System.out.println("    CALL " + name + ".evaluate()");
         changed = false;
 
         Value[] tmp = new Value[outputs.length];
         for (int i = 0; i < outputs.length; i++) {
+            //System.out.println("      CALL outputs["+i+"].getValue()");
             tmp[i] = outputs[i].getValue();
+            //System.out.println("      RETURN ["+tmp[i]+"]");
         }
 
         onEvaluation();
+
         for (int i = 0; i < outputs.length; i++) {
             if (tmp[i] != outputs[i].getValue()) {
                 changed = true;
             }
         }
+        System.out.println("    RETURN");
     }
 
     /*
@@ -102,6 +107,8 @@ public abstract class AbstractComponent {
      * @return bementen lévõ érték
      */
     protected Value evaluateInput(int inputPin) {
+        System.out.println("      CALL inputs[" + inputPin + "].getValue()");
+        System.out.println("      RETURN [" + inputs[inputPin].getValue() + "]");
         return inputs[inputPin].getValue();
     }
 
@@ -120,6 +127,8 @@ public abstract class AbstractComponent {
     protected abstract void onEvaluation();
 
     public void addTo(Circuit circuit) {
+        System.out.println("CALL " + name + ".addTo(circuit)");
         circuit.add(this);
+        System.out.println("RETURN");
     }
 }

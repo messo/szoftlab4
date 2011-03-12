@@ -12,6 +12,7 @@ public class Toggle extends SourceComponent {
 
     @Override
     protected void onEvaluation() {
+        System.out.println("      # jelenlegi állapot: [" + outputs[0].getValue() + "]");
     }
 
     /**

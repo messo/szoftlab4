@@ -32,51 +32,6 @@ public class Simulation {
     ///node-dal
     void loadDefault() {
         circuit = new Circuit();
-        
-        
-        ///1 toggle 1 led
-//        Wire t_to_l = new Wire();
-//        Toggle t = new Toggle();
-//        t.setName("toggle");
-//        t.setOutput(0,t_to_l);
-//
-//        Led l = new Led();
-//        l.setName("led");
-//        l.setInput(0,t_to_l);
-//
-//
-//        t.addTo(circuit);
-//        l.addTo(circuit);
-
-
-    //2 toggle 1 and 1 led
-//        Wire t1_to_and = new Wire();
-//        Wire t2_to_and = new Wire();
-//        Wire and_to_l = new Wire();
-//
-//        Toggle t1 = new Toggle();
-//        t1.setName("toggle1");
-//        t1.setOutput(0,t1_to_and);
-//
-//        Toggle t2 = new Toggle();
-//        t2.setName("toggle2");
-//        t2.setOutput(0,t2_to_and);
-//
-//        AndGate a = new AndGate(2);
-//        a.setName("andgate");
-//        a.setInput(0,t1_to_and);
-//        a.setInput(1,t2_to_and);
-//        a.setOutput(0, and_to_l);
-//
-//        Led l = new Led();
-//        l.setName("led");
-//        l.setInput(0,and_to_l);
-//
-//
-//        t1.addTo(circuit);
-//        t2.addTo(circuit);
-//        a.addTo(circuit);
-//        l.addTo(circuit);
 
             //2 toggle 1 and 1 led
         Wire t1_to_or = new Wire();
@@ -211,7 +166,7 @@ public class Simulation {
     /**
      * cikluslimit
      */
-    private static final int cycleLimit = 100;
+    private static final int cycleLimit = 3;
     /**
      * Szimulált áramkör
      */
@@ -226,7 +181,8 @@ public class Simulation {
      * Egy adott bemeneti kombinációkra szimulálja a hálózatot, amíg be nem áll a
      * stacionárius állapot.
      */
-    public void start() {
+    public boolean start() {
+        System.out.println("CALL simulation.start()");
         // amikor elindul a szimuláció, akkor a steppert is indítsuk el.
         state = State.WORKING;
         int counter = 0;
@@ -235,19 +191,22 @@ public class Simulation {
             if (!circuit.isChanged()) {
                 break;
             }
+            counter++;
         }
         if (counter == cycleLimit) {
             state = State.FAILED;
-            System.out.println("Nincs stacionárius állapot!");
-            return;
+            System.out.println("RETURN false");
+            return false;
         }
         circuit.commitFlipFlops();
         circuit.stepGenerators();
         // GUI rajzolás
-        controller.onCircuitUpdate();
+        //controller.onCircuitUpdate();
 
         state = State.READY;
-        System.out.println("Simulation is done!");
+        //System.out.println("Simulation is done!");
+        System.out.println("RETURN true");
+        return true;
     }
 
     /**
@@ -265,7 +224,9 @@ public class Simulation {
      * @param circuit
      */
     public void setCircuit(Circuit circuit) {
+        System.out.println("CALL simulation.setCircuit(circuit)");
         this.circuit = circuit;
+        System.out.println("RETURN");
     }
 
     /**

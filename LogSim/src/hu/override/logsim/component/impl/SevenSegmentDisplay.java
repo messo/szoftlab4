@@ -1,5 +1,6 @@
 package hu.override.logsim.component.impl;
 
+import hu.override.logsim.Value;
 import hu.override.logsim.component.DisplayComponent;
 import hu.override.logsim.component.Wire;
 
@@ -15,6 +16,10 @@ public class SevenSegmentDisplay extends DisplayComponent {
     public SevenSegmentDisplay() {
         outputs = new Wire[0];
         inputs = new Wire[7];
+    }
+
+    public Value getSegment(int segment) {
+        return inputs[segment].getValue();
     }
 
     @Override

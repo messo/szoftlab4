@@ -4,14 +4,11 @@ import hu.override.logsim.component.AbstractComponent;
 import hu.override.logsim.component.FlipFlop;
 import hu.override.logsim.component.DisplayComponent;
 import hu.override.logsim.component.SourceComponent;
-import hu.override.logsim.component.impl.Node;
 import hu.override.logsim.component.impl.SequenceGenerator;
 import hu.override.logsim.parser.SourceReader;
 import hu.override.logsim.parser.SourceWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Feladata a jelgenerátor léptetõ kérésére a jelgenerátorok léptetése, a feldolgozó
@@ -28,7 +25,7 @@ public class Circuit {
     /**
      * Komponenseket tartalmazó HashMap
      */
-    private Map<String, AbstractComponent> componentMap;
+    //private Map<String, AbstractComponent> componentMap;
     /**
      * Jelforrás típusú komponensek listája (kapcsoló, jelgenerátor)
      */
@@ -44,17 +41,17 @@ public class Circuit {
     /**
      * Jelgenerátorok listája
      */
-
-
     private List<SequenceGenerator> seqGens;
+    private List<AbstractComponent> components;
 
     public Circuit() {
-        componentMap = new HashMap<String, AbstractComponent>();
+        System.out.println("CREATE Circuit circuit");
+        //componentMap = new HashMap<String, AbstractComponent>();
         sources = new ArrayList<SourceComponent>();
         displays = new ArrayList<DisplayComponent>();
         flipFlops = new ArrayList<FlipFlop>();
         seqGens = new ArrayList<SequenceGenerator>();
-
+        components = new ArrayList<AbstractComponent>();
     }
 
     /**
@@ -64,29 +61,35 @@ public class Circuit {
      * @return komponens
      */
     public AbstractComponent getComponentByName(String name) {
-        return componentMap.get(name);
+        //return componentMap.get(name);
+        return null;
     }
 
     public void add(AbstractComponent c) {
-        componentMap.put(c.getName(), c);
+        //componentMap.put(c.getName(), c);
+        // egyelõre elég a lista.
+        components.add(c);
     }
 
     public void add(SourceComponent sc) {
+        components.add(sc);
         sources.add(sc);
     }
 
     public void add(FlipFlop ff) {
+        components.add(ff);
         flipFlops.add(ff);
     }
 
     public void add(SequenceGenerator sg) {
+        components.add(sg);
         seqGens.add(sg);
     }
 
     public void add(DisplayComponent dc) {
+        components.add(dc);
         displays.add(dc);
     }
-
 
     /**
      * Egy kiértékelési ciklus lefuttatása. Az áramkörtõl ezután lekérdezhetõ, hogy
@@ -94,13 +97,17 @@ public class Circuit {
      * vagy instabil állapotban van-e.
      */
     public void doEvaluationCycle() {
+        System.out.println("  CALL circuit.doEvaluationCycle()");
+
         // a megjelenítõkre hívjuk meg az evaluate();
-        for (AbstractComponent c : componentMap.values()) {
+        for (AbstractComponent c : components) {
             // miközben minden kiértékelõdik, lehet, hogy valamelyik
             // komponens instabillá teszi az áramkört, mert változott
             // az õ értéke.
             c.evaluate();
         }
+
+        System.out.println("  RETURN");
     }
 
     /**
@@ -167,11 +174,14 @@ public class Circuit {
     }
 
     public boolean isChanged() {
-        for (AbstractComponent c : componentMap.values()) {
+        System.out.println("  CALL circuit.isChanged()");
+        for (AbstractComponent c : components) {
             if (c.isChanged()) {
+                System.out.println("  RETURN true");
                 return true;
             }
         }
+        System.out.println("  RETURN false");
         return false;
     }
 }
