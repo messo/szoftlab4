@@ -1,6 +1,9 @@
 LogSim/build/
 LogSim/dist/
 LogSim/nbproject/private/
+LogSimSkeleton/build/
+LogSimSkeleton/dist/
+LogSimSkeleton/nbproject/private/
 doc/*.log
 doc/*.ps
 doc/*.toc
