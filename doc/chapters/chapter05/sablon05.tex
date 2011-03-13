@@ -398,7 +398,31 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 \section{Architektúra}
 
 \section{A szkeleton kezelői felületének terve, dialógusok}
-\comment{A szkeleton által elfogadott bemenetek , valamint a szöveges konzolon megjelenő kimenetek. A kiemenet formátuma olyan kell legyen, ami alapján a működés összevethető a korábbi szekvencia-diagramokkal.}
+%\comment{A szkeleton által elfogadott bemenetek , valamint a szöveges konzolon megjelenő kimenetek. A %kiemenet formátuma olyan kell legyen, ami alapján a működés összevethető a korábbi szekvencia-
+%diagramokkal.}
+
+Az általunk elkészített szkeleton egy  program váz melynek felülete egy egyszerű konzolos megjelenítési felület, amely alkalmas arra, hogy a use case-k által leírt teszteseteket bemutassuk. Az egyes tesztesetek a neki megfelelő use case sorszámával van elnevezve, így program indítás után egy szám bevitelét követően a kiválasztott teszteset lefut. 
+A teszteset futása közben kiír minden objektumot amin metódust hív, illetve kiírja a metódus nevét a paraméterekkel együtt, majd a visszatérési értéket. Ez azért lehetséges, mert a szkeleton már tartalmazza az elkészítendő szoftver összes fontos osztályát és metódusát, azonban az üzleti logikát még nem. Így könnyen eldönthető, hogy a use case-nek megfelelően viselkedik a program és továbbiakban képes lesz-e megfelelően működni.
+A tesztelési folyamat során döntési helyzet léphet fel. Ilyenkor a program felteszi a kérdést, majd a kapott válasz alapján folytatja a további futást. Ezzel csökkentjük a tesztesetek számát, anélkül, hogy bizonyos esetek kimaradnának a tesztelés alól. 
+Futás közben megjegyzés formájában a program tájékoztat néhány elem belső állapotáról (például kapcsoló értéke) vagy bizonyos fontosabb lépésekről (például inicializálás).
+Az elvárás, hogy a szkeleton a szekvenciadiagramok által leírt működést mutassa. A program egyszerű és könnyen összehasonlítható formában írja ki a működését, amelyet könnyen összevethetjük a szekvencia diagrammokkal.
+
+Egy metódushívás és visszatérés esetén kiírt adatok a következők:
+\begin{itemize}
+\item Metódushívás esetén a CALL szót, konstruktorhívás esetén CREATE szót, míg visszatéréskor a RETURN szót
+
+\item Objektum neve
+\item A metódus neve és a metódus paramétereinek értékét
+\item Visszatérés esetén a visszatérési értéket 
+\end{itemize}
+Egy döntési helyzetben a kiírt adatok a következő:
+\begin{itemize}
+\item QUESTION szó
+\item objektum neve
+\item Egy rövid magyarázó szöveg
+\item Szögletes zárójelben a lehetséges válaszok
+\end{itemize}
+
 
 \section{Szekvencia diagramok a belső működésre}
 \comment{A szkeletonban implementált szekvenciadiagramok. Tipikusan egy use-case egy diagram. Ezek megegyezhetnek a korábban specifikált diagramokkal, de az egyes életvonalakat (lifeline) egyértelműen a szkeletonban példányosított objektumokhoz kell tudni kötni. Azt kell megjeleníteni, hogy a szkeletonban létrehozott objektumok egymással hogyan fognak kommunikálni.}
