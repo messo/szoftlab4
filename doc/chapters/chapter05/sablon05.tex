@@ -5,23 +5,369 @@
 
 \thispagestyle{fancy}
 
+\section{Errata}
+
+Az előző fejezetben leírtak egy apró részletben megváltoztak. Az elemeket már nem közvetlenül kötjük össze, hanem \textit{vezeték}ek segítségével, melyeket egymással \textit{csomópont}okkal lehet összekötni, ha szükséges. Így javítottuk a láthatósággal kapcsolatosan felmerült problémákat, ehhez fel kellett venni 2 új osztályt (Wire, Node), illetve az AbstractComponent módosítani, ezekhez tartozó objektum és osztályleírások alább olvashatóak, valamint mellékeltük a módosított statikus osztálydiagramot is. (Egy-két egyéb objektumleírás is módosult, de csak azért mert a kiértékelés logikája változott -- nem hátulról megyünk, hanem az összes kiértékeli magát, ez nem szükséges a jelen fejezethez, hiszen magától értetődő)
+
+\subsection{Objektumleírás: \bf Wire}
+Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vezeték egy darab kimenetet és egy darab bemenetet köt össze. A rajta lévő értéket le lehet tőle kérdezni, illetve be lehet azt állítani.
+
+\subsection{Objektumleírás: \bf Node}
+Csomópont, mely a bemenetén lévő értéket a kimeneteire adja. Segítségével lehet egy vezetéket ,,szétágaztatni''.
+
+\subsection{Osztályleírás: \bf AbstractComponent}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelősség\\
+Egy komponens absztrakt megvalósítása, ebből származik az összes többi  komponens. A közös logikát valósítja meg. A gyakran használt feladatokra ad alapértelmezett implementációt (pl. vezetékek bekötése). Tudja magáról, hogy a legutóbbi két kiértékelés között változtak-e a kimenetei.
+\item Ősosztályok: (nincs)
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{protected Wire[] inputs}: Bemeneteire kötött vezetékek.
+	\item \texttt{protected Wire[] outputs}: Kimeneteire kötött vezetékek.
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(AbstractComponent ac)} metódusát.
+	\item \texttt{void evaluate()}: Komponens kimenetein lévő értékek kiszámolása a bemenetek alapján.
+	\item \texttt{boolean isChanged()}: Visszaadja, hogy a legutóbbi két kiértékelés között változtak-e a kimenetek.
+	\item \texttt{void setInput(int inputPin, Wire wire)}: Az adott bemeneti lábára rákötjük a megadott vezetéket.
+	\item \texttt{void setOutput(int outputPin, Wire wire)}: Az adott kimeneti lábára rákötjük a megadott vezetéket.
+\end{itemize}
+\end{itemize}
+
+\subsection{Osztályleírás: \bf Node}
+\begin{itemize}
+\item Felelősség\\
+Csomópont, mely a bemenetén lévő értéket a kimeneteire adja. Segítségével lehet egy vezetéket ,,szétágaztatni''.
+\item Ősosztályok:\ AbstractComponent.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\end{itemize}
+
+\subsection{Osztályleírás: \bf Wire}
+\begin{itemize}
+\item Felelősség\\
+Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vezeték egy darab kimenetet és egy darab bemenetet köt össze. A rajta lévő értéket le lehet tőle kérdezni, illetve be lehet azt állítani.
+\item Ősosztályok:\ AbstractComponent.
+\item Interfészek: (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item \texttt{private Value value}: Vezetéken lévő érték
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item \texttt{Value getValue()}: Visszaadja a vezetéken lévő értéket.
+	\item \texttt{void settValue(Value v)}: Beállítja a vezetéken lévő értéket.
+\end{itemize}
+\end{itemize}
+
+\subsection{Statikus struktúra diagramok}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics*[angle=90, width=17cm, viewport = 25 30 705 565]{chapters/chapter04/classdiagram/class.pdf}
+\caption{Statikus struktúra nézet}
+\label{fig:class_diagram}
+\end{center}
+\end{figure}
+
 \section{A szkeleton modell valóságos use-case-ei}
-\comment{A szkeletonnak, mint önálló programnak a működésével kapcsolatos use-case-ek.}
 
 \subsection{Use-case diagram}
 
 \begin{figure}[h]
 \begin{center}
-%\includegraphics[width=17cm]{chapters/chapter05/example.pdf}
-\caption{x}
+\includegraphics[width=10cm]{chapters/chapter05/imgs/usecase.pdf}
+\caption{A szkeleton modell valóságos use-case-ei}
 \label{fig:SzkeletonUseCase}
 \end{center}
 \end{figure}
 
 \subsection{Use-case leírások}
-\comment{Minden use-case-hez külön}
 
-\usecase{...}{...}{...}{...}
+\usecase
+{Kapcsoló és Led}
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból és rá kötött ledből áll.}
+{Tesztelő}
+{\vspace{-15pt}
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item Áramkör és komponensek létrehozása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item áramkör létrehozása
+\item áramkör beregisztrálása a szimulációba
+\item vezeték létrehozása
+\item kapcsoló létrehozása
+\item kapcsoló kimenetére vezeték kötése
+\item led létrehozása
+\item led bemenetére vezeték kötése
+\item kapcsoló áramkörbe regisztrálása
+\item led áramkörbe regisztrálása
+\end{itemize}
+\item kapcsoló értékének beállítása (\textbf{megkérdezi a tesztelőt})
+\item szimuláció indítása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item hálózat kiértékelés indítása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item kapcsoló kiértékelése (állapotának kijelzése)
+\item led kiértékelése (világít/nem világít kijelzése)
+\end{itemize}
+\item áramkör változásának vizsgálata
+\item stacionárius állapot, szimuláció vége
+\end{itemize}
+\end{itemize}
+\vspace{-15pt}}
+
+\usecase
+{Kapcsoló, Inverter és Led}
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból egy rá kötött inverterből és egy arra kötött ledből áll.}
+{Tesztelő}
+{\vspace{-15pt}
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item Áramkör és komponensek létrehozása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item áramkör létrehozása
+\item áramkör beregisztrálása a szimulációba
+\item vezeték létrehozása a kapcsoló és az inverter összekötéséhez
+\item kapcsoló létrehozása
+\item kapcsoló kimenetére vezeték kötése
+\item inverter létrehozása
+\item inverter bemenetére vezeték kötése
+\item vezeték lérehozása az inverter és a led összekötéséhez
+\item inverter kimenetére vezeték kötése
+\item led létrehozása
+\item led bemenetére vezeték kötése
+\item kapcsoló áramkörhöz adása
+\item led áramkörhöz adása
+\item inverter áramkörhöz adása
+\end{itemize}
+\item kapcsoló értékének beállítása (\textbf{megkérdezi a tesztelőt})
+\item szimuláció indítása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item hálózat kiértékelés indítása (2x)
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item kapcsoló kiértékelése (állapotának kijelzése)
+\item inverter kiértékelése
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item bemenetén lévő érték lekérése
+\item kimenetére kötött érték kiszámolása és kiadása
+\end{itemize}
+\item led kiértékelése (világít/nem világít kijelzése)
+\end{itemize}
+\item áramkör változásának vizsgálata
+\item két lépés alatt stacionárius állapot\footnote{amennyiben a kapcsoló logikai igazra van állítva, akkor egy lépés is elég, de két lépés biztosan, így ezt ábrázoljuk diagramon}, szimuláció vége
+\end{itemize}
+\end{itemize}
+\vspace{-15pt}}
+
+\usecase
+{2 Kapcsoló, Vagy kapu és Led}
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy vagy kapura kötött két kapcsolóból és a vagy kapu kimenetére kötött ledből áll.}
+{Tesztelő}
+{\vspace{-15pt}
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item Áramkör és komponensek létrehozása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item áramkör létrehozása
+\item áramkör beregisztrálása a szimulációba
+\item vezeték létrehozása az egyik kapcsoló és a vagy kapu összekötéséhez
+\item egyik kapcsoló létrehozása
+\item kapcsoló kimenetére vezeték kötése
+\item vezeték létrehozása a másik kapcsoló és a vagy kapu összekötéséhez
+\item másik kapcsoló létrehozása
+\item kapcsoló kimenetére vezeték kötése
+\item VAGY kapu létrehozása
+\item VAGY kapu bemeneteire a fenti két vezeték kötése
+\item vezeték létrehozása a vagy kapu és a led összekötéséhez
+\item VAGY kapu kimenetére vezeték kötése
+\item led létrehozása
+\item led bemenetére vezeték kötése
+\item kapcsolók áramkörhöz adása
+\item VAGY kapu áramkörhöz adása
+\item led áramkörhöz adása
+\end{itemize}
+\item egyik kapcsoló értékének beállítása (\textbf{megkérdezi a tesztelőt})
+\item másik kapcsoló értékének beállítása (\textbf{megkérdezi a tesztelőt})
+\item szimuláció indítása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item hálózat kiértékelés indítása (2x)
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item egyik kapcsoló kiértékelése (állapotának kijelzése)
+\item másik kapcsoló kiértékelése (állapotának kijelzése)
+\item VAGY kapu kiértékelése
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item bemenetén lévő értékek lekérése
+\item kimenetére kötött érték kiszámolása és kiadása
+\end{itemize}
+\item led kiértékelése (világít/nem világít kijelzése)
+\end{itemize}
+\item áramkör változásának vizsgálata
+\item második lépés után stacionárius állapot\footnote{amennyiben mindkét kapcsoló 0-ás állapotban van, egy lépés alatt stabil lesz a hálózat, hiszen a VAGY kapu végig hamis állapotot ad ki, itt és a szekvencia diagramon úgy vesszük, mintha legalább az egyik kapcsoló 1-esbe lenne állítva.}, szimuláció vége
+\end{itemize}
+\end{itemize}
+\vspace{-15pt}}
+
+\newpage
+
+\usecase
+{Inverter visszakötve és Led}
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy inverterből, amelynek kimenete egy ledbe illetve saját bemenetére van kötve. Oszcillálni fog, ezért a szimuláció rövid időn belül leáll.}
+{Tesztelő}
+{\vspace{-15pt}
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item Áramkör és komponensek létrehozása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item áramkör létrehozása
+\item áramkör beregisztrálása a szimulációba
+\item inverter létrehozása
+\item vezeték létrehozása az inverter és a csomópont összekötéséhez
+\item inverter kimenetére vezeték kötése
+\item csomópont létrehozása
+\item csomópont bemenetére vezeték kötése
+\item vezeték létrehozása a csomópont és az inverter (bemenetre) összekötéséhez
+\item csomópont egyik kimenetére vezeték kötése
+\item inverter bemenetére vezeték kötése
+\item vezeték létrehozása a csomópont és a led összekötéséhez
+\item csomópont másik kimenetére vezeték kötése
+\item led létrehozása
+\item led bemenetére vezeték kötése
+\item inverter áramkörhöz adása
+\item led áramkörhöz adása
+\end{itemize}
+\item szimuláció indítása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item hálózat kiértékelés indítása (3x)
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item inverter kiértékelése
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item bemenetén lévő értékek lekérése
+\item kimenetére kötött érték kiszámolása és kiadása
+\end{itemize}
+\item csomópont kiértékelése
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item bemenetén lévő érték lekérése
+\item kimeneteire az érték kiadása
+\end{itemize}
+\item led kiértékelése (világít/nem világít kijelzése)
+\end{itemize}
+\item áramkör változásának vizsgálata
+\item harmadik lépés után sincs stacionárius állapot, szimuláció vége
+\end{itemize}
+\end{itemize}
+\vspace{-15pt}}
+
+\usecase
+{Kapcsoló, Vagy kapu visszakötve és Led}
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból, egy VAGY kapuból, melynek egyik bemenetére a kapcsoló, másik bemenetére a saját kimenete van kötve és egy ledből, melyre szintén a VAGY kapu kimenetét kötöttük. Ez egy olyan visszakötéses hálózat, mely stabil állapotban van.}
+{Tesztelő}
+{\vspace{-15pt}
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item Áramkör és komponensek létrehozása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item áramkör létrehozása
+\item áramkör beregisztrálása a szimulációba
+\item kapcsoló létrehozása
+\item vezeték létrehozása a kapcsoló és a VAGY kapu összekötéséhez
+\item kapcsoló kimenetére vezeték kötése
+\item VAGY kapu létrehozása
+\item VAGY kapu egyik bemenetére vezeték kötése
+\item vezeték létrehozása a VAGY kapu és a csomópont összekötéséhez
+\item VAGY kapu kimenetére vezeték kötése
+\item csomópont létrehozása
+\item csomópont bemenetére vezeték kötése
+\item vezeték létrehozása a csomópont és a vagy kapu (bemenetének) összekötéséhez
+\item csomópont egyik kimenetére vezeték kötése
+\item VAGY kapu másik bemenetére vezeték kötése
+\item vezeték létrehozása a csomópont és a led összekötéséhez
+\item csomópont másik kimenetére vezeték kötése
+\item led létrehozása
+\item led bemenetére vezeték kötése
+\item kapcsoló áramkörhöz adása
+\item VAGY kapu áramkörhöz adása
+\item led áramkörhöz adása
+\end{itemize}
+\item szimuláció indítása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item hálózat kiértékelés indítása (2x)
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item kapcsoló kiértékelése (állapotának kijelzése)
+\item VAGY kapu kiértékelése
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item bemenetén lévő értékek lekérése
+\item kimenetére kötött érték kiszámolása és kiadása
+\end{itemize}
+\item csomópont kiértékelése
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item bemenetén lévő érték lekérése
+\item kimeneteire az érték kiadása
+\end{itemize}
+\item led kiértékelése (világít/nem világít kijelzése)
+\end{itemize}
+\item áramkör változásának vizsgálata
+\item második lépés után stacionárius állapot\footnote{ha a kapcsoló 0-ás állapotban van, akkor egy lépés alatt bekövetkezik, de érdekesebb szituáció, amikor 1-es állapotban van, ezt ábrázoljuk diagramon}, szimuláció vége
+\end{itemize}
+\end{itemize}
+\vspace{-15pt}}
 
 \section{Architektúra}
 
