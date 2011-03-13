@@ -51,7 +51,7 @@ public class Simulation implements Loggable {
     /**
      * cikluslimit
      */
-    private static final int cycleLimit = 3;
+    private static final int cycleLimit = 2;
     /**
      * Szimulált áramkör
      */
