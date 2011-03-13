@@ -94,6 +94,8 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 
 \subsection{Use-case leírások}
 
+Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy csak szükségünk van a skeleton jellegéből adódó hiányzó információkra, azt a felhasználótól kérjük be, ahhoz, hogy a szekvenciadiagramokon lévő szekvenciákat kapjunk a javasolt értéket kell beírnia a tesztelőnek.
+
 \usecase
 {Áramkör inicializálása}
 {Ez a usecase egy áramkör és a hozzá tartozó szimuláció inicializálását mutatja be, hogyan jönnek létre a komponensek és a közöttük lévő összeköttetés. Jelen példa egy Kapcsoló és egy Led összeköttetését prezentálja.}
@@ -142,7 +144,6 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 %\item kapcsoló áramkörbe regisztrálása
 %\item led áramkörbe regisztrálása
 %\end{itemize}
-\item kapcsoló értékének beállítása (\textbf{megkérdezi a tesztelőt})
 \item szimuláció indítása
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
@@ -151,10 +152,56 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
-\item kapcsoló kiértékelése (állapotának kijelzése)
-\item led kiértékelése (világít/nem világít kijelzése)
+	\item kapcsoló kiértékelése
+	\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item kapcsoló értékének kiadása a vezetékre
+	\end{itemize}
+	\item led kiértékelése
+	\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+		\item led bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item bemenettől függően világít/nem világít.
+	\end{itemize}
+	\item áramkör változásának vizsgálata
+	\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+		\item toggle változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item led változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
+	\end{itemize}
+	\item áramkör változott, ezért új ciklus
 \end{itemize}
-\item áramkör változásának vizsgálata
+\item hálózat kiértékelés indítása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+	\item kapcsoló kiértékelése
+	\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item kapcsoló értékének kiadása a vezetékre
+	\end{itemize}
+	\item led kiértékelése
+	\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+		\item led bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item bemenettől függően világít/nem világít.
+	\end{itemize}
+	\item áramkör változásának vizsgálata
+	\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+		\item toggle változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
+		\item led változásának vizsgálata \textbf{megkérdezi a tesztelőt}, javasolt: 0)
+	\end{itemize}
+	\item áramkör nem változott, stabil állapot
+\end{itemize}
 \item stacionárius állapot, szimuláció vége
 \end{itemize}
 \end{itemize}
