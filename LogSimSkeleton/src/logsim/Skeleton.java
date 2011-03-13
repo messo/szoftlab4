@@ -2,9 +2,11 @@ package logsim;
 
 import logsim.model.Value;
 import java.io.IOException;
-import logsim.model.skeleton.Simulation1;
-import logsim.model.skeleton.Simulation2;
-import logsim.model.skeleton.Simulation3;
+import logsim.model.Simulation;
+import logsim.model.skeleton.Circuit1;
+import logsim.model.skeleton.Circuit2;
+import logsim.model.skeleton.Circuit3;
+import logsim.model.skeleton.Circuit4;
 
 /**
  *
@@ -19,7 +21,7 @@ public class Skeleton {
     public static final int VAGY_VISSZAKOTVE_LED = 5;
 
     public Skeleton() {
-        int use_case = 3;
+        int use_case = 4;
 
         switch (use_case) {
             case KAPCSOLO_LED:
@@ -41,72 +43,39 @@ public class Skeleton {
     }
 
     private void testKapcsoloLed() {
-        Simulation1 simulation = new Simulation1();
+        Simulation simulation = new Simulation();
+        Circuit1 c = new Circuit1();
+        simulation.setCircuit(c);
+        c.init();
         simulation.start();
     }
 
     private void testKapcsoloInverterLed() {
-        Simulation2 simulation = new Simulation2();
+        Simulation simulation = new Simulation();
+        Circuit2 c = new Circuit2();
+        simulation.setCircuit(c);
+        c.init();
         simulation.start();
     }
 
     private void testKapcsolo2xVagy() {
-        Simulation3 simulation = new Simulation3();
+        Simulation simulation = new Simulation();
+        Circuit3 c = new Circuit3();
+        simulation.setCircuit(c);
+        c.init();
         simulation.start();
     }
 
     private void testInverterVisszakotveLed() {
-//        Simulation simulation = new Simulation();
-//        Circuit circuit = new Circuit();
-//        simulation.setCircuit(circuit);
-//        Wire inv_to_node = new Wire();
-//        Wire inv_to_inv = new Wire();
-//        Wire node_to_led = new Wire();
-//
-//        Inverter t = new Inverter();
-//        t.setName("inverter");
-//        t.setInput(0, inv_to_inv);
-//        t.setOutput(0, inv_to_node);
-//
-//        Node n = new Node(2);
-//        n.setName("node");
-//        n.setInput(0, inv_to_node);
-//        n.setOutput(0, inv_to_inv);
-//        n.setOutput(1, node_to_led);
-//
-//        Led l = new Led();
-//        l.setName("led");
-//        l.setInput(0, node_to_led);
-//
-//        t.addTo(circuit);
-//        n.addTo(circuit);
-//        l.addTo(circuit);
-//
-//        simulation.start();
+        Simulation simulation = new Simulation();
+        Circuit4 c = new Circuit4();
+        simulation.setCircuit(c);
+        c.init();
+        simulation.start();
     }
 
     private void testVagyVisszakotveLed() {
         throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    private Value getToggle() {
-        System.out.println("Kapcsol?? [0/1]");
-        int ch;
-        try {
-            while (true) {
-                ch = System.in.read();
-                if (ch == '0' || ch == '1') {
-                    break;
-                }
-            }
-            if (ch == '0') {
-                return Value.FALSE;
-            } else {
-                return Value.TRUE;
-            }
-        } catch (IOException ex) {
-        }
-        return null;
     }
 
     /**
