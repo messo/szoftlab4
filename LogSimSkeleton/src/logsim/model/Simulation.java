@@ -57,6 +57,10 @@ public class Simulation implements Loggable {
      */
     protected Circuit circuit;
 
+    public Simulation() {
+        Logger.logComment("Inicializálás");
+    }
+
     /**
      * Egy adott bemeneti kombinációkra szimulálja a hálózatot, amíg be nem áll a
      * stacionárius állapot.
