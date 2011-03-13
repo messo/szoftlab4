@@ -1,12 +1,11 @@
 package logsim;
 
-import logsim.model.Value;
-import java.io.IOException;
 import logsim.model.Simulation;
 import logsim.model.skeleton.Circuit1;
 import logsim.model.skeleton.Circuit2;
 import logsim.model.skeleton.Circuit3;
 import logsim.model.skeleton.Circuit4;
+import logsim.model.skeleton.Circuit5;
 
 /**
  *
@@ -21,7 +20,7 @@ public class Skeleton {
     public static final int VAGY_VISSZAKOTVE_LED = 5;
 
     public Skeleton() {
-        int use_case = 4;
+        int use_case = 5;
 
         switch (use_case) {
             case KAPCSOLO_LED:
@@ -75,7 +74,11 @@ public class Skeleton {
     }
 
     private void testVagyVisszakotveLed() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        Simulation simulation = new Simulation();
+        Circuit5 c = new Circuit5();
+        simulation.setCircuit(c);
+        c.init();
+        simulation.start();
     }
 
     /**

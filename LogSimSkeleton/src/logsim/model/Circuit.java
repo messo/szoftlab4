@@ -130,9 +130,11 @@ public class Circuit implements Loggable {
      * bemenetén lévõ értéket pedig eltároljuk az éldetektálás érdekében.
      */
     public void commitFlipFlops() {
+        Logger.logCall(this, "commitFlipFlops");
         for (FlipFlop ff : flipFlops) {
             ff.commit();
         }
+        Logger.logReturn();
     }
 
     /**
