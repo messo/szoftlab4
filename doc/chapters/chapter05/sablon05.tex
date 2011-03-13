@@ -95,6 +95,32 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 \subsection{Use-case leírások}
 
 \usecase
+{Áramkör inicializálása}
+{Ez a usecase egy áramkör és a hozzá tartozó szimuláció inicializálását mutatja be, hogyan jönnek létre a komponensek és a közöttük lévő összeköttetés. Jelen példa egy Kapcsoló és egy Led összeköttetését prezentálja.}
+{Tesztelő}
+{\vspace{-15pt}
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+\item szimuláció létrehozása
+\item áramkör létrehozása
+\item áramkör beregisztrálása a szimulációba
+\item áramkör inicializálása
+\begin{itemize}
+\setlength{\itemsep}{0cm}%
+\setlength{\parskip}{0cm}%
+	\item kapcsoló létrehozása
+	\item vezeték létrehozása
+	\item kapcsoló kimenetére vezeték kötése
+	\item led létrehozása
+	\item led bemenetére vezeték kötése
+	\item kapcsoló áramkörbe regisztrálása
+	\item led áramkörbe regisztrálása
+\end{itemize}
+\end{itemize}
+\vspace{-15pt}}
+
+\usecase
 {Kapcsoló és Led}
 {Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból és rá kötött ledből áll.}
 {Tesztelő}
@@ -103,19 +129,19 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \item Áramkör és komponensek létrehozása
-\begin{itemize}
-\setlength{\itemsep}{0cm}%
-\setlength{\parskip}{0cm}%
-\item áramkör létrehozása
-\item áramkör beregisztrálása a szimulációba
-\item vezeték létrehozása
-\item kapcsoló létrehozása
-\item kapcsoló kimenetére vezeték kötése
-\item led létrehozása
-\item led bemenetére vezeték kötése
-\item kapcsoló áramkörbe regisztrálása
-\item led áramkörbe regisztrálása
-\end{itemize}
+%\begin{itemize}
+%\setlength{\itemsep}{0cm}%
+%\setlength{\parskip}{0cm}%
+%\item áramkör létrehozása
+%\item áramkör beregisztrálása a szimulációba
+%\item vezeték létrehozása
+%\item kapcsoló létrehozása
+%\item kapcsoló kimenetére vezeték kötése
+%\item led létrehozása
+%\item led bemenetére vezeték kötése
+%\item kapcsoló áramkörbe regisztrálása
+%\item led áramkörbe regisztrálása
+%\end{itemize}
 \item kapcsoló értékének beállítása (\textbf{megkérdezi a tesztelőt})
 \item szimuláció indítása
 \begin{itemize}
@@ -143,24 +169,24 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \item Áramkör és komponensek létrehozása
-\begin{itemize}
-\setlength{\itemsep}{0cm}%
-\setlength{\parskip}{0cm}%
-\item áramkör létrehozása
-\item áramkör beregisztrálása a szimulációba
-\item vezeték létrehozása a kapcsoló és az inverter összekötéséhez
-\item kapcsoló létrehozása
-\item kapcsoló kimenetére vezeték kötése
-\item inverter létrehozása
-\item inverter bemenetére vezeték kötése
-\item vezeték lérehozása az inverter és a led összekötéséhez
-\item inverter kimenetére vezeték kötése
-\item led létrehozása
-\item led bemenetére vezeték kötése
-\item kapcsoló áramkörhöz adása
-\item led áramkörhöz adása
-\item inverter áramkörhöz adása
-\end{itemize}
+%\begin{itemize}
+%\setlength{\itemsep}{0cm}%
+%\setlength{\parskip}{0cm}%
+%\item áramkör létrehozása
+%\item áramkör beregisztrálása a szimulációba
+%\item vezeték létrehozása a kapcsoló és az inverter összekötéséhez
+%\item kapcsoló létrehozása
+%\item kapcsoló kimenetére vezeték kötése
+%\item inverter létrehozása
+%\item inverter bemenetére vezeték kötése
+%\item vezeték lérehozása az inverter és a led összekötéséhez
+%\item inverter kimenetére vezeték kötése
+%\item led létrehozása
+%\item led bemenetére vezeték kötése
+%\item kapcsoló áramkörhöz adása
+%\item led áramkörhöz adása
+%\item inverter áramkörhöz adása
+%\end{itemize}
 \item kapcsoló értékének beállítása (\textbf{megkérdezi a tesztelőt})
 \item szimuláció indítása
 \begin{itemize}
@@ -195,27 +221,27 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \item Áramkör és komponensek létrehozása
-\begin{itemize}
-\setlength{\itemsep}{0cm}%
-\setlength{\parskip}{0cm}%
-\item áramkör létrehozása
-\item áramkör beregisztrálása a szimulációba
-\item vezeték létrehozása az egyik kapcsoló és a vagy kapu összekötéséhez
-\item egyik kapcsoló létrehozása
-\item kapcsoló kimenetére vezeték kötése
-\item vezeték létrehozása a másik kapcsoló és a vagy kapu összekötéséhez
-\item másik kapcsoló létrehozása
-\item kapcsoló kimenetére vezeték kötése
-\item VAGY kapu létrehozása
-\item VAGY kapu bemeneteire a fenti két vezeték kötése
-\item vezeték létrehozása a vagy kapu és a led összekötéséhez
-\item VAGY kapu kimenetére vezeték kötése
-\item led létrehozása
-\item led bemenetére vezeték kötése
-\item kapcsolók áramkörhöz adása
-\item VAGY kapu áramkörhöz adása
-\item led áramkörhöz adása
-\end{itemize}
+%\begin{itemize}
+%\setlength{\itemsep}{0cm}%
+%\setlength{\parskip}{0cm}%
+%\item áramkör létrehozása
+%\item áramkör beregisztrálása a szimulációba
+%\item vezeték létrehozása az egyik kapcsoló és a vagy kapu összekötéséhez
+%\item egyik kapcsoló létrehozása
+%\item kapcsoló kimenetére vezeték kötése
+%\item vezeték létrehozása a másik kapcsoló és a vagy kapu összekötéséhez
+%\item másik kapcsoló létrehozása
+%\item kapcsoló kimenetére vezeték kötése
+%\item VAGY kapu létrehozása
+%\item VAGY kapu bemeneteire a fenti két vezeték kötése
+%\item vezeték létrehozása a vagy kapu és a led összekötéséhez
+%\item VAGY kapu kimenetére vezeték kötése
+%\item led létrehozása
+%\item led bemenetére vezeték kötése
+%\item kapcsolók áramkörhöz adása
+%\item VAGY kapu áramkörhöz adása
+%\item led áramkörhöz adása
+%\end{itemize}
 \item egyik kapcsoló értékének beállítása (\textbf{megkérdezi a tesztelőt})
 \item másik kapcsoló értékének beállítása (\textbf{megkérdezi a tesztelőt})
 \item szimuláció indítása
@@ -254,26 +280,26 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \item Áramkör és komponensek létrehozása
-\begin{itemize}
-\setlength{\itemsep}{0cm}%
-\setlength{\parskip}{0cm}%
-\item áramkör létrehozása
-\item áramkör beregisztrálása a szimulációba
-\item inverter létrehozása
-\item vezeték létrehozása az inverter és a csomópont összekötéséhez
-\item inverter kimenetére vezeték kötése
-\item csomópont létrehozása
-\item csomópont bemenetére vezeték kötése
-\item vezeték létrehozása a csomópont és az inverter (bemenetre) összekötéséhez
-\item csomópont egyik kimenetére vezeték kötése
-\item inverter bemenetére vezeték kötése
-\item vezeték létrehozása a csomópont és a led összekötéséhez
-\item csomópont másik kimenetére vezeték kötése
-\item led létrehozása
-\item led bemenetére vezeték kötése
-\item inverter áramkörhöz adása
-\item led áramkörhöz adása
-\end{itemize}
+%\begin{itemize}
+%\setlength{\itemsep}{0cm}%
+%\setlength{\parskip}{0cm}%
+%\item áramkör létrehozása
+%\item áramkör beregisztrálása a szimulációba
+%\item inverter létrehozása
+%\item vezeték létrehozása az inverter és a csomópont összekötéséhez
+%\item inverter kimenetére vezeték kötése
+%\item csomópont létrehozása
+%\item csomópont bemenetére vezeték kötése
+%\item vezeték létrehozása a csomópont és az inverter (bemenetre) összekötéséhez
+%\item csomópont egyik kimenetére vezeték kötése
+%\item inverter bemenetére vezeték kötése
+%\item vezeték létrehozása a csomópont és a led összekötéséhez
+%\item csomópont másik kimenetére vezeték kötése
+%\item led létrehozása
+%\item led bemenetére vezeték kötése
+%\item inverter áramkörhöz adása
+%\item led áramkörhöz adása
+%\end{itemize}
 \item szimuláció indítása
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
@@ -313,31 +339,31 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \item Áramkör és komponensek létrehozása
-\begin{itemize}
-\setlength{\itemsep}{0cm}%
-\setlength{\parskip}{0cm}%
-\item áramkör létrehozása
-\item áramkör beregisztrálása a szimulációba
-\item kapcsoló létrehozása
-\item vezeték létrehozása a kapcsoló és a VAGY kapu összekötéséhez
-\item kapcsoló kimenetére vezeték kötése
-\item VAGY kapu létrehozása
-\item VAGY kapu egyik bemenetére vezeték kötése
-\item vezeték létrehozása a VAGY kapu és a csomópont összekötéséhez
-\item VAGY kapu kimenetére vezeték kötése
-\item csomópont létrehozása
-\item csomópont bemenetére vezeték kötése
-\item vezeték létrehozása a csomópont és a vagy kapu (bemenetének) összekötéséhez
-\item csomópont egyik kimenetére vezeték kötése
-\item VAGY kapu másik bemenetére vezeték kötése
-\item vezeték létrehozása a csomópont és a led összekötéséhez
-\item csomópont másik kimenetére vezeték kötése
-\item led létrehozása
-\item led bemenetére vezeték kötése
-\item kapcsoló áramkörhöz adása
-\item VAGY kapu áramkörhöz adása
-\item led áramkörhöz adása
-\end{itemize}
+%\begin{itemize}
+%\setlength{\itemsep}{0cm}%
+%\setlength{\parskip}{0cm}%
+%\item áramkör létrehozása
+%\item áramkör beregisztrálása a szimulációba
+%\item kapcsoló létrehozása
+%\item vezeték létrehozása a kapcsoló és a VAGY kapu összekötéséhez
+%\item kapcsoló kimenetére vezeték kötése
+%\item VAGY kapu létrehozása
+%\item VAGY kapu egyik bemenetére vezeték kötése
+%\item vezeték létrehozása a VAGY kapu és a csomópont összekötéséhez
+%\item VAGY kapu kimenetére vezeték kötése
+%\item csomópont létrehozása
+%\item csomópont bemenetére vezeték kötése
+%\item vezeték létrehozása a csomópont és a vagy kapu (bemenetének) összekötéséhez
+%\item csomópont egyik kimenetére vezeték kötése
+%\item VAGY kapu másik bemenetére vezeték kötése
+%\item vezeték létrehozása a csomópont és a led összekötéséhez
+%\item csomópont másik kimenetére vezeték kötése
+%\item led létrehozása
+%\item led bemenetére vezeték kötése
+%\item kapcsoló áramkörhöz adása
+%\item VAGY kapu áramkörhöz adása
+%\item led áramkörhöz adása
+%\end{itemize}
 \item szimuláció indítása
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
@@ -377,3 +403,10 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 \section{Szekvencia diagramok a belső működésre}
 \comment{A szkeletonban implementált szekvenciadiagramok. Tipikusan egy use-case egy diagram. Ezek megegyezhetnek a korábban specifikált diagramokkal, de az egyes életvonalakat (lifeline) egyértelműen a szkeletonban példányosított objektumokhoz kell tudni kötni. Azt kell megjeleníteni, hogy a szkeletonban létrehozott objektumok egymással hogyan fognak kommunikálni.}
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=17cm]{chapters/chapter05/imgs/init.pdf}
+\caption{Áramkör inicializálása}
+\label{fig:init}
+\end{center}
+\end{figure}
