@@ -17,7 +17,7 @@
 
 \section{Errata}
 
-Az előző fejezetben leírtak egy apró részletben megváltoztak. Az elemeket már nem közvetlenül kötjük össze, hanem \textit{vezeték}ek segítségével, melyeket egymással \textit{csomópont}okkal lehet összekötni, ha szükséges. Így javítottuk a láthatósággal kapcsolatosan felmerült problémákat, ehhez fel kellett venni 2 új osztályt (Wire, Node), illetve az AbstractComponent módosítani, ezekhez tartozó objektum és osztályleírások alább olvashatóak, valamint mellékeltük a módosított statikus osztálydiagramot is. (Egy-két egyéb objektumleírás is módosult, de csak azért mert a kiértékelés logikája változott -- nem hátulról megyünk, hanem az összes kiértékeli magát, ez nem szükséges a jelen fejezethez, hiszen magától értetődő)
+Az előző fejezetben leírtak egy apró részletben megváltoztak. Az elemeket már nem közvetlenül kötjük össze, hanem \textit{vezeték}ek segítségével, melyeket egymással \textit{csomópont}okkal lehet összekötni, ha szükséges. Így javítottuk a láthatósággal kapcsolatosan felmerült problémákat, ehhez fel kellett venni 2 új osztályt (Wire, Node), illetve az AbstractComponent módosítani, ezekhez tartozó objektum és osztályleírások alább olvashatóak, valamint mellékeltük a módosított statikus osztálydiagramot is. (Egy-két egyéb objektumleírás is módosult, de csak azért mert a kiértékelés logikája változott -- nem hátulról megyünk, hanem az összes kiértékeli magát, ez nem szükséges a jelen fejezethez, hiszen magától értetődő apróbb átfogalmazásokról van szó)
 
 \subsection{Objektumleírás: \bf Wire}
 Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vezeték egy darab kimenetet és egy darab bemenetet köt össze. A rajta lévő értéket le lehet tőle kérdezni, illetve be lehet azt állítani.
@@ -110,7 +110,7 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 
 \usecase
 {Áramkör inicializálása}
-{Ez a usecase egy áramkör és a hozzá tartozó szimuláció inicializálását mutatja be, hogyan jönnek létre a komponensek és a közöttük lévő összeköttetés. Jelen példa egy Kapcsoló és egy Led összeköttetését prezentálja.}
+{Ez a usecase egy áramkör és a hozzá tartozó szimuláció inicializálását mutatja be, hogyan jönnek létre a komponensek és a közöttük lévő összeköttetések. Jelen példa egy Kapcsoló és egy Led összeköttetését prezentálja.}
 {Tesztelő}
 {\vspace{-15pt}
 \begin{itemize}
@@ -118,7 +118,6 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 \setlength{\parskip}{0cm}%
 \item szimuláció létrehozása
 \item áramkör létrehozása
-\item áramkör beregisztrálása a szimulációba
 \item áramkör inicializálása
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
@@ -131,6 +130,7 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 	\item kapcsoló áramkörbe regisztrálása
 	\item led áramkörbe regisztrálása
 \end{itemize}
+\item áramkör beregisztrálása a szimulációba
 \end{itemize}
 \vspace{-15pt}}
 
