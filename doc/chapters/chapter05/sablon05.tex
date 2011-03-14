@@ -134,7 +134,13 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 
 \usecase
 {Kapcsoló és Led}
-{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból és rá kötött ledből áll.}
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból és rá kötött ledből áll.\newline
+\begin{center}
+\vspace{-15pt}
+\includegraphics[scale=1.5]{dw/circuit_test1.pdf}
+\vspace{-10pt}
+\end{center}
+}
 {Tesztelő}
 {\vspace{-15pt}
 \begin{itemize}
@@ -221,7 +227,12 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 
 \usecase
 {Kapcsoló, Inverter és Led}
-{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból egy rá kötött inverterből és egy arra kötött ledből áll.}
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból egy rá kötött inverterből és egy arra kötött ledből áll.\newline
+\begin{center}
+\vspace{-15pt}
+\includegraphics[scale=1.5]{dw/circuit_test2.pdf}
+\vspace{-10pt}
+\end{center}}
 {Tesztelő}
 {\vspace{-15pt}
 \begin{itemize}
@@ -341,7 +352,12 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 	\hline
 	\textbf{Use-case neve}   & {2 Kapcsoló, Vagy kapu és Led} \tabularnewline
 	\hline\hline
-	Rövid leírás    & {Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy vagy kapura kötött két kapcsolóból és a vagy kapu kimenetére kötött ledből áll.} \tabularnewline
+	Rövid leírás    & {Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy vagy kapura kötött két kapcsolóból és a vagy kapu kimenetére kötött ledből áll.\newline
+\begin{center}
+\vspace{-15pt}
+\includegraphics[scale=1.5]{dw/circuit_test3.pdf}
+\vspace{-10pt}
+\end{center}} \tabularnewline
 	\hline
 	Aktorok         & {Tesztelő} \tabularnewline
 	\hline
@@ -419,15 +435,7 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 		\item kapcsoló értékének kiadása a vezetékre
 	\end{itemize}	
-	\item 2. kapcsoló kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-25pt}%
-		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item kapcsoló értékének kiadása a vezetékre
-	\end{itemize}
-	
+
 \end{itemize}
 \end{itemize}
 \end{itemize}
@@ -440,7 +448,17 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \setlength{\itemindent}{1.5em}%
-\item VAGY kapu kiértékelése
+
+	\item 2. kapcsoló kiértékelése
+	\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+	\setlength{\itemindent}{1em}%
+		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item kapcsoló értékének kiadása a vezetékre
+	\end{itemize}
+	
+	\item VAGY kapu kiértékelése
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
@@ -486,9 +504,15 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 
 \usecase
 {Inverter visszakötve és Led}
-{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy inverterből, amelynek kimenete egy ledbe illetve saját bemenetére van kötve. Oszcillálni fog, ezért a szimuláció rövid időn belül leáll.}
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy inverterből, amelynek kimenete egy ledbe illetve saját bemenetére van kötve. Oszcillálni fog, ezért a szimuláció rövid időn belül leáll.
+\newline
+\begin{center}
+\vspace{-15pt}
+\includegraphics[scale=1.5]{dw/circuit_test4.pdf}
+\vspace{-10pt}
+\end{center}}
 {Tesztelő}
-{\vspace{-15pt}
+{\vspace{-10pt}
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
@@ -545,7 +569,13 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 
 \usecase
 {Kapcsoló, Vagy kapu visszakötve és Led}
-{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból, egy VAGY kapuból, melynek egyik bemenetére a kapcsoló, másik bemenetére a saját kimenete van kötve és egy ledből, melyre szintén a VAGY kapu kimenetét kötöttük. Ez egy olyan visszakötéses hálózat, mely stabil állapotban van.}
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy kapcsolóból, egy VAGY kapuból, melynek egyik bemenetére a kapcsoló, másik bemenetére a saját kimenete van kötve és egy ledből, melyre szintén a VAGY kapu kimenetét kötöttük. Ez egy olyan visszakötéses hálózat, mely stabil állapotban van.
+\newline
+\begin{center}
+\vspace{-15pt}
+\includegraphics[scale=1.5]{dw/circuit_test5.pdf}
+\vspace{-10pt}
+\end{center}}
 {Tesztelő}
 {\vspace{-15pt}
 \begin{itemize}
