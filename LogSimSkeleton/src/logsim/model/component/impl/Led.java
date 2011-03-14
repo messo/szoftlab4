@@ -31,7 +31,7 @@ public class Led extends DisplayComponent {
     @Override
     protected void onEvaluation() {
         Value v = inputs[0].getValue();
-        Logger.logComment((v == Value.TRUE) ? "világít" : "nem világít");
+        //Logger.logComment((v == Value.TRUE) ? "világít" : "nem világít");
     }
 
     @Override

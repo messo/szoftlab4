@@ -19,9 +19,10 @@ public class Node extends AbstractComponent {
 
     @Override
     protected void onEvaluation() {
-        Value v = inputs[0].getValue();
+        inputs[0].getValue();
         for (int i = 0; i < outputs.length; i++) {
-            outputs[i].setValue(v);
+            Value v2 = Logger.logAskValue(this, "mit adjunk a vezetékre");
+            outputs[i].setValue(v2);
         }
     }
 
