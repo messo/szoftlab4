@@ -611,97 +611,81 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \section{Architektúra}
 
 \section{A szkeleton kezelői felületének terve, dialógusok}
-%\comment{A szkeleton által elfogadott bemenetek , valamint a szöveges konzolon megjelenő kimenetek. A %kiemenet formátuma olyan kell legyen, ami alapján a működés összevethető a korábbi szekvencia-%
-%diagramokkal.}
-Az általunk elkészített szkeleton egy  program váz melynek felülete egy egyszerű konzolos megjelenítési felület, amely alkalmas arra, hogy a use case-k által leírt teszteseteket bemutassuk. Az egyes tesztesetek a neki megfelelő use case sorszámával van elnevezve, így program indítás után egy szám bevitelét követően a kiválasztott teszteset lefut. 
+Az általunk elkészített szkeleton egy program váz melynek felülete egy egyszerű konzolos megjelenítési felület, amely alkalmas arra, hogy a use case-k által leírt teszteseteket bemutassuk. Az egyes tesztesetek a neki megfelelő use case sorszámával van elnevezve, így program indítás után egy szám bevitelét követően a kiválasztott teszteset lefut. 
 A teszteset futása közben kiír minden objektumot amin metódust hív, illetve kiírja a metódus nevét a paraméterekkel együtt, majd a visszatérési értéket. Ez azért lehetséges, mert a szkeleton már tartalmazza az elkészítendő szoftver összes fontos osztályát és metódusát, azonban az üzleti logikát még nem. Így könnyen eldönthető, hogy a use case-nek megfelelően viselkedik a program és továbbiakban képes lesz-e megfelelően működni.
 A tesztelési folyamat során döntési helyzet léphet fel. Ilyenkor a program felteszi a kérdést, majd a kapott válasz alapján folytatja a további futást. Ezzel csökkentjük a tesztesetek számát, anélkül, hogy bizonyos esetek kimaradnának a tesztelés alól. 
-Futás közben megjegyzés formájában a program tájékoztat néhány elem belső állapotáról (például kapcsoló értéke) vagy bizonyos fontosabb lépésekről (például inicializálás).
+Futás közben megjegyzés formájában a program tájékoztat néhány elem valamilyen tulajdonságáról (például az adott bemenet miatt a kijelző világít, vagy nem) vagy bizonyos fontosabb lépésekről (például inicializálás).
 Az elvárás, hogy a szkeleton a szekvenciadiagramok által leírt működést mutassa. A program egyszerű és könnyen összehasonlítható formában írja ki a működését, amelyet könnyen összevethetjük a szekvencia diagrammokkal.
 
-Egy metódushívás és visszatérés esetén kiírt adatok a következők:
+\subsection{Program üzeneteinek formátuma}
+
+A program a következő eseményeket jelzi ki:
 \begin{itemize}
-\item Metódushívás esetén a CALL szót, konstruktorhívás esetén CREATE szót, míg visszatéréskor a RETURN szót
-\item Objektum neve
-\item A metódus neve és a metódus paramétereinek értékét
-\item Visszatérés esetén a visszatérési értéket
-\end{itemize}
- 
-Egy döntési helyzetben a kiírt adatok a következő:
-\begin{itemize}
-\item QUESTION szó
-\item objektum neve
-\item Egy rövid magyarázó szöveg
-\item Szögletes zárójelben a lehetséges válaszok
+\item Konstruktor hívás.\\
+	  Formátum: \texttt{CREATE osztálynév objektumnév}\\
+	  Példa: \texttt{CREATE Circuit circuit}
+\item Tagfüggvény hívás.\\
+	  Formátum: \texttt{CALL objektumnév.metódus(paraméterek)}\\
+	  Példa: \texttt{CALL wire.setValue(Value.TRUE)}
+\item Konstruktor/tagfüggvény visszatér\\
+	  Formátum: \texttt{RETURN} vagy \texttt{RETURN objektumnév/érték}\\
+	  Ha van visszatérési érték az kétféle lehet: referencia valamelyik objektumra (ekkor az objektumnevet írjuk ki), vagy egy konkrét érték (ilyenkor az értéket, pl: \texttt{false}).
+\item Kérdés a felhasználónak.\\
+	  Formátum: \texttt{QUESTION objektumnév üzenet? [opciók]}\\
+	  Példa: \texttt{QUESTION wire vezetéken lévő érték? [0/1]}\\
+	  Objektumnév annak az objektumnak a neve, aki kérdezi a felhasználót. Az opciókban lévő elemek \texttt{/} jellel vannak elválasztva. Addig nem megy tovább a program, amíg nem ezek közül kap választ.
+\item Megjegyzés kijelzése.\\
+	Formátum: \texttt{\# üzenet}
 \end{itemize}
 
-Formátumra példa:
+Formátum bemutatásához egy összetettebb példa:
 
 \begin{verbatim}
 CALL simulation.start()
   CALL circuit.doEvaluationCycle()
     CALL toggle.evaluate()
-      QUESTION toggle állapot? [0/1]
-1
-      CALL toggle_to_inv.setValue(Value.TRUE)
-      RETURN
-    RETURN
-    CALL inv.evaluate()
-      CALL toggle_to_inv.getValue()
-        QUESTION toggle_to_inv vezetéken lévő érték? [0/1]
-1
-      RETURN Value.TRUE
-      CALL inv_to_led.setValue(Value.FALSE)
+      QUESTION toggle állapot? [0/1] 1
+      CALL wire.setValue(Value.TRUE)
       RETURN
     RETURN
     CALL led.evaluate()
-      CALL inv_to_led.getValue()
-        QUESTION inv_to_led vezetéken lévő érték? [0/1]
-0
-      RETURN Value.FALSE
-      # nem világít
-    RETURN
-  RETURN
-  CALL circuit.doEvaluationCycle()
-    CALL toggle.evaluate()
-      QUESTION toggle állapot? [0/1]
-1
-      CALL toggle_to_inv.setValue(Value.TRUE)
-      RETURN
-    RETURN
-    CALL inv.evaluate()
-      CALL toggle_to_inv.getValue()
-        QUESTION toggle_to_inv vezetéken lévő érték? [0/1]
-1
+      CALL wire.getValue()
+        QUESTION wire vezetéken lévő érték? [0/1] 1
       RETURN Value.TRUE
-      CALL inv_to_led.setValue(Value.FALSE)
-      RETURN
-    RETURN
-    CALL led.evaluate()
-      CALL inv_to_led.getValue()
-        QUESTION inv_to_led vezetéken lévő érték? [0/1]
-0
-      RETURN Value.FALSE
-      # nem világít
+      # világít
     RETURN
   RETURN
   CALL circuit.isChanged()
     CALL toggle.isChanged()
-      QUESTION toggle változott? [0/1]
-0
-    RETURN false
-    CALL inv.isChanged()
-      QUESTION inv változott? [0/1]
-0
+      QUESTION toggle változott? [0/1] 1
+    RETURN true
+  RETURN true
+  CALL circuit.doEvaluationCycle()
+    CALL toggle.evaluate()
+      QUESTION toggle állapot? [0/1] 1
+      CALL wire.setValue(Value.TRUE)
+      RETURN
+    RETURN
+    CALL led.evaluate()
+      CALL wire.getValue()
+        QUESTION wire vezetéken lévő érték? [0/1] 1
+      RETURN Value.TRUE
+      # világít
+    RETURN
+  RETURN
+  CALL circuit.isChanged()
+    CALL toggle.isChanged()
+      QUESTION toggle változott? [0/1] 0
     RETURN false
     CALL led.isChanged()
-      QUESTION led változott? [0/1]
-0
+      QUESTION led változott? [0/1] 0
     RETURN false
   RETURN false
+  CALL circuit.commitFlipFlops()
+  RETURN
+  CALL circuit.stepGenerators()
+  RETURN
 RETURN true
-
-
 \end{verbatim}
 
 \section{Szekvencia diagramok a belső működésre}
@@ -745,6 +729,21 @@ RETURN true
 \label{fig:init}
 \end{center}
 \end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=16.5cm]{chapters/chapter05/imgs/test4-1.pdf}
+\caption{Inverter visszakötve és Led (1. rész)}
+\label{fig:init}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=16.5cm]{chapters/chapter05/imgs/test4-2.pdf}
+\caption{Inverter visszakötve és Led (2. rész)}
+\label{fig:init}
+\end{figure}
+
 
 \begin{figure}[H]
 \begin{center}
