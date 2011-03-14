@@ -104,7 +104,9 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 
 \subsection{Use-case leírások}
 
-Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy csak szükségünk van a skeleton jellegéből adódó hiányzó információkra, azt a felhasználótól kérjük be, ahhoz, hogy a szekvenciadiagramokon lévő szekvenciákat kapjunk a javasolt értéket kell beírnia a tesztelőnek.
+Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy csak szükségünk van a skeleton jellegéből adódó hiányzó információkra, azt a felhasználótól kérjük be, ahhoz, hogy a szekvenciadiagramokon lévő szekvenciákat kapjunk a javasolt értéket kell beírnia a tesztelőnek.\\
+
+Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, ezzel elfedve a lényegi részeket, ezért ezt egy külön use-case-ben bemutatjuk, a többinél csak jelezzük, hogy ott is van ilyen lépés. A tesztelő, majd egy adott tesztesetnél választhat, hogy kíváncsi-e az inicializálásra vagy sem.
 
 \usecase
 {Áramkör inicializálása}
@@ -131,6 +133,8 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \end{itemize}
 \end{itemize}
 \vspace{-15pt}}
+
+\newpage
 
 \usecase
 {Kapcsoló és Led}
@@ -195,20 +199,7 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
-	\item kapcsoló kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item kapcsoló értékének kiadása a vezetékre
-	\end{itemize}
-	\item led kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-		\item led bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item bemenettől függően világít/nem világít.
-	\end{itemize}
+	\item \textit{ugyanazon lépések történnek mint az előző kiértékelésnél, és ugyanazon válaszokat javasolt adni.}
 \end{itemize}
 \item áramkör változásának vizsgálata
 \begin{itemize}
@@ -224,6 +215,8 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \end{itemize}
 \end{itemize}
 \vspace{-15pt}}
+
+\newpage
 
 \usecase
 {Kapcsoló, Inverter és Led}
@@ -307,29 +300,7 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
 \setlength{\itemindent}{-25pt}%
-	\item kapcsoló kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-35pt}%
-		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item kapcsoló értékének kiadása a vezetékre
-	\end{itemize}
-	\item inverter kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-35pt}%
-		\item bemenet lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item kimenet kiadása a vezetékre (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
-	\end{itemize}\item led kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-35pt}%
-		\item led bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
-		\item bemenettől függően világít/nem világít.
-	\end{itemize}
+	\item \textit{ugyanazon lépések történnek mint az előző kiértékelésnél, és ugyanazon válaszokat javasolt adni.}
 \end{itemize}
 \item áramkör változásának vizsgálata
 \begin{itemize}
@@ -348,6 +319,8 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \end{itemize}
 \vspace{-15pt}}
 
+\newpage
+
 	\begin{longtable}{| l | p{12cm} |}
 	\hline
 	\textbf{Use-case neve}   & {2 Kapcsoló, Vagy kapu és Led} \tabularnewline
@@ -365,23 +338,23 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
-\setlength{\itemindent}{-10pt}%
+\setlength{\itemindent}{-15pt}%
 \item Áramkör és komponensek létrehozása
 \item Szimuláció indítása
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
-\setlength{\itemindent}{-25pt}%
+\setlength{\itemindent}{-35pt}%
 \item hálózat kiértékelés indítása
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
-\setlength{\itemindent}{-25pt}%
+\setlength{\itemindent}{-50pt}%
 	\item 1. kapcsoló kiértékelése
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-25pt}%
+	\setlength{\itemindent}{-60pt}%
 		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 		\item kapcsoló értékének kiadása a vezetékre
 	\end{itemize}
@@ -389,7 +362,7 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-25pt}%
+	\setlength{\itemindent}{-60pt}%
 		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 		\item kapcsoló értékének kiadása a vezetékre
 	\end{itemize}
@@ -397,7 +370,7 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-25pt}%
+	\setlength{\itemindent}{-60pt}%
 		\item kapu egyik bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 		\item kapu másik bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 		\item kapu értékének kiadása a vezetékre
@@ -406,7 +379,7 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-25pt}%
+	\setlength{\itemindent}{-60pt}%
 		\item led bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 		\item bemenettől függően világít/nem világít.
 	\end{itemize}
@@ -415,7 +388,7 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
-\setlength{\itemindent}{-25pt}%
+\setlength{\itemindent}{-50pt}%
 	\item 1. kapcsoló változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 	\item 2. kapcsoló változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 	\item kapu változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
@@ -426,68 +399,14 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
-\setlength{\itemindent}{-25pt}%
-	\item 1. kapcsoló kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-25pt}%
-		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
-		\item kapcsoló értékének kiadása a vezetékre
-	\end{itemize}	
-
+\setlength{\itemindent}{-50pt}%
+	\item \textit{ugyanazon lépések történnek mint az előző kiértékelésnél, és ugyanazon válaszokat javasolt adni.}
 \end{itemize}
-\end{itemize}
-\end{itemize}
-\tabularnewline
-& 
-
-\begin{itemize}
-\renewcommand{\labelitemi}{*}
-\renewcommand{\labelitemii}{$\cdot$}
-\setlength{\itemsep}{0cm}%
-\setlength{\parskip}{0cm}%
-\setlength{\itemindent}{1.5em}%
-
-	\item 2. kapcsoló kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{1em}%
-		\item kapcsoló állapotának lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item kapcsoló értékének kiadása a vezetékre
-	\end{itemize}
-	
-	\item VAGY kapu kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{1em}%
-		\item kapu egyik bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
-		\item kapu másik bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-	\item kapu értékének kiadása a vezetékre
-	\end{itemize}
-	\item led kiértékelése
-	\begin{itemize}
-	\setlength{\itemsep}{0cm}%
-	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{1em}%
-		\item led bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item bemenettől függően világít/nem világít.
-	\end{itemize}
-\end{itemize}
-
-\begin{itemize}
-\renewcommand{\labelitemi}{--}
-\renewcommand{\labelitemii}{*}
-\setlength{\itemsep}{0cm}%
-\setlength{\parskip}{0cm}%
-\setlength{\itemindent}{0em}%
 \item áramkör változásának vizsgálata
 \begin{itemize}
 \setlength{\itemsep}{0cm}%
 \setlength{\parskip}{0cm}%
-\setlength{\itemindent}{0em}%
+\setlength{\itemindent}{-50pt}%
 	\item 1. kapcsoló változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 	\item 2. kapcsoló változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 	\item kapu változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
@@ -495,6 +414,7 @@ Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy cs
 \end{itemize}
 \item áramkör nem változott, stabil állapot
 \item stacionárius állapot, szimuláció vége
+\end{itemize}
 \end{itemize}
 \vspace{-15pt}\tabularnewline
 	\hline
