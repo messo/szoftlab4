@@ -1,7 +1,6 @@
 package logsim.log;
 
 import java.io.IOException;
-import java.util.logging.Level;
 import logsim.model.Value;
 
 /**
@@ -18,6 +17,15 @@ public class Logger {
             sb.append("  ");
         }
         sb.append(s);
+        System.out.print(sb.toString());
+    }
+
+    private static void println(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < indent; i++) {
+            sb.append("  ");
+        }
+        sb.append(s);
         System.out.println(sb.toString());
     }
 
@@ -29,7 +37,7 @@ public class Logger {
             }
             sb.append(params[i].getName());
         }
-        print(String.format("CALL %s.%s(%s)", obj.getName(), method, sb.toString()));
+        println(String.format("CALL %s.%s(%s)", obj.getName(), method, sb.toString()));
         indent++;
     }
 
@@ -38,12 +46,12 @@ public class Logger {
     }
 
     public static void logCreate(Loggable obj) {
-        print(String.format("CREATE %s %s", obj.getClassName(), obj.getName()));
+        println(String.format("CREATE %s %s", obj.getClassName(), obj.getName()));
         indent++;
     }
 
     public static Value logAskValue(Loggable obj, String question) {
-        print("QUESTION " + obj.getName() + " " + question + "? [0/1]");
+        print("QUESTION " + obj.getName() + " " + question + "? [0/1] ");
 
         int ch;
         while (true) {
@@ -65,7 +73,7 @@ public class Logger {
     }
 
     public static Boolean logAskBool(Loggable obj, String question) {
-        print("QUESTION " + obj.getName() + " " + question + "? [0/1]");
+        print("QUESTION " + obj.getName() + " " + question + "? [0/1] ");
 
         int ch;
         while (true) {
@@ -89,13 +97,13 @@ public class Logger {
     public static void logReturn(String string) {
         indent--;
         if (string == null) {
-            print("RETURN");
+            println("RETURN");
         } else {
-            print("RETURN " + string);
+            println("RETURN " + string);
         }
     }
 
     public static void logComment(String string) {
-        print("# " + string);
+        println("# " + string);
     }
 }
