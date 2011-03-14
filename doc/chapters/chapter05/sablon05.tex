@@ -452,23 +452,23 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-60pt}%
+	\setlength{\itemindent}{-65pt}%
 		\item inverter bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
-		\item inverter értékének kiadása a vezetékre (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item inv. értékének kiadása a vezetékre (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 	\end{itemize}
 	\item node kiértékelése
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-60pt}%
+	\setlength{\itemindent}{-65pt}%
 		\item node bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item node értékének kiadása a vezetékekre
+		\item node értékének kiadása a vezetékekre (\textbf{megkérdezi a tesztelőt}, javasolt: mindkettőre 0)
 	\end{itemize}
 	\item led kiértékelése
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-60pt}%
+	\setlength{\itemindent}{-65pt}%
 		\item led bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 		\item bemenettől függően világít/nem világít.
 	\end{itemize}
@@ -491,23 +491,23 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-60pt}%
+	\setlength{\itemindent}{-65pt}%
 		\item inverter bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item inverter értékének kiadása a vezetékre (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item inv. értékének kiadása a vezetékre (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 	\end{itemize}
 	\item node kiértékelése
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-60pt}%
+	\setlength{\itemindent}{-65pt}%
 		\item node bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
-		\item node értékének kiadása a vezetékekre
+		\item node értékének kiadása a vezetékekre (\textbf{megkérdezi a tesztelőt}, javasolt: mindkettőre 0)
 	\end{itemize}
 	\item led kiértékelése
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
 	\setlength{\parskip}{0cm}%
-	\setlength{\itemindent}{-60pt}%
+	\setlength{\itemindent}{-65pt}%
 		\item led bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 		\item bemenettől függően világít/nem világít.
 	\end{itemize}
@@ -520,7 +520,7 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 	\item inverter változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 	\item led változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
 \end{itemize}
-\item az áramkör ismét változott, nincs stacionárius állapota
+\item az áramkör ismét változott, nincs stacionárius állapota, szim. vége
 \end{itemize}
 \end{itemize}
 \vspace{-15pt}}
@@ -692,7 +692,7 @@ RETURN true
 \begin{center}
 \includegraphics[width=17cm]{chapters/chapter05/imgs/test1.pdf}
 \caption{Kapcsoló és Led}
-\label{fig:toggle_led}
+\label{fig:test1}
 \end{center}
 \end{figure}
 
@@ -700,7 +700,7 @@ RETURN true
 \begin{center}
 \includegraphics[width=17cm]{chapters/chapter05/imgs/test2.pdf}
 \caption{Kapcsoló, Inverter és Led}
-\label{fig:toggle_inv_led}
+\label{fig:test2}
 \end{center}
 \end{figure}
 
@@ -708,7 +708,7 @@ RETURN true
 \begin{center}
 \includegraphics[width=16cm]{chapters/chapter05/imgs/test3-1.pdf}
 \caption{2 Kapcsoló, Vagy kapu és Led (1. rész)}
-\label{fig:init}
+\label{fig:test3_1}
 \end{center}
 \end{figure}
 
@@ -716,7 +716,7 @@ RETURN true
 \begin{center}
 \includegraphics[width=16cm]{chapters/chapter05/imgs/test3-2.pdf}
 \caption{2 Kapcsoló, Vagy kapu és Led (2. rész)}
-\label{fig:init}
+\label{fig:test3_2}
 \end{center}
 \end{figure}
 
@@ -724,14 +724,14 @@ RETURN true
 \begin{center}
 \includegraphics[height=23cm]{chapters/chapter05/imgs/test4-1.pdf}
 \caption{Inverter visszakötve és Led (1. rész)}
-\label{fig:init}
+\label{fig:test4_1}
 \end{center}
 \end{figure}
 
 \begin{figure}[H]
 \includegraphics[height=23cm]{chapters/chapter05/imgs/test4-2.pdf}
 \caption{Inverter visszakötve és Led (2. rész)}
-\label{fig:init}
+\label{fig:test4_2}
 \end{figure}
 
 
@@ -739,7 +739,7 @@ RETURN true
 \begin{center}
 \includegraphics[width=16cm]{chapters/chapter05/imgs/test5-1.pdf}
 \caption{Kapcsoló, Vagy kapu visszakötve és Led (1. rész)}
-\label{fig:init}
+\label{fig:test5_1}
 \end{center}
 \end{figure}
 
@@ -747,6 +747,6 @@ RETURN true
 \begin{center}
 \includegraphics[width=16cm]{chapters/chapter05/imgs/test5-2.pdf}
 \caption{Kapcsoló, Vagy kapu visszakötve és Led (2. rész)}
-\label{fig:init}
+\label{fig:test5_2}
 \end{center}
 \end{figure}
