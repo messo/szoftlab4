@@ -318,6 +318,7 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 \vspace{-15pt}}
 
 \newpage
+\vspace*{-30pt}
 
 	\begin{longtable}{| l | p{12cm} |}
 	\hline
@@ -371,7 +372,7 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 	\setlength{\itemindent}{-60pt}%
 		\item kapu egyik bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 		\item kapu másik bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item kapu értékének kiadása a vezetékre
+		\item kapu értékének kiadása a vezetékre (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 	\end{itemize}
 	\item led kiértékelése
 	\begin{itemize}
@@ -461,7 +462,7 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 	\setlength{\parskip}{0cm}%
 	\setlength{\itemindent}{-65pt}%
 		\item node bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-		\item node értékének kiadása a vezetékekre (\textbf{megkérdezi a tesztelőt}, javasolt: mindkettőre 0)
+		\item node értékének kiadása a vezetékekre (\textbf{megkérdezi a tesztelőt}, javasolt: mindkettőre 1)
 	\end{itemize}
 	\item led kiértékelése
 	\begin{itemize}
@@ -567,6 +568,14 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 		\item kapu másik bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 		\item kapu értékének kiadása a vezetékre (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 	\end{itemize}
+	\item node kiértékelése
+	\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+	\setlength{\itemindent}{-65pt}%
+		\item node bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item node értékének kiadása a vezetékekre (\textbf{megkérdezi a tesztelőt}, javasolt: mindkettőre 1)
+	\end{itemize}
 	\item led kiértékelése
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
@@ -581,8 +590,9 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 \setlength{\parskip}{0cm}%
 \setlength{\itemindent}{-50pt}%
 	\item kapcsoló változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-	\item kapu változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
-	\item led változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
+	\item kapu változásának vizsgálata (\textit{idáig nem kéne eljutni\ldots})
+	\item node változásának vizsgálata (\textit{idáig nem kéne eljutni\ldots})
+	\item led változásának vizsgálata (\textit{idáig nem kéne eljutni\ldots})
 \end{itemize}
 \item áramkör változott, ezért új ciklus
 \item hálózat kiértékelés indítása
@@ -607,6 +617,14 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 		\item kapu másik bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 		\item kapu értékének kiadása a vezetékre (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
 	\end{itemize}
+\item node kiértékelése
+	\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+	\setlength{\itemindent}{-65pt}%
+		\item node bemenetének lekérdezése (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+		\item node értékének kiadása a vezetékekre (\textbf{megkérdezi a tesztelőt}, javasolt: mindkettőre 1)
+	\end{itemize}	
 	\item led kiértékelése
 	\begin{itemize}
 	\setlength{\itemsep}{0cm}%
@@ -622,6 +640,7 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 \setlength{\itemindent}{-50pt}%
 	\item kapcsoló változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 	\item kapu változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
+	\item node változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 	\item led változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 0)
 \end{itemize}
 \item áramkör nem változott, stabil állapot
