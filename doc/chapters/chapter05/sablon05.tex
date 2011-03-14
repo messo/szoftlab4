@@ -659,9 +659,13 @@ Kapcsolók állítása nincs benne egyik use-caseben sem, azért mert ez tényle
 
 \section{A szkeleton kezelői felületének terve, dialógusok}
 Az általunk elkészített szkeleton egy program váz melynek felülete egy egyszerű konzolos megjelenítési felület, amely alkalmas arra, hogy a use case-k által leírt teszteseteket bemutassuk. Az egyes tesztesetek a neki megfelelő use case sorszámával van elnevezve, így program indítás után egy szám bevitelét követően a kiválasztott teszteset lefut. 
+
 A teszteset futása közben kiír minden objektumot amin metódust hív, illetve kiírja a metódus nevét a paraméterekkel együtt, majd a visszatérési értéket. Ez azért lehetséges, mert a szkeleton már tartalmazza az elkészítendő szoftver összes fontos osztályát és metódusát, azonban az üzleti logikát még nem. Így könnyen eldönthető, hogy a use case-nek megfelelően viselkedik a program és továbbiakban képes lesz-e megfelelően működni.
+
 A tesztelési folyamat során döntési helyzet léphet fel. Ilyenkor a program felteszi a kérdést, majd a kapott válasz alapján folytatja a további futást. Ezzel csökkentjük a tesztesetek számát, anélkül, hogy bizonyos esetek kimaradnának a tesztelés alól. 
+
 Futás közben megjegyzés formájában a program tájékoztat bizonyos fontosabb lépésekről (például inicializálás), vagy a megértést segítő egyéb dolgokról.
+
 Az elvárás, hogy a szkeleton a szekvenciadiagramok által leírt működést mutassa. A program egyszerű és könnyen összehasonlítható formában írja ki a működését, amelyet könnyen összevethetjük a szekvencia diagrammokkal.
 
 \subsection{Program üzeneteinek formátuma}
@@ -761,7 +765,7 @@ RETURN true
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=16cm]{chapters/chapter05/imgs/test3-1.pdf}
+\includegraphics[height=23cm]{chapters/chapter05/imgs/test3-1.pdf}
 \caption{2 Kapcsoló, Vagy kapu és Led (1. rész)}
 \label{fig:test3_1}
 \end{center}
@@ -769,7 +773,7 @@ RETURN true
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=16cm]{chapters/chapter05/imgs/test3-2.pdf}
+\includegraphics[height=23cm]{chapters/chapter05/imgs/test3-2.pdf}
 \caption{2 Kapcsoló, Vagy kapu és Led (2. rész)}
 \label{fig:test3_2}
 \end{center}
@@ -792,7 +796,7 @@ RETURN true
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=16cm]{chapters/chapter05/imgs/test5-1.pdf}
+\includegraphics[height=23cm]{chapters/chapter05/imgs/test5-1.pdf}
 \caption{Kapcsoló, Vagy kapu visszakötve és Led (1. rész)}
 \label{fig:test5_1}
 \end{center}
@@ -800,7 +804,7 @@ RETURN true
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=16cm]{chapters/chapter05/imgs/test5-2.pdf}
+\includegraphics[height=23cm]{chapters/chapter05/imgs/test5-2.pdf}
 \caption{Kapcsoló, Vagy kapu visszakötve és Led (2. rész)}
 \label{fig:test5_2}
 \end{center}
