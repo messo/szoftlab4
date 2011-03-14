@@ -106,7 +106,9 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 
 Lenti use-caseknél, ahol valamilyen információ szerint dönteni kell, vagy csak szükségünk van a skeleton jellegéből adódó hiányzó információkra, azt a felhasználótól kérjük be. Ahhoz, hogy a szekvenciadiagramokon lévő szekvenciákat kapjunk, a javasolt értéket kell beírnia a tesztelőnek.\\
 
-Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, ezzel elfedve a lényegi részeket, ezért ezt egy külön use-case-ben bemutatjuk, a többinél csak jelezzük, hogy ott is van ilyen lépés. A tesztelő, majd egy adott tesztesetnél választhat, hogy kíváncsi-e az inicializálásra vagy sem.
+Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, ezzel elfedve a lényegi részeket, ezért ezt egy külön use-case-ben bemutatjuk, a többinél csak jelezzük, hogy ott is van ilyen lépés. A tesztelő, majd egy adott tesztesetnél választhat, hogy kíváncsi-e az inicializálásra vagy sem.\\
+
+Kapcsolók állítása nincs benne egyik use-caseben sem, azért mert ez ténylegesen majd a szimuláción kívül fog történni, de a kapcsolók bekérik az állapotukat a felhasználótól, így a szimuláció teszteléséhez ez nem is szükséges.
 
 \usecase
 {Áramkör inicializálása}
@@ -657,7 +659,7 @@ Nem akartuk, hogy az áramkör inicializálása minden use-casenél ott legyen, 
 Az általunk elkészített szkeleton egy program váz melynek felülete egy egyszerű konzolos megjelenítési felület, amely alkalmas arra, hogy a use case-k által leírt teszteseteket bemutassuk. Az egyes tesztesetek a neki megfelelő use case sorszámával van elnevezve, így program indítás után egy szám bevitelét követően a kiválasztott teszteset lefut. 
 A teszteset futása közben kiír minden objektumot amin metódust hív, illetve kiírja a metódus nevét a paraméterekkel együtt, majd a visszatérési értéket. Ez azért lehetséges, mert a szkeleton már tartalmazza az elkészítendő szoftver összes fontos osztályát és metódusát, azonban az üzleti logikát még nem. Így könnyen eldönthető, hogy a use case-nek megfelelően viselkedik a program és továbbiakban képes lesz-e megfelelően működni.
 A tesztelési folyamat során döntési helyzet léphet fel. Ilyenkor a program felteszi a kérdést, majd a kapott válasz alapján folytatja a további futást. Ezzel csökkentjük a tesztesetek számát, anélkül, hogy bizonyos esetek kimaradnának a tesztelés alól. 
-Futás közben megjegyzés formájában a program tájékoztat néhány elem valamilyen tulajdonságáról (például az adott bemenet miatt a kijelző világít, vagy nem) vagy bizonyos fontosabb lépésekről (például inicializálás).
+Futás közben megjegyzés formájában a program tájékoztat bizonyos fontosabb lépésekről (például inicializálás), vagy a megértést segítő egyéb dolgokról.
 Az elvárás, hogy a szkeleton a szekvenciadiagramok által leírt működést mutassa. A program egyszerű és könnyen összehasonlítható formában írja ki a működését, amelyet könnyen összevethetjük a szekvencia diagrammokkal.
 
 \subsection{Program üzeneteinek formátuma}
