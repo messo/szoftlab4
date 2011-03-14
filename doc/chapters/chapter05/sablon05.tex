@@ -426,7 +426,7 @@ Kapcsolók állítása nincs benne egyik use-caseben sem, azért mert ez tényle
 
 \usecase
 {Inverter visszakötve és Led}
-{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy inverterből, amelynek kimenete egy ledbe illetve saját bemenetére van kötve. Oszcillálni fog, ezért a szimuláció rövid időn belül leáll.
+{Ez a usecase egy olyan áramkör tesztelését mutatja be, amely egy inverterből és egy ledből áll. Az inverter kimenete a ledbe illetve saját bemenetére van kötve. Oszcillálni fog, ezért a szimuláció rövid időn belül leáll.
 \newline
 \begin{center}
 \vspace{-15pt}
@@ -480,6 +480,7 @@ Kapcsolók állítása nincs benne egyik use-caseben sem, azért mert ez tényle
 \setlength{\parskip}{0cm}%
 \setlength{\itemindent}{-50pt}%
 	\item inverter változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
+	\item node változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
 	\item led változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
 \end{itemize}
 \item áramkör változott, ezért új ciklus
@@ -518,7 +519,8 @@ Kapcsolók állítása nincs benne egyik use-caseben sem, azért mert ez tényle
 \setlength{\parskip}{0cm}%
 \setlength{\itemindent}{-50pt}%
 	\item inverter változásának vizsgálata (\textbf{megkérdezi a tesztelőt}, javasolt: 1)
-	\item led változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
+	\item node változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
+\item led változásának vizsgálata (\textit{idáig nem kéne eljutni, ha fent jót válaszolt a tesztelő})
 \end{itemize}
 \item az áramkör ismét változott, nincs stacionárius állapota, szim. vége
 \end{itemize}
