@@ -22,14 +22,11 @@ public class OrGate extends AbstractComponent {
 
     @Override
     protected void onEvaluation() {
-        Value v = Value.FALSE;
         for (int i = 0; i < inputs.length; i++) {
-            if (evaluateInput(i) == Value.TRUE) {
-                v = Value.TRUE;
-                break;
-            }
+            evaluateInput(i);
         }
 
+        Value v = Logger.logAskValue(this, "mit adjunk a vezetékre");
         outputs[0].setValue(v);
     }
 

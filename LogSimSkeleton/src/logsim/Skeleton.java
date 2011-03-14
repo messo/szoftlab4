@@ -20,7 +20,7 @@ public class Skeleton {
     public static final int VAGY_VISSZAKOTVE_LED = 5;
 
     public Skeleton() {
-        int use_case = 4;
+        int use_case = 5;
 
         switch (use_case) {
             case KAPCSOLO_LED:
