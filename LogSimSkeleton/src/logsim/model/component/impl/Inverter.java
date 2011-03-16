@@ -19,9 +19,10 @@ public class Inverter extends AbstractComponent {
 
     @Override
     protected void onEvaluation() {
-        // bemenetén lévõ értéket invertálja.
+        // bemenetén lévõ adat lekérdezése
         Value v = evaluateInput(0);
 
+        //vezeték új értékének bekérése
         Value v2 = Logger.logAskValue(this, "mit adjunk a vezetékre");
         outputs[0].setValue(v2);
     }

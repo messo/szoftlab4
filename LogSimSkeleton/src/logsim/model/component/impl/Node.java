@@ -19,9 +19,16 @@ public class Node extends AbstractComponent {
 
     @Override
     protected void onEvaluation() {
+        //bemenetén lévõ adat lekérése
         inputs[0].getValue();
+
+        //új adat bekérése
+        Value v2 = Logger.logAskValue(this, "mit adjunk a vezetékre");
+
+        //kimenetekre az új érték kiírása
+        //szerintem ide elég egyszer beírni az értéket, nem kell minden vezetékre külön-külön
+        //mert a normális node-nál úgyis mindig ugyanaz lesz a kimeneti érték, mint a bemenetei mindenhol
         for (int i = 0; i < outputs.length; i++) {
-            Value v2 = Logger.logAskValue(this, "mit adjunk a vezetékre");
             outputs[i].setValue(v2);
         }
     }

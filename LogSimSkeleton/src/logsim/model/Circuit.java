@@ -4,7 +4,7 @@ import logsim.model.component.AbstractComponent;
 import logsim.model.component.FlipFlop;
 import logsim.model.component.DisplayComponent;
 import logsim.model.component.SourceComponent;
-import logsim.model.component.impl.SequenceGenerator;
+//import logsim.model.component.impl.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import logsim.log.Loggable;
@@ -41,14 +41,14 @@ public class Circuit implements Loggable {
     /**
      * Jelgenerátorok listája
      */
-    private List<SequenceGenerator> seqGens;
+//    private List<SequenceGenerator> seqGens;
 
     public Circuit() {
         Logger.logCreate(this);
         sources = new ArrayList<SourceComponent>();
         displays = new ArrayList<DisplayComponent>();
         flipFlops = new ArrayList<FlipFlop>();
-        seqGens = new ArrayList<SequenceGenerator>();
+ //       seqGens = new ArrayList<SequenceGenerator>();
         components = new ArrayList<AbstractComponent>();
         Logger.logReturn();
     }
@@ -80,14 +80,15 @@ public class Circuit implements Loggable {
         Logger.logReturn();
     }
 
+  /*
     public void add(SequenceGenerator sg) {
         Logger.logCall(this, "add", sg);
         Logger.logComment("Jelgenerátor hozzáadása az áramkörhöz");
         components.add(sg);
-        seqGens.add(sg);
+//        seqGens.add(sg);
         Logger.logReturn();
     }
-
+*/
     public void add(DisplayComponent dc) {
         Logger.logCall(this, "add", dc);
         Logger.logComment("Kijelzõ hozzáadása az áramkörhöz");
@@ -119,9 +120,8 @@ public class Circuit implements Loggable {
      */
     public void stepGenerators() {
         Logger.logCall(this, "stepGenerators");
-        for (SequenceGenerator sg : seqGens) {
-            sg.step();
-        }
+        
+        
         Logger.logReturn();
     }
 

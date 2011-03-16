@@ -18,20 +18,28 @@ public class Toggle extends SourceComponent {
 
     @Override
     protected void onEvaluation() {
+        //bemenet értékének bekérése
         Value v = Logger.logAskValue(this, "állapot");
+        //kimenet beállítása
         outputs[0].setValue(v);
     }
 
     /**
      * Lekérjük a kapcsoló értékét (1 elemû tömb)
      */
+    
     @Override
     public Value[] getValues() {
+
+        //mivel nem tároljuk az értékeket, ezért ha lekérdezzük õket
+        //be kell kérni õket
         Value[] values = new Value[1];
-        values[0] = outputs[0].getValue();
+        values[0] = Logger.logAskValue(this,"érték");
+        
+         
         return values;
     }
-
+    
     /**
      * Kapcsoló állapotának változtatása, csak 1 elemû tömböt kaphat paraméterül.
      *

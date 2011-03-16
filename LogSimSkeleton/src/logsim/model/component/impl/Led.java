@@ -30,8 +30,11 @@ public class Led extends DisplayComponent {
 
     @Override
     protected void onEvaluation() {
+        //bemenetén lévõ adat lekérése
         Value v = inputs[0].getValue();
-        //Logger.logComment((v == Value.TRUE) ? "világít" : "nem világít");
+
+        //led állapotának kiírása
+        Logger.logComment((v == Value.TRUE) ? "világít" : "nem világít");
     }
 
     @Override
