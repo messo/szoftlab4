@@ -5,20 +5,41 @@ import logsim.model.Value;
 
 /**
  * Loggolást segítõ osztály
- *
  */
 public class Logger {
 
     /**
      * Behúzás mértéke
      */
-    public static int indent = 0;
+    private static int indent = 0;
+    /**
+     * Loggolás engedélyezett flagje
+     */
+    private static boolean enabled = true;
+
+    /**
+     * Loggolás bekapcsolása
+     */
+    public static void turnOn() {
+        enabled = true;
+    }
+
+    /**
+     * Loggolás kikapcsolása
+     */
+    public static void turnOff() {
+        enabled = false;
+    }
 
     /**
      * Paraméterben megadott szöveget a jelenlegi behúzással kiírja
      * @param s Kiírandó szöveg
      */
     private static void print(String s) {
+        if (!enabled) {
+            return;
+        }
+
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < indent; i++) {
             sb.append("  ");
@@ -33,14 +54,12 @@ public class Logger {
      * @param s Kiírandó szöveg
      */
     private static void println(String s) {
-//        StringBuilder sb = new StringBuilder();
-//        for (int i = 0; i < indent; i++) {
-//            sb.append("  ");
-//        }
-//        sb.append(s);
+        if (!enabled) {
+            return;
+        }
+
         print(s);
         System.out.println();
-//        System.out.println(sb.toString());
     }
 
     /**
@@ -62,10 +81,24 @@ public class Logger {
     }
 
     /**
-     * Üres visszatérés
+     * Visszatérés paraméter nélkül
      */
     public static void logReturn() {
         logReturn(null);
+    }
+
+    /**
+     * Visszatérés paraméterrel
+     * 
+     * @param string Paraméter
+     */
+    public static void logReturn(String string) {
+        indent--;
+        if (string == null) {
+            println("RETURN");
+        } else {
+            println("RETURN " + string);
+        }
     }
 
     /**
@@ -77,7 +110,34 @@ public class Logger {
         indent++;
     }
 
-    private static Integer logAsk(Loggable obj, String question) {
+    /**
+     * Felhasználótól bekérünk egy Value-t.
+     *
+     * @param obj melyik objektum kéri
+     * @param question mi a kérdés
+     * @return felhasználó által megadott Value
+     */
+    public static Value logAskValue(Loggable obj, String question) {
+        Boolean bool = logAskBool(obj, question);
+        if (bool == null) {
+            return null;
+        }
+
+        if (bool) {
+            return Value.TRUE;
+        } else {
+            return Value.FALSE;
+        }
+    }
+
+    /**
+     * Felhasználótól bekérünk egy Booleant.
+     *
+     * @param obj melyik objektum kéri
+     * @param question mi a kérdés
+     * @return felhasználó által megadott Boolean
+     */
+    public static Boolean logAskBool(Loggable obj, String question) {
         print("QUESTION " + obj.getName() + " " + question + "? [0/1] ");
 
         int ch;
@@ -91,46 +151,6 @@ public class Logger {
                 return null;
             }
         }
-        return ch;
-    }
-
-    public static Value logAskValue(Loggable obj, String question) {
-//        print("QUESTION " + obj.getName() + " " + question + "? [0/1] ");
-//
-//        int ch;
-//        while (true) {
-//            try {
-//                ch = System.in.read();
-//                if (ch == '0' || ch == '1') {
-//                    break;
-//                }
-//            } catch (IOException ex) {
-//                return null;
-//            }
-//        }
-        Integer ch = Logger.logAsk(obj, question);
-        if (ch == '0') {
-            return Value.FALSE;
-        } else {
-            return Value.TRUE;
-        }
-    }
-
-    public static Boolean logAskBool(Loggable obj, String question) {
-//        print("QUESTION " + obj.getName() + " " + question + "? [0/1] ");
-//
-//        int ch;
-//        while (true) {
-//            try {
-//                ch = System.in.read();
-//                if (ch == '0' || ch == '1') {
-//                    break;
-//                }
-//            } catch (IOException ex) {
-//                return null;
-//            }
-//        }
-        Integer ch = Logger.logAsk(obj, question);
 
         if (ch == '0') {
             return false;
@@ -140,20 +160,8 @@ public class Logger {
     }
 
     /**
-     * Visszatértés paraméterrel
-     * @param string Paraméter
-     */
-    public static void logReturn(String string) {
-        indent--;
-        if (string == null) {
-            println("RETURN");
-        } else {
-            println("RETURN " + string);
-        }
-    }
-
-    /**
      * Kommentet ír a megjelenítõre
+     *
      * @param string Komment
      */
     public static void logComment(String string) {

@@ -1,5 +1,10 @@
 package logsim;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logsim.model.Simulation;
 import logsim.model.skeleton.Circuit1;
 import logsim.model.skeleton.Circuit2;
@@ -8,36 +13,68 @@ import logsim.model.skeleton.Circuit4;
 import logsim.model.skeleton.Circuit5;
 
 /**
- *
- * @author Balint
+ * Skeleton main osztály. Ez tartalmazza az indító logikát.
  */
 public class Skeleton {
 
-    public static final int KAPCSOLO_LED = 1;
-    public static final int KAPCSOLO_INVERTER_LED = 2;
-    public static final int KAPCSOLO_2x_VAGY_LED = 3;
-    public static final int INVERTER_VISSZAKOTVE_LED = 4;
-    public static final int VAGY_VISSZAKOTVE_LED = 5;
+    private static final String KAPCSOLO_LED = "1";
+    private static final String KAPCSOLO_INVERTER_LED = "2";
+    private static final String KAPCSOLO_2x_VAGY_LED = "3";
+    private static final String INVERTER_VISSZAKOTVE_LED = "4";
+    private static final String VAGY_VISSZAKOTVE_LED = "5";
+    private static final String EXIT = "0";
+    private static BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+
+    /**
+     * Kiírja a kijelzõre a menüpontokat
+     */
+    private void printMenu() {
+        System.out.println("Kérlek válassz az alábbi menüpontok közül:");
+        System.out.println("");
+        System.out.println("(1) Kapcsoló és led szimulációja");
+        System.out.println("     Egy darab kapcsoló, melyre led van kötve");
+        System.out.println("(2) Kapcsoló, inverter és led szimulációja");
+        System.out.println("     Egy darab kapcsoló, melyre egy inverter van kötve, és ennek kimenete van");
+        System.out.println("     egy leden.");
+        System.out.println("(3) 2 kapcsoló, VAGY kapu és led szimulációja");
+        System.out.println("     Két darab kapcsoló, melyek egy 2 bemenetes VAGY kapura vannak kötve, ennek");
+        System.out.println("     kimenete pedig egy ledre.");
+        System.out.println("(4) Visszakötött inverter szimulációja");
+        System.out.println("     Egy inverter, melynek kimenete egy ledre és saját maga bemenetére van kötve");
+        System.out.println("(5) Kapcsoló, visszakötött VAGY kapu és led szimulációja");
+        System.out.println("     Egy 2 bemenetes VAGY kapu, melynek egyik bemenetére egy kapcsoló, másikra");
+        System.out.println("     a saját bemenete van kötve.");
+        System.out.println("");
+        System.out.println("(0) Kilépés");
+        System.out.println("");
+        System.out.print("Választott menüpont (írd be a számot, majd ENTER): ");
+    }
 
     public Skeleton() {
-        int use_case = 2;
+        boolean shouldRun = true;
+        String str;
 
-        switch (use_case) {
-            case KAPCSOLO_LED:
-                testKapcsoloLed();
-                break;
-            case KAPCSOLO_INVERTER_LED:
-                testKapcsoloInverterLed();
-                break;
-            case KAPCSOLO_2x_VAGY_LED:
-                testKapcsolo2xVagy();
-                break;
-            case INVERTER_VISSZAKOTVE_LED:
-                testInverterVisszakotveLed();
-                break;
-            case VAGY_VISSZAKOTVE_LED:
-                testVagyVisszakotveLed();
-                break;
+        while (shouldRun) {
+            try {
+                printMenu();
+                str = keyboard.readLine();
+                if (str.equals(KAPCSOLO_LED)) {
+                    testKapcsoloLed();
+                } else if (str.equals(KAPCSOLO_INVERTER_LED)) {
+                    testKapcsoloInverterLed();
+                } else if (str.equals(KAPCSOLO_2x_VAGY_LED)) {
+                    testKapcsolo2xVagy();
+                } else if (str.equals(INVERTER_VISSZAKOTVE_LED)) {
+                    testInverterVisszakotveLed();
+                } else if (str.equals(VAGY_VISSZAKOTVE_LED)) {
+                    testVagyVisszakotveLed();
+                } else if (str.equals(EXIT)) {
+                    return;
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace(System.err);
+                return;
+            }
         }
     }
 
