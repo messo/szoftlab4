@@ -13,35 +13,193 @@
 \begin{fajllista}
 
 \fajl
-{Main.java} % Kezdet
+{src/logsim/Skeleton.java} % Kezdet
 {250 byte} % Idptartam
 {2009.10.10~18:05~} % Résztvevők
-{...} % Leírás
+{Menüt tartalmazza. A felhasználó választása alapján a megfelelő tesztesetet elindítja} % Leírás
 
 \fajl
-{...}
-{...}
-{...}
-{...}
+{src/logsim/log/Loggable.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Loggolást segítő interfész} % Leírás
+
+\fajl
+{src/logsim/log/\newline
+LoggableInt.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Wrapper osztály az int típus köré, mely lehetővé teszi az intek loggolását} % Leírás
+
+\fajl
+{src/logsim/log/Logger.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Loggolást megvalósító osztály} % Leírás
+
+\fajl
+{src/logsim/model/Circuit.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Az áramkört megvalósító osztály} % Leírás
+
+\fajl
+{src/logsim/model/\newline
+Simulation.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{A szimulációt megvalósító osztály} % Leírás
+
+\fajl
+{src/logsim/model/Value.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Az áramkörben előforduló értkékeket tartalmazó osztály} % Leírás
+
+\fajl
+{src/logsim/model/component/\newline
+AbstractComponent.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Az alkatrészek absztrakt ősosztálya} % Leírás
+
+\fajl
+{src/logsim/model/component/\newline
+DisplayComponent.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Megjelenítő típusú alkatrészek absztrakt ősosztálya} % Leírás
+
+\fajl
+{src/logsim/model/component/\newline
+SourceComponent.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Forrás típusú alkatrészek absztrakt ősosztálya} % Leírás
+
+\fajl
+{src/logsim/model/component/\newline
+Wire.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Vezetéket megvalósító osztály} % Leírás
+
+\fajl
+{src/logsim/model/component/\newline
+impl/Inverter.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Az inverter alkatrészt megvalósító osztály} % Leírás
+
+\fajl
+{src/logsim/model/component/\newline
+impl/Led.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{A led megjelenítőt megvalósító osztály} % Leírás
+
+\fajl
+{src/logsim/model/component/\newline
+impl/Node.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Csomópont alkatrészt megvalósító osztály} % Leírás
+
+\fajl
+{src/logsim/model/component/\newline
+impl/OrGate.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{VAGY kaput megvalósító osztály} % Leírás
+
+\fajl
+{src/logsim/model/component/\newline
+impl/Toggle.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{A kapcsoló forrást megvalósító osztály} % Leírás
+
+\fajl
+{src/logsim/model/skeleton/\newline
+Circuit1.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Az első tesztesetet tartalmazó osztály} % Leírás
+
+\fajl
+{src/logsim/model/skeleton/\newline
+Circuit2.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{A második tesztesetet tartalmazó osztály} % Leírás
+
+\fajl
+{src/logsim/model/skeleton/\newline
+Circuit3.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{A harmadik tesztesetet tartalmazó osztály} % Leírás
+
+\fajl
+{src/logsim/model/skeleton/\newline
+Circuit4.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{A negyedik tesztesetet tartalmazó osztály} % Leírás
+
+\fajl
+{src/logsim/model/skeleton/\newline
+Circuit5.java} % Kezdet
+{250 byte} % Idptartam
+{2009.10.10~18:05~} % Résztvevők
+{Az ötödik tesztesetet tartalmazó osztály} % Leírás
 
 \end{fajllista}
 
 \subsection{Fordítás}
-\comment{A fenti listában szereplő forrásfájlokból milyen műveletekkel lehet a bináris, futtatható kódot előállítani. Az előállításhoz csak a 2. Követelmények c. dokumentumban leírt környezetet szabad előírni.}
+A hibamentes és minél inkább gördülékenyebb fordítás érdekében létrehoztunk egy compile.bat nevezetű batch fájlt, mely a projekt főkönyvtárában található. Projekt főkönytára az, amelyik batch fájlokat tartalmaz és a "src" nevezetű mappát, melyben a program forráskódja található.
 
+A compile.bat fájl az alábbi parancsokat hajtja végre:
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
 \begin{lstlisting}
-javac -d bin *.java
+@echo off
+set PATH=%PATH%;C:\Program Files\Java\jdk1.6.0_21\bin\
+cd src
+javac logsim\Skeleton.java
+cd..
+if not errorlevel 1 echo Forditas sikeres
+pause
 \end{lstlisting}
+Vagyis, beállítja a PATH környezeti változót, majd lefordítja a programot. Ha hibamentes volt a fordítás, azt a "Fordítás sikeres" kimenettel értesíti a felhasználót.
+Fontos, hogy a PATH változóban az aktuális JDK bináris könyvtárának az elérési útvonala legyen. Szükség esetén módosítani kell a compile.bat batch fájlt!
+
+
+A fordítás sikeressége után, lehetőség van a dokumentáció legenerálására is. Ehhez felhasználható a főkönyvtárban található doc.bat batch fájl, mely az alábbi parancsokat hajtja végre:
+\lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
+\begin{lstlisting}
+@echo off
+cd src
+javadoc logsim logsim.log logsim.model logsim.model.component
+ logsim.model.component.impl logsim.model.skeleton -d ..\documents
+cd..
+if not errorlevel 1 echo Dokumentum generalas sikeres volt. 
+pause
+\end{lstlisting}
+Ha a dokumentum generálás sikeres volt, akkor a documents nevezetű mappában megtaláhatóak a kívánt dokumentumok.
+
+
 
 \subsection{Futtatás}
-\comment{A futtatható kód elindításával kapcsolatos teendők leírása. Az indításhoz csak a 2. Követelmények c. dokumentumban leírt környezetet szabad előírni.}
-
+A futtatás megkönnyításe érdekében elkészítettük a run.bat batch fájlt.
+Ez az alábbi parancsokat hajtja végre:
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
 \begin{lstlisting}
-cd bin
-java Main.java
+@echo off
+cd src
+java logsim.Skeleton
 \end{lstlisting}
+Az "src" könyvtárból elindítja az előzőleg lefordított programot.
+
 
 \section{Értékelés}
 \comment{A projekt kezdete óta az értékelésig eltelt időben tagokra bontva, százalékban.}
