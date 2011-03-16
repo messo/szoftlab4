@@ -5,53 +5,28 @@ import logsim.log.Logger;
 
 /**
  * Egy szimulációt reprezentáló objektum.
- * Futásakor elindítja a jelgenerátor léptetõt, s utasítja az áramkört több kiértékelési
- * ciklus lefuttatásához, amíg az áramkörben van változás. Ha a változás megadott lépésen belül
+ * Utasítja az áramkört több kiértékelési ciklus lefuttatásához,
+ * amíg az áramkörben van változás. Ha a változás megadott lépésen belül
  * nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot.
- * Amikor leállítódik, a jelgenerátor-léptetõt is leállítja.
- * A szál természetébõl adódóan többet nem indítható el, új szimulációhoz új példányt kell létrehozni.
  *
- * @author balint
  */
 public class Simulation implements Loggable {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return "simulation";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getClassName() {
         return "Simulation";
     }
-
-    /**
-     * Szimuláció állapotait írja le
-     */
-    public static enum State {
-
-        /**
-         * Szimuláció éppen dolgozik, egy konkrét jelforrás-kombinációt alkalmazva dolgoztatja az áramkört
-         */
-        WORKING,
-        /**
-         * A szimuláció kész a futásra. Ilyenkor hívható rajta a start() metódus
-         */
-        READY,
-        /**
-         * A szimuláció leállt, mert az áramkörnek nincs stacionárius állapota. A start() metódus
-         * újra hívható (ha a bemenetek nem változnak, továbbra is le fog állni).
-         */
-        FAILED
-    }
-    /**
-     * Szimuláció jelenlegi állapota
-     */
-    private State state = State.READY;
-    /**
-     * cikluslimit
-     */
-    private static final int cycleLimit = 2;
     /**
      * Szimulált áramkör
      */
@@ -67,28 +42,21 @@ public class Simulation implements Loggable {
      */
     public boolean start() {
         Logger.logCall(this, "start");
-        // amikor elindul a szimuláció, akkor a steppert is indítsuk el.
-        state = State.WORKING;
         int counter = 0;
-        while (counter < cycleLimit) {
+        while (counter < 2) {
             circuit.doEvaluationCycle();
             if (!circuit.isChanged()) {
                 break;
             }
             counter++;
         }
-        if (counter == cycleLimit) {
-            state = State.FAILED;
+        if (counter == 2) {
             Logger.logReturn("false");
             return false;
         }
         circuit.commitFlipFlops();
         circuit.stepGenerators();
-        // GUI rajzolás
-        //controller.onCircuitUpdate();
 
-        state = State.READY;
-        //System.out.println("Simulation is done!");
         Logger.logReturn("true");
         return true;
     }
@@ -96,7 +64,7 @@ public class Simulation implements Loggable {
     /**
      * Szimulált áramkör lekérdezése
      *
-     * @return
+     * @return Áramkör példány
      */
     public Circuit getCircuit() {
         return circuit;
@@ -105,20 +73,11 @@ public class Simulation implements Loggable {
     /**
      * Szimulált áramkör beállítása
      * 
-     * @param circuit
+     * @param circuit Szimulálni kívánt áramkör
      */
     public void setCircuit(Circuit circuit) {
         Logger.logCall(this, "setCircuit", circuit);
         this.circuit = circuit;
         Logger.logReturn();
-    }
-
-    /**
-     * Szimuláció állapotának lekérdezése.
-     *
-     * @return állapot
-     */
-    public State getState() {
-        return state;
     }
 }

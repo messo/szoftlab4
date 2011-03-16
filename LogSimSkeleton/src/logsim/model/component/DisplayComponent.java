@@ -5,16 +5,22 @@ import logsim.model.Circuit;
 
 /**
  * Megjelenítõ típusú komponenst reprezentál. Ezt kell implementálnia a megjelenítõknek.
- *
- * @author balint
+ * pl. led
  */
 public abstract class DisplayComponent extends AbstractComponent {
 
-    public DisplayComponent(String name) {
-        super(name);
-        outputs = new Wire[0];
+    /**
+     * Konstruktor
+     * @param name Komponens neve. Nincs kimenete
+     * @param inputCount Bemenetek száma
+     */
+    protected DisplayComponent(String name, int inputCount) {
+        super(name, inputCount, 0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addTo(Circuit circuit) {
         Logger.logCall(this, "addTo", circuit);

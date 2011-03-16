@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logsim.log;
 
-/**
- *
- * @author Balint
- */
 public class LoggableInt implements Loggable {
 
     private int intValue;

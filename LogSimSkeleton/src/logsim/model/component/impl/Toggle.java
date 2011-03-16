@@ -7,15 +7,20 @@ import logsim.model.component.SourceComponent;
 /**
  * Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
  *
- * @author balint
  */
 public class Toggle extends SourceComponent {
 
+    /**
+     * Konstruktor
+     * @param name Kapcsoló neve
+     */
     public Toggle(String name) {
         super(name);
-        Logger.logReturn();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onEvaluation() {
         //bemenet értékének bekérése
@@ -26,20 +31,21 @@ public class Toggle extends SourceComponent {
 
     /**
      * Lekérjük a kapcsoló értékét (1 elemû tömb)
+     *
+     * @return Érték
      */
-    
     @Override
     public Value[] getValues() {
 
         //mivel nem tároljuk az értékeket, ezért ha lekérdezzük õket
         //be kell kérni õket
         Value[] values = new Value[1];
-        values[0] = Logger.logAskValue(this,"érték");
-        
-         
+        values[0] = Logger.logAskValue(this, "érték");
+
+
         return values;
     }
-    
+
     /**
      * Kapcsoló állapotának változtatása, csak 1 elemû tömböt kaphat paraméterül.
      *
@@ -58,6 +64,9 @@ public class Toggle extends SourceComponent {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getClassName() {
         return "Toggle";

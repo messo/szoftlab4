@@ -6,22 +6,23 @@ import logsim.model.Value;
 
 /**
  * Jelforrás típusú komponenst reprezentál. Ezt kell implementálnia a jelforrásoknak.
- *
- * @author balint
+ * pl. toggle
  */
 public abstract class SourceComponent extends AbstractComponent {
 
+    /**
+     * Konstruktor. Nincs bemenete és egy kimenete van
+     * @param name Komponens neve
+     */
     public SourceComponent(String name) {
-        super(name);
-        inputs = new Wire[0];
-        outputs = new Wire[1];
+        super(name,0,1);
     }
 
     /**
      * Beállítjuk a jelforrás értékét. Kapcsoló esetén csak 1 elemû tömb
      * adható paraméterként!
      * 
-     * @param values
+     * @param values Érték(ek)et tároló tömb
      */
     public abstract void setValues(Value[] values);
 
@@ -32,6 +33,10 @@ public abstract class SourceComponent extends AbstractComponent {
      */
     public abstract Value[] getValues();
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void addTo(Circuit circuit) {
         Logger.logCall(this, "addTo", circuit);

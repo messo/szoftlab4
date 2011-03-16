@@ -11,7 +11,6 @@ import logsim.model.Value;
  * komponens. A közös logikát valósítja meg. A gyakran használt dolgokra
  * ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.)
  *
- * @author balint
  */
 public abstract class AbstractComponent implements Loggable {
 
@@ -23,25 +22,41 @@ public abstract class AbstractComponent implements Loggable {
      * Kimenetekre kötött vezetékek
      */
     protected Wire[] outputs;
+    /*
+     * Komponens neve
+     */
     protected String name;
 
-    public AbstractComponent(String name) {
+    /**
+     * Konstruktor
+     * @param name Komponens neve
+     * @param inputCount Komponens bemeneteinek száma
+     * @param outputCount Komponens kimeneteinek száma
+     */
+    protected AbstractComponent(String name, int inputCount, int outputCount) {
         this.name = name;
         Logger.logCreate(this);
-        inputs = new Wire[1];
-        outputs = new Wire[1];
+
+        outputs = new Wire[outputCount];
+        inputs = new Wire[inputCount];
+
+        Logger.logReturn();
+
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return name;
     }
 
-    /*
+    /**
      * Beállítunk egy bemenetet
      *
-     * @param inputPin melyik bemenetet állítjuk
-     * @param wire melyik vezetéket kötjük rá
+     * @param inputPin Melyik bemenetet állítjuk
+     * @param wire Melyik vezetéket kötjük rá
      */
     public void setInput(int inputPin, Wire wire) {
         Logger.logCall(this, "setInput", new LoggableInt(inputPin), wire);
@@ -49,6 +64,11 @@ public abstract class AbstractComponent implements Loggable {
         Logger.logReturn();
     }
 
+    /**
+     * Beállítunk egy kimenetet
+     * @param outputPin Melyik kimenetet állítjuk
+     * @param wire Melyik vezetéket kötjük rá
+     */
     public void setOutput(int outputPin, Wire wire) {
         Logger.logCall(this, "setOutput", new LoggableInt(outputPin), wire);
         outputs[outputPin] = wire;
@@ -56,7 +76,9 @@ public abstract class AbstractComponent implements Loggable {
     }
 
     /**
-     * Adott kimeneti lábon lévõ érték lekérdezése.
+     * Egy kiválasztott kimenet értékének lekérdezése
+     * @param idx Kimenet sorszáma
+     * @return Érték
      */
     public Value getValue(int idx) {
         return outputs[idx].getValue();
@@ -66,7 +88,6 @@ public abstract class AbstractComponent implements Loggable {
      * Komponens kimeneti lábain lévõ vezetékeken lévõ értékek újraszámolása
      * a bemenetek alapján.
      *
-     * @return kimenetek
      */
     public void evaluate() {
         Logger.logCall(this, "evaluate");
@@ -77,13 +98,17 @@ public abstract class AbstractComponent implements Loggable {
     /*
      * Lekérjük egy adott bemenetre kötött értéket
      *
-     * @param inputPin bemenet, amely érdekel minket
-     * @return bementen lévõ érték
+     * @param inputPin Bemenet, amely érdekel minket
+     * @return Bementen lévõ érték
      */
     protected Value evaluateInput(int inputPin) {
         return inputs[inputPin].getValue();
     }
 
+    /**
+     * Visszaadja, hogy a komponensünk kimeneti értéke változott-e a kiértékelés során
+     * @return Változott-e
+     */
     public boolean isChanged() {
         Logger.logCall(this, "isChanged");
         boolean b = Logger.logAskBool(this, "változott");
@@ -98,14 +123,13 @@ public abstract class AbstractComponent implements Loggable {
      */
     protected abstract void onEvaluation();
 
+    /**
+     * Komponens hozzáadása az áramkörhöz
+     * @param circuit Áramkör, amihez hozzáadjuk
+     */
     public void addTo(Circuit circuit) {
         Logger.logCall(this, "addTo", circuit);
         circuit.add(this);
         Logger.logReturn();
-    }
-
-    @Override
-    public String getClassName() {
-        return "ABSTRACTCOMPONENT!!!!";
     }
 }

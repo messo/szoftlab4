@@ -7,7 +7,15 @@ package logsim.log;
  */
 public interface Loggable {
 
+    /**
+     * Visszaadja a példány nevét
+     * @return Példány neve
+     */
     String getName();
 
+    /**
+     * Visszaadja az osztály nevét
+     * @return Osztály neve
+     */
     String getClassName();
 }

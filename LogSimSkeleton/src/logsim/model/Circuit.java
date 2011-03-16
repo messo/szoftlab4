@@ -1,24 +1,16 @@
 package logsim.model;
 
 import logsim.model.component.AbstractComponent;
-import logsim.model.component.FlipFlop;
 import logsim.model.component.DisplayComponent;
 import logsim.model.component.SourceComponent;
-//import logsim.model.component.impl.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import logsim.log.Loggable;
 import logsim.log.Logger;
 
 /**
- * Feladata a jelgenerátor léptetõ kérésére a jelgenerátorok léptetése, a feldolgozó
- * által létrehozott komponensek felvétele az áramkörbe, illetve ezek utasítása arra,
- * hogy töröljék a "már kiértékelve" flaget egy adott kiértékelési ciklus elõtt, hogy ezáltal a
- * ciklusban minden kimenet értéke frissülhessen.
- * Továbbá feladata a kiértékelés elindítása az összes kijelzõre, mert a rendszer kiértékelése
- * a kijelzõk kiértékelésével kezdõdik.
+ * Feladata a komponensek felvétele az áramkörbe, illetve ezek kiértékelése.
  *
- * @author balint
  */
 public class Circuit implements Loggable {
 
@@ -27,36 +19,33 @@ public class Circuit implements Loggable {
      */
     private List<AbstractComponent> components;
     /**
-     * Jelforrás típusú komponensek listája (kapcsoló, jelgenerátor)
+     * Jelforrás típusú komponensek listája (pl. kapcsoló)
      */
     private List<SourceComponent> sources;
     /**
-     * Megjelenítõ típusú komponensek listája (kijelzõ, 7-szegmenses kijelzõ)
+     * Megjelenítõ típusú komponensek listája (pl. led)
      */
     private List<DisplayComponent> displays;
-    /**
-     * Flipflopok listája (D és JK flipflopok)
-     */
-    private List<FlipFlop> flipFlops;
-    /**
-     * Jelgenerátorok listája
-     */
-//    private List<SequenceGenerator> seqGens;
 
     public Circuit() {
         Logger.logCreate(this);
         sources = new ArrayList<SourceComponent>();
         displays = new ArrayList<DisplayComponent>();
-        flipFlops = new ArrayList<FlipFlop>();
- //       seqGens = new ArrayList<SequenceGenerator>();
         components = new ArrayList<AbstractComponent>();
         Logger.logReturn();
     }
 
+    /**
+     * Áramkör inicializálása
+     */
     public void init() {
         // Tesztesetekben implementáljuk.
     }
 
+    /**
+     * Általános típusú komponens hozzáadása az áramkörhöz
+     * @param c Hozzáadandó komponens
+     */
     public void add(AbstractComponent c) {
         Logger.logCall(this, "add", c);
         Logger.logComment("Általános komponens hozzáadása az áramkörhöz");
@@ -64,6 +53,10 @@ public class Circuit implements Loggable {
         Logger.logReturn();
     }
 
+    /**
+     * Jelforrás típusú komponens hozzáadása az áramkörhöz
+     * @param sc Hozzáadandó komponens
+     */
     public void add(SourceComponent sc) {
         Logger.logCall(this, "add", sc);
         Logger.logComment("Jelforrás hozzáadása az áramkörhöz");
@@ -72,23 +65,10 @@ public class Circuit implements Loggable {
         Logger.logReturn();
     }
 
-    public void add(FlipFlop ff) {
-        Logger.logCall(this, "add", ff);
-        Logger.logComment("FF hozzáadása az áramkörhöz");
-        components.add(ff);
-        flipFlops.add(ff);
-        Logger.logReturn();
-    }
-
-  /*
-    public void add(SequenceGenerator sg) {
-        Logger.logCall(this, "add", sg);
-        Logger.logComment("Jelgenerátor hozzáadása az áramkörhöz");
-        components.add(sg);
-//        seqGens.add(sg);
-        Logger.logReturn();
-    }
-*/
+    /**
+     * Kijelzõ típusú komponens hozzáadása az áramkörhöz
+     * @param dc Hozzáadandó komponens
+     */
     public void add(DisplayComponent dc) {
         Logger.logCall(this, "add", dc);
         Logger.logComment("Kijelzõ hozzáadása az áramkörhöz");
@@ -120,8 +100,7 @@ public class Circuit implements Loggable {
      */
     public void stepGenerators() {
         Logger.logCall(this, "stepGenerators");
-        
-        
+        // TODO
         Logger.logReturn();
     }
 
@@ -131,14 +110,14 @@ public class Circuit implements Loggable {
      */
     public void commitFlipFlops() {
         Logger.logCall(this, "commitFlipFlops");
-        for (FlipFlop ff : flipFlops) {
-            ff.commit();
-        }
+        // TODO
         Logger.logReturn();
     }
 
     /**
      * Jelforrás típusú komponenseket adja vissza.
+     *
+     * @return Jellforrásokat tartalmazó listát ad vissza
      */
     public List<SourceComponent> getSources() {
         return sources;
@@ -147,12 +126,17 @@ public class Circuit implements Loggable {
     /**
      * Megjelenítõ típusú komponeseket adja vissza.
      *
-     * @return
+     * @return Megjelenítõket tartalmazó lista
      */
     public List<DisplayComponent> getDisplays() {
         return displays;
     }
 
+    /**
+     * Megvizsgálja, hogy az áramkörben történt-e változás
+     *
+     * @return változott-e
+     */
     public boolean isChanged() {
         boolean ret;
         Logger.logCall(this, "isChanged");
@@ -168,11 +152,17 @@ public class Circuit implements Loggable {
         return ret;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return "circuit";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getClassName() {
         return "Circuit";

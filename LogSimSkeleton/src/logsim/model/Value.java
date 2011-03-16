@@ -5,12 +5,15 @@ import logsim.log.Loggable;
 /**
  * Az áramkörben elõfordulható értéket reprezentál.
  *
- * @author balint
  */
 public enum Value implements Loggable {
 
     TRUE, FALSE;
 
+    /**
+     * A saját értékét szövegként adja vissza
+     * @return Érték
+     */
     @Override
     public String toString() {
         if (this == TRUE) {
@@ -19,7 +22,6 @@ public enum Value implements Loggable {
             return "Value.FALSE";
         }
 
-        // ilyen nem lehet, de lehet lesz másik típus
         return null;
     }
 
@@ -27,7 +29,7 @@ public enum Value implements Loggable {
      * Invertálja az adott értéket. Ennek addig van értelme, amíg 2 féle
      * állapot fordulhat elõ a rendszerben.
      *
-     * @return
+     * @return Invertált érték
      */
     public Value invert() {
         if (this == TRUE) {
@@ -40,11 +42,17 @@ public enum Value implements Loggable {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getClassName() {
         return "Value";
