@@ -1,6 +1,8 @@
 package logsim.log;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import logsim.model.Value;
 
 /**
@@ -16,6 +18,17 @@ public class Logger {
      * Loggolás engedélyezett flagje
      */
     private static boolean enabled = true;
+    //kimeneti adatfolyam, erre írunk
+    private static PrintWriter out;
+
+    static {
+        try {
+            out = new PrintWriter(new OutputStreamWriter(System.out, "CP852"), true);
+        } catch (Exception e) {
+            System.out.println("Outstream error!");
+            System.exit(-1);
+        }
+    }
 
     /**
      * Loggolás bekapcsolása
@@ -39,13 +52,12 @@ public class Logger {
         if (!enabled) {
             return;
         }
-
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < indent; i++) {
             sb.append("  ");
         }
         sb.append(s);
-        System.out.print(sb.toString());
+        out.print(sb.toString());
     }
 
     /**
@@ -59,7 +71,7 @@ public class Logger {
         }
 
         print(s);
-        System.out.println();
+        out.println();
     }
 
     /**
@@ -139,7 +151,7 @@ public class Logger {
      */
     public static Boolean logAskBool(Loggable obj, String question) {
         print("QUESTION " + obj.getName() + " " + question + "? [0/1] ");
-
+        out.flush();
         int ch;
         while (true) {
             try {
