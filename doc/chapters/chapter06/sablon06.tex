@@ -173,29 +173,32 @@ Circuit5.java} % Kezdet
 \end{fajllista}
 
 \subsection{Fordítás}
-A hibamentes és minél inkább gördülékenyebb fordítás érdekében létrehoztunk egy compile.bat nevezetű batch fájlt, mely a projekt főkönyvtárában található. Projekt főkönytára az, amelyik batch fájlokat tartalmaz és a "src" nevezetű mappát, melyben a program forráskódja található.
+A hibamentes és minél inkább gördülékenyebb fordítás érdekében létrehoztunk egy compile.bat nevezetű batch fájlt, mely a projekt főkönyvtárában található. Projekt főkönytára az, amelyik batch fájlokat tartalmaz és a "src" nevezetű mappát, melyben a program forráskódja található. Szükség estén kézzel kell módosítani a batch file " set C="C:\Program Files\Java\jdk1.6.0_21\bin\" " sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található!
 
 A compile.bat fájl az alábbi parancsokat hajtja végre:
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
 \begin{lstlisting}
 @echo off
-set PATH=%PATH%;C:\Program Files\Java\jdk1.6.0_21\bin\
+set C="C:\Program Files\Java\jdk1.6.0_21\bin\"
 cd src
-javac logsim\Skeleton.java
+%C%\javac logsim\Skeleton.java
 cd..
 if not errorlevel 1 echo Forditas sikeres
 pause
 \end{lstlisting}
-Vagyis, beállítja a PATH környezeti változót, majd lefordítja a programot. Ha hibamentes volt a fordítás, azt a "Fordítás sikeres" kimenettel értesíti a felhasználót.
-Fontos, hogy a PATH változóban az aktuális JDK bináris könyvtárának az elérési útvonala legyen. Szükség esetén módosítani kell a compile.bat batch fájlt!
+Ha hibamentes volt a fordítás, azt a "Fordítás sikeres" kimenettel értesíti a felhasználót.
 
 
-A fordítás sikeressége után, lehetőség van a dokumentáció legenerálására is. Ehhez felhasználható a főkönyvtárban található doc.bat batch fájl, mely az alábbi parancsokat hajtja végre:
+
+A fordítás sikeressége után, lehetőség van a dokumentáció legenerálására is. Ehhez felhasználható a főkönyvtárban található doc.bat batch fájl.
+Szükség estén kézzel kell módosítani a batch file " set C="C:\Program Files\Java\jdk1.6.0_21\bin\" " sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található!
+A batch fájl az alábbi parancsokat hajtja végre:
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
 \begin{lstlisting}
 @echo off
+set C="C:\Program Files\Java\jdk1.6.0_21\bin\"
 cd src
-javadoc logsim logsim.log logsim.model logsim.model.component
+%C%\javadoc logsim logsim.log logsim.model logsim.model.component logsim.model.component.impl 
  logsim.model.component.impl logsim.model.skeleton -d ..\documents
 cd..
 if not errorlevel 1 echo Dokumentum generalas sikeres volt. 
@@ -205,14 +208,17 @@ Ha a dokumentum generálás sikeres volt, akkor a documents nevezetű mappában 
 
 
 
+
 \subsection{Futtatás}
 A futtatás megkönnyításe érdekében elkészítettük a run.bat batch fájlt.
+Szükség estén kézzel kell módosítani a batch file " set C="C:\Program Files\Java\jdk1.6.0_21\bin\" " sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található!
 Ez az alábbi parancsokat hajtja végre:
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
 \begin{lstlisting}
 @echo off
+set C="C:\Program Files\Java\jdk1.6.0_21\bin\"
 cd src
-java logsim.Skeleton
+%C%\java logsim.Skeleton
 \end{lstlisting}
 Az "src" könyvtárból elindítja az előzőleg lefordított programot.
 
@@ -220,7 +226,7 @@ Az "src" könyvtárból elindítja az előzőleg lefordított programot.
 \section{Értékelés}
 \comment{A projekt kezdete óta az értékelésig eltelt időben tagokra bontva, százalékban.}
 
-Csapatunk már a múlt félévben kialakult, így nem voltunk ismeretlenek egymás számára, ismertük egymás képességeit. Az elején hamar egyeszségre jutottunk, hogy miként fog történni a kommunikáció a csapaton belül és milyen módon tároljuk az elkészült anyagokat, úgy, hogy mindig mindenki a legfrisebb fájlokhoz férhessen hozzá. 
+Csapatunk már a múlt félévben kialakult, így nem voltunk ismeretlenek egymás számára, ismertük egymás képességeit. Az elején hamar egyeszségre jutottunk, hogy miként fog történni a kommunikáció a csapaton belül és milyen módon tároljuk az elkészült anyagokat, úgy, hogy mindig mindenki a legfrissebb fájlokhoz férhessen hozzá. 
 A közös munka elején mégis gondot okozott számunkra a csapatban dolgozás. Ezt azonban hamar felismertük és közös megbeszéléseket tartva pontosan definiáltuk mindenkinek az aktuális munkáját és a továbbiakban figyelemmel kisértük a másik munkájának a haladását is. Előfordult, hogy a munka haladtával merültek fel kérdések, mely más csapattagok átlal készített megoldásokat is érintette. Ilyenkor gyors megbeszélés és döntés után a csapat probléma nélkül tudta folytatni a közös munkát. Minden döntésünkről és annak okairól leírás készül, melyet elolvasva azok a csapattagok is követni tudták a fejleményeket, akik esetleg nem tudtak résztvenni egy közös gyűlésen.
 A munkaórák eloszlását közös megegyezés alapján korrigáltuk és ebből számítottuk a végső százalékokat, melyek az alábbiak szerint alakultak:
 
