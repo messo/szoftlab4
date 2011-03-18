@@ -64,7 +64,8 @@ public class Skeleton {
     public Skeleton() {
         boolean shouldRun = true;
         String str;
-
+        
+        //Felhasználótól bekérjük, hogy melyik áramkört szeretné tesztelni
         while (shouldRun) {
             try {
                 printMenu();
@@ -88,6 +89,10 @@ public class Skeleton {
             }
         }
     }
+    
+    //A választásnak megfelelõ áramköröket létrehozó, és elindító függvények:
+    //mindegyik létrehoz egy szimulációt, egy a kiválasztott tesztáramkört
+    //beállítja szimulálásra a létrehozott áramkört, inicializálja, és indítja    
 
     private void testKapcsoloLed() {
         Simulation simulation = new Simulation();
