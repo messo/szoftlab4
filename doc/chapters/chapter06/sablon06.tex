@@ -173,7 +173,11 @@ Circuit5.java} % Kezdet
 \end{fajllista}
 
 \subsection{Fordítás}
-A hibamentes és minél inkább gördülékenyebb fordítás érdekében létrehoztunk egy compile.bat nevezetű batch fájlt, mely a projekt főkönyvtárában található. Projekt főkönytára az, amelyik batch fájlokat tartalmaz és a "src" nevezetű mappát, melyben a program forráskódja található. Szükség estén kézzel kell módosítani a batch file " set C="C:\Program Files\Java\jdk1.6.0_21\bin\" " sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található!
+A hibamentes és minél inkább gördülékenyebb fordítás érdekében létrehoztunk egy compile.bat nevezetű batch fájlt, mely a projekt főkönyvtárában található. Projekt főkönytára az, amelyik batch fájlokat tartalmaz és a "src" nevezetű mappát, melyben a program forráskódja található. Szükség estén kézzel kell módosítani a batch file 
+\begin{verbatim}
+set C="C:\Program Files\Java\jdk1.6.0_21\bin\" 
+\end{verbatim}
+sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található!
 
 A compile.bat fájl az alábbi parancsokat hajtja végre:
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
@@ -191,7 +195,10 @@ Ha hibamentes volt a fordítás, azt a "Fordítás sikeres" kimenettel értesít
 
 
 A fordítás sikeressége után, lehetőség van a dokumentáció legenerálására is. Ehhez felhasználható a főkönyvtárban található doc.bat batch fájl.
-Szükség estén kézzel kell módosítani a batch file " set C="C:\Program Files\Java\jdk1.6.0_21\bin\" " sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található!
+Szükség estén kézzel kell módosítani a batch file \begin{verbatim}
+set C="C:\Program Files\Java\jdk1.6.0_21\bin\" 
+\end{verbatim}
+sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található!
 A batch fájl az alábbi parancsokat hajtja végre:
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
 \begin{lstlisting}
@@ -211,7 +218,10 @@ Ha a dokumentum generálás sikeres volt, akkor a documents nevezetű mappában 
 
 \subsection{Futtatás}
 A futtatás megkönnyításe érdekében elkészítettük a run.bat batch fájlt.
-Szükség estén kézzel kell módosítani a batch file " set C="C:\Program Files\Java\jdk1.6.0_21\bin\" " sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található!
+Szükség estén kézzel kell módosítani a batch file 
+\begin{verbatim}
+set C="C:\Program Files\Java\jdk1.6.0_21\bin\" 
+\end{verbatim} sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található!
 Ez az alábbi parancsokat hajtja végre:
 \lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
 \begin{lstlisting}
