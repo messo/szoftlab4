@@ -1,4 +1,5 @@
 @echo off
-set C="C:\Program Files\Java\jdk1.6.0_21\bin\"
-cd src
+set C="C:\Program Files\Java\jdk1.6.0_24\bin\"
+cd build
 %C%\java logsim.Skeleton
+PAUSE

@@ -8,33 +8,13 @@ import logsim.log.Logger;
  * Utasítja az áramkört több kiértékelési ciklus lefuttatásához,
  * amíg az áramkörben van változás. Ha a változás megadott lépésen belül
  * nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot.
- *
  */
 public class Simulation implements Loggable {
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return "simulation";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        return "Simulation";
-    }
-    /**
      * Szimulált áramkör
      */
     protected Circuit circuit;
-
-    public Simulation() {
-        Logger.logComment("Inicializálás");
-    }
 
     /**
      * Egy adott bemeneti kombinációkra szimulálja a hálózatot, amíg be nem áll a
@@ -62,15 +42,6 @@ public class Simulation implements Loggable {
     }
 
     /**
-     * Szimulált áramkör lekérdezése
-     *
-     * @return Áramkör példány
-     */
-    public Circuit getCircuit() {
-        return circuit;
-    }
-
-    /**
      * Szimulált áramkör beállítása
      * 
      * @param circuit Szimulálni kívánt áramkör
@@ -79,5 +50,21 @@ public class Simulation implements Loggable {
         Logger.logCall(this, "setCircuit", circuit);
         this.circuit = circuit;
         Logger.logReturn();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+        return "simulation";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        return "Simulation";
     }
 }

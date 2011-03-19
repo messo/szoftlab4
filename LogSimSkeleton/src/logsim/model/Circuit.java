@@ -9,8 +9,8 @@ import logsim.log.Loggable;
 import logsim.log.Logger;
 
 /**
+ * Áramkört reprezentáló osztály.
  * Feladata a komponensek felvétele az áramkörbe, illetve ezek kiértékelése.
- *
  */
 public class Circuit implements Loggable {
 
@@ -85,10 +85,8 @@ public class Circuit implements Loggable {
     public void doEvaluationCycle() {
         Logger.logCall(this, "doEvaluationCycle");
 
+        // minden komponenst kiértékelünk
         for (AbstractComponent c : components) {
-            // miközben minden kiértékelõdik, lehet, hogy valamelyik
-            // komponens instabillá teszi az áramkört, mert változott
-            // valamelyik kimenete
             c.evaluate();
         }
 

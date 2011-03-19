@@ -5,8 +5,7 @@ import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 
 /**
- * Csomópont elem. Az egyetlen bemenetére kötött értéket kiadja az összes kimeneti lábán
- * 
+ * Csomópont elem. Az egyetlen bemenetére kötött értéket kiadja az összes kimeneti lábán.
  */
 public class Node extends AbstractComponent {
 
@@ -25,12 +24,12 @@ public class Node extends AbstractComponent {
     @Override
     protected void onEvaluation() {
         // Bemenetén lévõ adat lekérése
-        inputs[0].getValue();
+        getInput(0);
 
         // Bekérjük a felhasználótól, hogy az egyes kimeneteken milyen érték legyen
         for (int i = 0; i < outputs.length; i++) {
-            Value v2 = Logger.logAskValue(this, String.format("mit adjunk a %d. vezetékre", i));
-            outputs[i].setValue(v2);
+            Value v = Logger.logAskValue(this, String.format("mit adjunk a %d. vezetékre", i));
+            outputs[i].setValue(v);
         }
     }
 

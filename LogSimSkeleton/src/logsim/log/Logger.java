@@ -1,6 +1,8 @@
 package logsim.log;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import logsim.model.Value;
@@ -18,7 +20,13 @@ public class Logger {
      * Loggolás engedélyezett flagje
      */
     private static boolean enabled = true;
-    //kimeneti adatfolyam, erre írunk
+    /**
+     * Bemenet, innen olvassuk a felhasználó válaszait
+     */
+    private static BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+    /**
+     * Kimeneti adatfolyam, ide írunk
+     */
     private static PrintWriter out;
 
     static {
@@ -45,7 +53,8 @@ public class Logger {
     }
 
     /**
-     * Paraméterben megadott szöveget a jelenlegi behúzással kiírja
+     * Paraméterben megadott szöveget a jelenlegi behúzással kiírja.
+     * 
      * @param s Kiírandó szöveg
      */
     private static void print(String s) {
@@ -62,7 +71,8 @@ public class Logger {
 
     /**
      * Paraméterben megadott szöveget a jelenlegi behúzással kiírja majd új sorra
-     * állítja a kurzort
+     * állítja a kurzort.
+     * 
      * @param s Kiírandó szöveg
      */
     private static void println(String s) {
@@ -76,19 +86,23 @@ public class Logger {
 
     /**
      * Függvény hívás kiírása
+     * 
      * @param obj Melyik objektumon
      * @param method Melyik metódust
      * @param params Milyen paraméterekkel
      */
     public static void logCall(Loggable obj, String method, Loggable... params) {
         StringBuilder sb = new StringBuilder();
+        // paraméterek összefûzése
         for (int i = 0; i < params.length; i++) {
             if (i != 0) {
                 sb.append(", ");
             }
             sb.append(params[i].getName());
         }
+        // kiírjuk
         println(String.format("CALL %s.%s(%s)", obj.getName(), method, sb.toString()));
+        // behúzást növeljük
         indent++;
     }
 
@@ -105,6 +119,7 @@ public class Logger {
      * @param string Paraméter
      */
     public static void logReturn(String string) {
+        // behúzást csökkentjük
         indent--;
         if (string == null) {
             println("RETURN");
@@ -115,6 +130,7 @@ public class Logger {
 
     /**
      * Példányosítás kiírása
+     * 
      * @param obj Objektum
      */
     public static void logCreate(Loggable obj) {
@@ -153,13 +169,18 @@ public class Logger {
         print("QUESTION " + obj.getName() + " " + question + "? [0/1] ");
         out.flush();
         int ch;
+        String str;
         while (true) {
             try {
-                ch = System.in.read();
+                // beolvasunk egy sort
+                str = keyboard.readLine();
+                // annak az elsõ karaktere a fontos
+                ch = str.charAt(0);
                 if (ch == '0' || ch == '1') {
                     break;
                 }
             } catch (IOException ex) {
+                out.println("Nem tudtuk beolvasni a választ!");
                 return null;
             }
         }
@@ -172,7 +193,7 @@ public class Logger {
     }
 
     /**
-     * Kommentet ír a megjelenítõre
+     * Megjegyzés kiírása
      *
      * @param string Komment
      */

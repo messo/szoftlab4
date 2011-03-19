@@ -5,8 +5,8 @@ import logsim.log.Logger;
 import logsim.model.Value;
 
 /**
- * Vezeték osztály. Egy bemenettel és egy kimenettel rendelkezik.
- *
+ * Vezeték osztály. Két komponens-lábat köt össze. A rajta lévõ érték lekérdezhetõ
+ * és beállítható.
  */
 public class Wire implements Loggable {
 
@@ -44,6 +44,7 @@ public class Wire implements Loggable {
         Logger.logReturn(v.toString());
         return v;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -51,6 +52,7 @@ public class Wire implements Loggable {
     public String getName() {
         return name;
     }
+
     /**
      * {@inheritDoc}
      */

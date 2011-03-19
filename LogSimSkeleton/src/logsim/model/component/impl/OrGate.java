@@ -5,10 +5,8 @@ import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 
 /**
- * VAGY kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek
- * kiértékelését kezdeményezi, s a kapott értékek logikai VAGY kapcsolatát
+ * VAGY kapu, az áramkör egyik alapeleme. Bemenetein lévõ értékek logikai VAGY kapcsolatát
  * valósítja meg, amit a kimenetén kiad.
- *
  */
 public class OrGate extends AbstractComponent {
 
@@ -18,17 +16,17 @@ public class OrGate extends AbstractComponent {
      * @param name Vagy kapu neve
      */
     public OrGate(int inputPinsCount, String name) {
-        super(name,inputPinsCount,1);
-        
+        super(name, inputPinsCount, 1);
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void onEvaluation() {
-        //bemenetek lekérdezése
+        // bemenetek lekérdezése
         for (int i = 0; i < inputs.length; i++) {
-            evaluateInput(i);
+            getInput(i);
         }
 
         // kimenet értékének bekérése
@@ -37,6 +35,7 @@ public class OrGate extends AbstractComponent {
         // kimenet beállítása
         outputs[0].setValue(v);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -44,6 +43,4 @@ public class OrGate extends AbstractComponent {
     public String getClassName() {
         return "OrGate";
     }
-
-
 }

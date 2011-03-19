@@ -4,17 +4,18 @@ import logsim.log.Logger;
 import logsim.model.Circuit;
 
 /**
- * Megjelenítõ típusú komponenst reprezentál. Ezt kell implementálnia a megjelenítõknek.
- * pl. led
+ * Megjelenítõ típusú komponenst reprezentál. Tõle származnak a megjelenítõk (pl. led).
  */
 public abstract class DisplayComponent extends AbstractComponent {
 
     /**
-     * Konstruktor
-     * @param name Komponens neve. Nincs kimenete
+     * Konstruktor. Nem lesz kimenete.
+     * 
+     * @param name Komponens neve
      * @param inputCount Bemenetek száma
      */
     protected DisplayComponent(String name, int inputCount) {
+        // kimenet nélküli komponens
         super(name, inputCount, 0);
     }
 

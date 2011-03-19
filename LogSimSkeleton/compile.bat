@@ -1,7 +1,8 @@
 @echo off
-set C="C:\Program Files\Java\jdk1.6.0_21\bin\"
+set C="C:\Program Files\Java\jdk1.6.0_24\bin\"
+mkdir build
 cd src
-%C%\javac logsim\Skeleton.java
+%C%\javac -d ..\build logsim\Skeleton.java
 cd..
 if not errorlevel 1 echo Forditas sikeres
 pause

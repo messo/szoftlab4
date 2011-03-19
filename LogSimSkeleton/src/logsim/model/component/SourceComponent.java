@@ -5,8 +5,7 @@ import logsim.model.Circuit;
 import logsim.model.Value;
 
 /**
- * Jelforrás típusú komponenst reprezentál. Ezt kell implementálnia a jelforrásoknak.
- * pl. toggle
+ * Jelforrás típusú komponenst reprezentál. Tõle származnak a jelforrások (pl. toggle).
  */
 public abstract class SourceComponent extends AbstractComponent {
 
@@ -14,8 +13,8 @@ public abstract class SourceComponent extends AbstractComponent {
      * Konstruktor. Nincs bemenete és egy kimenete van
      * @param name Komponens neve
      */
-    public SourceComponent(String name) {
-        super(name,0,1);
+    protected SourceComponent(String name) {
+        super(name, 0, 1);
     }
 
     /**

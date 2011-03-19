@@ -7,7 +7,6 @@ import logsim.model.component.AbstractComponent;
 /**
  * Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén
  * érkezõ jelet.
- * 
  */
 public class Inverter extends AbstractComponent {
 
@@ -18,18 +17,22 @@ public class Inverter extends AbstractComponent {
     public Inverter(String name) {
         super(name, 1, 1);
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void onEvaluation() {
         // bemenetén lévõ adat lekérdezése
-        evaluateInput(0);
+        getInput(0);
 
         // vezeték új értékének bekérése
-        Value v2 = Logger.logAskValue(this, "mit adjunk a vezetékre");
-        outputs[0].setValue(v2);
+        Value v = Logger.logAskValue(this, "mit adjunk a vezetékre");
+
+        // kimenet beállítása
+        outputs[0].setValue(v);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -37,6 +40,4 @@ public class Inverter extends AbstractComponent {
     public String getClassName() {
         return "Inverter";
     }
-
-
 }

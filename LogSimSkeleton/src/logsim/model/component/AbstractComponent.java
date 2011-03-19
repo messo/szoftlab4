@@ -10,7 +10,6 @@ import logsim.model.Value;
  * Egy komponens absztrakt megvalósítása, ebbõl származik az összes többi
  * komponens. A közös logikát valósítja meg. A gyakran használt dolgokra
  * ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.)
- *
  */
 public abstract class AbstractComponent implements Loggable {
 
@@ -18,11 +17,11 @@ public abstract class AbstractComponent implements Loggable {
      * Bemenetekre kötött vezetékek
      */
     protected Wire[] inputs;
-    /*
+    /**
      * Kimenetekre kötött vezetékek
      */
     protected Wire[] outputs;
-    /*
+    /**
      * Komponens neve
      */
     protected String name;
@@ -41,15 +40,6 @@ public abstract class AbstractComponent implements Loggable {
         inputs = new Wire[inputCount];
 
         Logger.logReturn();
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return name;
     }
 
     /**
@@ -76,15 +66,6 @@ public abstract class AbstractComponent implements Loggable {
     }
 
     /**
-     * Egy kiválasztott kimenet értékének lekérdezése
-     * @param idx Kimenet sorszáma
-     * @return Érték
-     */
-    public Value getValue(int idx) {
-        return outputs[idx].getValue();
-    }
-
-    /**
      * Komponens kimeneti lábain lévõ vezetékeken lévõ értékek újraszámolása
      * a bemenetek alapján.
      *
@@ -95,13 +76,13 @@ public abstract class AbstractComponent implements Loggable {
         Logger.logReturn();
     }
 
-    /*
+    /**
      * Lekérjük egy adott bemenetre kötött értéket
      *
      * @param inputPin Bemenet, amely érdekel minket
      * @return Bementen lévõ érték
      */
-    protected Value evaluateInput(int inputPin) {
+    protected Value getInput(int inputPin) {
         return inputs[inputPin].getValue();
     }
 
@@ -119,7 +100,7 @@ public abstract class AbstractComponent implements Loggable {
 
     /**
      * Ebben a metódusban kell implementálni az alkatrész logikáját, vagyis
-     * az adott bemenet(ek) függvényében mit kell kiadnia a kimenet(ek)en.
+     * az adott bemenet(ek) függvényében mit kell kiadnia a kimenet(ek)re.
      */
     protected abstract void onEvaluation();
 
@@ -131,5 +112,13 @@ public abstract class AbstractComponent implements Loggable {
         Logger.logCall(this, "addTo", circuit);
         circuit.add(this);
         Logger.logReturn();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+        return name;
     }
 }

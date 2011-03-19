@@ -5,12 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import logsim.log.Logger;
 import logsim.model.Simulation;
-import logsim.model.skeleton.Circuit1;
-import logsim.model.skeleton.Circuit2;
-import logsim.model.skeleton.Circuit3;
-import logsim.model.skeleton.Circuit4;
-import logsim.model.skeleton.Circuit5;
+import logsim.model.skeleton.Simulation1;
 
 /**
  * Skeleton main osztály. Ez tartalmazza az indító logikát.
@@ -23,8 +20,13 @@ public class Skeleton {
     private static final String INVERTER_VISSZAKOTVE_LED = "4";
     private static final String VAGY_VISSZAKOTVE_LED = "5";
     private static final String EXIT = "0";
+    /**
+     * Bemenet, innen olvassuk a felhasználó választásait
+     */
     private static BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
-    //kimeneti adatfolyam, erre írunk
+    /**
+     * Kimeneti adatfolyam, ide írunk.
+     */
     private static PrintWriter out;
 
     static {
@@ -35,6 +37,7 @@ public class Skeleton {
             System.exit(-1);
         }
     }
+
     /**
      * Kiírja a kijelzõre a menüpontokat
      */
@@ -61,77 +64,107 @@ public class Skeleton {
         out.flush();
     }
 
+    /**
+     * A program indulásakor, megkéri a felhasználót, hogy válasszon, ha választott
+     * lefuttatja a megfelelõ teszteset vagy kilép. Ezt addig ismétli, amíg a felhasználó
+     * nem akar kilépni.
+     */
     public Skeleton() {
         boolean shouldRun = true;
         String str;
-        
-        //Felhasználótól bekérjük, hogy melyik áramkört szeretné tesztelni
+
         while (shouldRun) {
             try {
+                // kiírjuk a menüt
                 printMenu();
+                // Felhasználótól bekérjük, hogy melyik áramkört szeretné tesztelni
                 str = keyboard.readLine();
                 if (str.equals(KAPCSOLO_LED)) {
-                    testKapcsoloLed();
+                    test(1);
                 } else if (str.equals(KAPCSOLO_INVERTER_LED)) {
-                    testKapcsoloInverterLed();
+                    test(2);
                 } else if (str.equals(KAPCSOLO_2x_VAGY_LED)) {
-                    testKapcsolo2xVagy();
+                    test(3);
                 } else if (str.equals(INVERTER_VISSZAKOTVE_LED)) {
-                    testInverterVisszakotveLed();
+                    test(4);
                 } else if (str.equals(VAGY_VISSZAKOTVE_LED)) {
-                    testVagyVisszakotveLed();
+                    test(5);
                 } else if (str.equals(EXIT)) {
                     return;
                 }
             } catch (IOException ex) {
-                ex.printStackTrace(System.err);
+                out.println("Valami I/O hiba van!");
                 return;
             }
         }
     }
-    
-    //A választásnak megfelelõ áramköröket létrehozó, és elindító függvények:
-    //mindegyik létrehoz egy szimulációt, egy a kiválasztott tesztáramkört
-    //beállítja szimulálásra a létrehozott áramkört, inicializálja, és indítja    
 
-    private void testKapcsoloLed() {
-        Simulation simulation = new Simulation();
-        Circuit1 c = new Circuit1();
-        simulation.setCircuit(c);
-        c.init();
-        simulation.start();
-    }
+    /**
+     * Az adott tesztesetet lefuttatja.
+     *
+     * @param testCase
+     */
+    private void test(int testCase) {
+        String str;
+        char ch = '1';
+        // megkérdezzük a felhasználót, hogy kiírjuk-e az initet.
+        try {
+            while (true) {
+                out.print("Szeretnéd látni az inicializálást? [0/1] ");
+                out.flush();
+                str = keyboard.readLine();
+                ch = str.charAt(0);
+                if (ch == '1' || ch == '0') {
+                    // ha 1-et vagy 0-át válaszolt, akkor kész.
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            out.println("Nem sikerült beolvasni a felhasználótól (Alapértelmezett válasz: 1)!");
+        }
 
-    private void testKapcsoloInverterLed() {
-        Simulation simulation = new Simulation();
-        Circuit2 c = new Circuit2();
-        simulation.setCircuit(c);
-        c.init();
-        simulation.start();
-    }
+        if (ch == '0') {
+            // ha azt mondta, hogy nem, akkor kikapcsoljuk!
+            Logger.turnOff();
+        } else {
+            // biztos, ami biztos.
+            Logger.turnOn();
+        }
 
-    private void testKapcsolo2xVagy() {
-        Simulation simulation = new Simulation();
-        Circuit3 c = new Circuit3();
-        simulation.setCircuit(c);
-        c.init();
-        simulation.start();
-    }
+        out.println();
+        out.println("--------- TESZT KEZDETE ---------");
+        out.println();
 
-    private void testInverterVisszakotveLed() {
-        Simulation simulation = new Simulation();
-        Circuit4 c = new Circuit4();
-        simulation.setCircuit(c);
-        c.init();
-        simulation.start();
-    }
+        Logger.logComment("Inicializálás");
+        Simulation s = null;
+        // megfelelõ tesztesetnek megfelelõen, létrehozzuk a szimulációt
+        switch (testCase) {
+            case 1:
+                s = new Simulation1();
+                break;
+            case 2:
+                s = new Simulation();
+                break;
+            case 3:
+                s = new Simulation();
+                break;
+            case 4:
+                s = new Simulation();
+                break;
+            case 5:
+                s = new Simulation();
+                break;
+        }
 
-    private void testVagyVisszakotveLed() {
-        Simulation simulation = new Simulation();
-        Circuit5 c = new Circuit5();
-        simulation.setCircuit(c);
-        c.init();
-        simulation.start();
+        // Innentõl mindenképp kell loggolás!
+        Logger.turnOn();
+        Logger.logComment("Szimuláció");
+        // szimuláció indítása!
+        s.start();
+
+        out.println();
+        out.println("---------- TESZT VÉGE -----------");
+        out.println();
     }
 
     /**

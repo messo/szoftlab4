@@ -5,12 +5,11 @@ import logsim.model.component.DisplayComponent;
 
 /**
  * Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
- *
  */
 public class Led extends DisplayComponent {
 
     /**
-     * Konstruktor
+     * Konstruktor. 1 bemenetû megjelenítõ
      * @param name Led neve
      */
     public Led(String name) {
@@ -22,7 +21,7 @@ public class Led extends DisplayComponent {
      * @return Érték
      */
     public Value getValue() {
-        return evaluateInput(0);
+        return getInput(0);
     }
 
     /**
@@ -31,7 +30,7 @@ public class Led extends DisplayComponent {
     @Override
     protected void onEvaluation() {
         // bemenetén lévõ adat lekérése
-        evaluateInput(0);
+        getInput(0);
     }
 
     /**
