@@ -8,6 +8,10 @@ import java.io.PrintWriter;
 import logsim.log.Logger;
 import logsim.model.Simulation;
 import logsim.model.skeleton.Simulation1;
+import logsim.model.skeleton.Simulation2;
+import logsim.model.skeleton.Simulation3;
+import logsim.model.skeleton.Simulation4;
+import logsim.model.skeleton.Simulation5;
 
 /**
  * Skeleton main osztály. Ez tartalmazza az indító logikát.
@@ -45,7 +49,7 @@ public class Skeleton {
         out.println("Kérlek válassz az alábbi menüpontok közül:");
         out.println("");
         out.println("(1) Kapcsoló és led szimulációja");
-        out.println("     Egy darab kapcsoló, melyre led van kötve");
+        out.println("     Egy darab kapcsoló, melyre led van kötve.");
         out.println("(2) Kapcsoló, inverter és led szimulációja");
         out.println("     Egy darab kapcsoló, melyre egy inverter van kötve, és ennek kimenete van");
         out.println("     egy leden.");
@@ -53,7 +57,8 @@ public class Skeleton {
         out.println("     Két darab kapcsoló, melyek egy 2 bemenetes VAGY kapura vannak kötve, ennek");
         out.println("     kimenete pedig egy ledre.");
         out.println("(4) Visszakötött inverter szimulációja");
-        out.println("     Egy inverter, melynek kimenete egy ledre és saját maga bemenetére van kötve");
+        out.println("     Egy inverter, melynek kimenete egy ledre és saját maga bemenetére van");
+        out.println("     kötve.");
         out.println("(5) Kapcsoló, visszakötött VAGY kapu és led szimulációja");
         out.println("     Egy 2 bemenetes VAGY kapu, melynek egyik bemenetére egy kapcsoló, másikra");
         out.println("     a saját bemenete van kötve.");
@@ -143,16 +148,16 @@ public class Skeleton {
                 s = new Simulation1();
                 break;
             case 2:
-                s = new Simulation();
+                s = new Simulation2();
                 break;
             case 3:
-                s = new Simulation();
+                s = new Simulation3();
                 break;
             case 4:
-                s = new Simulation();
+                s = new Simulation4();
                 break;
             case 5:
-                s = new Simulation();
+                s = new Simulation5();
                 break;
         }
 
