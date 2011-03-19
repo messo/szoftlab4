@@ -2,6 +2,7 @@ LogSim/build/
 LogSim/dist/
 LogSim/nbproject/private/
 LogSimSkeleton/build/
+LogSimSkeleton/documents/
 LogSimSkeleton/dist/
 LogSimSkeleton/nbproject/private/
 doc/*.log
@@ -13,4 +14,3 @@ doc/*.lof
 doc/*.out
 doc/chapters/chapter03/javadoc/*.aux
 doc/chapters/chapter03/javadoc/*.class
-
