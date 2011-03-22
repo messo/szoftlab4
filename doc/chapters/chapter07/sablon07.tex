@@ -270,18 +270,37 @@ Egy olyan minta hálózatot hozunk létre melyben található két kapcsoló egy
 \comment{Egyértelműen definiálni kell, hogy az egyes bemeneti parancsok végrehajtása után előálló állapot milyen formában jelenik meg a szabványos kimeneten.}
 
 \section{Összes részletes use-case}
-\comment{A use-case-eknek a részletezettsége feleljen meg a kezelői felületnek, azaz a felület elemeire kell hivatkozniuk.
-Alábbi táblázat minden use-case-hez külön-külön.}
 
-\begin{figure}[h]
-\begin{center}
+%\begin{figure}[h]
+%\begin{center}
 %\includegraphics[width=17cm]{chapters/chapter07/example.pdf}
-\caption{x}
-\label{fig:ProtoUseCase}
-\end{center}
-\end{figure}
+%\caption{x}
+%\label{fig:ProtoUseCase}
+%\end{center}
+%\end{figure}
 
-\usecase{...}{...}{...}{...}
+\usecase{Áramkör betöltése}{Az áramkört leíró fájl betöltése}{Felhasználó}{A loadCircuit parancsot használva betöltheti az
+áramkört leíró fájlt, amely a program követelményeinek megfelel}
+
+
+\usecase{Konfiguráció betöltése}{Egy áramkör konfigurációjának betöltése}{Felhasználó}{A loadSettings paranccsal betölt egy egyedi a konfigurációt 
+az áramkörhöz, amely például tartalmazhatja a szekvencia generátorok által kiadott bitsorozatokat vagy a kapcsolók állását.}
+
+
+\usecase{Konfiguráció mentése}{Áramkör konfigurációjának mentése}{Felhasználó}{A saveSettings parancs kiadásával
+ menti az aktuális áramkör konfigurációját.}
+
+\usecase{Kapcsoló kapcsolása}{Kapcsoló állásnak módosítás}{Felhasználó}{Az adott áramkörben a neve alapján azonosított kapcsoló állásának
+módosítása a switch parancs használatával.}
+
+\usecase{Szekvenciagenerátor módosítás}{Szekvenciagenerátor bitsorozatának megadása}{Felhasználó}{Az adott áramkörben a neve alapján 
+azonosított szekvenciagenerátor által kiadott bitsorozat megadása a setSeqGen paranccsal.}
+
+\usecase{Érték lekérdezése}{Egy, az áramkörben lévő alkatrész értékének lekérdezése}{Felhasználó}{Az adott áramkörben a getValue
+parancs használatával a megadott nevű alkatrész értékének lekérdezése.}
+
+\usecase{Áramkör szimulálása}{A betöltött áramkör szimulálása}{Felhasználó}{A step parancs kiadásával szimulálja 
+a betöltött áramkört.}
 
 \section{Tesztelési terv}
 \comment{A tesztelési tervben definiálni kell, hogy a be- és kimeneti fájlok egybevetésével miként végezhető el a program tesztelése. Meg kell adni teszt forgatókönyveket. Az egyes teszteket elég informálisan, szabad szövegként leírni. Teszt-esetenként egy-öt mondatban. Minden teszthez meg kell adni, hogy mi a célja, a proto mely funkcionalitását, osztályait stb. teszteli. Az alábbi táblázat minden teszt-esethez külön-külön elkészítendő.}
