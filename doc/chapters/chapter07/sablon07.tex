@@ -28,7 +28,206 @@
 
 \end{itemize}
 
-\comment{Ha szükséges, meg kell adni a konfigurációs (pl. pályaképet megadó) fájlok nyelvtanát is.}
+\subsection{Konfigurációs fájlok nyelvtana}
+A konfigurációs fájlok *.ovr kiterjesztésűek, ezekben adjuk meg a szimulálandó hálózat paramétereit. Egyszerű szövegfájl, melyben az értelmezendő parancsok soronként tagolódnak. A program feltételezi a konfigurációs fájl hibamentességét, sehol nem ellenőrizzük, hogy a bemenetnek van-e értelme!\linebreak
+A fájl létrehozásához az alábbi parancsok, szintaxisok állnak rendelkezésre:
+
+\begin{itemize}
+\item X=...
+	\begin{itemize}
+	\item Leírás: komponens létrehozás. Ezzel a paranccsal az egyenlőség jel után megadott komponenst hozzuk létre, melynek kimenetére ezek után az "X"-el hivatkozhatunk. Amennyiben több kimenetű komponensről beszélünk akkor az egyenlőség bal oldala egy tömböt jelent. Ebben az esetben az egyes kimenetekre a későbbiekben X[i]-vel hivatkozhatunk (a 0 és N-1 között).
+	\item Opciók: A lehetséges komponensek az implementált komponensek listájából választható, melyeknek paraméterül az egyes komponensekhez tartozó meghatározott paramétereket át kell adni.
+		\begin{itemize}
+			\item OR(...)			%+
+			\item AND(...)			%+			
+			\item INVERTER(...)		%+			
+			\item VCC(...)			%+
+			\item GND(...)			%+
+			\item MPX(...)			%+
+			\item FFJK(...)			%
+			\item FFD(...)			%
+			\item LED(...)			%+
+			\item 7SEG(...)			%
+			\item TOGGLE(...)		%+
+			\item SEQ(...)			%+
+			\item WIRE(...)			%+
+			\item NODE(...)			%+
+		\end{itemize}
+	\end{itemize}
+
+\item OR(name,WIRE[n])
+	\begin{itemize}
+	\item Leírás: vagy kapu létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a kapcsoló nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE[n]: fel kell sorolni a kapu bemenetére kötött WIRE típusú változók neveit. N bemenetű kapu esetén ide N db WIRE kerül. A kapu számot nem kell megadni, azt a parser autómatikusan észleli a megkapott paraméterek számából. Minimum 2 bemenetet meg kell adni.
+		\end{itemize}
+	\item Példa: OR(vagy1,w\_kapcs1\_vagy1,w\_kapcs2\_vagy1,w\_kapcs3\_vagy1) - három vezeték rákapcsolása a kapura, mely így egy három bemenetes vagy kapu lesz.
+	\end{itemize}
+
+\item AND(name,WIRE[n])
+	\begin{itemize}
+	\item Leírás: "és" kapu létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a kapu nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE[n]: u.a. mint a vagy kapu esetén.
+		\end{itemize}
+	\item Példa: AND(es1,w\_kapcs1\_es1,w\_kapcs2\_es1) - két vezeték rákapcsolása a kapura, mely így egy két bemenetes vagy kapu lesz.
+	\end{itemize}
+	
+\item INV(name,WIRE\_in)
+	\begin{itemize}
+	\item Leírás: inverter létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a kapu nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE\_in: az inverter bemeneti vezetékét kell megadni. Csak egy bemenetű inverter létezik.
+		\end{itemize}
+	\item Példa: INV(inv1,w\_kapcs1\_inv1) - egy vezeték rákapcsolása a kapura.
+	\end{itemize}
+	
+\item VCC(name)
+	\begin{itemize}
+	\item Leírás: konstans igaz jel létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a komponens nevét (egyedi azonosításra szolgál - a külvilág felé).
+		\end{itemize}
+	\item Példa: VCC(vcc1)
+	\end{itemize}
+	
+\item GND(name)
+	\begin{itemize}
+	\item Leírás: konstans hamis jel létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a komponens nevét (egyedi azonosításra szolgál - a külvilág felé).
+		\end{itemize}
+	\item Példa: GND(gnd1)
+	\end{itemize}	
+
+\item MPX(name,WIRE\_in[4],WIRE\_S[2])
+	\begin{itemize}
+	\item Leírás: 4:1 multiplexer létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a komponens nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE\_in[4]: meg kell adni négy WIRE-t, ami az egyes bemeneteket jelentik.
+			\item WIRE\_S[2]: meg kell adni két WIRE-t, ami a két select jelet adja
+		\end{itemize}
+	\item Példa: MPX(mpx1,w\_in3,w\_in2,w\_in1,w\_in0,w\_s1,w\_s0)
+	\end{itemize}	
+	
+\item FFJK(name,WIRE\_clk,WIRE\_J,WIRE\_K)
+	\begin{itemize}
+	\item Leírás: konstans hamis jel létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a komponens nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE\_clk: meg kell adni egy WIRE-t, ami az órajel bemenet lesz
+			\item WIRE\_J: meg kell adni egy WIRE-t, ami az J bemenet lesz
+			\item WIRE\_K: meg kell adni egy WIRE-t, ami az K bemenet lesz			
+		\end{itemize}
+	\item Példa: FFJK(ffjk1,w\_clk,w\_j,w\_k)
+	\end{itemize}
+
+\item FFD(name,WIRE\_clk,WIRE\_D)
+	\begin{itemize}
+	\item Leírás: D flip-flop létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a komponens nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE\_clk: meg kell adni egy WIRE-t, ami az órajel bemenet lesz
+			\item WIRE\_D: meg kell adni egy WIRE-t, ami az adat bemenet lesz
+		\end{itemize}
+	\item Példa: FFD(ffd1,w\_clk,w\_d)
+	\end{itemize}
+	
+\item LED(name,WIRE\_in)
+	\begin{itemize}
+	\item Leírás: LED létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a komponens nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE\_in: meg kell adni egy WIRE-t, ami a LED bemenete lesz
+		\end{itemize}
+	\item Példa: LED(led1)
+	\end{itemize}
+
+\item 7SEG(name,WIRE\_D[8])
+	\begin{itemize}
+	\item Leírás: 7 szegmenses kijelző létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a komponens nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE\_D[8]: meg kell adni nyolc WIRE-t, ami a sorra a szegmenseket kapcsolja
+		\end{itemize}
+	\item Példa: 7SEG(7seg1,w\_d7,w\_d6,w\_d5,w\_d4,w\_d3,w\_d,w\_d2,w\_d1,w\_d0)
+	\end{itemize}
+	
+\item TOGGLE(name)
+	\begin{itemize}
+	\item Leírás: kapcsoló létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a kapcsoló nevét (egyedi azonosításra szolgál - a külvilág felé).
+		\end{itemize}
+	\item Példa: TOGGLE(kapcs1)
+	\end{itemize}		
+
+\item SEQ(name,BITMINTA)
+	\begin{itemize}
+	\item Leírás: szekvencia generátor létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a komponens nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item BITMINTA: meg kell adni egy sorozatot, melyet a generátor egymás után kiad magából.
+		\end{itemize}
+	\item Példa: SEQ(seq1,011000110)
+	\end{itemize}
+
+\item WIRE(name,WIRE\_in)
+	\begin{itemize}
+	\item Leírás: vezeték létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a vezeték nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE\_in: meg kell adni egy NODE-ot, vagy egy komponens kimenetet a vezeték bemenetének 
+		\end{itemize}
+	\item Példa: WIRE(w1,X) - WIRE(w1,Node)
+	\end{itemize}	
+
+\item NODE(name,WIRE\_in,out)
+	\begin{itemize}
+	\item Leírás: csomópont létrehozása.
+	\item Opciók: 
+		\begin{itemize}
+			\item name: meg kell adni a csomópont nevét (egyedi azonosításra szolgál - a külvilág felé).
+			\item WIRE\_in: meg kell adni egy WIRE-t a csomópont bemenetének 
+			\item out: meg kell adni, hogy a NODE-nak hány kimenete lesz
+		\end{itemize}
+	\item Példa: NODE(n1,w1,3) - három kimenetű elosztót hoz létre a w1 vezeték alapján
+	\end{itemize}
+	
+\item Példa áramkör konfigurációs fájl
+Egy olyan minta hálózatot hozunk létre melyben található két kapcsoló egy és kapura kötve és az és kapu kimenete egy inverteren keresztül egy ledre kapcsolódik.
+	\begin{itemize}
+	\item t1=TOGGLE(t1)
+	\item t2=TOGGLE(t2)
+	\item w\_t1\_es1=WIRE(w\_t1\_es1,T1)
+	\item w\_t2\_es1=WIRE(w\_t1\_es1,T2)
+	\item es1=AND(es1,w\_t1\_es1,w\_t2\_es1)	
+	\item w\_es1\_inv1=WIRE(w\_es1\_inv1,es1)	
+	\item inv1=INV(inv1,w\_es1\_inv1)
+	\item w\_inv1\_led1=WIRE(w\_inv1\_led1,inv1)
+	\item led1=LED(led1,w\_inv1\_led1)
+	\end{itemize}	
+
+
+\end{itemize}
+
 
 \subsection{Kimeneti nyelv}
 \comment{Egyértelműen definiálni kell, hogy az egyes bemeneti parancsok végrehajtása után előálló állapot milyen formában jelenik meg a szabványos kimeneten.}
