@@ -12,20 +12,57 @@
 \comment{A protó (karakteres) input és output felületeit úgy kell kialakítani, hogy az input fájlból is vehető legyen illetőleg az output fájlba menthető legyen, vagyis kommunikációra csak a szabványos be- és kimenet használható.}
 
 \subsection{Bemeneti nyelv}
-\comment{Definiálni kell a teszteket leíró nyelvet. Külön figyelmet kell fordítani arra, hogy ha a rendszer véletlen elemeket is tartalmaz, akkor a véletlenszerűség ki-bekapcsolható legyen, és a program determinisztikusan is futtatható legyen. A szálkezelést is tesztelhető, irányítható módon kell megoldani.}
 
+A parancsokat a standard bemenetről, illetve fájlból olvassa be a program. Minden parancsot egy sorvége karakter zár le.\newline
+Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott eseményről, ennek formátuma a Kimeneti nyelv c. fejezetben olvasható.\newline
+
+\textbf{loadCircuit [file]}
 \begin{itemize}
-\item Parancs1
-	\begin{itemize}
-	\item Leírás:
-	\item Opciók:
-	\end{itemize}
-\item Parancs2
-	\begin{itemize}
-	\item Leírás:
-	\item Opciók:
-	\end{itemize}
+	\item Leírás: A megadott áramkört betölti a szimulációs program.
+	\item Megjegyzés: A file nevét kiterjesztés nélkül kell megadni.
+	\item Opciók: -
+\end{itemize}
 
+\textbf{loadSettings [file]}
+\begin{itemize}
+	\item Leírás: A jelenlegi áramkörhöz a megadott konfigurációs fájl betöltése.
+	\item Megjegyzés: A file nevét kiterjesztés nélkül kell megadni.
+	\item Opciók: -
+\end{itemize}
+
+\textbf{saveSettings [file]}
+\begin{itemize}
+	\item Leírás: A pillanatnyilag használt konfiguráció fájlba mentése.
+	\item Megjegyzés: A file nevét kiterjesztés nélkül kell megadni.
+	\item Opciók: -
+\end{itemize}
+
+\textbf{switch [név]}
+\begin{itemize}
+	\item Leírás: A megnevezett kapcsoló átállítása.
+	\item Opciók: -
+\end{itemize}
+
+\textbf{setSeqGen [név] [érték1, érték2, ...]}
+\begin{itemize}
+	\item Leírás: A megnevezett szekvenciagenerátor az értékparaméterek szerint beállítódik.
+	\item Opciók: -
+\end{itemize}
+
+\textbf{getValue [név]}
+\begin{itemize}
+	\item Leírás: A megadott áramköri elem kiírja az aktuális kimeneti értékét.
+	\item Opciók: a getValue -all parancs az összes áramköri elem kimenetének értékét kilistázza.
+\end{itemize}
+
+\textbf{step}
+\begin{itemize}
+	\item Leírás: A parancs hatására lefut egy szimulációs ciklus, melynek két eredménye lehet:
+	\begin{itemize}
+		\item véges lépésen belül stabilizálódik a rendszer, ekkor a kapcsoló(k), szekvenciagenerátor(ok) és kijelző(k) értéke(i) kiíródnak.
+		\item nem stabilizálódik az áramkör; hibaüzenet
+	\end{itemize} 
+	\item Opciók: -
 \end{itemize}
 
 \subsection{Konfigurációs fájlok nyelvtana}
