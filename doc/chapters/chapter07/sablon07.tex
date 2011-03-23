@@ -12,8 +12,8 @@
 \comment{Definiálni kell a teszteket leíró nyelvet. Külön figyelmet kell fordítani arra, hogy ha a rendszer véletlen elemeket is tartalmaz, akkor a véletlenszerűség ki-bekapcsolható legyen, és a program determinisztikusan is tesztelhető legyen.}
 
 \subsection{Az interfész általános leírása}
-A prototípus szabványos ki- és bementen kommunikál a felhasználóval. Az elkészített prototípus program egy
-saját parancsrendszert használ. A parancs kiadása után a program végrehajtja azt és kiírja az eredményt a kimenetre. Az autómatikus tesztelés elősegítése érdekében lehetőség van arra, hogy 
+A prototípus szabványos ki- és bemeneten kommunikál a felhasználóval. Az elkészített prototípus program egy
+saját parancsrendszert használ. A parancs kiadása után a program végrehajtja azt és kiírja az eredményt a kimenetre. Az automatikus tesztelés elősegítése érdekében lehetőség van arra, hogy 
 a parancsokat egy előre elkészített fájlból olvassa és a kimenetet fájlba mentse. A program az áramkört is
 fájlból olvassa. A tesztelés elősegítése érdekében elkészítettünk néhány áramkört, azonban a felhasználó a megadott áramkört leíró fájl specifikációja alapján saját áramkört is készíthet, majd tesztelhet. 
 
@@ -448,5 +448,5 @@ a betöltött áramkört.}
 \teszteset{...}{...}{...}
 
 \section{Tesztelést támogató segéd- és fordítóprogramok specifikálása}
-A program által generált kimeneti fájl és az elvárt eredményeket tartalmazó fájlok összehasonlítására a 
+A program által generált kimeneti fájl és az elvárt eredményeket tartalmazó fájlok összehasonlítására 
 a DiffUtils-ban (http://www.gnu.org/software/diffutils/) található cmp.exe-t fogjuk használni.
