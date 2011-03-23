@@ -3,6 +3,7 @@
 %
 \chapter{Prototípus koncepciója}
 
+\parindent 0pt
 \thispagestyle{fancy}
 
 \section{Prototípus interface-definíciója}
@@ -267,7 +268,85 @@ Egy olyan minta hálózatot hozunk létre melyben található két kapcsoló egy
 
 
 \subsection{Kimeneti nyelv}
-\comment{Egyértelműen definiálni kell, hogy az egyes bemeneti parancsok végrehajtása után előálló állapot milyen formában jelenik meg a szabványos kimeneten.}
+
+A program történései, visszajelzése a standard kimeneten jelennek meg, illetve ezek fájlba is kiíródnak. A program minden parancs után visszajelzést ad a felhasználónak a végrehajtott eseményről. A fentebb definiált parancsokra a következő jelzéseket kapja a felhasználó:\newline
+
+\textit{loadCircuit [file]}\newline
+Lehetséges kimenetek
+\begin{itemize}
+	\item áramkör betöltése sikeres
+	\begin{itemize}
+		\item Leírás: a betöltés sikeres, amennyiben az áramkört tartalmazó fájl szintaktikája megfelel a Konfigurációs fájlok nyelvtana c. fejezetnek.
+	\end{itemize}
+	\item áramkör betöltése sikertelen: hibás áramkör
+	\begin{itemize}
+		\item Leírás: a betöltés sikertelen, amennyiben az áramkört tartalmazó fájl szintaktikája nem felel meg a Konfigurációs fájlok nyelvtana c. fejezetnek.
+	\end{itemize}
+\end{itemize}
+
+\textit{loadSettings [file]}\newline
+Lehetséges kimenetek
+\begin{itemize}
+	\item értékek mentése sikeres
+	\begin{itemize}
+		\item Leírás: a konfigurációs értékek sikeresen fájlba mentődtek.
+	\end{itemize}
+\end{itemize}
+
+\textit{saveSettings [file]}\newline
+Lehetséges kimenetek
+\begin{itemize}
+	\item értékek betöltése sikeres
+	\begin{itemize}
+		\item Leírás: az értékek betöltése sikeres, amennyiben a konfigurációs fájlban szereplő áramköri elemek megfeleltethetők az aktuális áramkörben szereplő elemekkel, illetve a megadott értékek helyesek.
+	\end{itemize}
+	\item értékek betöltése sikertelen: hibás értékek
+	\begin{itemize}
+		\item Leírás: az értékek betöltése sikeres, amennyiben a konfigurációs fájlban szereplő áramköri elem nem feleltethető meg az aktuális áramkörben szereplő elemek egyikével sem, illetve ha valamelyik érték helytelen.
+		\item Megjegyzés: azon elemek, melyek beállítására nem volt információ a konfigurációs fájlban automatikusan nullázódnak.
+	\end{itemize}
+\end{itemize}
+
+\textit{switch [név]}\newline
+Lehetséges kimenetek
+\begin{itemize}
+	\item ~[elem]: [érték]
+	\begin{itemize}
+		\item Leírás: az [elem] megadja a módosított kapcsoló nevét, míg az [érték] megmutatja, hogy milyen értékre változott az aktuális kapcsoló kimenete. 
+	\end{itemize}
+\end{itemize}
+
+\textit{setSeqGen [név] [érték1, érték2, ...]}\newline
+Lehetséges kimenetek
+\begin{itemize}
+	\item ~[elem]: [érték1, érték2, ...]
+	\begin{itemize}
+		\item Leírás: az [elem] megadja a módosított generátor nevét, míg az [érték1, érték2, ...] megmutatja, hogy milyen értékekre változott az aktuális generátor kimenete. 
+	\end{itemize}
+\end{itemize}
+
+\textit{getValue [név]}\newline
+Lehetséges kimenetek
+\begin{itemize}
+	\item ~[elem]: [érték]
+	\begin{itemize}
+		\item Leírás: az [elem] megadja a módosított kapcsoló nevét, míg az [érték] megmutatja, hogy milyen értékre változott az aktuális kapcsoló kimenete.
+		\item Megjegyzés: a getValue -all parancsra az összes elemet kilistázza a megadott formában új sor karakterrel elválasztva
+	\end{itemize}
+\end{itemize}
+
+\textit{step}\newline
+Lehetséges kimenetek
+\begin{itemize}
+	\item szimuláció sikeres; összes elem kilistázása, mintha hívnánk egy getValue -all függvényt
+	\begin{itemize}
+		\item Leírás: a szimuláció sikeres, amennyiben véges lépésen belül stabilizálódni tud az áramkör.
+	\end{itemize}
+	\item szimuláció sikertelen: nincs stabil állapot
+	\begin{itemize}
+		\item Leírás: a szimuláció sikertelen, amennyiben véges lépésen belül nem tud stabilizálódni az áramkör.
+	\end{itemize}
+\end{itemize}
 
 \section{Összes részletes use-case}
 
