@@ -25,42 +25,42 @@ fájlból olvassa. A tesztelés elősegítése érdekében elkészítettünk né
 A parancsokat a standard bemenetről, illetve fájlból olvassa be a program. Minden parancsot egy sorvége karakter zár le.\newline
 Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott eseményről, ennek formátuma a Kimeneti nyelv c. fejezetben olvasható.\newline
 
-\textit{loadCircuit [file]}
+\textit{loadCircuit <file>}
 \begin{itemize}
 	\item Leírás: A megadott áramkört betölti a szimulációs program.
 	\item Megjegyzés: A file nevét kiterjesztés nélkül kell megadni.
 	\item Opciók: -
 \end{itemize}
 
-\textit{loadSettings [file]}
+\textit{loadSettings <file>}
 \begin{itemize}
 	\item Leírás: A jelenlegi áramkörhöz a megadott konfigurációs fájl betöltése.
 	\item Megjegyzés: A file nevét kiterjesztés nélkül kell megadni.
 	\item Opciók: -
 \end{itemize}
 
-\textit{saveSettings [file]}
+\textit{saveSettings <file>}
 \begin{itemize}
 	\item Leírás: A pillanatnyilag használt konfiguráció fájlba mentése.
 	\item Megjegyzés: A file nevét kiterjesztés nélkül kell megadni.
 	\item Opciók: -
 \end{itemize}
 
-\textit{switch [név]}
+\textit{switch <név>}
 \begin{itemize}
 	\item Leírás: A megnevezett kapcsoló átállítása.
 	\item Megjegyzés: -
 	\item Opciók: -
 \end{itemize}
 
-\textit{setSeqGen [név] [érték1, érték2, ...]}
+\textit{setSeqGen <név> <érték1, érték2, ...>}
 \begin{itemize}
 	\item Leírás: A megnevezett szekvenciagenerátor az értékparaméterek szerint beállítódik.
 	\item Megjegyzés: -
 	\item Opciók: -
 \end{itemize}
 
-\textit{getValue [név]}
+\textit{getValue <név> | -all}
 \begin{itemize}
 	\item Leírás: A megadott áramköri elem kiírja az aktuális kimeneti értékét.
 	\item Megjegyzés: -
@@ -297,7 +297,7 @@ seqGen1=0,1,1,0,1
 
 A program történései, visszajelzése a standard kimeneten jelennek meg, illetve ezek fájlba is kiíródnak. A program minden parancs után visszajelzést ad a felhasználónak a végrehajtott eseményről. A fentebb definiált parancsokra a következő jelzéseket kapja a felhasználó:\newline
 
-\textit{loadCircuit [file]}\newline
+\textit{loadCircuit <file>}\newline
 Lehetséges kimenetek
 \begin{itemize}
 	\item
@@ -316,7 +316,7 @@ Lehetséges kimenetek
 	\end{itemize}
 \end{itemize}
 
-\textit{loadSettings [file]}\newline
+\textit{loadSettings <file>}\newline
 Lehetséges kimenetek
 \begin{itemize}
 	\item
@@ -325,6 +325,7 @@ Lehetséges kimenetek
 	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az értékek betöltése sikeres, amennyiben a konfigurációs fájlban szereplő áramköri elemek megfeleltethetők az aktuális áramkörben szereplő elemekkel, illetve a megadott értékek helyesek.
+		\item Megjegyzés: azon elemek, melyek beállítására nem volt információ a konfigurációs fájlban automatikusan nullázódnak.
 	\end{itemize}
 	\item
 	\begin{verbatim}
@@ -332,11 +333,10 @@ Lehetséges kimenetek
 	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az értékek betöltése sikeres, amennyiben a konfigurációs fájlban szereplő áramköri elem nem feleltethető meg az aktuális áramkörben szereplő elemek egyikével sem, illetve ha valamelyik érték helytelen.
-		\item Megjegyzés: azon elemek, melyek beállítására nem volt információ a konfigurációs fájlban automatikusan nullázódnak.
 	\end{itemize}
 \end{itemize}
 
-\textit{saveSettings [file]}\newline
+\textit{saveSettings <file>}\newline
 Lehetséges kimenetek
 \begin{itemize}
 	\item
@@ -348,7 +348,7 @@ Lehetséges kimenetek
 	\end{itemize}
 \end{itemize}
 
-\textit{switch [név]}\newline
+\textit{switch <név>}\newline
 Lehetséges kimenetek
 \begin{itemize}
 	\item
@@ -360,7 +360,7 @@ Lehetséges kimenetek
 	\end{itemize}
 \end{itemize}
 
-\textit{setSeqGen [név] [érték1, érték2, ...]}\newline
+\textit{setSeqGen <név> <érték1, érték2, ...>}\newline
 Lehetséges kimenetek
 \begin{itemize}
 	\item 
@@ -372,7 +372,7 @@ Lehetséges kimenetek
 	\end{itemize}
 \end{itemize}
 
-\textit{getValue [név]}\newline
+\textit{getValue <név> | -all}\newline
 Lehetséges kimenetek
 \begin{itemize}
 	\item
