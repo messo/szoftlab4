@@ -45,18 +45,21 @@ Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott
 \textbf{switch [név]}
 \begin{itemize}
 	\item Leírás: A megnevezett kapcsoló átállítása.
+	\item Megjegyzés: -
 	\item Opciók: -
 \end{itemize}
 
 \textbf{setSeqGen [név] [érték1, érték2, ...]}
 \begin{itemize}
 	\item Leírás: A megnevezett szekvenciagenerátor az értékparaméterek szerint beállítódik.
+	\item Megjegyzés: -
 	\item Opciók: -
 \end{itemize}
 
 \textbf{getValue [név]}
 \begin{itemize}
 	\item Leírás: A megadott áramköri elem kiírja az aktuális kimeneti értékét.
+	\item Megjegyzés: -
 	\item Opciók: a getValue -all parancs az összes áramköri elem kimenetének értékét kilistázza.
 \end{itemize}
 
@@ -66,7 +69,8 @@ Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott
 	\begin{itemize}
 		\item véges lépésen belül stabilizálódik a rendszer, ekkor a kapcsoló(k), szekvenciagenerátor(ok) és kijelző(k) értéke(i) kiíródnak.
 		\item nem stabilizálódik az áramkör; hibaüzenet
-	\end{itemize} 
+	\end{itemize}
+	\item Megjegyzés: - 
 	\item Opciók: -
 \end{itemize}
 
@@ -292,11 +296,17 @@ A program történései, visszajelzése a standard kimeneten jelennek meg, illet
 \textit{loadCircuit [file]}\newline
 Lehetséges kimenetek
 \begin{itemize}
-	\item áramkör betöltése sikeres
+	\item
+	\begin{verbatim}
+	loading successful
+	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: a betöltés sikeres, amennyiben az áramkört tartalmazó fájl szintaktikája megfelel a Konfigurációs fájlok nyelvtana c. fejezetnek.
 	\end{itemize}
-	\item áramkör betöltése sikertelen: hibás áramkör
+	\item 
+	\begin{verbatim}
+	loading failed
+	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: a betöltés sikertelen, amennyiben az áramkört tartalmazó fájl szintaktikája nem felel meg a Konfigurációs fájlok nyelvtana c. fejezetnek.
 	\end{itemize}
@@ -305,7 +315,10 @@ Lehetséges kimenetek
 \textit{loadSettings [file]}\newline
 Lehetséges kimenetek
 \begin{itemize}
-	\item értékek mentése sikeres
+	\item
+	\begin{verbatim}
+	save successful
+	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: a konfigurációs értékek sikeresen fájlba mentődtek.
 	\end{itemize}
@@ -314,11 +327,17 @@ Lehetséges kimenetek
 \textit{saveSettings [file]}\newline
 Lehetséges kimenetek
 \begin{itemize}
-	\item értékek betöltése sikeres
+	\item
+	\begin{verbatim}
+	loading successful
+	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az értékek betöltése sikeres, amennyiben a konfigurációs fájlban szereplő áramköri elemek megfeleltethetők az aktuális áramkörben szereplő elemekkel, illetve a megadott értékek helyesek.
 	\end{itemize}
-	\item értékek betöltése sikertelen: hibás értékek
+	\item
+	\begin{verbatim}
+	loading failed
+	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az értékek betöltése sikeres, amennyiben a konfigurációs fájlban szereplő áramköri elem nem feleltethető meg az aktuális áramkörben szereplő elemek egyikével sem, illetve ha valamelyik érték helytelen.
 		\item Megjegyzés: azon elemek, melyek beállítására nem volt információ a konfigurációs fájlban automatikusan nullázódnak.
@@ -328,7 +347,10 @@ Lehetséges kimenetek
 \textit{switch [név]}\newline
 Lehetséges kimenetek
 \begin{itemize}
-	\item ~[elem]: [érték]
+	\item
+	\begin{verbatim}
+	[elem]: [érték]
+	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az [elem] megadja a módosított kapcsoló nevét, míg az [érték] megmutatja, hogy milyen értékre változott az aktuális kapcsoló kimenete. 
 	\end{itemize}
@@ -337,7 +359,10 @@ Lehetséges kimenetek
 \textit{setSeqGen [név] [érték1, érték2, ...]}\newline
 Lehetséges kimenetek
 \begin{itemize}
-	\item ~[elem]: [érték1, érték2, ...]
+	\item 
+	\begin{verbatim}
+	[elem]: [érték1, érték2, ...]
+	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az [elem] megadja a módosított generátor nevét, míg az [érték1, érték2, ...] megmutatja, hogy milyen értékekre változott az aktuális generátor kimenete. 
 	\end{itemize}
@@ -346,7 +371,10 @@ Lehetséges kimenetek
 \textit{getValue [név]}\newline
 Lehetséges kimenetek
 \begin{itemize}
-	\item ~[elem]: [érték]
+	\item
+	\begin{verbatim}
+	[elem]: [érték]
+	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az [elem] megadja a módosított kapcsoló nevét, míg az [érték] megmutatja, hogy milyen értékre változott az aktuális kapcsoló kimenete.
 		\item Megjegyzés: a getValue -all parancsra az összes elemet kilistázza a megadott formában új sor karakterrel elválasztva
@@ -356,11 +384,20 @@ Lehetséges kimenetek
 \textit{step}\newline
 Lehetséges kimenetek
 \begin{itemize}
-	\item szimuláció sikeres; összes elem kilistázása, mintha hívnánk egy getValue -all függvényt
+	\item
+	\begin{verbatim}
+	simulation successful
+	[elem1]: [érték]
+	[elem2]: [érték]
+	...
+	\end{verbatim}
 	\begin{itemize}
-		\item Leírás: a szimuláció sikeres, amennyiben véges lépésen belül stabilizálódni tud az áramkör.
+		\item Leírás: a szimuláció sikeres, amennyiben véges lépésen belül stabilizálódni tud az áramkör. Ekkor a kapcsoló(k), szekvenciagenerátor(ok) és kijelző(k) értéke(i) kiíródnak.
 	\end{itemize}
-	\item szimuláció sikertelen: nincs stabil állapot
+	\item
+	\begin{verbatim}
+	simulation failed
+	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: a szimuláció sikertelen, amennyiben véges lépésen belül nem tud stabilizálódni az áramkör.
 	\end{itemize}
