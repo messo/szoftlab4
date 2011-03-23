@@ -12,7 +12,11 @@
 \comment{Definiálni kell a teszteket leíró nyelvet. Külön figyelmet kell fordítani arra, hogy ha a rendszer véletlen elemeket is tartalmaz, akkor a véletlenszerűség ki-bekapcsolható legyen, és a program determinisztikusan is tesztelhető legyen.}
 
 \subsection{Az interfész általános leírása}
-\comment{A protó (karakteres) input és output felületeit úgy kell kialakítani, hogy az input fájlból is vehető legyen illetőleg az output fájlba menthető legyen, vagyis kommunikációra csak a szabványos be- és kimenet használható.}
+A prototípus szabványos ki- és bementen kommunikál a felhasználóval. Az elkészített prototípus program egy
+saját parancsrendszert használ. A parancs kiadása után a program végrehajtja azt és kiírja az eredményt a kimenetre. Az autómatikus tesztelés elősegítése érdekében lehetőség van arra, hogy 
+a parancsokat egy előre elkészített fájlból olvassa és a kimenetet fájlba mentse. A program az áramkört is
+fájlból olvassa. A tesztelés elősegítése érdekében elkészítettünk néhány áramkört, azonban a felhasználó a megadott áramkört leíró fájl specifikációja alapján saját áramkört is készíthet, majd tesztelhet. 
+
 
 \subsection{Bemeneti nyelv}
 
@@ -436,11 +440,13 @@ parancs használatával a megadott nevű alkatrész értékének lekérdezése.}
 \usecase{Áramkör szimulálása}{A betöltött áramkör szimulálása}{Felhasználó}{A step parancs kiadásával szimulálja 
 a betöltött áramkört.}
 
+\usecase{Teszt eredményének ellenőrzése}{A program által generált kimenetet összehasonlítja a referencia kimenettel}{Felhasználó}{A teszt lefutását követően egy script összehasonlítja a kapott eredményeket a várt eredményekkel.}
+
 \section{Tesztelési terv}
 \comment{A tesztelési tervben definiálni kell, hogy a be- és kimeneti fájlok egybevetésével miként végezhető el a program tesztelése. Meg kell adni teszt forgatókönyveket. Az egyes teszteket elég informálisan, szabad szövegként leírni. Teszt-esetenként egy-öt mondatban. Minden teszthez meg kell adni, hogy mi a célja, a proto mely funkcionalitását, osztályait stb. teszteli. Az alábbi táblázat minden teszt-esethez külön-külön elkészítendő.}
 
 \teszteset{...}{...}{...}
 
 \section{Tesztelést támogató segéd- és fordítóprogramok specifikálása}
-\comment{Specifikálni kell a tesztelést támogató segédprogramokat.}
-
+A program által generált kimeneti fájl és az elvárt eredményeket tartalmazó fájlok összehasonlítására a 
+a DiffUtils-ban (http://www.gnu.org/software/diffutils/) található cmp.exe-t fogjuk használni.
