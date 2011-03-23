@@ -4,6 +4,8 @@
 \chapter{Prototípus koncepciója}
 
 \parindent 0pt
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 \thispagestyle{fancy}
 
 \section{Prototípus interface-definíciója}
@@ -13,6 +15,8 @@
 \comment{A protó (karakteres) input és output felületeit úgy kell kialakítani, hogy az input fájlból is vehető legyen illetőleg az output fájlba menthető legyen, vagyis kommunikációra csak a szabványos be- és kimenet használható.}
 
 \subsection{Bemeneti nyelv}
+
+\subsubsection{Felhasználói parancsok}
 
 A parancsokat a standard bemenetről, illetve fájlból olvassa be a program. Minden parancsot egy sorvége karakter zár le.\newline
 Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott eseményről, ennek formátuma a Kimeneti nyelv c. fejezetben olvasható.\newline
@@ -66,7 +70,7 @@ Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott
 	\item Opciók: -
 \end{itemize}
 
-\subsection{Konfigurációs fájlok nyelvtana}
+\subsubsection{Konfigurációs fájlok nyelvtana}
 A konfigurációs fájlok *.ovr kiterjesztésűek, ezekben adjuk meg a szimulálandó hálózat paramétereit. Egyszerű szövegfájl, melyben az értelmezendő parancsok soronként tagolódnak. A program feltételezi a konfigurációs fájl hibamentességét, sehol nem ellenőrizzük, hogy a bemenetnek van-e értelme!\linebreak
 A fájl létrehozásához az alábbi parancsok, szintaxisok állnak rendelkezésre:
 
@@ -266,6 +270,20 @@ Egy olyan minta hálózatot hozunk létre melyben található két kapcsoló egy
 
 \end{itemize}
 
+\subsubsection{Konfigurációs fájl nyelvtana}
+
+A konfigurációs fájlban minden sorban egybeállításnak kell szerepelnie, mely a kövekező egységekből áll:
+\begin{itemize}
+	\item az elem neve
+	\item egyenlőségjel
+	\item az elem értéke (szekvencia generátor esetében több érték is lehet, ezeket vesszővel elválasztva kell megadni
+\end{itemize}
+
+példa:
+\begin{verbatim}
+toggle1=0
+seqGen1=0,1,1,0,1
+\end{verbatim}
 
 \subsection{Kimeneti nyelv}
 
