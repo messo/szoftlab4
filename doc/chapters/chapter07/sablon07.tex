@@ -414,9 +414,21 @@ a betöltött áramkört.}
 \usecase{Teszt eredményének ellenőrzése}{A program által generált kimenetet összehasonlítja a referencia kimenettel}{Felhasználó}{A teszt lefutását követően egy script összehasonlítja a kapott eredményeket a várt eredményekkel.}
 
 \section{Tesztelési terv}
-\comment{A tesztelési tervben definiálni kell, hogy a be- és kimeneti fájlok egybevetésével miként végezhető el a program tesztelése. Meg kell adni teszt forgatókönyveket. Az egyes teszteket elég informálisan, szabad szövegként leírni. Teszt-esetenként egy-öt mondatban. Minden teszthez meg kell adni, hogy mi a célja, a proto mely funkcionalitását, osztályait stb. teszteli. Az alábbi táblázat minden teszt-esethez külön-külön elkészítendő.}
+A tesztelés lehetőséget nyújt a program funkcióinak és menetének széleskörű vizsgálatára. Tesztelés során lehetőség nyílik a különböző tesztesetek kipróbálására. A teszt bemenetét bemeneti állományokból kapja, és a teszt eredményét kimeneti fájlban, és konzolon jeleníti meg. Ezáltal lehet összevetni a kiválasztott teszt várt, és tényleges eredményét.
 
-\teszteset{...}{...}{...}
+\teszteset{Alap áramkör}{Alap áramkör, mely kapcsolókból, és egyszerű nem visszacsatolt ÉS kapukból áll, kimeneti értékeket ledek jelzik}{Ez a teszteset leteszteli a kapcsolók, ÉS kapu, és a ledek működését.}
+
+\teszteset{MPX-es áramkör}{Olyan áramkör, mely kapcsolókból és MPX-ből áll, a kimeneti értékeket 7 szegmenses kijelző jelzi.}{Ez a teszteset leteszteli a MPX és a 7szegmenses kijelző működésést}
+
+\teszteset{Visszacsatolt stabil áramkör}{Olyan áramkör, melyben egy visszacsatolás történik, de az áramkör stabil marad, tehát egy vagy kapu visszakötve, kimenet értékét egy led jelzi.}{Ez a teszteset első sorban a visszacsatolás helyes működését teszteli le, de mivel visszacsatolás is történik és egyúttal a kimeneti értéket is megjelenítjük leden, ezért csomópont is kell tehát csomópont helyes működését is teszteli}
+
+\teszteset{Visszacsatolt nem stabil áramkör}{Előző áramkörhöz hasonló áramkör, csak itt úgy végezzük a visszacsatolást, hogy az áramkör ne legyen stabil: egy vagy kapu visszakötve egy inverteren keresztül}{Ez a teszteset az invertert és a VAGY kaput továbbá a visszacsatolást teszteli le olyan esetben, mikor az áramkör nem lesz soha stabil.}
+
+\teszteset{Flip-flop-os áramkör}{Olyan áramkör melyben szerepel egy flipflop, egy jelgenerátor, és az értéket leden jelezzük ki.}{E teszteset során letesztelhetjük a jelgenerátor helyes működését és, hogy a flip-flop helyesen lép e felfutó élre, illetve helyesen működik e.}
+
+\teszteset{Kompozitos áramkör}{Egy olyan áramkör, melyben szerepel egy kompozit elem, azaz szerepel egy áramköri hálózat egy egységben mint áramköri elem. Kompoziton belül valamilyen egyszerű áramköri hálózat szerepel.}{Ez a teszteset az új kompozit elem működését teszteli le, annak helyességét ellenőrizhetjük.}
+
+\teszteset{Kompoziton belüli kompozitos áramkör}{Előző áramkörhöz hasonló áramkör, a különbség az, hogy a kompoziton belüli áramköri hálózat tartalmaz egy újabb kompozitot a többi elemen kívül.}{Ez az áramkör leteszteli, hogyan működik a program olyan esetben, mikor a kompozit további kompozitot tartalmaz, illetve a kompoziton belüli kompozit jól működik e más elemekkel összekötve.}
 
 \section{Tesztelést támogató segéd- és fordítóprogramok specifikálása}
 A program által generált kimeneti fájl és az elvárt eredményeket tartalmazó fájlok összehasonlítására 
