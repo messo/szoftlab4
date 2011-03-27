@@ -9,12 +9,11 @@
 \thispagestyle{fancy}
 
 \section{Prototípus interface-definíciója}
-\comment{Definiálni kell a teszteket leíró nyelvet. Külön figyelmet kell fordítani arra, hogy ha a rendszer véletlen elemeket is tartalmaz, akkor a véletlenszerűség ki-bekapcsolható legyen, és a program determinisztikusan is tesztelhető legyen.}
 
 \subsection{Az interfész általános leírása}
 A prototípus szabványos ki- és bemeneten kommunikál a felhasználóval. Az elkészített prototípus program egy
 saját parancsrendszert használ. A parancs kiadása után a program végrehajtja azt és kiírja az eredményt a kimenetre. Az automatikus tesztelés elősegítése érdekében lehetőség van arra, hogy 
-a parancsokat egy előre elkészített fájlból olvassa és a kimenetet fájlba mentse. A program az áramkört is
+a parancsokat egy előre elkészített fájlból olvassa és a kimenetet fájlba mentse. A program az áramkört
 fájlból olvassa. A tesztelés elősegítése érdekében elkészítettünk néhány áramkört, azonban a felhasználó a megadott áramkört leíró fájl specifikációja alapján saját áramkört is készíthet, majd tesztelhet. 
 
 
@@ -79,7 +78,7 @@ Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott
 \end{itemize}
 
 \subsubsection{Áramkör leíró fájlok nyelvtana}
-A konfigurációs fájlok *.ovr kiterjesztésűek, ezekben adjuk meg a szimulálandó hálózat paramétereit. Egyszerű szövegfájl, melyben az értelmezendő parancsok soronként tagolódnak. A program feltételezi a konfigurációs fájl hibamentességét, sehol nem ellenőrizzük, hogy a bemenetnek van-e értelme!\linebreak
+Az áramkör leíró fájlok *.ovr kiterjesztésűek, ezekben adjuk meg a szimulálandó hálózat paramétereit. Egyszerű szövegfájl, melyben az értelmezendő parancsok soronként tagolódnak. A program feltételezi a konfigurációs fájl hibamentességét, sehol nem ellenőrizzük, hogy a bemenetnek van-e értelme!\linebreak
 A fájl létrehozásához az alábbi parancsok, szintaxisok állnak rendelkezésre:
 
 \begin{itemize}
@@ -138,8 +137,6 @@ A fájl létrehozásához az alábbi parancsok, szintaxisok állnak rendelkezés
 	\begin{itemize}
 	\item Leírás: konstans igaz jel létrehozása.
 	\item Opciók: 
-		\begin{itemize}
-		\end{itemize}
 	\item Példa: VCC()
 	\end{itemize}
 	
@@ -147,8 +144,6 @@ A fájl létrehozásához az alábbi parancsok, szintaxisok állnak rendelkezés
 	\begin{itemize}
 	\item Leírás: konstans hamis jel létrehozása.
 	\item Opciók: 
-		\begin{itemize}
-		\end{itemize}
 	\item Példa: GND()
 	\end{itemize}	
 
@@ -210,8 +205,6 @@ A fájl létrehozásához az alábbi parancsok, szintaxisok állnak rendelkezés
 	\begin{itemize}
 	\item Leírás: kapcsoló létrehozása.
 	\item Opciók: 
-		\begin{itemize}
-		\end{itemize}
 	\item Példa: TOGGLE()
 	\end{itemize}		
 
@@ -324,7 +317,7 @@ Lehetséges kimenetek
 \begin{itemize}
 	\item
 	\begin{verbatim}
-	[elem]: [érték]
+	<elem>: <érték>
 	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az [elem] megadja a módosított kapcsoló nevét, míg az [érték] megmutatja, hogy milyen értékre változott az aktuális kapcsoló kimenete. 
@@ -336,7 +329,7 @@ Lehetséges kimenetek
 \begin{itemize}
 	\item 
 	\begin{verbatim}
-	[elem]: [érték1, érték2, ...]
+	<elem>: <érték1, érték2, ...>
 	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az [elem] megadja a módosított generátor nevét, míg az [érték1, érték2, ...] megmutatja, hogy milyen értékekre változott az aktuális generátor kimenete. 
@@ -348,7 +341,7 @@ Lehetséges kimenetek
 \begin{itemize}
 	\item
 	\begin{verbatim}
-	[elem]: [érték]
+	<elem>: <érték>
 	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az [elem] megadja a módosított kapcsoló nevét, míg az [érték] megmutatja, hogy milyen értékre változott az aktuális kapcsoló kimenete.
@@ -362,8 +355,8 @@ Lehetséges kimenetek
 	\item
 	\begin{verbatim}
 	simulation successful
-	[elem1]: [érték]
-	[elem2]: [érték]
+	<elem1>: <érték>
+	<elem2>: <érték>
 	...
 	\end{verbatim}
 	\begin{itemize}
@@ -420,15 +413,15 @@ A tesztelés lehetőséget nyújt a program funkcióinak és menetének szélesk
 
 \teszteset{MPX-es áramkör}{Olyan áramkör, mely kapcsolókból és MPX-ből áll, a kimeneti értékeket 7 szegmenses kijelző jelzi.}{Ez a teszteset leteszteli a MPX és a 7szegmenses kijelző működésést}
 
-\teszteset{Visszacsatolt stabil áramkör}{Olyan áramkör, melyben egy visszacsatolás történik, de az áramkör stabil marad, tehát egy vagy kapu visszakötve, kimenet értékét egy led jelzi.}{Ez a teszteset első sorban a visszacsatolás helyes működését teszteli le, de mivel visszacsatolás is történik és egyúttal a kimeneti értéket is megjelenítjük leden, ezért csomópont is kell tehát csomópont helyes működését is teszteli}
+\teszteset{Visszacsatolt stabil áramkör}{Olyan áramkör, melyben egy visszacsatolás történik, de az áramkör stabil marad, tehát egy vagy kapu visszakötve, kimenet értékét egy led jelzi.}{Ez a teszteset első sorban a visszacsatolás helyes működését teszteli le, de mivel visszacsatolás is történik és egyúttal a kimeneti értéket is megjelenítjük leden, ezért csomópont is kell; így másodsorban a csomópont elem helyes működését is teszteli}
 
 \teszteset{Visszacsatolt nem stabil áramkör}{Előző áramkörhöz hasonló áramkör, csak itt úgy végezzük a visszacsatolást, hogy az áramkör ne legyen stabil: egy vagy kapu visszakötve egy inverteren keresztül}{Ez a teszteset az invertert és a VAGY kaput továbbá a visszacsatolást teszteli le olyan esetben, mikor az áramkör nem lesz soha stabil.}
 
-\teszteset{Flip-flop-os áramkör}{Olyan áramkör melyben szerepel egy flipflop, egy jelgenerátor, és az értéket leden jelezzük ki.}{E teszteset során letesztelhetjük a jelgenerátor helyes működését és, hogy a flip-flop helyesen lép e felfutó élre, illetve helyesen működik e.}
+\teszteset{Flip-flop-os áramkör}{Olyan áramkör melyben szerepel egy flipflop, egy jelgenerátor, és az értéket leden jelezzük ki.}{E teszteset során letesztelhetjük a jelgenerátor helyes működését és megvizsgálhatjuk, hogy a flip-flop helyesen lép-e felfutó élre, illetve helyesen működik-e.}
 
 \teszteset{Kompozitos áramkör}{Egy olyan áramkör, melyben szerepel egy kompozit elem, azaz szerepel egy áramköri hálózat egy egységben mint áramköri elem. Kompoziton belül valamilyen egyszerű áramköri hálózat szerepel.}{Ez a teszteset az új kompozit elem működését teszteli le, annak helyességét ellenőrizhetjük.}
 
-\teszteset{Kompoziton belüli kompozitos áramkör}{Előző áramkörhöz hasonló áramkör, a különbség az, hogy a kompoziton belüli áramköri hálózat tartalmaz egy újabb kompozitot a többi elemen kívül.}{Ez az áramkör leteszteli, hogyan működik a program olyan esetben, mikor a kompozit további kompozitot tartalmaz, illetve a kompoziton belüli kompozit jól működik e más elemekkel összekötve.}
+\teszteset{Kompoziton belüli kompozitos áramkör}{Előző áramkörhöz hasonló áramkör, a különbség az, hogy a kompoziton belüli áramköri hálózat tartalmaz egy újabb kompozitot a többi elemen kívül.}{Ez az áramkör leteszteli, hogyan működik a program olyan esetben, mikor a kompozit további kompozitot tartalmaz, illetve a kompoziton belüli kompozit jól működik-e más elemekkel összekötve.}
 
 \section{Tesztelést támogató segéd- és fordítóprogramok specifikálása}
 A program által generált kimeneti fájl és az elvárt eredményeket tartalmazó fájlok összehasonlítására 
