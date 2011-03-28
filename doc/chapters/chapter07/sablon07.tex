@@ -8,62 +8,59 @@
 \setcounter{tocdepth}{3}
 \thispagestyle{fancy}
 
+\setcounter{section}{-1}
+\section{Változtatások}
+
+A specifikáció módosulása miatt a következő változtatásokat kellett tenni a modellben.
+Bevezettük a Composite osztályt, mely egy kompozit áramköri elemet ír le. Mivel az áramkör is lényegében egy kompozit elem, ezért a Circuit osztály a Composite-ból öröklődik. Ha egy kompozit elemnek nincsen stacionárius állapota, akkor azt jelzi kifele (az őt magába foglaló kompozitnak - amennyiben az áramkörről van szó, akkor a szimulációt értesíti) és ezáltal az egész áramkörnek nem lesz stacionárius állapota. Az áramkör annyiból speciális kompozit, hogy nincsen be- és kimenete.
+
+A másik új elem, mely bevezetésre került az oszcillátor. Ez egy olyan speciális LED, mely kijelzi az aktuális értékét, de lekérhető tőle az addig eltárolt értékek is. A memóriája véges, ha megtelik, az új érték a legrégebbi érték helyére íródik be.
+
 \section{Prototípus interface-definíciója}
 
 \subsection{Az interfész általános leírása}
 A prototípus szabványos ki- és bemeneten kommunikál a felhasználóval. Az elkészített prototípus program egy
 saját parancsrendszert használ. A parancs kiadása után a program végrehajtja azt és kiírja az eredményt a kimenetre. Az automatikus tesztelés elősegítése érdekében lehetőség van arra, hogy 
 a parancsokat egy előre elkészített fájlból olvassa és a kimenetet fájlba mentse. A program az áramkört
-fájlból olvassa. A tesztelés elősegítése érdekében elkészítettünk néhány áramkört, azonban a felhasználó a megadott áramkört leíró fájl specifikációja alapján saját áramkört is készíthet, majd tesztelhet. 
-
+fájlból olvassa. A tesztelés elősegítése érdekében elkészítünk néhány áramkört, azonban a felhasználó a megadott áramkört leíró fájl specifikációja alapján saját áramkört is készíthet, majd tesztelhet.
 
 \subsection{Bemeneti nyelv}
 
 \subsubsection{Felhasználói parancsok}
 
 A parancsokat a standard bemenetről, illetve fájlból olvassa be a program. Minden parancsot egy sorvége karakter zár le.\newline
-Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott eseményről, ennek formátuma a Kimeneti nyelv c. fejezetben olvasható.\newline
+Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott eseményről, ennek formátuma \aref{sec:output} alfejezetben olvasható.\newline
 
 \textit{loadCircuit <file>}
 \begin{itemize}
-	\item Leírás: A megadott áramkört betölti a szimulációs program.
-	\item Megjegyzés: A file nevét kiterjesztés nélkül kell megadni.
-	\item Opciók: -
+	\item Leírás: A megadott áramkört betölti a szimulációs program. A szintaktikát lásd \ref{sec:circuit_def} fejezetet.
 \end{itemize}
 
 \textit{loadSettings <file>}
 \begin{itemize}
-	\item Leírás: A jelenlegi áramkörhöz a megadott konfigurációs fájl betöltése.
-	\item Megjegyzés: A file nevét kiterjesztés nélkül kell megadni.
-	\item Opciók: -
+	\item Leírás: A jelenlegi áramkörhöz a megadott konfigurációs fájl betöltése. A szintaktikát lásd \ref{sec:settings_def} fejezetet.
 \end{itemize}
 
 \textit{saveSettings <file>}
 \begin{itemize}
 	\item Leírás: A pillanatnyilag használt konfiguráció fájlba mentése.
-	\item Megjegyzés: A file nevét kiterjesztés nélkül kell megadni.
-	\item Opciók: -
 \end{itemize}
 
 \textit{switch <név>}
 \begin{itemize}
 	\item Leírás: A megnevezett kapcsoló átállítása.
-	\item Megjegyzés: -
-	\item Opciók: -
 \end{itemize}
 
-\textit{setSeqGen <név> <érték1, érték2, ...>}
+\textit{setSeqGen <név> <bit1>[<bit2>...]}
 \begin{itemize}
 	\item Leírás: A megnevezett szekvenciagenerátor az értékparaméterek szerint beállítódik.
-	\item Megjegyzés: -
-	\item Opciók: -
+	\item Megjegyzés: A szekvencia legalább 1 bitből áll.
 \end{itemize}
 
-\textit{getValue <név> | -all}
+\textit{check <név> | -all}
 \begin{itemize}
-	\item Leírás: A megadott áramköri elem kiírja az aktuális kimeneti értékét.
-	\item Megjegyzés: -
-	\item Opciók: a getValue -all parancs az összes áramköri elem kimenetének értékét kilistázza.
+	\item Leírás: A megadott áramköri elem bemeneteinek és kimeneteinek kilistázása.
+	\item Opció: a \texttt{check -all} parancs kilistázza az összes áramköri elem bemenetét és kimenetét.
 \end{itemize}
 
 \textit{step}
@@ -73,193 +70,233 @@ Megjegyzés: minden parancs ad visszajelzést a felhasználónak a végrehajtott
 		\item véges lépésen belül stabilizálódik a rendszer, ekkor a kapcsoló(k), szekvenciagenerátor(ok) és kijelző(k) értéke(i) kiíródnak.
 		\item nem stabilizálódik az áramkör; hibaüzenet
 	\end{itemize}
-	\item Megjegyzés: - 
-	\item Opciók: -
 \end{itemize}
 
-\subsubsection{Áramkör leíró fájlok nyelvtana}
-Az áramkör leíró fájlok *.ovr kiterjesztésűek, ezekben adjuk meg a szimulálandó hálózat paramétereit. Egyszerű szövegfájl, melyben az értelmezendő parancsok soronként tagolódnak. A program feltételezi a konfigurációs fájl hibamentességét, sehol nem ellenőrizzük, hogy a bemenetnek van-e értelme!\linebreak
-A fájl létrehozásához az alábbi parancsok, szintaxisok állnak rendelkezésre:
+\subsubsection{Az áramkör leíró fájl nyelvtana}
+\label{sec:circuit_def}
+Az áramkör leíró fájlban adjuk meg a szimulálandó hálózatot. Egyszerű szövegfájl, melyben az értelmezendő parancsok soronként tagolódnak. A program feltételezi, hogy ez egy, a Követelmények c. fejezetben megfogalmazott hálózatot ír le, azaz pl. nincsen lebegő ki- és/vagy bemenet.\\
+A fájl egy sora az alábbi formátumú:
+\begin{verbatim}
+	<név> = <komponens> ( <paraméter1> [, <paraméter2>, ...] )
+\end{verbatim}
+Megjegyzés: a szóközök nem bírnak jelentéssel, ezek csak az olvashatóságot növelik.\\
 
+Minden sor egy komponenst ír le, az egyenlőség baloldalán található a komponens neve, mellyel a továbbiak során az adott komponensre, illetve annak valamelyik kimenetére hivatkozhatunk. A jobb oldalán pedig az adott komponens típusát határozzuk meg, illetve a paramétereket, melyek főképpen bemenetek:
 \begin{itemize}
-\item X=...
+	\item \texttt{0}: konstans 0.
+	\item \texttt{1}: konstans 1.
+	\item \texttt{<név>[i]}: egy adott komponens i. kimenete. Ha nem írjuk oda, hogy \texttt{[i]}, akkor az alapértelmezett az, hogy a komponens 1. kimenetét kötjük oda. A név csak az angol ábc betűit és a számokat tartalmazhatja, illetve csak betűvel kezdődhet.
+	\item Egyéb paraméter típus, ami a komponens létrehozásához kell (ilyen pl. a csomópontnak a kimeneti száma, illetve az oszcilloszkóp által eltárolható értékek száma), mely általában egy egész szám.
+\end{itemize}
+Ettől jelentősen eltér a kompozit definiálása (ennek felhasználása az áramkörben viszont ilyen alakú), ezt lásd később.
+
+A lehetséges komponens típusok (és azok bemeneteinek) az alábbiak:
+\begin{itemize}
+%			\item OR(...)			%+
+%			\item AND(...)			%+			
+%			\item INV(...)		%+			
+%			\item VCC(...)			%+
+%			\item GND(...)			%+
+%			\item MPX(...)			%+
+%			\item FFJK(...)			%
+%			\item FFD(...)			%
+%			\item LED(...)			%+
+%			\item 7SEG(...)			%
+%			\item TOGGLE(...)		%+
+%			\item SEQGEN(...)			%+
+%			\item NODE(...)			%+
+			
+\item \texttt{OR(in1, in2 [, in3, ...])}
 	\begin{itemize}
-	\item Leírás: komponens létrehozás, illetve elnevezése (a név lesz az egyenlőség bal oldalán szereplő név). Ezzel a paranccsal az egyenlőség jel után megadott komponenst hozzuk létre, melynek kimenetére ezek után az "X"-el hivatkozhatunk. Amennyiben több kimenetű komponensről beszélünk akkor az egyenlőség bal oldala egy tömböt jelent. Ebben az esetben az egyes kimenetekre a későbbiekben X[i]-vel hivatkozhatunk (a 0 és N-1 között).
-	\item Opciók: A lehetséges komponensek az implementált komponensek listájából választható, melyeknek paraméterül az egyes komponensekhez tartozó meghatározott paramétereket át kell adni.
+	\item Leírás: VAGY kapu létrehozása.
+	\item Paraméterek: 
 		\begin{itemize}
-			\item OR(...)			%+
-			\item AND(...)			%+			
-			\item INVERTER(...)		%+			
-			\item VCC(...)			%+
-			\item GND(...)			%+
-			\item MPX(...)			%+
-			\item FFJK(...)			%
-			\item FFD(...)			%
-			\item LED(...)			%+
-			\item 7SEG(...)			%
-			\item TOGGLE(...)		%+
-			\item SEQ(...)			%+
-			\item NODE(...)			%+
+			\item N bemenetű kapu esetén ide N db bemenet kerül. A bemenetek számát nem kell megadni, azt a feldolgozó automatikusan észleli a megkapott paraméterek számából. Minimum 2 bemenetet meg kell adni.
 		\end{itemize}
+	\item Példa: \texttt{or = OR(kapcs1, kapcs2, kapcs3)} - három komponens rákapcsolása a kapura, mely így egy három bemenetes vagy kapu lesz.
 	\end{itemize}
 
-\item OR(in[n])
+\item \texttt{AND(in1, in2 [, in3, ...])}
 	\begin{itemize}
-	\item Leírás: vagy kapu létrehozása.
-	\item Opciók: 
+	\item Leírás: ÉS kapu létrehozása.
+	\item Paraméterek: 
 		\begin{itemize}
-			\item in[n]: fel kell sorolni a kapu bemenetére kötött komponensek "neveit". N bemenetű kapu esetén ide N db név. A kapu számot nem kell megadni, azt a parser autómatikusan észleli a megkapott paraméterek számából. Minimum 2 bemenetet meg kell adni.
+			\item N bemenetű kapu esetén ide N db bemenet kerül. A bemenetek számát nem kell megadni, azt a feldolgozó automatikusan észleli a megkapott paraméterek számából. Minimum 2 bemenetet meg kell adni.
 		\end{itemize}
-	\item Példa: OR(vagy1,kapcs1,kapcs2,kapcs3) - három komponens rákapcsolása a kapura, mely így egy három bemenetes vagy kapu lesz.
-	\end{itemize}
-
-\item AND(in[n])
-	\begin{itemize}
-	\item Leírás: "és" kapu létrehozása.
-	\item Opciók: 
-		\begin{itemize}
-			\item in[n]: u.a. mint a vagy kapu esetén.
-		\end{itemize}
-	\item Példa: AND(es1,kapcs1,kapcs2) - két komponens rákapcsolása a kapura, mely így egy két bemenetes vagy kapu lesz.
+	\item Példa: \texttt{and = AND(kapcs1, kapcs2)} - két komponens rákapcsolása a kapura, mely így egy két bemenetes vagy kapu lesz.
 	\end{itemize}
 	
-\item INV(in)
+\item \texttt{INV(in)}
 	\begin{itemize}
 	\item Leírás: inverter létrehozása.
-	\item Opciók: 
+	\item Paraméterek: 
 		\begin{itemize}
-			\item in: az inverter bemenetét kell megadni. Csak egy bemenetű inverter létezik.
+			\item in: az inverter bemenete.
 		\end{itemize}
-	\item Példa: INV(inv1,kapcs1) - egy kapcsoló rákapcsolása a kapura.
+	\item Példa: \texttt{inv = INV(kapcs1)} - egy kapcsoló rákapcsolása az inverterre.
 	\end{itemize}
 	
-\item VCC()
-	\begin{itemize}
-	\item Leírás: konstans igaz jel létrehozása.
-	\item Opciók: 
-	\item Példa: VCC()
-	\end{itemize}
-	
-\item GND()
-	\begin{itemize}
-	\item Leírás: konstans hamis jel létrehozása.
-	\item Opciók: 
-	\item Példa: GND()
-	\end{itemize}	
+%\item \texttt{VCC()}
+%	\begin{itemize}
+%	\item Leírás: konstans igaz jel létrehozása.
+%	\item Példa: \texttt{vcc = VCC()}
+%	\end{itemize}
+%	
+%\item \texttt{GND()}
+%	\begin{itemize}
+%	\item Leírás: konstans hamis jel létrehozása.
+%	\item Példa: \texttt{GND()}
+%	\end{itemize}	
 
-\item MPX(in[4],S[2])
+\item \texttt{MPX(in1, in2, in3, in4, s1, s2)}
 	\begin{itemize}
 	\item Leírás: 4:1 multiplexer létrehozása.
-	\item Opciók: 
+	\item Paraméterek: 
 		\begin{itemize}
-			\item in[4]: meg kell adni a négy bemenetet.
-			\item S[2]: meg kell adni a két select bementet
+			\item in1..in4: a 4 adatbemenet.
+			\item s1, s2: a 2 kiválasztó bemenet
 		\end{itemize}
-	\item Példa: MPX(mpx1,kapcs1,kapcs2,kapcs3,kapcs4,or1,and1)
+	\item Példa: \texttt{mpx = MPX(kapcs1, kapcs2, kapcs3, kapcs4, or1, and1)}
 	\end{itemize}	
 	
-\item FFJK(clk,J,K)
+\item \texttt{FFJK(clk,J,K)}
 	\begin{itemize}
 	\item Leírás: J-K flip-flop létrehozása
-	\item Opciók: 
+	\item Paraméterek: 
 		\begin{itemize}
-			\item clk: meg kell adni az órajel bemenetet
-			\item J: meg kell adni a J bemenetet
-			\item K: meg kell adni a K bemenetet
+			\item clk: órajel bemenet
+			\item J: a J bemenet
+			\item K: a K bemenet
 		\end{itemize}
-	\item Példa: FFJK(seqgen1,and1,and2)
+	\item Példa: \texttt{jk = FFJK(seqgen1, and1, and2)}
 	\end{itemize}
 
-\item FFD(clk,D)
+\item \texttt{FFD(clk, D)}
 	\begin{itemize}
 	\item Leírás: D flip-flop létrehozása.
-	\item Opciók: 
+	\item Paraméterek: 
 		\begin{itemize}
-			\item clk: meg kell adni az órajel bemenetet.
-			\item D: meg kell adni a D bemenetet
+			\item clk: órajel bemenet
+			\item D: a D bemenet
 		\end{itemize}
-	\item Példa: FFD(seqgen1,or1)
+	\item Példa: \texttt{ffd = FFD(seqgen1, or1)}
 	\end{itemize}
 	
-\item LED(in)
+\item \texttt{LED(in)}
 	\begin{itemize}
 	\item Leírás: LED létrehozása.
-	\item Opciók: 
+	\item Paraméterek: 
 		\begin{itemize}
-			\item in: meg kell adni a LED bemenetét
+			\item in: led bemenete
 		\end{itemize}
-	\item Példa: LED(kapcs1)
+	\item Példa: \texttt{led = LED(kapcs1)}
 	\end{itemize}
 
-\item 7SEG(D[8])
+\item \texttt{7SEG(seg1, seg2, seg3, seg4, seg5, seg6, seg7)}
 	\begin{itemize}
 	\item Leírás: 7 szegmenses kijelző létrehozása.
-	\item Opciók: 
+	\item Paraméterek: 
 		\begin{itemize}
-			\item D[8]: meg kell adni a nyolc vezérlő bemenetet
+			\item seg1..seg7: szegmensek bemenetei
 		\end{itemize}
-	\item Példa: 7SEG(7seg1,dek[7],dek[6],dek[5],dek[4],dek[3],dek[2],dek[1],dek[0])
+	\item Példa: \texttt{display = 7SEG(seg1, seg2, seg3, seg4, seg5, seg6, seg7)}
 	\end{itemize}
 	
-\item TOGGLE()
+\item \texttt{TOGGLE()}
 	\begin{itemize}
 	\item Leírás: kapcsoló létrehozása.
-	\item Opciók: 
-	\item Példa: TOGGLE()
+	\item Példa: \texttt{t = TOGGLE()}
 	\end{itemize}		
 
-\item SEQ(BITMINTA)
+\item \texttt{SEQGEN(seq)}
 	\begin{itemize}
 	\item Leírás: szekvencia generátor létrehozása.
-	\item Opciók: 
+	\item Paraméterek: 
 		\begin{itemize}
-			\item BITMINTA: meg kell adni egy sorozatot, melyet a generátor egymás után kiad magából.
+			\item seq: meg kell adni egy sorozatot, melyet a generátor egymás után kiad.
 		\end{itemize}
-	\item Példa: SEQ(011000110)
+	\item Példa: \texttt{seqgen = SEQGEN(011000110)}
 	\end{itemize}
 
-\item NODE(in,n)
+\item \texttt{NODE(in, n)}
 	\begin{itemize}
 	\item Leírás: csomópont létrehozása.
-	\item Opciók: 
+	\item Paraméterek: 
 		\begin{itemize}
-			\item in: meg kell adni a csomópont bemenetét
-			\item n: meg kell adni, hány kimenet lesz
+			\item in: a csomópont bemenete
+			\item n: csomópont kimeneteinek a száma
 		\end{itemize}
-	\item Példa: NODE(kapcs1,3) - három kimenetű elosztót hoz létre, melynek bemenete a kapcs1
+	\item Példa: \texttt{node = NODE(kapcs1, 3)} - három kimenetű csomópontot hoz létre, melynek bemenete a kapcs1.
 	\end{itemize}
 	
-\item Példa áramkör konfigurációs fájl
-Egy olyan minta hálózatot hozunk létre melyben található két kapcsoló egy és kapura kötve és az és kapu kimenete egy inverteren keresztül egy ledre kapcsolódik.
-	\begin{itemize}
-	\item t1=TOGGLE()
-	\item t2=TOGGLE()
-	\item es1=AND(t1,t2)	
-	\item inv1=INV(es1)
-	\item led1=LED(inv1)
-	\end{itemize}	
-
+\item \texttt{SCOPE(in, size)}
+\begin{itemize}
+	\item Leírás: oszcilloszkóp létrehozása.
+	\item Paraméterek: 
+		\begin{itemize}
+			\item in: az oszcilloszkóp bemenete
+			\item size: az oszcilloszkóp által tárolható értékek száma
+		\end{itemize}
+	\item Példa: \texttt{scope = SCOPE(kapcs1, 3)} - 3 értéket eltároló oszcilloszkóp, melynek bemenetére a kapcs1 nevű komponens van kötve.
+\end{itemize}
 
 \end{itemize}
 
-\subsubsection{Konfigurációs fájl nyelvtana}
+Kompozit definiálása:\\
+A kompozitok definiálása lényegesen eltér az előzőektől, hiszen ott le kell írni a kompozit belsejét, majd erre a hálózatban hivatkozni lehet, ahogy a többi komponensre. Példa a kompozitra:
+\begin{verbatim}
+composite MY_COMPOSITE( x, y, z ) {
 
-A konfigurációs fájlban minden sorban egybeállításnak kell szerepelnie, mely a kövekező egységekből áll:
+	and = AND(x, y, z)
+	or = OR(and, y)
+
+} (or)
+\end{verbatim}
+
+A fenti példa egy olyan kompozitot ír le, melynek 3 bemenete van: x, y és z. Ezeket a bemeneteket egy 3-bemenetű ÉS és egy 2-bemenetű VAGY kapuban használjuk fel. A kompozitnak egy kimenete van, ezen pedig a VAGY kapu kimenete fog látszódni. Példa egy ilyen kompozit használatára:
+\begin{verbatim}
+	toggle = TOGGLE()
+	comp = MY_COMPOSITE(toggle, 1, 1)
+	led = LED(comp)
+\end{verbatim}
+	
+Példa egy áramkör leíró fájlra:\\
+
+Egy olyan minta hálózatot hozunk létre melyben található két kapcsoló egy és kapura kötve és az és kapu kimenete egy inverteren keresztül egy ledre kapcsolódik.
+\begin{verbatim}
+  composite MY_COMPOSITE( x, y, z ) {
+
+    and = AND(x, y, z)
+    or = OR(and, y)
+
+  } (or)
+
+  t1 = TOGGLE()
+  t2 = TOGGLE()
+  comp = MY_COMPOSITE(t1, t2, 1)
+  led = LED(comp)
+\end{verbatim}	
+
+\subsubsection{A konfigurációs fájl nyelvtana}
+\label{sec:settings_def}
+
+A konfigurációs fájl minden sorában egy jelforrás beállítása szerepel, mely a következő egységekből áll:
 \begin{itemize}
 	\item az elem neve
 	\item egyenlőségjel
-	\item az elem értéke (szekvencia generátor esetében több érték is lehet, ezeket vesszővel elválasztva kell megadni
+	\item az elem értéke (szekvencia generátor esetében a bitszekvenciát egybe kell megadni, lásd példa)
 \end{itemize}
 
 példa:
 \begin{verbatim}
-toggle1=0
-seqGen1=0,1,1,0,1
+toggle1 = 0
+seqGen1 = 01101
 \end{verbatim}
 
 \subsection{Kimeneti nyelv}
+\label{sec:output}
 
-A program történései, visszajelzése a standard kimeneten jelennek meg, illetve ezek fájlba is kiíródnak. A program minden parancs után visszajelzést ad a felhasználónak a végrehajtott eseményről. A fentebb definiált parancsokra a következő jelzéseket kapja a felhasználó:\newline
+A program történései, visszajelzése a standard kimeneten jelennek meg, illetve ezek fájlba is kiíródhatnak. A program minden parancs után visszajelzést ad a felhasználónak a végrehajtott eseményről. A fentebb definiált parancsokra a következő jelzéseket kapja a felhasználó:\newline
 
 \textit{loadCircuit <file>}\newline
 Lehetséges kimenetek
@@ -269,14 +306,14 @@ Lehetséges kimenetek
 	load successful
 	\end{verbatim}
 	\begin{itemize}
-		\item Leírás: a betöltés sikeres, amennyiben az áramkört tartalmazó fájl szintaktikája megfelel a Áramkör leíró fájlok nyelvtana c. fejezetnek.
+		\item Leírás: a betöltés sikeres, amennyiben az áramkört tartalmazó fájl szintaktikája megfelel \aref{sec:circuit_def} alfejezetben leírtaknak.
 	\end{itemize}
 	\item 
 	\begin{verbatim}
 	load failed
 	\end{verbatim}
 	\begin{itemize}
-		\item Leírás: a betöltés sikertelen, amennyiben az áramkört tartalmazó fájl szintaktikája nem felel meg a Áramkör leíró fájlok nyelvtana c. fejezetnek.
+		\item Leírás: a betöltés sikertelen, amennyiben az áramkört tartalmazó fájl szintaktikája nem felel meg \aref{sec:circuit_def} alfejezetben leírtaknak.
 	\end{itemize}
 \end{itemize}
 
@@ -317,35 +354,37 @@ Lehetséges kimenetek
 \begin{itemize}
 	\item
 	\begin{verbatim}
-	<elem>: <érték>
+	<név>: <érték>
 	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az [elem] megadja a módosított kapcsoló nevét, míg az [érték] megmutatja, hogy milyen értékre változott az aktuális kapcsoló kimenete. 
 	\end{itemize}
 \end{itemize}
 
-\textit{setSeqGen <név> <érték1, érték2, ...>}\newline
+\textit{setSeqGen <név> <bit1>[<bit2><bit3>...]}\newline
 Lehetséges kimenetek
 \begin{itemize}
 	\item 
 	\begin{verbatim}
-	<elem>: <érték1, érték2, ...>
+	<név>: <bit1>[<bit2><bit3>...]
 	\end{verbatim}
 	\begin{itemize}
 		\item Leírás: az [elem] megadja a módosított generátor nevét, míg az [érték1, érték2, ...] megmutatja, hogy milyen értékekre változott az aktuális generátor kimenete. 
 	\end{itemize}
 \end{itemize}
 
-\textit{getValue <név> | -all}\newline
+\textit{check <név> | -all}\newline
 Lehetséges kimenetek
 \begin{itemize}
 	\item
 	\begin{verbatim}
-	<elem>: <érték>
+<név>:
+  in: <in1> [, <in2>, ...]
+  out: <out1> [, <out2>, ...]
 	\end{verbatim}
 	\begin{itemize}
-		\item Leírás: az [elem] megadja a módosított kapcsoló nevét, míg az [érték] megmutatja, hogy milyen értékre változott az aktuális kapcsoló kimenete.
-		\item Megjegyzés: a getValue -all parancsra az összes elemet kilistázza a megadott formában új sor karakterrel elválasztva
+		\item Leírás: kiírja a megadott elem ki és bemeneteit a fenti formátumban.
+		\item Megjegyzés: a \texttt{check -all} parancsra az összes elemet kilistázza a megadott formában új sor karakterrel elválasztva
 	\end{itemize}
 \end{itemize}
 
@@ -360,7 +399,7 @@ Lehetséges kimenetek
 	...
 	\end{verbatim}
 	\begin{itemize}
-		\item Leírás: a szimuláció sikeres, amennyiben véges lépésen belül stabilizálódni tud az áramkör. Ekkor a kapcsoló(k), szekvenciagenerátor(ok) és kijelző(k) értéke(i) kiíródnak.
+		\item Leírás: a szimuláció sikeres, amennyiben véges lépésen belül stabilizálódni tud az áramkör. Ekkor a kapcsoló(k), szekvenciagenerátor(ok) és a megjelenítő(k) értéke(i) kiíródnak.
 	\end{itemize}
 	\item
 	\begin{verbatim}
@@ -370,6 +409,8 @@ Lehetséges kimenetek
 		\item Leírás: a szimuláció sikertelen, amennyiben véges lépésen belül nem tud stabilizálódni az áramkör.
 	\end{itemize}
 \end{itemize}
+
+\newpage
 
 \section{Összes részletes use-case}
 
@@ -384,10 +425,8 @@ Lehetséges kimenetek
 \usecase{Áramkör betöltése}{Az áramkört leíró fájl betöltése}{Felhasználó}{A loadCircuit parancsot használva betöltheti az
 áramkört leíró fájlt, amely a program követelményeinek megfelel}
 
-
 \usecase{Konfiguráció betöltése}{Egy áramkör konfigurációjának betöltése}{Felhasználó}{A loadSettings paranccsal betölt egy egyedi a konfigurációt 
 az áramkörhöz, amely például tartalmazhatja a szekvencia generátorok által kiadott bitsorozatokat vagy a kapcsolók állását.}
-
 
 \usecase{Konfiguráció mentése}{Áramkör konfigurációjának mentése}{Felhasználó}{A saveSettings parancs kiadásával
  menti az aktuális áramkör konfigurációját.}
@@ -398,8 +437,7 @@ módosítása a switch parancs használatával.}
 \usecase{Szekvenciagenerátor módosítás}{Szekvenciagenerátor bitsorozatának megadása}{Felhasználó}{Az adott áramkörben a neve alapján 
 azonosított szekvenciagenerátor által kiadott bitsorozat megadása a setSeqGen paranccsal.}
 
-\usecase{Érték lekérdezése}{Egy, az áramkörben lévő alkatrész értékének lekérdezése}{Felhasználó}{Az adott áramkörben a getValue
-parancs használatával a megadott nevű alkatrész értékének lekérdezése.}
+\usecase{Elem vizsgálata}{Egy, az áramkörben lévő alkatrész vizsgálata}{Felhasználó}{Az adott áramkörben a check parancs használatával a megadott nevű alkatrész be- és kimeneteinek lekérdezése.}
 
 \usecase{Áramkör szimulálása}{A betöltött áramkör szimulálása}{Felhasználó}{A step parancs kiadásával szimulálja 
 a betöltött áramkört.}
@@ -409,17 +447,17 @@ a betöltött áramkört.}
 \section{Tesztelési terv}
 A tesztelés lehetőséget nyújt a program funkcióinak és menetének széleskörű vizsgálatára. Tesztelés során lehetőség nyílik a különböző tesztesetek kipróbálására. A teszt bemenetét bemeneti állományokból kapja, és a teszt eredményét kimeneti fájlban, és konzolon jeleníti meg. Ezáltal lehet összevetni a kiválasztott teszt várt, és tényleges eredményét.
 
-\teszteset{Alap áramkör}{Alap áramkör, mely kapcsolókból, és egyszerű nem visszacsatolt ÉS kapukból áll, kimeneti értékeket ledek jelzik}{Ez a teszteset leteszteli a kapcsolók, ÉS kapu, és a ledek működését.}
+\teszteset{Alap áramkör}{Alap áramkör, mely kapcsolókból, és egyszerű nem visszacsatolt ÉS kapukból áll, kimeneti értékeket ledek jelzik}{Ez a teszteset leteszteli a kapcsoló, az ÉS kapu, és a led működését.}
 
-\teszteset{MPX-es áramkör}{Olyan áramkör, mely kapcsolókból és MPX-ből áll, a kimeneti értékeket 7 szegmenses kijelző jelzi.}{Ez a teszteset leteszteli a MPX és a 7szegmenses kijelző működésést}
+\teszteset{MPX-es áramkör}{Olyan áramkör, mely kapcsolókból és MPX-ből áll, a kimeneti értékeket 7 szegmenses kijelző jelzi.}{Ez a teszteset leteszteli a MPX és a 7szegmenses kijelző működését.}
 
-\teszteset{Visszacsatolt stabil áramkör}{Olyan áramkör, melyben egy visszacsatolás történik, de az áramkör stabil marad, tehát egy vagy kapu visszakötve, kimenet értékét egy led jelzi.}{Ez a teszteset első sorban a visszacsatolás helyes működését teszteli le, de mivel visszacsatolás is történik és egyúttal a kimeneti értéket is megjelenítjük leden, ezért csomópont is kell; így másodsorban a csomópont elem helyes működését is teszteli}
+\teszteset{Visszacsatolt stabil áramkör}{Olyan áramkör, melyben egy visszacsatolás történik, de az áramkör stabil marad, tehát egy VAGY kapu visszakötve, kimenet értékét egy led jelzi.}{Ez a teszteset első sorban a visszacsatolás helyes működését teszteli le, de mivel visszacsatolás is történik és egyúttal a kimeneti értéket is megjelenítjük leden, ezért csomópont is kell; így másodsorban a csomópont elem helyes működését is teszteli.}
 
-\teszteset{Visszacsatolt nem stabil áramkör}{Előző áramkörhöz hasonló áramkör, csak itt úgy végezzük a visszacsatolást, hogy az áramkör ne legyen stabil: egy vagy kapu visszakötve egy inverteren keresztül}{Ez a teszteset az invertert és a VAGY kaput továbbá a visszacsatolást teszteli le olyan esetben, mikor az áramkör nem lesz soha stabil.}
+\teszteset{Visszacsatolt nem stabil áramkör}{Olyan áramkör, melyben egy visszacsatolás történik, de az áramkör nem lesz stabil, mert egy visszacsatolt invertert tartalmaz.}{Ez a teszteset azt teszteli, hogy a szimuláció ilyen esetben leáll és ezt jelzi a felhasználónak.}
 
-\teszteset{Flip-flop-os áramkör}{Olyan áramkör melyben szerepel egy flipflop, egy jelgenerátor, és az értéket leden jelezzük ki.}{E teszteset során letesztelhetjük a jelgenerátor helyes működését és megvizsgálhatjuk, hogy a flip-flop helyesen lép-e felfutó élre, illetve helyesen működik-e.}
+\teszteset{Flip-flop-os áramkör}{Olyan áramkör melyben szerepel egy flipflop, egy jelgenerátor, és egy oszcilloszkóp, melyre a flipflop kimenetét kötjük}{E teszteset során letesztelhetjük a jelgenerátor helyes működését és megvizsgálhatjuk, hogy a flip-flop helyesen lép-e felfutó élre, illetve helyesen működik-e, valamint az oszcilloszkóp helyesen tárolja-e az értékeket.}
 
-\teszteset{Kompozitos áramkör}{Egy olyan áramkör, melyben szerepel egy kompozit elem, azaz szerepel egy áramköri hálózat egy egységben mint áramköri elem. Kompoziton belül valamilyen egyszerű áramköri hálózat szerepel.}{Ez a teszteset az új kompozit elem működését teszteli le, annak helyességét ellenőrizhetjük.}
+\teszteset{Kompozitos áramkör}{Egy olyan áramkör, melyben szerepel egy kompozit elem, mely egy egyszerű áramköri hálózat tartalmaz.}{Ez a teszteset a kompozit elem működését teszteli le, annak helyességét ellenőrizhetjük.}
 
 \teszteset{Kompoziton belüli kompozitos áramkör}{Előző áramkörhöz hasonló áramkör, a különbség az, hogy a kompoziton belüli áramköri hálózat tartalmaz egy újabb kompozitot a többi elemen kívül.}{Ez az áramkör leteszteli, hogyan működik a program olyan esetben, mikor a kompozit további kompozitot tartalmaz, illetve a kompoziton belüli kompozit jól működik-e más elemekkel összekötve.}
 
