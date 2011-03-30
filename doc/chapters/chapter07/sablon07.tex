@@ -14,7 +14,7 @@
 A specifikáció módosulása miatt a következő változtatásokat kellett tenni a modellben.
 Bevezettük a Composite osztályt, mely egy kompozit áramköri elemet ír le. Mivel az áramkör is lényegében egy kompozit elem, ezért a Circuit osztály a Composite-ból öröklődik. Ha egy kompozit elemnek nincsen stacionárius állapota, akkor azt jelzi kifele (az őt magába foglaló kompozitnak - amennyiben az áramkörről van szó, akkor a szimulációt értesíti) és ezáltal az egész áramkörnek nem lesz stacionárius állapota. Az áramkör annyiból speciális kompozit, hogy nincsen be- és kimenete.
 
-A másik új elem, mely bevezetésre került az oszcillátor. Ez egy olyan speciális LED, mely kijelzi az aktuális értékét, de lekérhető tőle az addig eltárolt értékek is. A memóriája véges, ha megtelik, az új érték a legrégebbi érték helyére íródik be.
+A másik új elem, mely bevezetésre került az oszcilloszkóp. Ez egy olyan speciális LED, mely kijelzi az aktuális értékét, de lekérhető tőle az addig eltárolt értékek is. A memóriája véges, ha megtelik, az új érték a legrégebbi érték helyére íródik be.
 
 A megváltozott osztálydiagram a következő oldalon tekinthető meg.
 
