@@ -56,24 +56,187 @@ Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
 \section{A tesztek részletes tervei, leírásuk a teszt nyelvén}
 [A tesztek részletes tervei alatt meg kell adni azokat a bemeneti adatsorozatokat, amelyekkel a program működése ellenőrizhető. Minden bemenő adatsorozathoz definiálni kell, hogy az adatsorozat végrehajtásától a program mely részeinek, funkcióinak ellenőrzését várjuk és konkrétan milyen eredményekre számítunk, ezek az eredmények hogyan vethetők össze a bemenetekkel.]
 
-\subsection{Teszteset1}
+
+
+
+\subsection{Alap áramkör}
 \begin{itemize}
 \item Leírás\newline
-\comment{szöveges leírás, kb. 1-5 mondat.}
-\item Ellenőrzött funkcionalitás, várható hibahelyek
+Olyan áramkör, melyben 2 kapcsolóval állíthatjuk egy ÉS kapu bemeneteit, melyet egy LED jelenít meg.
+\item Ellenőrzött funkcionalitás, várható hibahelyek\newline
+Ellenőrízzük a kapcsoló helyes váltását,az ÉS kapu kimenetének helyes kiszámítását és a LED működését
 \item Bemenet\newline
-\comment{a proto bemeneti nyelvén megadva (lásd előző anyag)}
+\newline
+{\bf Áramkör létrehozása:}\newline
+kapcs1=TOGGLE()\newline
+kapcs2=TOGGLE()\newline
+es=AND(kapcs1,kapcs2)\newline
+led=LED(es)\newline
 \item Elvárt kimenet\newline
 \comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
 \end{itemize}
 
-\subsection{Teszteset2}
+\subsection{MPX-es áramkör}
 \begin{itemize}
 \item Leírás\newline
-\comment{szöveges leírás, kb. 1-5 mondat.}
-\item Ellenőrzött funkcionalitás, várható hibahelyek
+Olyan áramkört hozunk létre, melyben egy 7 szegmenses kijelzőt hajtunk meg kapcsolókkal és egy MPX-xel. A 7szegmenses kijelző [2]-[7] bemeneteire kapcsolókat kötünk, a [1] bemenetét egy MPX adja, mely 4 kapcsolóból választja ki az egyiket, tehát egy 4/1 es MPX.
+\item Ellenőrzött funkcionalitás, várható hibahelyek\newline
+Ellenőrízzük a MPX helyes működését, és a 7 szegmenses kijelzőt. Hiba a MPX kiválasztása során történhet, hogy rossz jelet juttat a kimenetére.
 \item Bemenet\newline
-\comment{a proto bemeneti nyelvén megadva (lásd előző anyag)}
+\newline
+{\bf Áramkör létrehozása:}\newline
+inmpx1=TOGGLE()\newline
+inmpx2=TOGGLE()\newline
+inmpx3=TOGGLE()\newline
+inmpx4=TOGGLE()\newline
+selmpx1=TOGGLE()\newline
+selmpx2=TOGGLE()\newline
+mux=MPX(inmpx1,inmpx2,inmpx3,inmpx4,selmpx1,selmpx2)\newline
+seg7=TOGGLE()\newline
+seg6=TOGGLE()\newline
+seg5=TOGGLE()\newline
+seg4=TOGGLE()\newline
+seg3=TOGGLE()\newline
+seg2=TOGGLE()\newline
+display=7SEG(mux,seg2,seg3,seg4,seg5,seg6, seg7)\newline
+\item Elvárt kimenet\newline
+\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+\end{itemize}
+
+\subsection{Visszacsatolt stabil áramkör}
+\begin{itemize}
+\item Leírás\newline
+Egy olyan áramkört hozunk létre, melyben egy VAGY kapu szerepel, aminek egyik bemenete egy kapcsoló, kimenetét pedig visszakötjük a második bemenetére, illetve egy csomóponton keresztül egy LED-re is eljuttatjuk.
+\item Ellenőrzött funkcionalitás, várható hibahelyek\newline
+Ellenőrízzük, hogy az áramkör helyesen stabilnak érzékeli e a kapcsolást, illetve a VAGY kapu helyes működését is ellenőrízzük. Hibát a visszakötés okozhat.
+\item Bemenet\newline
+\newline
+{\bf Áramkör létrehozása:}\newline
+kapcs=TOGGLE()\newline
+vagy=OR(kapcs,node[2])\newline
+node=NODE(vagy,2)\newline
+led=LED(node[1])\newline
+\item Elvárt kimenet\newline
+\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+\end{itemize}
+
+
+
+\subsection{Visszacsatolt nem stabil áramkör}
+\begin{itemize}
+\item Leírás\newline
+Egy olyan áramkört hozunk létre, melyben egy ÉS kapu szerepel, aminek egyik bemenete egy kapcsoló, kimenetét pedig visszakötjük egy inverteren keresztül a második bemenetére, illetve egy csomóponton keresztül egy LED-re is eljuttatjuk.
+\item Ellenőrzött funkcionalitás, várható hibahelyek\newline
+Ellenőrízzük, hogy az áramkör helyesen instabilnak érzékeli e a kapcsolást. Továbbá, hogy a hálózat helyesen egy bizonyos lépésszám után instabillá nyilvánítja e a hálózatot. Hibás működést ez okozhat, tehát ha az áramkör ezt rosszul állapítja meg, és nem jelzi.
+\item Bemenet\newline
+\newline
+{\bf Áramkör létrehozása:}\newline
+kapcs=TOGGLE()\newline
+inv=INV(node[2])\newline
+es=AND(kapcs,inv)\newline
+node=NODE(es,2)\newline
+led=LED(node[1])\newline
+\item Elvárt kimenet\newline
+\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+\end{itemize}
+
+
+\subsection{Flip-flop-os áramkör}
+\begin{itemize}
+\item Leírás\newline
+Egy olyan áramkört hozunk létre, melyben egy JK flipflop szerepel, J és K bemenetére kapcsolókat kötünk, órajelét egy jelgenerátorból kapja, és a kimenetét egy oszcilloszkóp kapja meg.
+\item Ellenőrzött funkcionalitás, várható hibahelyek\newline
+Ellenőrízzük a jelgenerátort, hogy megfelelő jelet ad e ciklikusan, ellenőrízzük a JK flipflop működését, illetve, hogy megfelelelően lép e az órajelre, továbbá ellenőrízzük az oszcilloszkóp helyes működését. Hiba lehetséges a jelgenerátor működésében, a JK flipflop működésében illetve számolásában, és az oszcilloszkóp működésében.
+\item Bemenet\newline
+\newline
+{\bf Áramkör létrehozása:}\newline
+kapcs1=TOGGLE()\newline
+kapcs2=TOGGLE()\newline
+seqgen=SEQGEN()\newline
+jk=FFJK(seqgen,kapcs1,kapcs2)\newline
+led=LED(jk)\newline
+\item Elvárt kimenet\newline
+\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+\end{itemize}
+
+
+
+
+
+\subsection{Kompozitos áramkör}
+\begin{itemize}
+\item Leírás\newline
+Egy olyan áramkört valósítunk meg, melyben egy kompozit szerepel. Ez a kompozit egy 2 bites balról tölthető shiftregisztert valósít meg. A kompozitnak két bemenete van egy kapcsoló ami a balról bejövő értéket adja, és egy jelgenerátor, amely az órajelet. Belül 2 D flipflop található összekötve. Az első flipflop kimenetét kiadja a kompozit kimenetén is, és a 2-ik flipflop bemenetére is adja, ezért NODE is kell. Kompozit kimenete a 2 bit és a carry.
+\item Ellenőrzött funkcionalitás, várható hibahelyek\newline
+Kompozit helyes működését ellenőrízzük.
+\item Bemenet\newline
+\newline
+{\bf Áramkör létrehozása:}\newline
+input=TOGGLE() \newline
+seqgen=SEQGEN()
+\begin{verbatim}
+composite SHR(clk,in){		
+    nodeclk=NODE(clk,2)		
+    d1=FFD(nodeclk[1],in)		
+    node1=NODE(d1,2)			
+    d2=FFD(nodeclk[2],node1[2])
+    node2=NODE(d2,2)			
+}(node1[1],node2[2],node2[2])	
+\end{verbatim}
+myshr=SHR(seqgen,input)\newline
+led1=LED(myshr[1])\newline
+led2=LED(myshr[2])\newline
+ledcarry=LED(myshr[3])\newline
+
+
+\item Elvárt kimenet\newline
+\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+\end{itemize}
+
+
+\subsection{Kompoziton belüli kompozitos áramkör}
+\begin{itemize}
+\item Leírás\newline
+Egy olyan áramkört hozunk létre melyben egy kompozit szerepel ami egy 4bites shiftregiszter. Ezt shiftregisztert úgy hozzuk létre, hogy a kompoziton belül 2db 2 bites shiftregiszter szerepel mint kompozitok. Kívülről csak a 4 bites shiftregisztert látjuk, ami belül 4 kompozittal jön létre. 4 bit és carry kimeneteket leden jelezzük, míg az input és órajel bemenetét kapcsolóval és jelgenerátorral adjuk.
+\item Ellenőrzött funkcionalitás, várható hibahelyek\newline
+Leteszteljük, hogy működik e a kompozit elem, ha belül bonyolultabb áramköri hálózat szerepel, egy kompozit, illetve jelen esetben több kompozit.
+\item Bemenet\newline
+\newline
+{\bf Áramkör létrehozása:}\newline
+\begin{verbatim}
+composite SHR2BIT(clk,in){		
+    nodeclk=NODE(clk,2)		
+    d1=FFD(nodeclk[1],in)		
+    node1=NODE(d1,2)			
+    d2=FFD(nodeclk[2],node1[2])
+    node2=NODE(d2,2)			
+}(node1[1],node2[2],node2[2])	
+\end{verbatim}
+
+input=TOGGLE() \newline
+seqgen=SEQGEN()
+
+\begin{verbatim}
+composite SHR4BIT(clk,in){		
+    nodeclk=NODE(clk,2)		
+    shr2bit_1=SHR2BIT(nodeclk[1],in)
+    shr2bit_2=SHR2BIT(nodeclk[2],shr2bit[3])			
+}(shr2bit_2[2],shr2bit_2[1],shr2bit_1[2],shr2bit_1[1],shr2bit_2[3])	
+\end{verbatim}
+
+my4bitshr=SHR4BIT(clk,in)\newline
+ledbit1=LED(my4bitshr[1])\newline
+ledbit2=LED(my4bitshr[2])\newline
+ledbit3=LED(my4bitshr[3])\newline
+ledbit4=LED(my4bitshr[4])\newline
+ledcarry=LED(my4bitshr[5])\newline
+
+myshr=SHR(seqgen,input)\newline
+led1=LED(myshr[1])\newline
+led2=LED(myshr[2])\newline
+ledcarry=LED(myshr[3])\newline
+
+
 \item Elvárt kimenet\newline
 \comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
 \end{itemize}
