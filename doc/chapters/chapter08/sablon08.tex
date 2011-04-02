@@ -56,7 +56,16 @@ Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
 \section{A tesztek részletes tervei, leírásuk a teszt nyelvén}
 [A tesztek részletes tervei alatt meg kell adni azokat a bemeneti adatsorozatokat, amelyekkel a program működése ellenőrizhető. Minden bemenő adatsorozathoz definiálni kell, hogy az adatsorozat végrehajtásától a program mely részeinek, funkcióinak ellenőrzését várjuk és konkrétan milyen eredményekre számítunk, ezek az eredmények hogyan vethetők össze a bemenetekkel.]
 
+\subsection{Áramkörök betöltése}
+\begin{itemize}
+Minden teszteset elején betöltjük a megfelelő fájból az áramkört. Ezt mindig meg kell tenni, azonban csak egy esetben mutatjuk meg az egyszerűség és átláthatóság kedvéért.
 
+\textbf{Alap áramkör}\newline
+loadCircuit test1.ovr\newline
+\newline
+load successful
+
+\end{itemize}
 
 
 \subsection{Alap áramkör}
@@ -72,8 +81,22 @@ kapcs1=TOGGLE()\newline
 kapcs2=TOGGLE()\newline
 es=AND(kapcs1,kapcs2)\newline
 led=LED(es)\newline
+{\bf Felhasználó ténykedései:}\newline
+switch kapcs1
+step
+switch kapcs2
+step
 \item Elvárt kimenet\newline
-\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+kapcs1: 1\newline
+simulation successful\newline
+kapcs1: 1\newline
+kapcs2: 0\newline
+led: 0\newline
+kapcs2: 1\newline
+simulation successful\newline
+kapcs1: 1\newline
+kapcs2: 1\newline
+led: 1\newline
 \end{itemize}
 
 \subsection{MPX-es áramkör}
@@ -99,8 +122,74 @@ seg4=TOGGLE()\newline
 seg3=TOGGLE()\newline
 seg2=TOGGLE()\newline
 display=7SEG(mux,seg2,seg3,seg4,seg5,seg6, seg7)\newline
+
+{\bf Felhasználó ténykedései:}\newline
+switch inmpx1\newline
+switch inmpx3\newline
+step\newline
+switch selmpx2\newline
+switch seg2\newline
+step\newline
+switch selmpx2\newline
+switch selmpx1\newline
+step\newline
+
 \item Elvárt kimenet\newline
-\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+inmpx1: 1\newline
+inmpx3: 1\newline
+simulation successful
+inmpx1: 1\newline
+inmpx2: 0\newline
+inmpx3: 1\newline
+inmpx4: 0\newline
+selmpx1: 0\newline
+selmpx2: 0\newline
+seg7: 0\newline
+seg6: 0\newline
+seg5: 0\newline
+seg4: 0\newline
+seg3: 0\newline
+seg2: 0\newline
+display: 100000\newline
+
+selmpx2: 1\newline
+seg2: 1\newline
+
+simulation successful\newline
+inmpx1: 1\newline
+inmpx2: 0\newline
+inmpx3: 1\newline
+inmpx4: 0\newline
+selmpx1: 0\newline
+selmpx2: 1\newline
+seg7: 0\newline
+seg6: 0\newline
+seg5: 0\newline
+seg4: 0\newline
+seg3: 0\newline
+seg2: 1\newline
+display: 010000\newline
+
+selmpx2: 0\newline
+selmpx1: 1\newline
+
+simulation successful\newline
+inmpx1: 1\newline
+inmpx2: 0\newline
+inmpx3: 1\newline
+inmpx4: 0\newline
+selmpx1: 1\newline
+selmpx2: 0\newline
+seg7: 0\newline
+seg6: 0\newline
+seg5: 0\newline
+seg4: 0\newline
+seg3: 0\newline
+seg2: 1\newline
+display: 110000\newline
+
+
+
 \end{itemize}
 
 \subsection{Visszacsatolt stabil áramkör}
@@ -116,8 +205,24 @@ kapcs=TOGGLE()\newline
 vagy=OR(kapcs,node[2])\newline
 node=NODE(vagy,2)\newline
 led=LED(node[1])\newline
+
+{\bf Felhasználó ténykedései:}\newline
+step\newline
+switch kapcs\newline
+step
+
 \item Elvárt kimenet\newline
-\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+simulation successful\newline
+kapcs: 0\newline
+led: 0\newline
+
+kapcs: 1\newline
+
+simulation successful\newline
+kapcs: 1\newline
+led: 1\newline
+
+
 \end{itemize}
 
 
@@ -136,8 +241,17 @@ inv=INV(node[2])\newline
 es=AND(kapcs,inv)\newline
 node=NODE(es,2)\newline
 led=LED(node[1])\newline
+
+{\bf Felhasználó ténykedései:}\newline
+switch kapcs\newline
+step\newline
+
 \item Elvárt kimenet\newline
-\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+kapcs: 1\newline
+
+simulation failed\newline
+
+
 \end{itemize}
 
 
@@ -150,13 +264,70 @@ Ellenőrízzük a jelgenerátort, hogy megfelelő jelet ad e ciklikusan, ellenő
 \item Bemenet\newline
 \newline
 {\bf Áramkör létrehozása:}\newline
-kapcs1=TOGGLE()\newline
-kapcs2=TOGGLE()\newline
+j=TOGGLE()\newline
+k=TOGGLE()\newline
 seqgen=SEQGEN()\newline
-jk=FFJK(seqgen,kapcs1,kapcs2)\newline
+jk=FFJK(seqgen,j,k)\newline
 led=LED(jk)\newline
+
+{\bf Felhasználó ténykedései:}\newline
+%j: kapcs1
+%k: kapcs2
+switch k\newline
+step\newline
+step\newline
+switch j\newline
+step\newline
+step\newline
+switch j\newline
+switch k\newline
+step\newline
+step\newline
+
 \item Elvárt kimenet\newline
-\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+k: 1\newline
+
+simulation successful\newline
+j: 0\newline
+k: 1\newline
+seqgen: 1\newline
+led: 0\newline
+
+simulation successful\newline
+j: 0\newline
+k: 1\newline
+seqgen: 0\newline
+led: 0\newline
+
+j: 1\newline
+
+simulation successful\newline
+j: 1\newline
+k: 1\newline
+seqgen: 1\newline
+led: 1\newline
+
+simulation successful\newline
+j: 1\newline
+k: 1\newline
+seqgen: 0\newline
+led: 1\newline
+
+j: 0\newline
+k: 0\newline
+
+simultion successful\newline
+j: 0\newline
+k: 0\newline
+seqgen: 1\newline
+led: 1\newline
+
+simulation successful\newline
+j: 0\newline
+k: 0\newline
+seqgen: 1\newline
+led: 1\newline
+
 \end{itemize}
 
 
@@ -188,9 +359,67 @@ led1=LED(myshr[1])\newline
 led2=LED(myshr[2])\newline
 ledcarry=LED(myshr[3])\newline
 
+{\bf Felhasználó ténykedései:}\newline
+switch input\newline
+step\newline
+step\newline
+
+switch input\newline
+step\newline
+step\newline
+
+step\newline
+step\newline
 
 \item Elvárt kimenet\newline
-\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+input: 1\newline
+
+simulation successful
+input: 1\newline
+seqgen: 1\newline
+led1: 1\newline
+led2: 0\newline
+led3: 0\newline
+
+simulation successful
+input: 1\newline
+seqgen: 0\newline
+led1: 1\newline
+led2: 0\newline
+led3: 0\newline
+
+input: 0\newline
+
+simulation successful
+input: 0\newline
+seqgen: 1\newline
+led1: 0\newline
+led2: 1\newline
+led3: 1\newline
+
+simulation successful
+input: 0\newline
+seqgen: 0\newline
+led1: 0\newline
+led2: 1\newline
+led3: 1\newline
+
+simulation successful
+input: 0\newline
+seqgen: 1\newline
+led1: 0\newline
+led2: 0\newline
+led3: 0\newline
+
+simulation successful
+input: 0\newline
+seqgen: 0\newline
+led1: 0\newline
+led2: 0\newline
+led3: 0\newline
+
+
+
 \end{itemize}
 
 
@@ -231,14 +460,104 @@ ledbit3=LED(my4bitshr[3])\newline
 ledbit4=LED(my4bitshr[4])\newline
 ledcarry=LED(my4bitshr[5])\newline
 
-myshr=SHR(seqgen,input)\newline
-led1=LED(myshr[1])\newline
-led2=LED(myshr[2])\newline
-ledcarry=LED(myshr[3])\newline
+
+{\bf Felhasználó ténykedései:}\newline
+switch input\newline
+step\newline
+step\newline
+
+step\newline
+step\newline
+
+switch input\newline
+step\newline
+step\newline
+
+switch input\newline
+step \newline
+step \newline
 
 
 \item Elvárt kimenet\newline
-\comment{a proto kimeneti nyelvén megadva (lásd előző anyag)}
+input: 1\newline
+
+simulation successful\newline
+input: 1\newline
+seqgen: 1\newline
+ledbit1: 1\newline
+ledbit2: 0\newline
+ledbit3: 0\newline
+ledbit3: 0\newline
+ledcarry: 0\newline
+
+simulation successful\newline
+input: 1\newline
+seqgen: 0\newline
+ledbit1: 1\newline
+ledbit2: 0\newline
+ledbit3: 0\newline
+ledbit3: 0\newline
+ledcarry: 0\newline
+
+simulation successful\newline
+input: 1\newline
+seqgen: 1\newline
+ledbit1: 1\newline
+ledbit2: 1\newline
+ledbit3: 0\newline
+ledbit3: 0\newline
+ledcarry: 0\newline
+
+simulation successful\newline
+input: 1\newline
+seqgen: 0\newline
+ledbit1: 1\newline
+ledbit2: 1\newline
+ledbit3: 0\newline
+ledbit3: 0\newline
+ledcarry: 0\newline
+
+input: 0\newline
+
+simulation successful\newline
+input: 0\newline
+seqgen: 1\newline
+ledbit1: 0\newline
+ledbit2: 1\newline
+ledbit3: 1\newline
+ledbit3: 0\newline
+ledcarry: 0\newline
+
+simulation successful\newline
+input: 0\newline
+seqgen: 0\newline
+ledbit1: 0\newline
+ledbit2: 1\newline
+ledbit3: 1\newline
+ledbit3: 0\newline
+ledcarry: 0\newline
+
+input: 1\newline
+
+simulation successful\newline
+input: 1\newline
+seqgen: 1\newline
+ledbit1: 1\newline
+ledbit2: 0\newline
+ledbit3: 1\newline
+ledbit3: 1\newline
+ledcarry: 0\newline
+
+simulation successful\newline
+input: 1\newline
+seqgen: 0\newline
+ledbit1: 1\newline
+ledbit2: 0\newline
+ledbit3: 1\newline
+ledbit3: 1\newline
+ledcarry: 0\newline
+
+
 \end{itemize}
 
 \section{A tesztelést támogató programok tervei}
