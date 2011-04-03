@@ -2,6 +2,7 @@ package logsim;
 
 import java.io.File;
 import logsim.model.Circuit;
+import logsim.model.Value;
 import logsim.model.component.impl.Led;
 import logsim.model.component.impl.Toggle;
 
@@ -31,6 +32,7 @@ public class Proto implements Controllable {
     /* 
      * Parancs értelmezése
      */
+    @Override
     public void Eval(String s) {
         String cmds[] = s.split(" ");
         if(cmds[0].equals("loadCircuit")){
@@ -42,7 +44,9 @@ public class Proto implements Controllable {
             //Attila függvényének hívása
         } else if(cmds[0].equals("switch")){
             Toggle sw = (Toggle) c.getComponentByName(cmds[1]);
-
+            Value[] v = sw.getValues();
+            v[0] = v[0].invert();
+            sw.setValues(v);
         } else if(cmds[0].equals("setSeqGen")){
 //            SequenceGenerator sg = (SequenceGenerator)c.getComponentByName(cmd[1]);
 //            sg.setValues(cmds[2]);
