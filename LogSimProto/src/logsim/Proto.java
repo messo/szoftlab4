@@ -44,7 +44,8 @@ public class Proto implements Controllable {
             Toggle sw = (Toggle) c.getComponentByName(cmds[1]);
 
         } else if(cmds[0].equals("setSeqGen")){
-
+//            SequenceGenerator sg = (SequenceGenerator)c.getComponentByName(cmd[1]);
+//            sg.setValues(cmds[2]);
         } else if(cmds[0].equals("check")){
             if(cmds[1].equals("-all"))
             {

@@ -46,29 +46,39 @@ public class ConsoleView implements Viewable {
     }
 
 /*
- * Flehasználó parancsit olvassa
+ * Felhasználó parancsait olvassa
  */
     @Override
     public void Run()
     {
-        try {
-                String str = keyboard.readLine();
+        while(true){
+            try {
+                    String str = keyboard.readLine();
 
-                if (str.equals("exit"))
-                {
+                    if (str.equals("exit"))
+                    {
+                        return;
+                    } else
+                    {
+                        controller.Eval(str);
+                    }
+                } catch (IOException ex) {
+                    out.println("Valami I/O hiba van!");
                     return;
-                } else
-                {
-                    controller.Eval(str);
-                }
-            } catch (IOException ex) {
-                out.println("Valami I/O hiba van!");
-                return;
+            }
         }
     }
-
+/*
+ * Egy komponens bemeneteit és kimeneteit írja ki
+ */
     @Override
     public void WriteDetails(AbstractComponent ac) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        out.println("Komponens: " + ac.getName());
+        for(int i=0; i<ac.getInputsWire().length;i++){
+            out.println(String.format("Bemenet[%d]: ", ac.getInputsWire()[i].getValue()));
+        }
+        for(int i=0;i<ac.getOutputsWire().length;i++){
+            out.println(String.format("Kimenet[%d]: ", ac.getOutputsWire()[i].getValue()));
+        }
     }
 }

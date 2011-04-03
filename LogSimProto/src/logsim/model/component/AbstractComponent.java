@@ -153,6 +153,16 @@ public abstract class AbstractComponent implements Loggable {
         Logger.logReturn();
     }
 
+    public Wire[] getInputsWire()
+    {
+        return inputs;
+    }
+
+    public Wire[] getOutputsWire()
+    {
+        return outputs;
+    }
+
     @Override
     public String getName() {
         return name;
