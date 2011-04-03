@@ -57,11 +57,11 @@ public abstract class AbstractComponent implements Loggable {
         Logger.logReturn();
     }
 
-    protected Wire getInputWire(int inputPin) {
+    public Wire getInputWire(int inputPin) {
         return inputs[inputPin - 1];
     }
 
-    protected int getInputsCount() {
+    public int getInputsCount() {
         return inputs.length;
     }
 
@@ -76,11 +76,11 @@ public abstract class AbstractComponent implements Loggable {
         Logger.logReturn();
     }
 
-    protected Wire getOutputWire(int outputPin) {
+    public Wire getOutputWire(int outputPin) {
         return outputs[outputPin - 1];
     }
 
-    protected int getOutputsCount() {
+    public int getOutputsCount() {
         return outputs.length;
     }
 
@@ -151,16 +151,6 @@ public abstract class AbstractComponent implements Loggable {
         Logger.logCall(this, "addTo", composite);
         composite.add(this);
         Logger.logReturn();
-    }
-
-    public Wire[] getInputsWire()
-    {
-        return inputs;
-    }
-
-    public Wire[] getOutputsWire()
-    {
-        return outputs;
     }
 
     @Override
