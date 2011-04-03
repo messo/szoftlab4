@@ -6,6 +6,7 @@
 package logsim;
 
 import logsim.model.component.AbstractComponent;
+import logsim.model.component.impl.Toggle;
 
 /**
  *
@@ -13,5 +14,7 @@ import logsim.model.component.AbstractComponent;
  */
 public interface Viewable {
     public void Run();
-    public void WriteDetails(AbstractComponent ac);
+    public void writeDetails(AbstractComponent ac);
+    public void writeToggle(Toggle t);
+
 }

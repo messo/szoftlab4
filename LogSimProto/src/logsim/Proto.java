@@ -2,12 +2,15 @@ package logsim;
 
 import java.io.File;
 import logsim.model.Circuit;
+import logsim.model.Simulation;
 import logsim.model.Value;
+import logsim.model.component.AbstractComponent;
 import logsim.model.component.impl.Led;
 import logsim.model.component.impl.Toggle;
 
 public class Proto implements Controllable {
     Viewable view;
+    Simulation s;
     Circuit c;
 
     public Proto() {
@@ -18,8 +21,9 @@ public class Proto implements Controllable {
 //        Led led2 = (Led) c.getComponentByName("led2");
 //        System.out.println("led1: " + led1.getValue());
 //        System.out.println("led2: " + led2.getValue());
-    view = new ConsoleView(this);
-    view.Run();
+        s = new Simulation();
+        view = new ConsoleView(this);
+        view.Run();
 
     }
 
@@ -37,6 +41,7 @@ public class Proto implements Controllable {
         String cmds[] = s.split(" ");
         if(cmds[0].equals("loadCircuit")){
            c = new Parser().parse(new File(cmds[1]));
+           this.s.setCircuit(c);
         } else if(cmds[0].equals("loadSettings"))
         {
             //Attila függvényének hívás
@@ -47,6 +52,7 @@ public class Proto implements Controllable {
             Value[] v = sw.getValues();
             v[0] = v[0].invert();
             sw.setValues(v);
+            view.writeToggle(sw);
         } else if(cmds[0].equals("setSeqGen")){
 //            SequenceGenerator sg = (SequenceGenerator)c.getComponentByName(cmd[1]);
 //            sg.setValues(cmds[2]);
@@ -54,12 +60,15 @@ public class Proto implements Controllable {
             if(cmds[1].equals("-all"))
             {
                 //összes elem kilistázása
+                for(AbstractComponent ac : c.getComponents()){
+                    view.writeDetails(ac);
+                }
 
             }else {
-                view.WriteDetails(c.getComponentByName(cmds[1]));
+                view.writeDetails(c.getComponentByName(cmds[1]));
             }
         } else if(cmds[0].equals("step")){
-            c.evaluate();
+            this.s.start();
         }
 
 

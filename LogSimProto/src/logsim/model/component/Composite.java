@@ -2,6 +2,7 @@ package logsim.model.component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,6 +123,7 @@ public class Composite extends AbstractComponent {
         components.put(c.getName(), c);
         composites.add(c);
         Logger.logReturn();
+
     }
 
     @Override
@@ -342,4 +344,9 @@ public class Composite extends AbstractComponent {
     public List<SourceComponent> getSourceComponents(){
         return sources;
     }
+    
+    public Collection<AbstractComponent> getComponents(){
+        return components.values();
+    }
+
 }

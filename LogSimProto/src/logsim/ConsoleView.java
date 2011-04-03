@@ -11,6 +11,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import logsim.model.Circuit;
 import logsim.model.component.AbstractComponent;
+import logsim.model.component.impl.Toggle;
 
 /**
  *
@@ -67,13 +68,27 @@ public class ConsoleView implements Viewable {
      */
 
     @Override
-    public void WriteDetails(AbstractComponent ac) {
-        out.println("Komponens: " + ac.getName());
+    public void writeDetails(AbstractComponent ac) {
+        out.println(ac.getName());
+        out.print(" in: ");
         for (int i = 1; i <= ac.getInputsCount(); i++) {
-            out.println(String.format("Bemenet[%s]: ", ac.getInputWire(i).getValue()));
+            out.print(ac.getInputWire(i).getValue());
+            if(i!=ac.getInputsCount())
+                out.print(", ");
         }
+        out.println();
+        out.print(" out: ");
         for (int i = 1; i <= ac.getOutputsCount(); i++) {
-            out.println(String.format("Kimenet[%s]: ", ac.getOutputWire(i).getValue()));
+            out.println(ac.getOutputWire(i).getValue());
+            if(i!=ac.getOutputsCount())
+                out.print(", ");
         }
+        out.println();
+    }
+
+    @Override
+    public void writeToggle(Toggle t) {
+        out.println(t.getName() + ": " + t.getValues()[0]);
+
     }
 }
