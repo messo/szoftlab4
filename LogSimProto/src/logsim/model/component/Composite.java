@@ -338,4 +338,8 @@ public class Composite extends AbstractComponent {
 
         return null;
     }
+
+    public List<SourceComponent> getSourceComponents(){
+        return sources;
+    }
 }
