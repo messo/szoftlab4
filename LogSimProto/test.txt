@@ -4,7 +4,8 @@
     out = OR(or1, or2)
  } (out)
 
-def = OR4(0, 0, 0, 0)
+tog = TOGGLE()
+def = OR4(tog, 0, 0, 0)
 node = NODE(def, 2)
 led1 = LED(node[1])
 led2 = LED(node[2])

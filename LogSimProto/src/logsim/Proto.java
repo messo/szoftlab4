@@ -9,6 +9,8 @@ public class Proto {
     public Proto() {
         // tegyük fel, hogy a felhasználó tol egy loadCircuit()-ot.
         Circuit c = new Parser().parse(new File("test.txt"));
+        Config config = new Config(c);
+        config.Load(new File("load.txt"));
         c.evaluate();
         Led led1 = (Led) c.getComponentByName("led1");
         Led led2 = (Led) c.getComponentByName("led2");
