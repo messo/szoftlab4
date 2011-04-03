@@ -8,7 +8,7 @@ import logsim.model.component.Composite;
 public class Circuit extends Composite {
 
     public Circuit() {
-        super("Circuit", "circuit", 0, 0);
+        super("circuit", 0, 0, null);
     }
 
     /**

@@ -24,19 +24,13 @@ public class Node extends AbstractComponent {
     @Override
     protected void onEvaluation() {
         // Bemenetén lévõ adat lekérése
-        Value v = getInput(1);
+        getInput(0);
 
         // Bekérjük a felhasználótól, hogy az egyes kimeneteken milyen érték legyen
         for (int i = 0; i < outputs.length; i++) {
-            if (outputs[i] != null) {
-                outputs[i].setValue(v);
-            }
+            Value v = Logger.logAskValue(this, String.format("mit adjunk a %d. vezetékre", i));
+            outputs[i].setValue(v);
         }
-    }
-
-    @Override
-    public AbstractComponent copy(String name) {
-        return new Led(name);
     }
 
     /**

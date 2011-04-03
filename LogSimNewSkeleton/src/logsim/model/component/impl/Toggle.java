@@ -2,7 +2,6 @@ package logsim.model.component.impl;
 
 import logsim.log.Logger;
 import logsim.model.Value;
-import logsim.model.component.AbstractComponent;
 import logsim.model.component.SourceComponent;
 
 /**
@@ -27,11 +26,6 @@ public class Toggle extends SourceComponent {
         Value v = Logger.logAskValue(this, "állapot");
         // kimenet beállítása
         outputs[0].setValue(v);
-    }
-
-    @Override
-    public AbstractComponent copy(String name) {
-        return new Toggle(name);
     }
 
     /**

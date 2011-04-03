@@ -14,10 +14,6 @@ public class Wire implements Loggable {
      * Vezeték neve
      */
     private String name;
-    /**
-     * Vezetéken lévõ érték
-     */
-    private Value value;
 
     /**
      * Konstruktor
@@ -25,6 +21,8 @@ public class Wire implements Loggable {
      */
     public Wire(String name) {
         this.name = name;
+        Logger.logCreate(this);
+        Logger.logReturn();
     }
 
     /**
@@ -32,7 +30,8 @@ public class Wire implements Loggable {
      * @param value Érték
      */
     public void setValue(Value value) {
-        this.value = value;
+        Logger.logCall(this, "setValue", value);
+        Logger.logReturn();
     }
 
     /**
@@ -40,7 +39,10 @@ public class Wire implements Loggable {
      * @return Vezeték értéke
      */
     public Value getValue() {
-        return value;
+        Logger.logCall(this, "getValue");
+        Value v = Logger.logAskValue(this, "vezetéken lévõ érték");
+        Logger.logReturn(v.toString());
+        return v;
     }
 
     /**

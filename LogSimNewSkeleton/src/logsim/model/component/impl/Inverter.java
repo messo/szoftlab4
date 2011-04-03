@@ -23,12 +23,14 @@ public class Inverter extends AbstractComponent {
      */
     @Override
     protected void onEvaluation() {
-        outputs[0].setValue(getInput(1).invert());
-    }
+        // bemenetén lévõ adat lekérdezése
+        getInput(0);
 
-    @Override
-    public AbstractComponent copy(String name) {
-        return new Inverter(name);
+        // vezeték új értékének bekérése
+        Value v = Logger.logAskValue(this, "mit adjunk a vezetékre");
+
+        // kimenet beállítása
+        outputs[0].setValue(v);
     }
 
     /**

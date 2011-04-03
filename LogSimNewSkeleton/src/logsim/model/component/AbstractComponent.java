@@ -3,6 +3,7 @@ package logsim.model.component;
 import logsim.log.Loggable;
 import logsim.log.LoggableInt;
 import logsim.log.Logger;
+import logsim.model.Circuit;
 import logsim.model.Value;
 
 /**
@@ -24,10 +25,6 @@ public abstract class AbstractComponent implements Loggable {
      * Komponens neve
      */
     protected String name;
-    /**
-     * Változott-e a komponens kimenete
-     */
-    private boolean changed;
 
     /**
      * Konstruktor
@@ -53,16 +50,8 @@ public abstract class AbstractComponent implements Loggable {
      */
     public void setInput(int inputPin, Wire wire) {
         Logger.logCall(this, "setInput", new LoggableInt(inputPin), wire);
-        inputs[inputPin - 1] = wire;
+        inputs[inputPin] = wire;
         Logger.logReturn();
-    }
-
-    protected Wire getInputWire(int inputPin) {
-        return inputs[inputPin - 1];
-    }
-
-    protected int getInputsCount() {
-        return inputs.length;
     }
 
     /**
@@ -72,16 +61,8 @@ public abstract class AbstractComponent implements Loggable {
      */
     public void setOutput(int outputPin, Wire wire) {
         Logger.logCall(this, "setOutput", new LoggableInt(outputPin), wire);
-        outputs[outputPin - 1] = wire;
+        outputs[outputPin] = wire;
         Logger.logReturn();
-    }
-
-    protected Wire getOutputWire(int outputPin) {
-        return outputs[outputPin - 1];
-    }
-
-    protected int getOutputsCount() {
-        return outputs.length;
     }
 
     /**
@@ -91,24 +72,7 @@ public abstract class AbstractComponent implements Loggable {
      */
     public void evaluate() {
         Logger.logCall(this, "evaluate");
-
-        changed = false;
-        Value[] oldValues = new Value[outputs.length];
-        for (int i = 0; i < outputs.length; i++) {
-            if (outputs[i] != null) {
-                oldValues[i] = outputs[i].getValue();
-            }
-        }
-
         onEvaluation();
-
-        for (int i = 0; i < outputs.length; i++) {
-            if (outputs[i] != null && oldValues[i] != outputs[i].getValue()) {
-                changed = true;
-                break;
-            }
-        }
-
         Logger.logReturn();
     }
 
@@ -119,7 +83,7 @@ public abstract class AbstractComponent implements Loggable {
      * @return Bementen lévõ érték
      */
     protected Value getInput(int inputPin) {
-        return inputs[inputPin - 1].getValue();
+        return inputs[inputPin].getValue();
     }
 
     /**
@@ -127,7 +91,11 @@ public abstract class AbstractComponent implements Loggable {
      * @return Változott-e
      */
     public boolean isChanged() {
-        return changed;
+        Logger.logCall(this, "isChanged");
+        boolean b = Logger.logAskBool(this, "változott");
+        Logger.logReturn(String.valueOf(b));
+
+        return b;
     }
 
     /**
@@ -135,13 +103,6 @@ public abstract class AbstractComponent implements Loggable {
      * az adott bemenet(ek) függvényében mit kell kiadnia a kimenet(ek)re.
      */
     protected abstract void onEvaluation();
-
-    /**
-     * Lemásoljuk a komponenst. Ezt a kompozitoknál használjuk!
-     *
-     * @return másolat
-     */
-    public abstract AbstractComponent copy(String newName);
 
     /**
      * Komponens hozzáadása az áramkörhöz
@@ -153,6 +114,9 @@ public abstract class AbstractComponent implements Loggable {
         Logger.logReturn();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return name;

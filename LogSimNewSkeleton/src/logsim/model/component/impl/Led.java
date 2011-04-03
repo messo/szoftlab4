@@ -21,7 +21,7 @@ public class Led extends DisplayComponent {
      * @return Érték
      */
     public Value getValue() {
-        return getInput(1);
+        return getInput(0);
     }
 
     /**
@@ -29,12 +29,8 @@ public class Led extends DisplayComponent {
      */
     @Override
     protected void onEvaluation() {
-        // nop.
-    }
-
-    @Override
-    public Led copy(String name) {
-        return new Led(name);
+        // bemenetén lévõ adat lekérése
+        getInput(0);
     }
 
     /**

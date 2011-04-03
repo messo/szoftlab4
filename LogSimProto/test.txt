@@ -1,0 +1,10 @@
+ composite OR4( a, b, c, d ) {
+    or1 = OR(a, b)
+    or2 = OR(c, d)
+    out = OR(or1, or2)
+ } (out)
+
+def = OR4(0, 0, 0, 0)
+node = NODE(def, 2)
+led1 = LED(node[1])
+led2 = LED(node[2])

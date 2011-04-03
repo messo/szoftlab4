@@ -39,14 +39,4 @@ public enum Value implements Loggable {
     public String getClassName() {
         return "Value";
     }
-
-    public Value invert() {
-        if(this == Value.TRUE) {
-            return Value.FALSE;
-        } else if(this == Value.FALSE) {
-            return Value.TRUE;
-        }
-
-        return null;
-    }
 }

@@ -24,19 +24,16 @@ public class OrGate extends AbstractComponent {
      */
     @Override
     protected void onEvaluation() {
-        for (int i = 1; i <= inputs.length; i++) {
-            if (getInput(i) == Value.TRUE) {
-                outputs[0].setValue(Value.TRUE);
-                return;
-            }
+        // bemenetek lekérdezése
+        for (int i = 0; i < inputs.length; i++) {
+            getInput(i);
         }
 
-        outputs[0].setValue(Value.FALSE);
-    }
+        // kimenet értékének bekérése
+        Value v = Logger.logAskValue(this, "mit adjunk a vezetékre");
 
-    @Override
-    public AbstractComponent copy(String name) {
-        return new OrGate(inputs.length, name);
+        // kimenet beállítása
+        outputs[0].setValue(v);
     }
 
     /**
