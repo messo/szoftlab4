@@ -3,20 +3,61 @@ package logsim;
 import java.io.File;
 import logsim.model.Circuit;
 import logsim.model.component.impl.Led;
+import logsim.model.component.impl.Toggle;
 
-public class Proto {
+public class Proto implements Controllable {
+    Viewable view;
+    Circuit c;
 
     public Proto() {
         // tegyük fel, hogy a felhasználó tol egy loadCircuit()-ot.
-        Circuit c = new Parser().parse(new File("test.txt"));
-        c.evaluate();
-        Led led1 = (Led) c.getComponentByName("led1");
-        Led led2 = (Led) c.getComponentByName("led2");
-        System.out.println("led1: " + led1.getValue());
-        System.out.println("led2: " + led2.getValue());
+//        Circuit c = new Parser().parse(new File("test.txt"));
+//        c.evaluate();
+//        Led led1 = (Led) c.getComponentByName("led1");
+//        Led led2 = (Led) c.getComponentByName("led2");
+//        System.out.println("led1: " + led1.getValue());
+//        System.out.println("led2: " + led2.getValue());
+    view = new ConsoleView(this);
+    view.Run();
+
     }
+
+
 
     public static void main(String[] args) {
         new Proto();
+    }
+
+    /* 
+     * Parancs értelmezése
+     */
+    public void Eval(String s) {
+        String cmds[] = s.split(" ");
+        if(cmds[0].equals("loadCircuit")){
+           c = new Parser().parse(new File(cmds[1]));
+        } else if(cmds[0].equals("loadSettings"))
+        {
+            //Attila függvényének hívás
+        } else if(cmds[0].equals("saveSetting")){
+            //Attila függvényének hívása
+        } else if(cmds[0].equals("switch")){
+            Toggle sw = (Toggle) c.getComponentByName(cmds[1]);
+
+        } else if(cmds[0].equals("setSeqGen")){
+
+        } else if(cmds[0].equals("check")){
+            if(cmds[1].equals("-all"))
+            {
+                //összes elem kilistázása
+
+            }else {
+                view.WriteDetails(c.getComponentByName(cmds[1]));
+            }
+        } else if(cmds[0].equals("step")){
+            c.evaluate();
+        }
+
+
+
     }
 }
