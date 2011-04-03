@@ -69,10 +69,10 @@ public class ConsoleView implements Viewable {
     @Override
     public void WriteDetails(AbstractComponent ac) {
         out.println("Komponens: " + ac.getName());
-        for (int i = 0; i < ac.getInputsCount(); i++) {
+        for (int i = 1; i <= ac.getInputsCount(); i++) {
             out.println(String.format("Bemenet[%s]: ", ac.getInputWire(i).getValue()));
         }
-        for (int i = 0; i < ac.getOutputsCount(); i++) {
+        for (int i = 1; i <= ac.getOutputsCount(); i++) {
             out.println(String.format("Kimenet[%s]: ", ac.getOutputWire(i).getValue()));
         }
     }

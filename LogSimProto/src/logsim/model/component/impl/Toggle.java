@@ -1,6 +1,5 @@
 package logsim.model.component.impl;
 
-import logsim.log.Logger;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.SourceComponent;
@@ -9,6 +8,8 @@ import logsim.model.component.SourceComponent;
  * Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
  */
 public class Toggle extends SourceComponent {
+
+    private Value v = Value.FALSE;
 
     /**
      * Konstruktor
@@ -23,8 +24,6 @@ public class Toggle extends SourceComponent {
      */
     @Override
     protected void onEvaluation() {
-        // állapotának lekérdezése
-        Value v = Logger.logAskValue(this, "állapot");
         // kimenet beállítása
         outputs[0].setValue(v);
     }
@@ -41,13 +40,8 @@ public class Toggle extends SourceComponent {
      */
     @Override
     public Value[] getValues() {
-        Logger.logCall(this, "getValues");
-        // mivel nem tároljuk az értékeket, ezért ha lekérdezzük õket
-        // be kell kérni õket
         Value[] values = new Value[1];
-        values[0] = Logger.logAskValue(this, "érték");
-
-        Logger.logReturn("values");
+        values[0] = v;
         return values;
     }
 
@@ -62,8 +56,7 @@ public class Toggle extends SourceComponent {
             throw new IllegalArgumentException("Kapcsolónak csak egy értéke lehet!");
         }
 
-        // elmentjük az értéket
-        outputs[0].setValue(newValues[0]);
+        v = newValues[0];
     }
 
     /**
