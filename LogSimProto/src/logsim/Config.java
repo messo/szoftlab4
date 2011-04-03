@@ -35,6 +35,7 @@ public class Config {
 
     public Config(Circuit circuit){
         this.circuit = circuit;
+        
     }
 
     /**
@@ -43,7 +44,7 @@ public class Config {
      * @param file fájl, amibe elmentõdik a konfiguráció
      */
 
-    public void Save(File file){
+    public void save(File file){
         sources = circuit.getSourceComponents();
         Value[] values;
         try{
@@ -76,7 +77,7 @@ public class Config {
      * @return 
      */
 
-    public void Load(File file){
+    public void load(File file){
         String line;
         SourceComponent component;
         Value[] values;
@@ -84,19 +85,20 @@ public class Config {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             while ((line = br.readLine()) != null) {
-                Matcher matcher = sourceComponentPattern.matcher("tog=1");
-                //String temp = matcher.group(1);
-                component = (SourceComponent)circuit.getComponentByName("tog");
-                String valuesString = "1";
-                values = new Value[valuesString.length()];
-                for (int i = 0; i < valuesString.length(); i++){
-                    if (valuesString.charAt(i) == '0'){
-                        values[i] = Value.FALSE;
-                    } else {
-                        values[i] = Value.TRUE;
+                Matcher matcher = sourceComponentPattern.matcher(line);
+                if (matcher.matches()){
+                    component = (SourceComponent)circuit.getComponentByName(matcher.group(1));
+                    String valuesString = matcher.group(2);
+                    values = new Value[valuesString.length()];
+                    for (int i = 0; i < valuesString.length(); i++){
+                        if (valuesString.charAt(i) == '0'){
+                            values[i] = Value.FALSE;
+                        } else {
+                            values[i] = Value.TRUE;
+                        }
                     }
+                    component.setValues(values);
                 }
-                component.setValues(values);
             }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.err);

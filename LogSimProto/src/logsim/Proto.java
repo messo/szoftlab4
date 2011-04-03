@@ -12,6 +12,7 @@ public class Proto implements Controllable {
     Viewable view;
     Simulation s;
     Circuit c;
+    Config config;
 
     public Proto() {
         // tegyük fel, hogy a felhasználó tol egy loadCircuit()-ot.
@@ -42,11 +43,12 @@ public class Proto implements Controllable {
         if(cmds[0].equals("loadCircuit")){
            c = new Parser().parse(new File(cmds[1]));
            this.s.setCircuit(c);
+           config = new Config(c);
         } else if(cmds[0].equals("loadSettings"))
         {
-            //Attila függvényének hívás
+            config.load(new File(cmds[1]));
         } else if(cmds[0].equals("saveSetting")){
-            //Attila függvényének hívása
+            config.save(new File(cmds[1]));
         } else if(cmds[0].equals("switch")){
             Toggle sw = (Toggle) c.getComponentByName(cmds[1]);
             Value[] v = sw.getValues();
