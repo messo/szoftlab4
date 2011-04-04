@@ -19,8 +19,11 @@ public class FlipFlopD extends FlipFlop {
         super(name, 2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void onEvaluation() {
+    protected void onCommit() {
         if (isActive()) {
             // bemenetén lévõ értéket beírjuk.
             outputs[0].setValue(getInput(D));
@@ -33,5 +36,13 @@ public class FlipFlopD extends FlipFlop {
     @Override
     public FlipFlopD copy(String newName) {
         return new FlipFlopD(newName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onEvaluation() {
+        
     }
 }

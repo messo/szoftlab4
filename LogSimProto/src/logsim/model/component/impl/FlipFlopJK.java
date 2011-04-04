@@ -24,8 +24,11 @@ public class FlipFlopJK extends FlipFlop {
         super(name, 3);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void onEvaluation() {
+    protected void onCommit() {
         if (isActive()) {
             Value j = getInput(J);
             Value k = getInput(K);
@@ -50,5 +53,13 @@ public class FlipFlopJK extends FlipFlop {
     @Override
     public FlipFlopJK copy(String newName) {
         return new FlipFlopJK(newName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onEvaluation() {
+        
     }
 }

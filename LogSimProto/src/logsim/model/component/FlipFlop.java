@@ -37,14 +37,24 @@ public abstract class FlipFlop extends AbstractComponent {
         return clk == Value.FALSE && getInput(CLK) == Value.TRUE;
     }
 
+
+    /**
+     * Kiemetre értékadás
+     */
+    protected abstract void onCommit();
+
     /**
      * Véglegesítés
      */
     public void commit() {
+        onCommit();
         q = outputs[0].getValue();
         clk = getInput(CLK);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addTo(Composite composite) {
         composite.add(this);
