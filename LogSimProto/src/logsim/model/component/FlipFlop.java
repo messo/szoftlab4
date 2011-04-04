@@ -38,9 +38,15 @@ public abstract class FlipFlop extends AbstractComponent {
     }
 
     /**
+     * Kimenetre értékadás a logika elvégzése után.
+     */
+    protected abstract void onCommit();
+
+    /**
      * Véglegesítés
      */
     public void commit() {
+        onCommit();
         q = outputs[0].getValue();
         clk = getInput(CLK);
     }
@@ -52,5 +58,12 @@ public abstract class FlipFlop extends AbstractComponent {
     @Override
     public void addTo(Composite composite) {
         composite.add(this);
+    }
+
+    /**
+     * Nem csinálunk semmit, majd csak commit()-nál.
+     */
+    @Override
+    protected void onEvaluation() {
     }
 }

@@ -19,8 +19,11 @@ public class FlipFlopD extends FlipFlop {
         super(name, 2);
     }
 
+    /**
+     * Flipflop logika véglegesítésnél
+     */
     @Override
-    protected void onEvaluation() {
+    protected void onCommit() {
         if (isActive()) {
             // bemenetén lévõ értéket beírjuk.
             outputs[0].setValue(getInput(D));

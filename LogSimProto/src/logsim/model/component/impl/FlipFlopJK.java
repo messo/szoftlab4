@@ -24,8 +24,11 @@ public class FlipFlopJK extends FlipFlop {
         super(name, 3);
     }
 
+    /**
+     * Flipflop logika véglegesítésnél
+     */
     @Override
-    protected void onEvaluation() {
+    protected void onCommit() {
         if (isActive()) {
             Value j = getInput(J);
             Value k = getInput(K);

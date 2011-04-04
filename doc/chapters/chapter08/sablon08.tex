@@ -14,21 +14,13 @@
 
 \section{A tesztek részletes tervei, leírásuk a teszt nyelvén}
 
-\subsection{Áramkörök betöltése}
-Minden teszteset elején betöltjük a megfelelő fájból az áramkört. Ezt mindig meg kell tenni, azonban csak egy esetben mutatjuk meg az egyszerűség és átláthatóság kedvéért.
-
-\textbf{Alap áramkör}\newline
-loadCircuit test1.ovr\newline
-\newline
-load successful
-
 
 \subsection{Alap áramkör}
 \begin{itemize}
 \item Leírás\newline
 Olyan áramkör, melyben 2 kapcsolóval állíthatjuk egy ÉS kapu bemeneteit, melyet egy LED jelenít meg.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
-Ellenőrízzük a kapcsoló helyes váltását,az ÉS kapu kimenetének helyes kiszámítását és a LED működését
+Ellenőrizzük a kapcsoló helyes váltását, az ÉS kapu kimenetének helyes kiszámítását és a LED működését
 \item Áramkör létrehozása
 
 \begin{verbatim}
@@ -44,6 +36,7 @@ led=LED(es)
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
+loadCircuit test1.ovr
 step
 switch kapcs1
 step
@@ -93,9 +86,9 @@ led: 1
 \subsection{MPX-es áramkör}
 \begin{itemize}
 \item Leírás\newline
-Olyan áramkört hozunk létre, melyben egy 7 szegmenses kijelzőt hajtunk meg kapcsolókkal és egy MPX-xel. A 7szegmenses kijelző [2]-[7] bemeneteire kapcsolókat kötünk, a [1] bemenetét egy MPX adja, mely 4 kapcsolóból választja ki az egyiket, tehát egy 4/1 es MPX.
+Olyan áramkört hozunk létre, melyben egy 7 szegmenses kijelzőt hajtunk meg kapcsolókkal és egy MPX-xel. A 7szegmenses kijelző [2]-[7] bemeneteire kapcsolókat kötünk, a [1] bemenetét egy MPX adja, mely 4 kapcsolóból választja ki az egyiket, tehát egy 4/1-es MPX.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
-Ellenőrízzük a MPX helyes működését, és a 7 szegmenses kijelzőt. Hiba a MPX kiválasztása során történhet, hogy rossz jelet juttat a kimenetére.
+Ellenőrizzük a MPX helyes működését, és a 7 szegmenses kijelzőt. Hiba a MPX kiválasztása során történhet, hogy rossz jelet juttat a kimenetére.
 
 \item Áramkör létrehozása
 
@@ -117,6 +110,7 @@ display=7SEG(mux,seg,0,0,0,0,0)
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
+loadCircuit test2.ovr
 switch inmpx1
 switch inmpx3
 step
@@ -184,7 +178,7 @@ display: 0, 1, 0, 0, 0, 0, 0
 \item Leírás\newline
 Egy olyan áramkört hozunk létre, melyben egy VAGY kapu szerepel, aminek egyik bemenete egy kapcsoló, kimenetét pedig visszakötjük a második bemenetére, illetve egy csomóponton keresztül egy LED-re is eljuttatjuk.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
-Ellenőrízzük, hogy az áramkör helyesen stabilnak érzékeli e a kapcsolást, illetve a VAGY kapu helyes működését is ellenőrízzük. Hibát a visszakötés okozhat.
+Ellenőrizzük, hogy az áramkör helyesen stabilnak érzékeli-e a kapcsolást, illetve a VAGY kapu helyes működését is ellenőrizzük. Hibát a visszakötés okozhat.
 
 \item Áramkör létrehozása
 
@@ -201,6 +195,7 @@ led=LED(node[1])
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
+loadCircuit test3.ovr
 step
 switch kapcs
 step
@@ -230,7 +225,7 @@ led: 1
 \item Leírás\newline
 Egy olyan áramkört hozunk létre, melyben egy ÉS kapu szerepel, aminek egyik bemenete egy kapcsoló, kimenetét pedig visszakötjük egy inverteren keresztül a második bemenetére, illetve egy csomóponton keresztül egy LED-re is eljuttatjuk.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
-Ellenőrízzük, hogy az áramkör helyesen instabilnak érzékeli e a kapcsolást. Továbbá, hogy a hálózat helyesen egy bizonyos lépésszám után instabillá nyilvánítja e a hálózatot. Hibás működést ez okozhat, tehát ha az áramkör ezt rosszul állapítja meg, és nem jelzi.
+Ellenőrizzük, hogy az áramkör helyesen instabilnak érzékeli-e a kapcsolást. Hibás működést ez okozhat, tehát ha az áramkör ezt rosszul állapítja meg, és nem jelzi.
 
 \item Áramkör létrehozása
 
@@ -248,6 +243,7 @@ led=LED(node[1])
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
+loadCircuit test4.ovr
 switch kapcs
 step
 \end{verbatim}
@@ -270,7 +266,7 @@ simulation failed
 \item Leírás\newline
 Egy olyan áramkört hozunk létre, melyben egy JK flipflop szerepel, J és K bemenetére kapcsolókat kötünk, órajelét egy jelgenerátorból kapja, és a kimenetét egy oszcilloszkóp kapja meg.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
-Ellenőrízzük a jelgenerátort, hogy megfelelő jelet ad e ciklikusan, ellenőrízzük a JK flipflop működését, illetve, hogy megfelelelően lép e az órajelre, továbbá ellenőrízzük az oszcilloszkóp helyes működését. Hiba lehetséges a jelgenerátor működésében, a JK flipflop működésében illetve számolásában, és az oszcilloszkóp működésében.
+Ellenőrizzük a jelgenerátort, hogy megfelelő jelet adja-e ciklikusan, ellenőrizzük a JK flipflop működését, illetve, hogy megfelelelően lép-e az órajelre, továbbá ellenőrizzük, hogy az oszcilloszkóp helyesen működik-e. Hiba lehetséges a jelgenerátor működésében, a JK flipflop működésében illetve számolásában, és az oszcilloszkóp működésében.
 
 \item Áramkör létrehozása
 
@@ -288,6 +284,7 @@ scope=SCOPE(jk, 3)
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
+loadCircuit test5.ovr
 switch k
 step
 step
@@ -356,9 +353,9 @@ scope: 111
 \subsection{Kompozitos áramkör}
 \begin{itemize}
 \item Leírás\newline
-Egy olyan áramkört valósítunk meg, melyben egy kompozit szerepel. Ez a kompozit egy 2 bites balról tölthető shiftregisztert valósít meg. A kompozitnak két bemenete van egy kapcsoló ami a balról bejövő értéket adja, és egy jelgenerátor, amely az órajelet. Belül 2 D flipflop található összekötve. Az első flipflop kimenetét kiadja a kompozit kimenetén is, és a 2-ik flipflop bemenetére is adja, ezért NODE is kell. Kompozit kimenete a 2 bit és a carry.
+Egy olyan áramkört valósítunk meg, melyben egy kompozit szerepel. Ez a kompozit egy 2 bites balról tölthető shiftregisztert valósít meg. A kompozitnak két bemenete van egy kapcsoló ami a balról bejövő értéket adja, és egy jelgenerátor, amely az órajelet. Belül 2 db D flipflop található összekötve. Az első flipflop kimenetét kiadja a kompozit kimenetén is, és a második flipflop bemenetére is ráadja, ezért NODE is kell. A kompozit kimenete a 2 bit és a carry.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
-Kompozit helyes működését ellenőrízzük.
+Kompozit helyes működését ellenőrizzük.
 
 \item Áramkör létrehozása
 
@@ -383,6 +380,7 @@ ledcarry=LED(myshr[3])
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
+loadCircuit test6.ovr
 switch input
 step
 step
@@ -409,8 +407,8 @@ simulation successful
 input: 1
 seqgen: 1
 led1: 1
-led2: 1
-ledcarry: 1
+led2: 0
+ledcarry: 0
 
 input: 0
 
@@ -419,13 +417,13 @@ input: 0
 seqgen: 0
 led1: 0
 led2: 1
-ledcarry: 1
+ledcarry: 0
 
 simulation successful
 input: 0
 seqgen: 1
 led1: 0
-led2: 0
+led2: 1
 ledcarry: 0
 
 simulation successful
@@ -433,14 +431,14 @@ input: 0
 seqgen: 0
 led1: 0
 led2: 0
-ledcarry: 0
+ledcarry: 1
 
 simulation successful
 input: 0
 seqgen: 1
 led1: 0
 led2: 0
-ledcarry: 0
+ledcarry: 1
 \end{verbatim}
 \\ \hline
 \end{tabular}
@@ -451,56 +449,59 @@ ledcarry: 0
 \subsection{Kompoziton belüli kompozitos áramkör}
 \begin{itemize}
 \item Leírás\newline
-Egy olyan áramkört hozunk létre melyben egy kompozit szerepel ami egy 4bites shiftregiszter. Ezt shiftregisztert úgy hozzuk létre, hogy a kompoziton belül 2db 2 bites shiftregiszter szerepel mint kompozitok. Kívülről csak a 4 bites shiftregisztert látjuk, ami belül 4 kompozittal jön létre. 4 bit és carry kimeneteket leden jelezzük, míg az input és órajel bemenetét kapcsolóval és jelgenerátorral adjuk.
+Egy olyan áramkört hozunk létre melyben egy kompozit szerepel, ami egy másik kompozitot foglal magába. A belső kompozit egyetlen invertert tartalmaz. A külső kompozit tartalmaz még egy VAGY kaput, melynek egyik bementére a belső kompozit kimenetét, másik bemenetére pedig a külső kompozit bemenetére érkező jelet kötjük. A külső kompozit bemenetére egy kapcsolót, kimenetére egy LED-et kötünk.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
-Leteszteljük, hogy működik e a kompozit elem, ha belül bonyolultabb áramköri hálózat szerepel, egy kompozit, illetve jelen esetben több kompozit.
+Leteszteljük, hogy működik-e a kompozit elem, ha belül bonyolultabb áramköri hálózat szerepel, jelen esetben egy kompozit, illetve egy VAGY kapu.
 
 \item Áramkör létrehozása
 
 \begin{verbatim}
-composite SHR2BIT(clk,in){		
-    nodeclk=NODE(clk,2)		
-    d1=FFD(nodeclk[1],in)		
-    node1=NODE(d1,2)			
-    d2=FFD(nodeclk[2],node1[2])
-    node2=NODE(d2,2)			
-}(node1[1],node2[2],node2[2])
-input=TOGGLE() \newline
-seqgen=SEQGEN()
-composite SHR4BIT(clk,in){		
-    nodeclk=NODE(clk,2)		
-    shr2bit_1=SHR2BIT(nodeclk[1],in)
-    shr2bit_2=SHR2BIT(nodeclk[2],shr2bit[3])			
-}(shr2bit_2[2],shr2bit_2[1],shr2bit_1[2],shr2bit_1[1],shr2bit_2[3])
-my4bitshr=SHR4BIT(clk,in)
-ledbit1=LED(my4bitshr[1])
-ledbit2=LED(my4bitshr[2])
-ledbit3=LED(my4bitshr[3])
-ledbit4=LED(my4bitshr[4])
-ledcarry=LED(my4bitshr[5])
+tog = TOGGLE()
+composite innerComp(in){
+inv = INV(in)
+}(inv)
+composite Main(in){
+inC = innerComp(in)
+or = OR(in, inC)
+}(or)
+m = Main(tog)
+led = LED(m)
 \end{verbatim}
 
 \item Bemenet és kimenet\newline
 
-\begin{tabular}{|p{5cm}|p{5cm}|} 
+\begin{tabular}{|p{7cm}|p{7cm}|} 
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
-switch input
+loadCircuit test7.ovr
 step
 step
-step
-step
-switch input
-step
-step
-switch input
+switch tog
 step
 step
 \end{verbatim}
 & 
 \begin{verbatim}
-copy-paste from netbeans
+load successful
+
+simulation successful
+tog: 0
+led: 1
+
+simulation successful
+tog: 0
+led: 1
+
+tog: 1
+
+simulation successful
+tog: 1
+led: 1
+
+simulation successful
+tog: 1
+led: 1
 \end{verbatim}
 \\ \hline
 \end{tabular}
