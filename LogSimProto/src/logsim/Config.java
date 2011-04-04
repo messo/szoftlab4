@@ -14,15 +14,28 @@ import logsim.model.Circuit;
 import logsim.model.component.SourceComponent;
 import logsim.model.Value;
 
+/**
+ * Konfigurációs fájlok kezelése, azok írása az áramkör alapján, illetve azok betöltése
+ * az áramkörbe.
+ */
 public class Config {
 
+    /**
+     * Regex kifejezés az illesztéshez (beolvasásnál)
+     */
     private static Pattern sourceComponentPattern = Pattern.compile("\\s*(.*?)\\s*=\\s*(.+?)");
-    Circuit circuit;
-    List<SourceComponent> sources;
+    /**
+     * Áramkör, aminek mentjük a dolgait
+     */
+    private Circuit circuit;
 
+    /**
+     * Példány létrehozása az áramkörhöz.
+     * 
+     * @param circuit
+     */
     public Config(Circuit circuit) {
         this.circuit = circuit;
-
     }
 
     /**
@@ -33,7 +46,7 @@ public class Config {
      * @return sikeresség/hibakód
      */
     public int save(File file) {
-        sources = circuit.getSourceComponents();
+        List<SourceComponent> sources = circuit.getSourceComponents();
         Value[] values;
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));

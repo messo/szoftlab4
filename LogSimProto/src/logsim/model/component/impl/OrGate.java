@@ -18,9 +18,6 @@ public class OrGate extends AbstractComponent {
         super(name, inputPinsCount, 1);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onEvaluation() {
         for (int i = 1; i <= inputs.length; i++) {

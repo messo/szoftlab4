@@ -3,7 +3,7 @@ package logsim.model.component;
 import logsim.model.Value;
 
 /**
- * Flipflopok õsosztálya, minden flipflop 0. bemenete az órajel!
+ * Flipflopok õsosztálya, minden flipflop 1. bemenete az órajel!
  *
  * @author balint
  */
@@ -45,6 +45,10 @@ public abstract class FlipFlop extends AbstractComponent {
         clk = getInput(CLK);
     }
 
+    /**
+     * Hozzáadás kompozithoz
+     * @param composite
+     */
     @Override
     public void addTo(Composite composite) {
         composite.add(this);

@@ -10,6 +10,9 @@ import logsim.model.component.SourceComponent;
  */
 public class Toggle extends SourceComponent {
 
+    /**
+     * Kapcsoló állapota
+     */
     private Value v = Value.FALSE;
 
     /**
@@ -20,9 +23,6 @@ public class Toggle extends SourceComponent {
         super(name);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onEvaluation() {
         // kimenet beállítása

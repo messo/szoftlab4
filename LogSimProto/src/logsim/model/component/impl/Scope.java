@@ -7,11 +7,17 @@ import logsim.model.Value;
 import logsim.model.component.Composite;
 
 /**
- * Egy oszcilloszkópot reprezentál.
+ * Egy oszcilloszkópot reprezentál. Eltárolt értékek egy sorba kerülnek bele, mely fix méretû.
  */
 public class Scope extends Led {
 
+    /**
+     * Eltárolt értékek sora.
+     */
     private Queue<Value> memory;
+    /**
+     * Eltárolható értékek száma.
+     */
     private int size;
 
     /**
@@ -43,9 +49,6 @@ public class Scope extends Led {
         memory.add(getInput(1));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onEvaluation() {
         // nop.
@@ -65,11 +68,19 @@ public class Scope extends Led {
         view.writeScopeDetails(this);
     }
 
+    /**
+     * Hozzáadás kompozithoz.
+     * @param composite
+     */
     @Override
     public void addTo(Composite composite) {
         composite.add(this);
     }
 
+    /**
+     * Érték kiírása a kimenetre.
+     * @param view
+     */
     @Override
     public void writeValueTo(Viewable view) {
         view.writeScopeValues(this);

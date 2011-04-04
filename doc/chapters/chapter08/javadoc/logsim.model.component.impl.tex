@@ -1,0 +1,321 @@
+\subsection{AndGate}
+\begin{itemize}
+\item Felelősség\\
+ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek  kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát  valósítja meg, amit a kimenetén kiad.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ AndGate.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ AndGate(int pinsCount, String name)}: 
+ % TODO
+	\item[] \texttt{$+$ AndGate copy(String newName)}: 
+ % TODO
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlopD}
+\begin{itemize}
+\item Felelősség\\
+D flipflop, mely felfutó órajelnél beírja a belső memóriába az adatbemeneten (D)  lévő értéket.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopD.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ final int \underline{D}} D bemenet lábának a száma.
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ FlipFlopD(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ FlipFlopD copy(String newName)}: 
+ % TODO
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlopJK}
+\begin{itemize}
+\item Felelősség\\
+JK flipflop, mely a belső memóriáját a Követelmények résznél leírt módon  a J és K bemenetektől függően változtatja.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopJK.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ final int \underline{J}} J bemenet lábának a száma
+	\item[] \texttt{$-$ final int \underline{K}} K bemenet lábának a száma
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ FlipFlopJK(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ FlipFlopJK copy(String newName)}: 
+ % TODO
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Gnd}
+\begin{itemize}
+\item Felelősség\\
+A "föld" komponens, mely állandóan a hamis értéket adja ki. Nincs bemenete.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Gnd.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Gnd(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ AbstractComponent copy(String newName)}: 
+ % TODO
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Inverter}
+\begin{itemize}
+\item Felelősség\\
+Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén  érkező jelet.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Inverter.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Inverter(String name)}: Konstruktor. 1 bemenet és 1 kimenet
+	\item[] \texttt{$+$ AbstractComponent copy(String name)}: 
+ % TODO
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Led}
+\begin{itemize}
+\item Felelősség\\
+Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ DisplayComponent $\rightarrow{}$ Led.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Led(String name)}: Konstruktor. 1 bemenetű megjelenítő
+	\item[] \texttt{$+$ Led copy(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ Value getValue()}: Visszaadja a led értékét
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+	\item[] \texttt{$+$ void writeValueTo(Viewable view)}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Mpx}
+\begin{itemize}
+\item Felelősség\\
+4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következő:  D0, D1, D2, D3, S0, S1. Ahol Dx az adatbemenetek, Sy a kiválasztóbemenetek.  Kimenetén a kiválasztóbemenetektől függően valamelyik adatbemenet kerül kiadásra.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Mpx.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ final int \underline{DATA0}} 
+ % TODO
+	\item[] \texttt{$-$ final int \underline{DATA1}} 
+ % TODO
+	\item[] \texttt{$-$ final int \underline{DATA2}} 
+ % TODO
+	\item[] \texttt{$-$ final int \underline{DATA3}} 
+ % TODO
+	\item[] \texttt{$-$ final int \underline{SEL0}} 
+ % TODO
+	\item[] \texttt{$-$ final int \underline{SEL1}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Mpx(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ Mpx copy(String newName)}: 
+ % TODO
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Node}
+\begin{itemize}
+\item Felelősség\\
+Csomópont elem. Az egyetlen bemenetére kötött értéket kiadja az összes kimeneti lábán.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Node.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Node(int outputPinsCount, String name)}: Konstruktor. 1 bemenete van
+	\item[] \texttt{$+$ AbstractComponent copy(String name)}: 
+ % TODO
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{OrGate}
+\begin{itemize}
+\item Felelősség\\
+VAGY kapu, az áramkör egyik alapeleme. Bemenetein lévő értékek logikai VAGY kapcsolatát  valósítja meg, amit a kimenetén kiad.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ OrGate.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ OrGate(int inputPinsCount, String name)}: Konstruktor. 1 kimenete van
+	\item[] \texttt{$+$ AbstractComponent copy(String name)}: 
+ % TODO
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Scope}
+\begin{itemize}
+\item Felelősség\\
+Egy oszcilloszkópot reprezentál. Eltárolt értékek egy sorba kerülnek bele, mely fix méretű.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ DisplayComponent $\rightarrow{}$ Led $\rightarrow{}$ Scope.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Queue memory} Eltárolt értékek sora.
+	\item[] \texttt{$-$ int size} Eltárolható értékek száma.
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Scope(int size, String name)}: Konstruktor. 1 bemenetű megjelenítő
+	\item[] \texttt{$+$ void addTo(Composite composite)}: Hozzáadás kompozithoz.
+	\item[] \texttt{$+$ void commit()}: Eltároljuk az értéket a memóriában
+	\item[] \texttt{$+$ Scope copy(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ Value[] getValues()}: Visszaadja az eddig eltárolt értékeket
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+	\item[] \texttt{$+$ void writeTo(Viewable view)}: Komponens kiírása a viewra.
+	\item[] \texttt{$+$ void writeValueTo(Viewable view)}: Érték kiírása a kimenetre.
+\end{itemize}
+\end{itemize}
+
+\subsection{SequenceGenerator}
+\begin{itemize}
+\item Felelősség\\
+Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki.  Alapértelmezetten (amíg a felhasználó nem állítja be, vagy tölt be másikat) a 0,1-es  szekvenciát tárolja.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SourceComponent $\rightarrow{}$ SequenceGenerator.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ int index} Bitsorozat egy indexe, ez határozza meg, hogy éppen melyik értéket adja ki.
+	\item[] \texttt{$-$ Value[] sequence} Tárolt bitsorozat
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ SequenceGenerator(String name)}: Konstruktor, ami alapállapotban a 0,1-es szekvenciát állítja be.
+	\item[] \texttt{$+$ void addTo(Composite composite)}: Hozzáadás kompozithoz.
+	\item[] \texttt{$+$ SequenceGenerator copy(String newName)}: 
+ % TODO
+	\item[] \texttt{$+$ Value[] getValues()}: Jelgenerátor bitsorozatának lekérdezése
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+	\item[] \texttt{$+$ void setValues(Value[] values)}: Jelgenerátor bitsorozatának beállítása
+	\item[] \texttt{$+$ void step()}: A jelgenerátor lép, a bitsorozat következő elemére ugrik. A következő léptetésig  ez kerül kiadásra a kimeneteken.
+	\item[] \texttt{$+$ void writeValueTo(Viewable view)}: Érték kiírása a megjelenítőre
+\end{itemize}
+\end{itemize}
+
+\subsection{SevenSegmentDisplay}
+\begin{itemize}
+\item Felelősség\\
+7-szegmenses kijelzőt reprezentál, melynek 7 bemenete vezérli a  megfelelő szegmenseket, ezek világítanak, ha az adott bemenetre logikai  igaz van kötve.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ DisplayComponent $\rightarrow{}$ SevenSegmentDisplay.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ SevenSegmentDisplay(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ AbstractComponent copy(String newName)}: 
+ % TODO
+	\item[] \texttt{$+$ Value getSegment(int segment)}: Egy szegmens értékének lekérdezése
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+	\item[] \texttt{$+$ void writeValueTo(Viewable view)}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Toggle}
+\begin{itemize}
+\item Felelősség\\
+Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SourceComponent $\rightarrow{}$ Toggle.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Value v} Kapcsoló állapota
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Toggle(String name)}: Konstruktor
+	\item[] \texttt{$+$ AbstractComponent copy(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ Value[] getValues()}: Lekérjük a kapcsoló értékét (1 elemű tömb)
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+	\item[] \texttt{$+$ void setValues(Value[] newValues)}: Kapcsoló állapotának változtatása, csak 1 elemű tömböt kaphat paraméterül.
+	\item[] \texttt{$+$ void writeValueTo(Viewable view)}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Vcc}
+\begin{itemize}
+\item Felelősség\\
+A tápfeszültés komponens, ami konstans igaz értéket ad. Nincs bemenete.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Vcc.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Vcc(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ AbstractComponent copy(String newName)}: 
+ % TODO
+	\item[] \texttt{$\#$ void onEvaluation()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+

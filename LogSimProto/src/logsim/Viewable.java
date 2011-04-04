@@ -1,6 +1,5 @@
 package logsim;
 
-import java.io.BufferedReader;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.impl.Led;
 import logsim.model.component.impl.Scope;
@@ -9,12 +8,9 @@ import logsim.model.component.impl.SevenSegmentDisplay;
 import logsim.model.component.impl.Toggle;
 
 /**
- *
- * @author Gabor
+ * A kimenet interfésze.
  */
 public interface Viewable {
-
-    public void run(BufferedReader input);
 
     /**
      * Kiírunk egy komponenst (be és kimenetek)
@@ -100,5 +96,8 @@ public interface Viewable {
      */
     public void writeScopeValues(Scope scope);
 
+    /**
+     * Új sor a kimeneten
+     */
     public void newline();
 }

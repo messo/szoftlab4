@@ -7,10 +7,7 @@ import logsim.model.component.Composite;
 import logsim.model.component.SourceComponent;
 
 /**
- * Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki. A
- * SequenceGeneratorStepper feladata, hogy a step() metódust meghívja ezen osztály
- * példányain. Azokat a FF-eket vezérli, melyek órajel bemenetére ez a komponens van kötve,
- * vagyis ha éppen felfutó él jön, akkor ezeket engedélyezi különben nem.
+ * Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki.
  * Alapértelmezetten (amíg a felhasználó nem állítja be, vagy tölt be másikat) a 0,1-es
  * szekvenciát tárolja.
  *
@@ -70,6 +67,10 @@ public class SequenceGenerator extends SourceComponent {
         return sequence;
     }
 
+    /**
+     * Hozzáadás kompozithoz.
+     * @param composite
+     */
     @Override
     public void addTo(Composite composite) {
         composite.add(this);
@@ -82,6 +83,10 @@ public class SequenceGenerator extends SourceComponent {
         return sg;
     }
 
+    /**
+     * Érték kiírása a megjelenítõre
+     * @param view
+     */
     @Override
     public void writeValueTo(Viewable view) {
         view.writeSequenceGeneratorValue(this);

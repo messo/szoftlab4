@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import logsim.model.Circuit;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.impl.Led;
@@ -18,25 +17,27 @@ import logsim.model.component.impl.SevenSegmentDisplay;
 import logsim.model.component.impl.Toggle;
 
 /**
- *
- * @author Gabor
+ * Egy konkrét kimeneti implementáció, mely OutputStreamWriter-be ír ki,
+ * így a konzolos megjelenítés és fájlba írás megoldott.
  */
 public class View implements Viewable {
 
     /**
-     * Áramkör
-     */
-    private Circuit modell;
-    /**
      * Kontroller
      */
-    private Controllable controller;
+    private Controller controller;
     /**
      * Kimeneti adatfolyam, ide írunk.
      */
     private PrintWriter out;
 
-    public View(Controllable c, OutputStreamWriter out) {
+    /**
+     * Létehozzuk a Viewt egy kontrollerrel és a kimenettel, ide fog menni a kimenet.
+     *
+     * @param c
+     * @param out
+     */
+    public View(Controller c, OutputStreamWriter out) {
         this.controller = c;
         try {
             this.out = new PrintWriter(out, true);
@@ -46,34 +47,9 @@ public class View implements Viewable {
         }
     }
 
-    static {
-    }
-
     /**
-     * Felhasználó parancsait olvassa
-     */
-    @Override
-    public void run(BufferedReader input) {
-        while (true) {
-            try {
-                String str = input.readLine();
-                if (str == null) {
-                    break;
-                }
-                if (str.equals("exit")) {
-                    return;
-                } else {
-                    controller.eval(str);
-                }
-            } catch (IOException ex) {
-                out.println("Valami I/O hiba van!");
-                return;
-            }
-        }
-    }
-
-    /**
-     * Egy komponens bemeneteit és kimeneteit írja ki
+     * Kiírunk egy komponenst (be és kimenetek)
+     * @param ac komponens
      */
     @Override
     public void writeDetails(AbstractComponent ac) {
@@ -97,7 +73,8 @@ public class View implements Viewable {
     }
 
     /**
-     * Egy scope komponens kiírása
+     * Kiírunk egy scope-ot
+     * @param scope oszcilloszkóp
      */
     @Override
     public void writeScopeDetails(Scope ac) {
@@ -121,52 +98,86 @@ public class View implements Viewable {
         out.println();
     }
 
+    /**
+     * Kiírjuk, hogy betöltés sikeres
+     */
     @Override
     public void writeLoadSuccessful() {
         out.println("load successful");
     }
 
+    /**
+     * Kiírjuk, hogy a config fájl mentés sikeres
+     */
     @Override
     public void writeSaveSuccessful() {
         out.println("save successful");
     }
 
+    /**
+     * Kiírjuk, hogy a betöltés sikertelen
+     */
     @Override
     public void writeLoadFailed() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Kiírjuk, hogy a config fájl sikertelen
+     */
     @Override
     public void writeSaveFailed() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Szekvenciagenerátor szekvenciájának kiírása
+     * @param sg szekvenciagenerátor
+     */
     @Override
     public void writeSequenceGenerator(SequenceGenerator sg) {
     }
 
+    /**
+     * Kiírjuk, hogy a szimuláció sikeres
+     */
     @Override
     public void writeSimulationSuccessful() {
         out.println("simulation successful");
     }
 
+    /**
+     * Kiírjuk, hogy a szimuláció sikertelen
+     */
     @Override
     public void writeSimulationFailed() {
         out.println("simulation failed");
     }
 
+    /**
+     * Kiírja a kapcsoló állapotát
+     * @param toggle
+     */
     @Override
     public void writeToggleValue(Toggle sc) {
         out.printf("%s: %s", sc.getName(), (sc.getValues()[0] == Value.TRUE) ? "1" : "0");
         out.println();
     }
 
+    /**
+     * Kiírja a jelgenerátor éppen kiadott értékét
+     * @param sg
+     */
     @Override
     public void writeSequenceGeneratorValue(SequenceGenerator sg) {
         out.printf("%s: %s", sg.getName(), sg.getOutputWire(1).getValue() == Value.TRUE ? "1" : "0");
         out.println();
     }
 
+    /**
+     * Kiírja a jelgenerátor szekvenciáját
+     * @param sg
+     */
     @Override
     public void writeSequenceGeneratorSequence(SequenceGenerator sg) {
         out.printf("%s: ", sg.getName());
@@ -177,12 +188,20 @@ public class View implements Viewable {
         out.println(bits);
     }
 
+    /**
+     * Kiírja a led értékét
+     * @param led
+     */
     @Override
     public void writeLedValue(Led led) {
         out.printf("%s: %s", led.getName(), led.getValue() == Value.TRUE ? "1" : "0");
         out.println();
     }
 
+    /**
+     * Kiírja a 7-szegmentes kijelzõ szegmenseit.
+     * @param seg
+     */
     @Override
     public void writeSevenSegmentDisplayValues(SevenSegmentDisplay seg) {
         out.printf("%s: ", seg.getName());
@@ -196,6 +215,10 @@ public class View implements Viewable {
         out.println(bits);
     }
 
+    /**
+     * Kiírja a scope által tárolt értékeket
+     * @param scope
+     */
     @Override
     public void writeScopeValues(Scope scope) {
         out.printf("%s: ", scope.getName());
@@ -206,6 +229,9 @@ public class View implements Viewable {
         out.println(bits);
     }
 
+    /**
+     * Új sor a kimeneten
+     */
     @Override
     public void newline() {
         out.println();

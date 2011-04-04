@@ -16,9 +16,6 @@ public class Inverter extends AbstractComponent {
         super(name, 1, 1);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onEvaluation() {
         outputs[0].setValue(getInput(1).invert());

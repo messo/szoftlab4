@@ -32,8 +32,7 @@ public abstract class SourceComponent extends AbstractComponent {
     public abstract Value[] getValues();
 
     /**
-     *
-     * {@inheritDoc}
+     * Hozzáadás kompozithoz.
      */
     @Override
     public void addTo(Composite composite) {

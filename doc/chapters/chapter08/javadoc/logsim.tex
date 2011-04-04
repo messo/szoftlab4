@@ -1,0 +1,142 @@
+\subsection{Config}
+\begin{itemize}
+\item Felelősség\\
+Konfigurációs fájlok kezelése, azok írása az áramkör alapján, illetve azok betöltése  az áramkörbe.
+\item Ősosztályok\ Object $\rightarrow{}$ Config.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Circuit circuit} Áramkör, aminek mentjük a dolgait
+	\item[] \texttt{$-$ Pattern \underline{sourceComponentPattern}} Regex kifejezés az illesztéshez (beolvasásnál)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Config(Circuit circuit)}: Példány létrehozása az áramkörhöz.
+	\item[] \texttt{$+$ int load(File file)}: Betölti egy fájlból a kapcsolók illetve jelgenerátorok konfigurációját
+	\item[] \texttt{$+$ int save(File file)}: Elmenti a kapcsolók illetve jelgenerátorok aktuális állapotát egy fájlba
+\end{itemize}
+\end{itemize}
+
+\subsection{Controller}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+Kontroller interfész.
+\item Ősosztályok\ Controller.
+\item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ void run(BufferedReader input)}: Vezérlés elindítása adott bemenetről.
+\end{itemize}
+\end{itemize}
+
+\subsection{Parser}
+\begin{itemize}
+\item Felelősség\\
+Áramkör értelmező objektum, feladata, hogy a paraméterként átadott, illetve  fájlban elhelyezett komponenseket értelmezze, a kapcsolatokat feltérképezze,  elvégezze az összeköttetéseket, és ezáltal felépítse az áramkört.
+\item Ősosztályok\ Object $\rightarrow{}$ Parser.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Circuit circuit} A leíróból létrehozott áramkör.
+	\item[] \texttt{$-$ Pattern \underline{componentPattern}} Regex minta egy komponens-sor feldolgozásához
+	\item[] \texttt{$-$ Pattern \underline{compositeEndPattern}} Regex minta egy kompozit véghez
+	\item[] \texttt{$-$ Map composites} Komponensek listája név szerint.
+	\item[] \texttt{$-$ Pattern \underline{compositeStartPattern}} Regex minta egy kompozit kezdethez
+	\item[] \texttt{$-$ Map parameters} Kompozitokban lévő komponensek paraméter listája.
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Parser()}: 
+ % TODO
+	\item[] \texttt{$-$ void addComponentsToComposite(Composite composite, List lines, String[] inputs, String[] outputs)}: Komponens hozzáadása a kompozithoz
+	\item[] \texttt{$-$ void parse(BufferedReader br)}: Bementről feldolgozás
+	\item[] \texttt{$+$ Circuit parse(File file)}: Létrehoz egy áramkört a megadott fájlból
+	\item[] \texttt{$-$ AbstractComponent parseComponentFromLine(Matcher matcher, Composite composite)}: Egy komponens-sor feldolgozása a fájlban
+\end{itemize}
+\end{itemize}
+
+\subsection{Proto}
+\begin{itemize}
+\item Felelősség\\
+Prototípus vezérlő osztálya.
+\item Ősosztályok\ Object $\rightarrow{}$ Proto.
+\item Interfészek Controller.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Circuit c} Áramkör
+	\item[] \texttt{$-$ Config config} Konfiguráció menedzselése
+	\item[] \texttt{$-$ Simulation s} Szimuláció
+	\item[] \texttt{$-$ Viewable view} Megjelenítő
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Proto()}: 
+ % TODO
+	\item[] \texttt{$-$ void eval(String s)}: Parancs értelmezése
+	\item[] \texttt{$+$ static void main(String[] args)}: Program belépési pontja.
+	\item[] \texttt{$+$ void run(BufferedReader input)}: Felhasználó parancsait olvassa
+\end{itemize}
+\end{itemize}
+
+\subsection{View}
+\begin{itemize}
+\item Felelősség\\
+Egy konkrét kimeneti implementáció, mely OutputStreamWriter-be ír ki,  így a konzolos megjelenítés és fájlba írás megoldott.
+\item Ősosztályok\ Object $\rightarrow{}$ View.
+\item Interfészek Viewable.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Controller controller} Kontroller
+	\item[] \texttt{$-$ PrintWriter out} Kimeneti adatfolyam, ide írunk.
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ View(Controller c, OutputStreamWriter out)}: Létehozzuk a Viewt egy kontrollerrel és a kimenettel, ide fog menni a kimenet.
+	\item[] \texttt{$+$ void newline()}: Új sor a kimeneten
+	\item[] \texttt{$+$ void writeDetails(AbstractComponent ac)}: Kiírunk egy komponenst (be és kimenetek)
+	\item[] \texttt{$+$ void writeLedValue(Led led)}: Kiírja a led értékét
+	\item[] \texttt{$+$ void writeLoadFailed()}: Kiírjuk, hogy a betöltés sikertelen
+	\item[] \texttt{$+$ void writeLoadSuccessful()}: Kiírjuk, hogy betöltés sikeres
+	\item[] \texttt{$+$ void writeSaveFailed()}: Kiírjuk, hogy a config fájl sikertelen
+	\item[] \texttt{$+$ void writeSaveSuccessful()}: Kiírjuk, hogy a config fájl mentés sikeres
+	\item[] \texttt{$+$ void writeScopeDetails(Scope ac)}: Kiírunk egy scope-ot
+	\item[] \texttt{$+$ void writeScopeValues(Scope scope)}: Kiírja a scope által tárolt értékeket
+	\item[] \texttt{$+$ void writeSequenceGenerator(SequenceGenerator sg)}: Szekvenciagenerátor szekvenciájának kiírása
+	\item[] \texttt{$+$ void writeSequenceGeneratorSequence(SequenceGenerator sg)}: Kiírja a jelgenerátor szekvenciáját
+	\item[] \texttt{$+$ void writeSequenceGeneratorValue(SequenceGenerator sg)}: Kiírja a jelgenerátor éppen kiadott értékét
+	\item[] \texttt{$+$ void writeSevenSegmentDisplayValues(SevenSegmentDisplay seg)}: Kiírja a 7-szegmentes kijelző szegmenseit.
+	\item[] \texttt{$+$ void writeSimulationFailed()}: Kiírjuk, hogy a szimuláció sikertelen
+	\item[] \texttt{$+$ void writeSimulationSuccessful()}: Kiírjuk, hogy a szimuláció sikeres
+	\item[] \texttt{$+$ void writeToggleValue(Toggle sc)}: Kiírja a kapcsoló állapotát
+\end{itemize}
+\end{itemize}
+
+\subsection{Viewable}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+A kimenet interfésze.
+\item Ősosztályok\ Viewable.
+\item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ void newline()}: Új sor a kimeneten
+	\item[] \texttt{$+$ void writeDetails(AbstractComponent ac)}: Kiírunk egy komponenst (be és kimenetek)
+	\item[] \texttt{$+$ void writeLedValue(Led led)}: Kiírja a led értékét
+	\item[] \texttt{$+$ void writeLoadFailed()}: Kiírjuk, hogy a betöltés sikertelen
+	\item[] \texttt{$+$ void writeLoadSuccessful()}: Kiírjuk, hogy betöltés sikeres
+	\item[] \texttt{$+$ void writeSaveFailed()}: Kiírjuk, hogy a config fájl sikertelen
+	\item[] \texttt{$+$ void writeSaveSuccessful()}: Kiírjuk, hogy a config fájl mentés sikeres
+	\item[] \texttt{$+$ void writeScopeDetails(Scope scope)}: Kiírunk egy scope-ot
+	\item[] \texttt{$+$ void writeScopeValues(Scope scope)}: Kiírja a scope által tárolt értékeket
+	\item[] \texttt{$+$ void writeSequenceGenerator(SequenceGenerator sg)}: Szekvenciagenerátor szekvenciájának kiírása
+	\item[] \texttt{$+$ void writeSequenceGeneratorSequence(SequenceGenerator sg)}: Kiírja a jelgenerátor szekvenciáját
+	\item[] \texttt{$+$ void writeSequenceGeneratorValue(SequenceGenerator sg)}: Kiírja a jelgenerátor éppen kiadott értékét
+	\item[] \texttt{$+$ void writeSevenSegmentDisplayValues(SevenSegmentDisplay seg)}: Kiírja a 7-szegmentes kijelző szegmenseit.
+	\item[] \texttt{$+$ void writeSimulationFailed()}: Kiírjuk, hogy a szimuláció sikertelen
+	\item[] \texttt{$+$ void writeSimulationSuccessful()}: Kiírjuk, hogy a szimuláció sikeres
+	\item[] \texttt{$+$ void writeToggleValue(Toggle toggle)}: Kiírja a kapcsoló állapotát
+\end{itemize}
+\end{itemize}
+

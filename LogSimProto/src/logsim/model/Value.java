@@ -22,6 +22,10 @@ public enum Value {
 
     }
 
+    /**
+     * Érték invertálása
+     * @return invertált érték
+     */
     public Value invert() {
         if (this == Value.TRUE) {
             return Value.FALSE;

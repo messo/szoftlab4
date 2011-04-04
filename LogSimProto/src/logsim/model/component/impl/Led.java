@@ -25,9 +25,6 @@ public class Led extends DisplayComponent {
         return getInput(1);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onEvaluation() {
         // nop.

@@ -6,7 +6,7 @@ import logsim.model.Value;
 /**
  * Egy komponens absztrakt megvalósítása, ebbõl származik az összes többi
  * komponens. A közös logikát valósítja meg. A gyakran használt dolgokra
- * ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.)
+ * ad alapértelmezett implementációt (kimenetekre és bemenetekre kötés, kiértékelés stb.)
  */
 public abstract class AbstractComponent {
 
@@ -50,10 +50,19 @@ public abstract class AbstractComponent {
         inputs[inputPin - 1] = wire;
     }
 
+    /**
+     * Lekérünk egy bemeneti lábon lévõ vezetéket
+     * @param inputPin
+     * @return
+     */
     public Wire getInputWire(int inputPin) {
         return inputs[inputPin - 1];
     }
 
+    /**
+     * Bemeneti lábak száma
+     * @return
+     */
     public int getInputsCount() {
         return inputs.length;
     }
@@ -67,10 +76,19 @@ public abstract class AbstractComponent {
         outputs[outputPin - 1] = wire;
     }
 
+    /**
+     * Lekérünk egy kimeneti lábon lévõ vezetéket
+     * @param inputPin
+     * @return
+     */
     public Wire getOutputWire(int outputPin) {
         return outputs[outputPin - 1];
     }
 
+    /**
+     * Kimeneti lábak száma
+     * @return
+     */
     public int getOutputsCount() {
         return outputs.length;
     }
@@ -124,7 +142,7 @@ public abstract class AbstractComponent {
     protected abstract void onEvaluation();
 
     /**
-     * Lemásoljuk a komponenst. Ezt a kompozitoknál használjuk!
+     * Lemásoljuk a komponenst.
      *
      * @return másolat
      */
@@ -138,6 +156,10 @@ public abstract class AbstractComponent {
         composite.add(this);
     }
 
+    /**
+     * Komponens nevének lekérése.
+     * @return
+     */
     public String getName() {
         return name;
     }

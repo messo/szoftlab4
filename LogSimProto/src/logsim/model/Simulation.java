@@ -2,9 +2,8 @@ package logsim.model;
 
 /**
  * Egy szimulációt reprezentáló objektum.
- * Utasítja az áramkört több kiértékelési ciklus lefuttatásához,
- * amíg az áramkörben van változás. Ha a változás megadott lépésen belül
- * nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot.
+ * Utasítja az áramkört, hogy értékelje ki magát. Ha az áramkör azt jelzi magáról,
+ * hogy nincs stacionárius állapota akkor jelezzük a felhasználónak.
  */
 public class Simulation {
 
@@ -14,8 +13,7 @@ public class Simulation {
     protected Circuit circuit;
 
     /**
-     * Egy adott bemeneti kombinációkra szimulálja a hálózatot, amíg be nem áll a
-     * stacionárius állapot.
+     * Egy adott bemeneti kombinációkra kiértékeli a hálózatot.
      */
     public boolean start() {
         try {

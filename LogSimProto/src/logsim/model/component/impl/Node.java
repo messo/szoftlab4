@@ -17,9 +17,6 @@ public class Node extends AbstractComponent {
         super(name, 1, outputPinsCount);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onEvaluation() {
         // Bemenetén lévõ adat lekérése

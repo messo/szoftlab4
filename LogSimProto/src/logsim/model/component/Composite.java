@@ -15,7 +15,8 @@ import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.component.impl.Vcc;
 
 /**
- *
+ * Kompozit elem leírása, kiértékelésnél a tartalmazott komponenseket kiértékeli, lépteti
+ * a jelgenerátorokat stb. Ha nem áll be stacionárius állapotba a kiértékelésnél, akkor ezt jelzi kifelé.
  */
 public class Composite extends AbstractComponent {
 
@@ -23,6 +24,9 @@ public class Composite extends AbstractComponent {
      * Regex minta egy komponens bemeneteinek a feldolgozásához
      */
     private static Pattern inputPattern = Pattern.compile("(.*?)(?:\\[([0-9]+)\\])?");
+    /**
+     * Max. ciklusok száma
+     */
     private static final int cycleLimit = 100;
     /**
      * Komponensek listája
@@ -52,10 +56,27 @@ public class Composite extends AbstractComponent {
      * Oszcillátor típusú komponensek listája
      */
     private List<Scope> scopes;
+    /**
+     * Bemeneti csomópontok
+     */
     private Node[] inputNodes;
+    /**
+     * Kimeneti csomópontok
+     */
     private Node[] outputNodes;
+    /**
+     * Kompozit típusa
+     */
     private String type;
 
+    /**
+     * Adott típusú és nevû komponens létrehozása a megfelelõ lábszámmal.
+     *
+     * @param type
+     * @param name
+     * @param inputCount
+     * @param outputCount
+     */
     public Composite(String type, String name, int inputCount, int outputCount) {
         super(name, inputCount, outputCount);
 
@@ -82,12 +103,22 @@ public class Composite extends AbstractComponent {
         }
     }
 
+    /**
+     * Bemenet beállítása
+     * @param inputPin
+     * @param wire
+     */
     @Override
     public void setInput(int inputPin, Wire wire) {
         super.setInput(inputPin, wire);
         inputNodes[inputPin - 1].setInput(1, wire);
     }
 
+    /**
+     * Kimenet beállítása
+     * @param inputPin
+     * @param wire
+     */
     @Override
     public void setOutput(int outputPin, Wire wire) {
         super.setOutput(outputPin, wire);
@@ -158,6 +189,9 @@ public class Composite extends AbstractComponent {
         composites.add(c);
     }
 
+    /**
+     * Kiértékelési ciklus
+     */
     @Override
     protected void onEvaluation() {
         int counter = 0;
@@ -214,6 +248,9 @@ public class Composite extends AbstractComponent {
         }
     }
 
+    /**
+     * Oszcilloszkópok véglegesítése
+     */
     private void commitScopes() {
         for (Composite c : composites) {
             c.commitScopes();
@@ -223,11 +260,20 @@ public class Composite extends AbstractComponent {
         }
     }
 
+    /**
+     * Kompozit hozzáadása kompozithoz.
+     * @param composite
+     */
     @Override
     public void addTo(Composite composite) {
         composite.add(this);
     }
 
+    /**
+     * Kompozit lemásolása (példányosításnál használjuk.)
+     * @param variableName
+     * @return
+     */
     @Override
     public Composite copy(String variableName) {
         Composite c = new Composite(type, variableName, inputNodes.length, outputNodes.length);
@@ -281,6 +327,12 @@ public class Composite extends AbstractComponent {
         return c;
     }
 
+    /**
+     * Komponensek összekötése
+     * @param connections
+     * @param inputs
+     * @param outputs
+     */
     public void connectComponents(Map<AbstractComponent, String[]> connections,
             String[] inputs, String[] outputs) {
 
@@ -361,6 +413,11 @@ public class Composite extends AbstractComponent {
         }
     }
 
+    /**
+     * Komponens lekérése a neve alapján (delegálja a kérést, ha kell).
+     * @param name
+     * @return
+     */
     public AbstractComponent getComponentByName(String name) {
         int sepIdx = name.indexOf('.');
         if (sepIdx == -1) {
@@ -377,14 +434,26 @@ public class Composite extends AbstractComponent {
         return null;
     }
 
+    /**
+     * Jelforrások listája
+     * @return
+     */
     public List<SourceComponent> getSourceComponents() {
         return sources;
     }
 
+    /**
+     * Megjelenítõk listája
+     * @return
+     */
     public List<DisplayComponent> getDisplayComponents() {
         return displays;
     }
 
+    /**
+     * Összes tartalmazott komponens listája
+     * @return
+     */
     public Collection<AbstractComponent> getComponents() {
         return components.values();
     }

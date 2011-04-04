@@ -1,0 +1,61 @@
+\subsection{Circuit}
+\begin{itemize}
+\item Felelősség\\
+Áramkört reprezentáló osztály, igazából egy kompozit. Felelőssége megegyzik a kompozitéval.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Composite $\rightarrow{}$ Circuit.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Circuit()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Simulation}
+\begin{itemize}
+\item Felelősség\\
+Egy szimulációt reprezentáló objektum.  Utasítja az áramkört, hogy értékelje ki magát. Ha az áramkör azt jelzi magáról,  hogy nincs stacionárius állapota akkor jelezzük a felhasználónak.
+\item Ősosztályok\ Object $\rightarrow{}$ Simulation.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$\#$ Circuit circuit} Szimulált áramkör
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Simulation()}: 
+ % TODO
+	\item[] \texttt{$+$ void setCircuit(Circuit circuit)}: Szimulált áramkör beállítása
+	\item[] \texttt{$+$ boolean start()}: Egy adott bemeneti kombinációkra kiértékeli a hálózatot.
+\end{itemize}
+\end{itemize}
+
+\subsection{Value}
+\begin{itemize}
+\item Felelősség\\
+Az áramkörben előfordulható értéket reprezentál.
+\item Ősosztályok\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Value.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$+$ final Value \underline{FALSE}} 
+ % TODO
+	\item[] \texttt{$+$ final Value \underline{TRUE}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Value()}: 
+ % TODO
+	\item[] \texttt{$+$ Value invert()}: Érték invertálása
+	\item[] \texttt{$+$ static Value valueOf(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ static Value[] values()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+

@@ -19,7 +19,7 @@ public abstract class DisplayComponent extends AbstractComponent {
     }
 
     /**
-     * {@inheritDoc}
+     * Hozzáadás kompozithoz
      */
     @Override
     public void addTo(Composite composite) {

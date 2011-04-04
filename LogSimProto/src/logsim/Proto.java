@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logsim.model.Circuit;
@@ -15,12 +14,28 @@ import logsim.model.component.AbstractComponent;
 import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.component.impl.Toggle;
 
-public class Proto implements Controllable {
+/**
+ * Prototípus vezérlõ osztálya.
+ *
+ */
+public class Proto implements Controller {
 
-    Viewable view;
-    Simulation s;
-    Circuit c;
-    Config config;
+    /**
+     * Megjelenítõ
+     */
+    private Viewable view;
+    /**
+     * Szimuláció
+     */
+    private Simulation s;
+    /**
+     * Áramkör
+     */
+    private Circuit c;
+    /**
+     * Konfiguráció menedzselése
+     */
+    private Config config;
 
     public Proto() {
         // tegyük fel, hogy a felhasználó tol egy loadCircuit()-ot.
@@ -33,23 +48,50 @@ public class Proto implements Controllable {
         s = new Simulation();
         try {
             view = new View(this, new FileWriter("output.txt"));
-            view.run(new BufferedReader(new FileReader("input.txt")));
+            run(new BufferedReader(new FileReader("input.txt")));
         } catch (IOException ex) {
             Logger.getLogger(Proto.class.getName()).log(Level.SEVERE, null, ex);
         }
         //view = new View(this, new OutputStreamWriter(System.out, "CP852"));
-        //view.run(new BufferedReader(new InputStreamReader(System.in)));
+        //run(new BufferedReader(new InputStreamReader(System.in)));
     }
 
+    /**
+     * Program belépési pontja.
+     * 
+     * @param args paraméterek
+     */
     public static void main(String[] args) {
         new Proto();
     }
 
-    /* 
-     * Parancs értelmezése
+    /**
+     * Felhasználó parancsait olvassa
      */
     @Override
-    public void eval(String s) {
+    public void run(BufferedReader input) {
+        while (true) {
+            try {
+                String str = input.readLine();
+                if (str == null) {
+                    break;
+                }
+                if (str.equals("exit")) {
+                    return;
+                } else {
+                    eval(str);
+                }
+            } catch (IOException ex) {
+                System.out.println("Valami I/O hiba van!");
+                return;
+            }
+        }
+    }
+
+    /**
+     * Parancs értelmezése
+     */
+    private void eval(String s) {
         String cmds[] = s.split(" ");
         if (cmds[0].equals("loadCircuit")) {
             c = new Parser().parse(new File(cmds[1]));

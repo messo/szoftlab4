@@ -33,8 +33,6 @@ import logsim.model.component.impl.Toggle;
  * Áramkör értelmezõ objektum, feladata, hogy a paraméterként átadott, illetve
  * fájlban elhelyezett komponenseket értelmezze, a kapcsolatokat feltérképezze,
  * elvégezze az összeköttetéseket, és ezáltal felépítse az áramkört.
- * Fontos, hogy egy ilyen objektum csak egyszer használható, új áramkörhöz, újat
- * kell létrehozni.
  *
  * @author balint
  */
@@ -45,43 +43,31 @@ public class Parser {
      */
     private Circuit circuit;
     /**
-     * Regex minta egy leíró-sor feldolgozásához
+     * Regex minta egy komponens-sor feldolgozásához
      */
     private static Pattern componentPattern = Pattern.compile("\\s*(.*?)\\s*=\\s*(.*?)\\s*\\((.*?)\\)");
+    /**
+     * Regex minta egy kompozit kezdethez
+     */
     private static Pattern compositeStartPattern = Pattern.compile("\\s*composite\\s*(.*?)\\((.*?)\\)\\s*\\{", Pattern.CASE_INSENSITIVE);
+    /**
+     * Regex minta egy kompozit véghez
+     */
     private static Pattern compositeEndPattern = Pattern.compile("\\s*\\}\\s*\\((.*?)\\)", Pattern.CASE_INSENSITIVE);
-    //private Map<String, String[]> inputs = new HashMap<String, String[]>();
+    /**
+     * Komponensek listája név szerint.
+     */
     private Map<String, Composite> composites = new HashMap<String, Composite>();
     /**
-     * Egy számláló, hogy a vcc és gnd komponenseknek eltérõ változónevet tudjunk adni.
+     * Kompozitokban lévõ komponensek paraméter listája.
      */
-    private int constComps = 0;
     private Map<Composite, Map<AbstractComponent, String[]>> parameters = new HashMap<Composite, Map<AbstractComponent, String[]>>();
-
-    public static class ComponentPin {
-
-        private String componentName;
-        private int pinIndex;
-
-        public ComponentPin(String componentName, int pinIndex) {
-            this.componentName = componentName;
-            this.pinIndex = pinIndex;
-        }
-
-        public String getComponentName() {
-            return componentName;
-        }
-
-        public int getPinIndex() {
-            return pinIndex;
-        }
-    }
 
     /**
      * Létrehoz egy áramkört a megadott fájlból
-
+     *
      * @param file fájl ami tartalmazza a komponenseket újsorral elválasztva
-     * @return
+     * @return létrehozott áramkör
      */
     public Circuit parse(File file) {
         circuit = new Circuit();
@@ -106,6 +92,13 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Egy komponens-sor feldolgozása a fájlban
+     * 
+     * @param matcher regex találatok
+     * @param composite kompozit ahova beszúrjuk
+     * @return létrehozott komponens
+     */
     private AbstractComponent parseComponentFromLine(Matcher matcher, Composite composite) {
         String variableName = matcher.group(1);
         String componentName = matcher.group(2).toLowerCase();
@@ -200,6 +193,12 @@ public class Parser {
         return component;
     }
 
+    /**
+     * Bementrõl feldolgozás
+     *
+     * @param br bemeneti stream
+     * @throws IOException
+     */
     private void parse(BufferedReader br) throws IOException {
         String line;
         while ((line = br.readLine()) != null) {
@@ -247,6 +246,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Komponens hozzáadása a kompozithoz
+     *
+     * @param composite
+     * @param lines
+     * @param inputs
+     * @param outputs
+     */
     private void addComponentsToComposite(Composite composite, List<String> lines,
             String[] inputs, String[] outputs) {
         for (String line : lines) {
