@@ -71,29 +71,44 @@ load successful
 Olyan áramkör, melyben 2 kapcsolóval állíthatjuk egy ÉS kapu bemeneteit, melyet egy LED jelenít meg.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
 Ellenőrízzük a kapcsoló helyes váltását,az ÉS kapu kimenetének helyes kiszámítását és a LED működését
-\item Bemenet\newline
-\newline
-{\bf Áramkör létrehozása:}\newline
-kapcs1=TOGGLE()\newline
-kapcs2=TOGGLE()\newline
-es=AND(kapcs1,kapcs2)\newline
-led=LED(es)\newline
-{\bf Felhasználó ténykedései:}\newline
+\item Áramkör létrehozása
+
+\begin{verbatim}
+kapcs1=TOGGLE()
+kapcs2=TOGGLE()
+es=AND(kapcs1,kapcs2)
+led=LED(es)
+\end{verbatim}
+
+\item Bemenet és kimenet\newline
+
+\begin{tabular}{|p{5cm}|p{5cm}|} 
+\hline 
+\textit{Bemenet} & \textit{Kimenet} \\ \hline
+\begin{verbatim}
+step
 switch kapcs1
 step
+check -all
 switch kapcs2
 step
-\item Elvárt kimenet\newline
-kapcs1: 1\newline
-simulation successful\newline
-kapcs1: 1\newline
-kapcs2: 0\newline
-led: 0\newline
-kapcs2: 1\newline
-simulation successful\newline
-kapcs1: 1\newline
-kapcs2: 1\newline
-led: 1\newline
+\end{verbatim}
+& 
+\begin{verbatim}
+kapcs1: 1
+simulation successful
+kapcs1: 1
+kapcs2: 0
+led: 0
+kapcs2: 1
+simulation successful
+kapcs1: 1
+kapcs2: 1
+led: 1
+\end{verbatim}
+\\ \hline
+\end{tabular}
+
 \end{itemize}
 
 \subsection{MPX-es áramkör}
@@ -102,88 +117,49 @@ led: 1\newline
 Olyan áramkört hozunk létre, melyben egy 7 szegmenses kijelzőt hajtunk meg kapcsolókkal és egy MPX-xel. A 7szegmenses kijelző [2]-[7] bemeneteire kapcsolókat kötünk, a [1] bemenetét egy MPX adja, mely 4 kapcsolóból választja ki az egyiket, tehát egy 4/1 es MPX.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
 Ellenőrízzük a MPX helyes működését, és a 7 szegmenses kijelzőt. Hiba a MPX kiválasztása során történhet, hogy rossz jelet juttat a kimenetére.
-\item Bemenet\newline
-\newline
-{\bf Áramkör létrehozása:}\newline
-inmpx1=TOGGLE()\newline
-inmpx2=TOGGLE()\newline
-inmpx3=TOGGLE()\newline
-inmpx4=TOGGLE()\newline
-selmpx1=TOGGLE()\newline
-selmpx2=TOGGLE()\newline
-mux=MPX(inmpx1,inmpx2,inmpx3,inmpx4,selmpx1,selmpx2)\newline
-seg7=TOGGLE()\newline
-seg6=TOGGLE()\newline
-seg5=TOGGLE()\newline
-seg4=TOGGLE()\newline
-seg3=TOGGLE()\newline
-seg2=TOGGLE()\newline
-display=7SEG(mux,seg2,seg3,seg4,seg5,seg6, seg7)\newline
 
-{\bf Felhasználó ténykedései:}\newline
-switch inmpx1\newline
-switch inmpx3\newline
-step\newline
-switch selmpx2\newline
-switch seg2\newline
-step\newline
-switch selmpx2\newline
-switch selmpx1\newline
-step\newline
+\item Áramkör létrehozása
 
-\item Elvárt kimenet\newline
-inmpx1: 1\newline
-inmpx3: 1\newline
-simulation successful
-inmpx1: 1\newline
-inmpx2: 0\newline
-inmpx3: 1\newline
-inmpx4: 0\newline
-selmpx1: 0\newline
-selmpx2: 0\newline
-seg7: 0\newline
-seg6: 0\newline
-seg5: 0\newline
-seg4: 0\newline
-seg3: 0\newline
-seg2: 0\newline
-display: 100000\newline
+\begin{verbatim}
+inmpx1=TOGGLE()
+inmpx2=TOGGLE()
+inmpx3=TOGGLE()
+inmpx4=TOGGLE()
+selmpx1=TOGGLE()
+selmpx2=TOGGLE()
+mux=MPX(inmpx1,inmpx2,inmpx3,inmpx4,selmpx1,selmpx2)
+seg7=TOGGLE()
+seg6=TOGGLE()
+seg5=TOGGLE()
+seg4=TOGGLE()
+seg3=TOGGLE()
+seg2=TOGGLE()
+display=7SEG(mux,seg2,seg3,seg4,seg5,seg6, seg7)
+\end{verbatim}
 
-selmpx2: 1\newline
-seg2: 1\newline
+\item Bemenet és kimenet\newline
 
-simulation successful\newline
-inmpx1: 1\newline
-inmpx2: 0\newline
-inmpx3: 1\newline
-inmpx4: 0\newline
-selmpx1: 0\newline
-selmpx2: 1\newline
-seg7: 0\newline
-seg6: 0\newline
-seg5: 0\newline
-seg4: 0\newline
-seg3: 0\newline
-seg2: 1\newline
-display: 010000\newline
+\begin{tabular}{|p{5cm}|p{5cm}|} 
+\hline 
+\textit{Bemenet} & \textit{Kimenet} \\ \hline
+\begin{verbatim}
+switch inmpx1
+switch inmpx3
+step
+switch selmpx2
+switch seg2
+step
+switch selmpx2
+switch selmpx1
+step
+\end{verbatim}
+& 
+\begin{verbatim}
+copy-paste from netbeans
+\end{verbatim}
+\\ \hline
+\end{tabular}
 
-selmpx2: 0\newline
-selmpx1: 1\newline
-
-simulation successful\newline
-inmpx1: 1\newline
-inmpx2: 0\newline
-inmpx3: 1\newline
-inmpx4: 0\newline
-selmpx1: 1\newline
-selmpx2: 0\newline
-seg7: 0\newline
-seg6: 0\newline
-seg5: 0\newline
-seg4: 0\newline
-seg3: 0\newline
-seg2: 1\newline
-display: 110000\newline
 \end{itemize}
 
 \subsection{Visszacsatolt stabil áramkör}
@@ -192,31 +168,34 @@ display: 110000\newline
 Egy olyan áramkört hozunk létre, melyben egy VAGY kapu szerepel, aminek egyik bemenete egy kapcsoló, kimenetét pedig visszakötjük a második bemenetére, illetve egy csomóponton keresztül egy LED-re is eljuttatjuk.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
 Ellenőrízzük, hogy az áramkör helyesen stabilnak érzékeli e a kapcsolást, illetve a VAGY kapu helyes működését is ellenőrízzük. Hibát a visszakötés okozhat.
-\item Bemenet\newline
-\newline
-{\bf Áramkör létrehozása:}\newline
-kapcs=TOGGLE()\newline
-vagy=OR(kapcs,node[2])\newline
-node=NODE(vagy,2)\newline
-led=LED(node[1])\newline
 
-{\bf Felhasználó ténykedései:}\newline
-step\newline
-switch kapcs\newline
+\item Áramkör létrehozása
+
+\begin{verbatim}
+kapcs=TOGGLE()
+vagy=OR(kapcs,node[2])
+node=NODE(vagy,2)
+led=LED(node[1])
+\end{verbatim}
+
+\item Bemenet és kimenet\newline
+
+\begin{tabular}{|p{5cm}|p{5cm}|} 
+\hline 
+\textit{Bemenet} & \textit{Kimenet} \\ \hline
+\begin{verbatim}
 step
+switch kapcs
+step
+\end{verbatim}
+& 
+\begin{verbatim}
+copy-paste from netbeans
+\end{verbatim}
+\\ \hline
+\end{tabular}
 
-\item Elvárt kimenet\newline
-simulation successful\newline
-kapcs: 0\newline
-led: 0\newline
-
-kapcs: 1\newline
-
-simulation successful\newline
-kapcs: 1\newline
-led: 1\newline
 \end{itemize}
-
 
 
 \subsection{Visszacsatolt nem stabil áramkör}
@@ -225,24 +204,32 @@ led: 1\newline
 Egy olyan áramkört hozunk létre, melyben egy ÉS kapu szerepel, aminek egyik bemenete egy kapcsoló, kimenetét pedig visszakötjük egy inverteren keresztül a második bemenetére, illetve egy csomóponton keresztül egy LED-re is eljuttatjuk.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
 Ellenőrízzük, hogy az áramkör helyesen instabilnak érzékeli e a kapcsolást. Továbbá, hogy a hálózat helyesen egy bizonyos lépésszám után instabillá nyilvánítja e a hálózatot. Hibás működést ez okozhat, tehát ha az áramkör ezt rosszul állapítja meg, és nem jelzi.
-\item Bemenet\newline
-\newline
-{\bf Áramkör létrehozása:}\newline
-kapcs=TOGGLE()\newline
-inv=INV(node[2])\newline
-es=AND(kapcs,inv)\newline
-node=NODE(es,2)\newline
-led=LED(node[1])\newline
 
-{\bf Felhasználó ténykedései:}\newline
-switch kapcs\newline
-step\newline
+\item Áramkör létrehozása
 
-\item Elvárt kimenet\newline
-kapcs: 1\newline
+\begin{verbatim}
+kapcs=TOGGLE()
+inv=INV(node[2])
+es=AND(kapcs,inv)
+node=NODE(es,2)
+led=LED(node[1])
+\end{verbatim}
 
-simulation failed\newline
+\item Bemenet és kimenet\newline
 
+\begin{tabular}{|p{5cm}|p{5cm}|} 
+\hline 
+\textit{Bemenet} & \textit{Kimenet} \\ \hline
+\begin{verbatim}
+switch kapcs
+step
+\end{verbatim}
+& 
+\begin{verbatim}
+copy-paste from netbeans
+\end{verbatim}
+\\ \hline
+\end{tabular}
 
 \end{itemize}
 
@@ -253,77 +240,42 @@ simulation failed\newline
 Egy olyan áramkört hozunk létre, melyben egy JK flipflop szerepel, J és K bemenetére kapcsolókat kötünk, órajelét egy jelgenerátorból kapja, és a kimenetét egy oszcilloszkóp kapja meg.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
 Ellenőrízzük a jelgenerátort, hogy megfelelő jelet ad e ciklikusan, ellenőrízzük a JK flipflop működését, illetve, hogy megfelelelően lép e az órajelre, továbbá ellenőrízzük az oszcilloszkóp helyes működését. Hiba lehetséges a jelgenerátor működésében, a JK flipflop működésében illetve számolásában, és az oszcilloszkóp működésében.
-\item Bemenet\newline
-\newline
-{\bf Áramkör létrehozása:}\newline
-j=TOGGLE()\newline
-k=TOGGLE()\newline
-seqgen=SEQGEN()\newline
-jk=FFJK(seqgen,j,k)\newline
-led=LED(jk)\newline
 
-{\bf Felhasználó ténykedései:}\newline
-%j: kapcs1
-%k: kapcs2
-switch k\newline
-step\newline
-step\newline
-switch j\newline
-step\newline
-step\newline
-switch j\newline
-switch k\newline
-step\newline
-step\newline
+\item Áramkör létrehozása
 
-\item Elvárt kimenet\newline
-k: 1\newline
+\begin{verbatim}
+j=TOGGLE()
+k=TOGGLE()
+seqgen=SEQGEN()
+jk=FFJK(seqgen,j,k)
+scope=SCOPE(jk)
+\end{verbatim}
 
-simulation successful\newline
-j: 0\newline
-k: 1\newline
-seqgen: 1\newline
-led: 0\newline
+\item Bemenet és kimenet\newline
 
-simulation successful\newline
-j: 0\newline
-k: 1\newline
-seqgen: 0\newline
-led: 0\newline
-
-j: 1\newline
-
-simulation successful\newline
-j: 1\newline
-k: 1\newline
-seqgen: 1\newline
-led: 1\newline
-
-simulation successful\newline
-j: 1\newline
-k: 1\newline
-seqgen: 0\newline
-led: 1\newline
-
-j: 0\newline
-k: 0\newline
-
-simultion successful\newline
-j: 0\newline
-k: 0\newline
-seqgen: 1\newline
-led: 1\newline
-
-simulation successful\newline
-j: 0\newline
-k: 0\newline
-seqgen: 1\newline
-led: 1\newline
+\begin{tabular}{|p{5cm}|p{5cm}|} 
+\hline 
+\textit{Bemenet} & \textit{Kimenet} \\ \hline
+\begin{verbatim}
+switch k
+step
+step
+switch j
+step
+step
+switch j
+switch k
+step
+step
+\end{verbatim}
+& 
+\begin{verbatim}
+copy-paste from netbeans
+\end{verbatim}
+\\ \hline
+\end{tabular}
 
 \end{itemize}
-
-
-
 
 
 \subsection{Kompozitos áramkör}
@@ -332,83 +284,46 @@ led: 1\newline
 Egy olyan áramkört valósítunk meg, melyben egy kompozit szerepel. Ez a kompozit egy 2 bites balról tölthető shiftregisztert valósít meg. A kompozitnak két bemenete van egy kapcsoló ami a balról bejövő értéket adja, és egy jelgenerátor, amely az órajelet. Belül 2 D flipflop található összekötve. Az első flipflop kimenetét kiadja a kompozit kimenetén is, és a 2-ik flipflop bemenetére is adja, ezért NODE is kell. Kompozit kimenete a 2 bit és a carry.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
 Kompozit helyes működését ellenőrízzük.
-\item Bemenet\newline
-\newline
-{\bf Áramkör létrehozása:}\newline
-input=TOGGLE() \newline
-seqgen=SEQGEN()
+
+\item Áramkör létrehozása
+
 \begin{verbatim}
+input=TOGGLE()
+seqgen=SEQGEN()
 composite SHR(clk,in){		
     nodeclk=NODE(clk,2)		
     d1=FFD(nodeclk[1],in)		
     node1=NODE(d1,2)			
     d2=FFD(nodeclk[2],node1[2])
     node2=NODE(d2,2)			
-}(node1[1],node2[2],node2[2])	
+}(node1[1],node2[2],node2[2])
+myshr=SHR(seqgen,input)
+led1=LED(myshr[1])
+led2=LED(myshr[2])
+ledcarry=LED(myshr[3])
 \end{verbatim}
-myshr=SHR(seqgen,input)\newline
-led1=LED(myshr[1])\newline
-led2=LED(myshr[2])\newline
-ledcarry=LED(myshr[3])\newline
 
-{\bf Felhasználó ténykedései:}\newline
-switch input\newline
-step\newline
-step\newline
+\item Bemenet és kimenet\newline
 
-switch input\newline
-step\newline
-step\newline
-
-step\newline
-step\newline
-
-\item Elvárt kimenet\newline
-input: 1\newline
-
-simulation successful
-input: 1\newline
-seqgen: 1\newline
-led1: 1\newline
-led2: 0\newline
-led3: 0\newline
-
-simulation successful
-input: 1\newline
-seqgen: 0\newline
-led1: 1\newline
-led2: 0\newline
-led3: 0\newline
-
-input: 0\newline
-
-simulation successful
-input: 0\newline
-seqgen: 1\newline
-led1: 0\newline
-led2: 1\newline
-led3: 1\newline
-
-simulation successful
-input: 0\newline
-seqgen: 0\newline
-led1: 0\newline
-led2: 1\newline
-led3: 1\newline
-
-simulation successful
-input: 0\newline
-seqgen: 1\newline
-led1: 0\newline
-led2: 0\newline
-led3: 0\newline
-
-simulation successful
-input: 0\newline
-seqgen: 0\newline
-led1: 0\newline
-led2: 0\newline
-led3: 0\newline
+\begin{tabular}{|p{5cm}|p{5cm}|} 
+\hline 
+\textit{Bemenet} & \textit{Kimenet} \\ \hline
+\begin{verbatim}
+switch input
+step
+step
+switch input
+step
+step
+step
+step
+\end{verbatim}
+& 
+\begin{verbatim}
+copy-paste from netbeans
+\end{verbatim}
+\\ \hline
+\end{tabular}
 
 \end{itemize}
 
@@ -419,9 +334,9 @@ led3: 0\newline
 Egy olyan áramkört hozunk létre melyben egy kompozit szerepel ami egy 4bites shiftregiszter. Ezt shiftregisztert úgy hozzuk létre, hogy a kompoziton belül 2db 2 bites shiftregiszter szerepel mint kompozitok. Kívülről csak a 4 bites shiftregisztert látjuk, ami belül 4 kompozittal jön létre. 4 bit és carry kimeneteket leden jelezzük, míg az input és órajel bemenetét kapcsolóval és jelgenerátorral adjuk.
 \item Ellenőrzött funkcionalitás, várható hibahelyek\newline
 Leteszteljük, hogy működik e a kompozit elem, ha belül bonyolultabb áramköri hálózat szerepel, egy kompozit, illetve jelen esetben több kompozit.
-\item Bemenet\newline
-\newline
-{\bf Áramkör létrehozása:}\newline
+
+\item Áramkör létrehozása
+
 \begin{verbatim}
 composite SHR2BIT(clk,in){		
     nodeclk=NODE(clk,2)		
@@ -429,126 +344,49 @@ composite SHR2BIT(clk,in){
     node1=NODE(d1,2)			
     d2=FFD(nodeclk[2],node1[2])
     node2=NODE(d2,2)			
-}(node1[1],node2[2],node2[2])	
-\end{verbatim}
-
+}(node1[1],node2[2],node2[2])
 input=TOGGLE() \newline
 seqgen=SEQGEN()
-
-\begin{verbatim}
 composite SHR4BIT(clk,in){		
     nodeclk=NODE(clk,2)		
     shr2bit_1=SHR2BIT(nodeclk[1],in)
     shr2bit_2=SHR2BIT(nodeclk[2],shr2bit[3])			
-}(shr2bit_2[2],shr2bit_2[1],shr2bit_1[2],shr2bit_1[1],shr2bit_2[3])	
+}(shr2bit_2[2],shr2bit_2[1],shr2bit_1[2],shr2bit_1[1],shr2bit_2[3])
+my4bitshr=SHR4BIT(clk,in)
+ledbit1=LED(my4bitshr[1])
+ledbit2=LED(my4bitshr[2])
+ledbit3=LED(my4bitshr[3])
+ledbit4=LED(my4bitshr[4])
+ledcarry=LED(my4bitshr[5])
 \end{verbatim}
 
-my4bitshr=SHR4BIT(clk,in)\newline
-ledbit1=LED(my4bitshr[1])\newline
-ledbit2=LED(my4bitshr[2])\newline
-ledbit3=LED(my4bitshr[3])\newline
-ledbit4=LED(my4bitshr[4])\newline
-ledcarry=LED(my4bitshr[5])\newline
+\item Bemenet és kimenet\newline
 
-
-{\bf Felhasználó ténykedései:}\newline
-switch input\newline
-step\newline
-step\newline
-
-step\newline
-step\newline
-
-switch input\newline
-step\newline
-step\newline
-
-switch input\newline
-step \newline
-step \newline
-
-
-\item Elvárt kimenet\newline
-input: 1\newline
-
-simulation successful\newline
-input: 1\newline
-seqgen: 1\newline
-ledbit1: 1\newline
-ledbit2: 0\newline
-ledbit3: 0\newline
-ledbit3: 0\newline
-ledcarry: 0\newline
-
-simulation successful\newline
-input: 1\newline
-seqgen: 0\newline
-ledbit1: 1\newline
-ledbit2: 0\newline
-ledbit3: 0\newline
-ledbit3: 0\newline
-ledcarry: 0\newline
-
-simulation successful\newline
-input: 1\newline
-seqgen: 1\newline
-ledbit1: 1\newline
-ledbit2: 1\newline
-ledbit3: 0\newline
-ledbit3: 0\newline
-ledcarry: 0\newline
-
-simulation successful\newline
-input: 1\newline
-seqgen: 0\newline
-ledbit1: 1\newline
-ledbit2: 1\newline
-ledbit3: 0\newline
-ledbit3: 0\newline
-ledcarry: 0\newline
-
-input: 0\newline
-
-simulation successful\newline
-input: 0\newline
-seqgen: 1\newline
-ledbit1: 0\newline
-ledbit2: 1\newline
-ledbit3: 1\newline
-ledbit3: 0\newline
-ledcarry: 0\newline
-
-simulation successful\newline
-input: 0\newline
-seqgen: 0\newline
-ledbit1: 0\newline
-ledbit2: 1\newline
-ledbit3: 1\newline
-ledbit3: 0\newline
-ledcarry: 0\newline
-
-input: 1\newline
-
-simulation successful\newline
-input: 1\newline
-seqgen: 1\newline
-ledbit1: 1\newline
-ledbit2: 0\newline
-ledbit3: 1\newline
-ledbit3: 1\newline
-ledcarry: 0\newline
-
-simulation successful\newline
-input: 1\newline
-seqgen: 0\newline
-ledbit1: 1\newline
-ledbit2: 0\newline
-ledbit3: 1\newline
-ledbit3: 1\newline
-ledcarry: 0\newline
-
+\begin{tabular}{|p{5cm}|p{5cm}|} 
+\hline 
+\textit{Bemenet} & \textit{Kimenet} \\ \hline
+\begin{verbatim}
+switch input
+step
+step
+step
+step
+switch input
+step
+step
+switch input
+step
+step
+\end{verbatim}
+& 
+\begin{verbatim}
+copy-paste from netbeans
+\end{verbatim}
+\\ \hline
+\end{tabular}
 
 \end{itemize}
+
 
 \section{A tesztelést támogató programok tervei}
 \comment{A tesztadatok előállítására, a tesztek eredményeinek kiértékelésére szolgáló segédprogramok részletes terveit kell elkészíteni.}
