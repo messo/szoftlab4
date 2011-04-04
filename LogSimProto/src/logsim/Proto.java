@@ -1,6 +1,13 @@
 package logsim;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logsim.model.Circuit;
 import logsim.model.Simulation;
 import logsim.model.Value;
@@ -24,8 +31,14 @@ public class Proto implements Controllable {
 //        System.out.println("led1: " + led1.getValue());
 //        System.out.println("led2: " + led2.getValue());
         s = new Simulation();
-        view = new ConsoleView(this);
-        view.run();
+        try {
+            view = new View(this, new FileWriter("output.txt"));
+            view.run(new BufferedReader(new FileReader("input.txt")));
+        } catch (IOException ex) {
+            Logger.getLogger(Proto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //view = new View(this, new OutputStreamWriter(System.out, "CP852"));
+        //view.run(new BufferedReader(new InputStreamReader(System.in)));
     }
 
     public static void main(String[] args) {
@@ -43,18 +56,22 @@ public class Proto implements Controllable {
             this.s.setCircuit(c);
             config = new Config(c);
             view.writeLoadSuccessful();
+            view.newline();
         } else if (cmds[0].equals("loadSettings")) {
             config.load(new File(cmds[1]));
             view.writeLoadSuccessful();
+            view.newline();
         } else if (cmds[0].equals("saveSetting")) {
             config.save(new File(cmds[1]));
             view.writeSaveSuccessful();
+            view.newline();
         } else if (cmds[0].equals("switch")) {
             Toggle sw = (Toggle) c.getComponentByName(cmds[1]);
             Value[] v = sw.getValues();
             v[0] = v[0].invert();
             sw.setValues(v);
             sw.writeValueTo(view);
+            view.newline();
         } else if (cmds[0].equals("setSeqGen")) {
             SequenceGenerator sg = (SequenceGenerator) c.getComponentByName(cmds[1]);
             Value[] values = new Value[cmds[2].length()];
@@ -69,6 +86,7 @@ public class Proto implements Controllable {
             }
             sg.setValues(values);
             view.writeSequenceGeneratorSequence(sg);
+            view.newline();
         } else if (cmds[0].equals("check")) {
             if (cmds[1].equals("-all")) {
                 //összes elem kilistázása
@@ -78,19 +96,21 @@ public class Proto implements Controllable {
             } else {
                 view.writeDetails(c.getComponentByName(cmds[1]));
             }
+            view.newline();
         } else if (cmds[0].equals("step")) {
             boolean success = this.s.start();
-            if(success) {
+            if (success) {
                 view.writeSimulationSuccessful();
+                for (AbstractComponent ac : c.getSourceComponents()) {
+                    ac.writeValueTo(view);
+                }
+                for (AbstractComponent ac : c.getDisplayComponents()) {
+                    ac.writeValueTo(view);
+                }
             } else {
                 view.writeSimulationFailed();
             }
-            for (AbstractComponent ac : c.getSourceComponents()) {
-                ac.writeValueTo(view);
-            }
-            for (AbstractComponent ac : c.getDisplayComponents()) {
-                ac.writeValueTo(view);
-            }
+            view.newline();
         }
     }
 }

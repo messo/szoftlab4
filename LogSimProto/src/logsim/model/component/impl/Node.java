@@ -35,6 +35,6 @@ public class Node extends AbstractComponent {
 
     @Override
     public AbstractComponent copy(String name) {
-        return new Led(name);
+        return new Node(outputs.length, name);
     }
 }

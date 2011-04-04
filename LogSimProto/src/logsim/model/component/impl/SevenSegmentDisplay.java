@@ -1,5 +1,6 @@
 package logsim.model.component.impl;
 
+import logsim.Viewable;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.DisplayComponent;
@@ -35,5 +36,10 @@ public class SevenSegmentDisplay extends DisplayComponent {
     @Override
     public AbstractComponent copy(String newName) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void writeValueTo(Viewable view) {
+        view.writeSevenSegmentDisplayValues(this);
     }
 }

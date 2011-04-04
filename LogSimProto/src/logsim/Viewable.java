@@ -1,7 +1,7 @@
 package logsim;
 
+import java.io.BufferedReader;
 import logsim.model.component.AbstractComponent;
-import logsim.model.component.SourceComponent;
 import logsim.model.component.impl.Led;
 import logsim.model.component.impl.Scope;
 import logsim.model.component.impl.SequenceGenerator;
@@ -14,7 +14,7 @@ import logsim.model.component.impl.Toggle;
  */
 public interface Viewable {
 
-    public void run();
+    public void run(BufferedReader input);
 
     /**
      * Kiírunk egy komponenst (be és kimenetek)
@@ -99,4 +99,6 @@ public interface Viewable {
      * @param scope
      */
     public void writeScopeValues(Scope scope);
+
+    public void newline();
 }

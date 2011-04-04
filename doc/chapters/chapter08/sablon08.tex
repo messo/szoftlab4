@@ -54,7 +54,7 @@ Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
 \end{itemize}
 
 \section{A tesztek részletes tervei, leírásuk a teszt nyelvén}
-[A tesztek részletes tervei alatt meg kell adni azokat a bemeneti adatsorozatokat, amelyekkel a program működése ellenőrizhető. Minden bemenő adatsorozathoz definiálni kell, hogy az adatsorozat végrehajtásától a program mely részeinek, funkcióinak ellenőrzését várjuk és konkrétan milyen eredményekre számítunk, ezek az eredmények hogyan vethetők össze a bemenetekkel.]
+\comment{A tesztek részletes tervei alatt meg kell adni azokat a bemeneti adatsorozatokat, amelyekkel a program működése ellenőrizhető. Minden bemenő adatsorozathoz definiálni kell, hogy az adatsorozat végrehajtásától a program mely részeinek, funkcióinak ellenőrzését várjuk és konkrétan milyen eredményekre számítunk, ezek az eredmények hogyan vethetők össze a bemenetekkel.}
 
 \subsection{Áramkörök betöltése}
 Minden teszteset elején betöltjük a megfelelő fájból az áramkört. Ezt mindig meg kell tenni, azonban csak egy esetben mutatjuk meg az egyszerűség és átláthatóság kedvéért.
@@ -82,7 +82,7 @@ led=LED(es)
 
 \item Bemenet és kimenet\newline
 
-\begin{tabular}{|p{5cm}|p{5cm}|} 
+\begin{tabular}{|p{7cm}|p{7cm}|} 
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
@@ -95,12 +95,33 @@ step
 \end{verbatim}
 & 
 \begin{verbatim}
+simulation successful
+kapcs1: 0
+kapcs2: 0
+led: 0
+
 kapcs1: 1
+
 simulation successful
 kapcs1: 1
 kapcs2: 0
 led: 0
+
+led:
+ in: 0
+ out: 
+kapcs1:
+ in: 
+ out: 1
+kapcs2:
+ in: 
+ out: 0
+es:
+ in: 1, 0
+ out: 0
+ 
 kapcs2: 1
+
 simulation successful
 kapcs1: 1
 kapcs2: 1
@@ -128,18 +149,13 @@ inmpx4=TOGGLE()
 selmpx1=TOGGLE()
 selmpx2=TOGGLE()
 mux=MPX(inmpx1,inmpx2,inmpx3,inmpx4,selmpx1,selmpx2)
-seg7=TOGGLE()
-seg6=TOGGLE()
-seg5=TOGGLE()
-seg4=TOGGLE()
-seg3=TOGGLE()
-seg2=TOGGLE()
-display=7SEG(mux,seg2,seg3,seg4,seg5,seg6, seg7)
+seg=TOGGLE()
+display=7SEG(mux,seg,0,0,0,0,0)
 \end{verbatim}
 
 \item Bemenet és kimenet\newline
 
-\begin{tabular}{|p{5cm}|p{5cm}|} 
+\begin{tabular}{|p{7cm}|p{7cm}|} 
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
@@ -155,7 +171,50 @@ step
 \end{verbatim}
 & 
 \begin{verbatim}
-copy-paste from netbeans
+load successful
+
+inmpx1: 1
+
+inmpx3: 1
+
+simulation successful
+inmpx1: 1
+inmpx2: 0
+inmpx3: 1
+inmpx4: 0
+selmpx1: 0
+selmpx2: 0
+seg: 0
+display: 1, 0, 0, 0, 0, 0, 0
+
+selmpx2: 1
+
+seg: 1
+
+simulation successful
+inmpx1: 1
+inmpx2: 0
+inmpx3: 1
+inmpx4: 0
+selmpx1: 0
+selmpx2: 1
+seg: 1
+display: 1, 1, 0, 0, 0, 0, 0
+
+selmpx2: 0
+
+selmpx1: 1
+
+simulation successful
+inmpx1: 1
+inmpx2: 0
+inmpx3: 1
+inmpx4: 0
+selmpx1: 1
+selmpx2: 0
+seg: 1
+display: 0, 1, 0, 0, 0, 0, 0
+
 \end{verbatim}
 \\ \hline
 \end{tabular}
@@ -180,7 +239,7 @@ led=LED(node[1])
 
 \item Bemenet és kimenet\newline
 
-\begin{tabular}{|p{5cm}|p{5cm}|} 
+\begin{tabular}{|p{7cm}|p{7cm}|} 
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
@@ -190,7 +249,17 @@ step
 \end{verbatim}
 & 
 \begin{verbatim}
-copy-paste from netbeans
+load successful
+
+simulation successful
+kapcs: 0
+led: 0
+
+kapcs: 1
+
+simulation successful
+kapcs: 1
+led: 1
 \end{verbatim}
 \\ \hline
 \end{tabular}
@@ -217,7 +286,7 @@ led=LED(node[1])
 
 \item Bemenet és kimenet\newline
 
-\begin{tabular}{|p{5cm}|p{5cm}|} 
+\begin{tabular}{|p{7cm}|p{7cm}|} 
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
@@ -226,7 +295,11 @@ step
 \end{verbatim}
 & 
 \begin{verbatim}
-copy-paste from netbeans
+load successful
+
+kapcs: 1
+
+simulation failed
 \end{verbatim}
 \\ \hline
 \end{tabular}
@@ -248,12 +321,12 @@ j=TOGGLE()
 k=TOGGLE()
 seqgen=SEQGEN()
 jk=FFJK(seqgen,j,k)
-scope=SCOPE(jk)
+scope=SCOPE(jk, 3)
 \end{verbatim}
 
 \item Bemenet és kimenet\newline
 
-\begin{tabular}{|p{5cm}|p{5cm}|} 
+\begin{tabular}{|p{7cm}|p{7cm}|} 
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
@@ -270,7 +343,51 @@ step
 \end{verbatim}
 & 
 \begin{verbatim}
-copy-paste from netbeans
+load successful
+
+k: 1
+
+simulation successful
+j: 0
+k: 1
+seqgen: 0
+scope: 0
+
+simulation successful
+j: 0
+k: 1
+seqgen: 1
+scope: 00
+
+j: 1
+
+simulation successful
+j: 1
+k: 1
+seqgen: 0
+scope: 000
+
+simulation successful
+j: 1
+k: 1
+seqgen: 1
+scope: 001
+
+j: 0
+
+k: 0
+
+simulation successful
+j: 0
+k: 0
+seqgen: 0
+scope: 011
+
+simulation successful
+j: 0
+k: 0
+seqgen: 1
+scope: 111
 \end{verbatim}
 \\ \hline
 \end{tabular}
@@ -290,14 +407,13 @@ Kompozit helyes működését ellenőrízzük.
 \begin{verbatim}
 input=TOGGLE()
 seqgen=SEQGEN()
-composite SHR(clk,in){		
-    nodeclk=NODE(clk,2)		
-    d1=FFD(nodeclk[1],in)		
-    node1=NODE(d1,2)			
-    d2=FFD(nodeclk[2],node1[2])
-    node2=NODE(d2,2)			
-}(node1[1],node2[2],node2[2])
-myshr=SHR(seqgen,input)
+composite SHR(clk, in){
+    in2 = NODE(in, 1)
+    d1 = FFD(clk, in)
+    node1 = NODE(d1,2)
+    d2 = FFD(clk,node1[1])
+} (in2, node1[2], d2)
+myshr = SHR(seqgen, input)
 led1=LED(myshr[1])
 led2=LED(myshr[2])
 ledcarry=LED(myshr[3])
@@ -305,7 +421,7 @@ ledcarry=LED(myshr[3])
 
 \item Bemenet és kimenet\newline
 
-\begin{tabular}{|p{5cm}|p{5cm}|} 
+\begin{tabular}{|p{7cm}|p{7cm}|} 
 \hline 
 \textit{Bemenet} & \textit{Kimenet} \\ \hline
 \begin{verbatim}
@@ -320,7 +436,53 @@ step
 \end{verbatim}
 & 
 \begin{verbatim}
-copy-paste from netbeans
+load successful
+
+input: 1
+
+simulation successful
+input: 1
+seqgen: 0
+led1: 1
+led2: 0
+ledcarry: 0
+
+simulation successful
+input: 1
+seqgen: 1
+led1: 1
+led2: 1
+ledcarry: 1
+
+input: 0
+
+simulation successful
+input: 0
+seqgen: 0
+led1: 0
+led2: 1
+ledcarry: 1
+
+simulation successful
+input: 0
+seqgen: 1
+led1: 0
+led2: 0
+ledcarry: 0
+
+simulation successful
+input: 0
+seqgen: 0
+led1: 0
+led2: 0
+ledcarry: 0
+
+simulation successful
+input: 0
+seqgen: 1
+led1: 0
+led2: 0
+ledcarry: 0
 \end{verbatim}
 \\ \hline
 \end{tabular}

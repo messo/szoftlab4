@@ -1,11 +1,12 @@
- composite OR4( a, b, c, d ) {
-    or1 = OR(a, b)
-    or2 = OR(c, d)
-    out = OR(or1, or2)
- } (out)
-
-tog = TOGGLE()
-def = OR4(tog, 0, 0, 0)
-node = NODE(def, 2)
-led1 = LED(node[1])
-led2 = LED(node[2])
+input=TOGGLE()
+seqgen=SEQGEN()
+composite SHR(clk, in){
+    in2 = NODE(in, 1)
+    d1 = FFD(clk, in)
+    node1 = NODE(d1,2)
+    d2 = FFD(clk, node1[1])
+} (in2, node1[2], d2)
+myshr = SHR(seqgen, input)
+led1=LED(myshr[1])
+led2=LED(myshr[2])
+ledcarry=LED(myshr[3])

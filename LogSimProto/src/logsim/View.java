@@ -6,13 +6,11 @@ package logsim;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import logsim.model.Circuit;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
-import logsim.model.component.SourceComponent;
 import logsim.model.component.impl.Led;
 import logsim.model.component.impl.Scope;
 import logsim.model.component.impl.SequenceGenerator;
@@ -23,7 +21,7 @@ import logsim.model.component.impl.Toggle;
  *
  * @author Gabor
  */
-public class ConsoleView implements Viewable {
+public class View implements Viewable {
 
     /**
      * Áramkör
@@ -34,36 +32,34 @@ public class ConsoleView implements Viewable {
      */
     private Controllable controller;
     /**
-     * Bemenet, innen olvassuk a felhasználó választásait
-     */
-    private static BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
-    /**
      * Kimeneti adatfolyam, ide írunk.
      */
-    private static PrintWriter out;
+    private PrintWriter out;
 
-    public ConsoleView(Controllable c) {
+    public View(Controllable c, OutputStreamWriter out) {
         this.controller = c;
-    }
-
-    static {
         try {
-            out = new PrintWriter(new OutputStreamWriter(System.out, "CP852"), true);
+            this.out = new PrintWriter(out, true);
         } catch (Exception e) {
             System.out.println("Outstream error!");
             System.exit(-1);
         }
     }
 
+    static {
+    }
+
     /**
      * Felhasználó parancsait olvassa
      */
     @Override
-    public void run() {
+    public void run(BufferedReader input) {
         while (true) {
             try {
-                String str = keyboard.readLine();
-
+                String str = input.readLine();
+                if (str == null) {
+                    break;
+                }
                 if (str.equals("exit")) {
                     return;
                 } else {
@@ -208,5 +204,10 @@ public class ConsoleView implements Viewable {
             bits.append(v == Value.TRUE ? '1' : '0');
         }
         out.println(bits);
+    }
+
+    @Override
+    public void newline() {
+        out.println();
     }
 }
