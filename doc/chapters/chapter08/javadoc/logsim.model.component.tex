@@ -118,6 +118,8 @@ Flipflopok ősosztálya, minden flipflop 1. bemenete az órajel!
 	\item[] \texttt{$+$ void addTo(Composite composite)}: Hozzáadás kompozithoz
 	\item[] \texttt{$+$ void commit()}: Véglegesítés
 	\item[] \texttt{$+$ boolean isActive()}: Számolhat-e az FF? Ezt hívja meg az FF-ek onEvaluation() metódusa, mielőtt  bármit is csinálnának.
+	\item[] \texttt{$\#$ abstract void onCommit()}: Kimenetre értékadás a logika elvégzése után.
+	\item[] \texttt{$\#$ void onEvaluation()}: Nem csinálunk semmit, majd csak commit()-nál.
 \end{itemize}
 \end{itemize}
 
