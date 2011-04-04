@@ -1,8 +1,6 @@
 package logsim.model.component;
 
-import logsim.log.Loggable;
-import logsim.log.LoggableInt;
-import logsim.log.Logger;
+import logsim.Viewable;
 import logsim.model.Value;
 
 /**
@@ -10,7 +8,7 @@ import logsim.model.Value;
  * komponens. A közös logikát valósítja meg. A gyakran használt dolgokra
  * ad alapértelmezett implementációt (összekötés, bemenetek kiértékelése stb.)
  */
-public abstract class AbstractComponent implements Loggable {
+public abstract class AbstractComponent {
 
     /**
      * Bemenetekre kötött vezetékek
@@ -37,12 +35,9 @@ public abstract class AbstractComponent implements Loggable {
      */
     protected AbstractComponent(String name, int inputCount, int outputCount) {
         this.name = name;
-        Logger.logCreate(this);
 
         outputs = new Wire[outputCount];
         inputs = new Wire[inputCount];
-
-        Logger.logReturn();
     }
 
     /**
@@ -52,9 +47,7 @@ public abstract class AbstractComponent implements Loggable {
      * @param wire Melyik vezetéket kötjük rá
      */
     public void setInput(int inputPin, Wire wire) {
-        Logger.logCall(this, "setInput", new LoggableInt(inputPin), wire);
         inputs[inputPin - 1] = wire;
-        Logger.logReturn();
     }
 
     public Wire getInputWire(int inputPin) {
@@ -71,9 +64,7 @@ public abstract class AbstractComponent implements Loggable {
      * @param wire Melyik vezetéket kötjük rá
      */
     public void setOutput(int outputPin, Wire wire) {
-        Logger.logCall(this, "setOutput", new LoggableInt(outputPin), wire);
         outputs[outputPin - 1] = wire;
-        Logger.logReturn();
     }
 
     public Wire getOutputWire(int outputPin) {
@@ -90,8 +81,6 @@ public abstract class AbstractComponent implements Loggable {
      *
      */
     public void evaluate() {
-        Logger.logCall(this, "evaluate");
-
         changed = false;
         Value[] oldValues = new Value[outputs.length];
         for (int i = 0; i < outputs.length; i++) {
@@ -108,8 +97,6 @@ public abstract class AbstractComponent implements Loggable {
                 break;
             }
         }
-
-        Logger.logReturn();
     }
 
     /**
@@ -148,13 +135,27 @@ public abstract class AbstractComponent implements Loggable {
      * @param composite Áramkör, amihez hozzáadjuk
      */
     public void addTo(Composite composite) {
-        Logger.logCall(this, "addTo", composite);
         composite.add(this);
-        Logger.logReturn();
     }
 
-    @Override
     public String getName() {
         return name;
+    }
+
+    /**
+     * Komponens kiírása a viewra.
+     * @param view
+     */
+    public void writeTo(Viewable view) {
+        view.writeDetails(this);
+    }
+
+    /**
+     * Kiírja az értékét a viewra (csak kijelzõ és forrásra!)
+     * 
+     * @param view
+     */
+    public void writeValueTo(Viewable view) {
+        throw new IllegalArgumentException("Csak megjelenítõ és forrásra!");
     }
 }

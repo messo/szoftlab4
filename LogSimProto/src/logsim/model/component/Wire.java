@@ -1,31 +1,17 @@
 package logsim.model.component;
 
-import logsim.log.Loggable;
-import logsim.log.Logger;
 import logsim.model.Value;
 
 /**
  * Vezeték osztály. Két komponens-lábat köt össze. A rajta lévõ érték lekérdezhetõ
  * és beállítható.
  */
-public class Wire implements Loggable {
+public class Wire {
 
-    /**
-     * Vezeték neve
-     */
-    private String name;
     /**
      * Vezetéken lévõ érték
      */
-    private Value value;
-
-    /**
-     * Konstruktor
-     * @param name vezeték neve
-     */
-    public Wire(String name) {
-        this.name = name;
-    }
+    private Value value = Value.FALSE;
 
     /**
      * Vezeték értékének beállítása
@@ -41,21 +27,5 @@ public class Wire implements Loggable {
      */
     public Value getValue() {
         return value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        return "Wire";
     }
 }

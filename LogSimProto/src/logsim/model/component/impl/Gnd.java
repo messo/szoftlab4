@@ -23,9 +23,4 @@ public class Gnd extends AbstractComponent {
     public AbstractComponent copy(String newName) {
         return new Gnd(newName);
     }
-
-    @Override
-    public String getClassName() {
-        return "Gnd";
-    }
 }

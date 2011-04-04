@@ -11,5 +11,5 @@ package logsim;
  */
 public interface Controllable {
 
-   public void Eval(String s);
+   public void eval(String s);
 }

@@ -17,9 +17,4 @@ public class Circuit extends Composite {
     public void init() {
         // Tesztesetekben implementáljuk.
     }
-
-    @Override
-    public String getClassName() {
-        return "Circuit";
-    }
 }

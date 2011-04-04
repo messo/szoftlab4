@@ -13,12 +13,20 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import logsim.model.Circuit;
+import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.Composite;
+import logsim.model.component.impl.AndGate;
+import logsim.model.component.impl.FlipFlopD;
+import logsim.model.component.impl.FlipFlopJK;
 import logsim.model.component.impl.Inverter;
 import logsim.model.component.impl.Led;
+import logsim.model.component.impl.Mpx;
 import logsim.model.component.impl.Node;
 import logsim.model.component.impl.OrGate;
+import logsim.model.component.impl.Scope;
+import logsim.model.component.impl.SequenceGenerator;
+import logsim.model.component.impl.SevenSegmentDisplay;
 import logsim.model.component.impl.Toggle;
 
 /**
@@ -104,7 +112,7 @@ public class Parser {
         String tmp = matcher.group(3).trim();
         String arguments[];
 
-        System.out.println(variableName + " - " + componentName);
+        //System.out.println(variableName + " - " + componentName);
 
         if (!parameters.containsKey(composite)) {
             parameters.put(composite, new HashMap<AbstractComponent, String[]>());
@@ -136,16 +144,46 @@ public class Parser {
         AbstractComponent component = null;
         if (componentName.equalsIgnoreCase("or")) {
             component = new OrGate(arguments.length, variableName);
+        } else if (componentName.equalsIgnoreCase("and")) {
+            component = new AndGate(arguments.length, variableName);
+        } else if (componentName.equalsIgnoreCase("mpx")) {
+            component = new Mpx(variableName);
         } else if (componentName.equalsIgnoreCase("inv")) {
             component = new Inverter(variableName);
         } else if (componentName.equalsIgnoreCase("led")) {
             component = new Led(variableName);
+        } else if (componentName.equalsIgnoreCase("7seg")) {
+            component = new SevenSegmentDisplay(variableName);
         } else if (componentName.equalsIgnoreCase("node")) {
             component = new Node(Integer.parseInt(arguments[1]), variableName);
             // csak 1 elemû tömb kell!
             arguments = Arrays.copyOf(arguments, 1);
+        } else if (componentName.equalsIgnoreCase("scope")) {
+            component = new Scope(Integer.parseInt(arguments[1]), variableName);
+            arguments = Arrays.copyOf(arguments, 1);
+        } else if (componentName.equalsIgnoreCase("seqgen")) {
+            SequenceGenerator sg = new SequenceGenerator(variableName);
+            if (arguments != null) {
+                Value[] values = new Value[arguments[0].length()];
+                for (int i = 0; i < arguments[0].length(); i++) {
+                    if (arguments[0].charAt(i) == '1') {
+                        values[i] = Value.TRUE;
+                    } else if (arguments[0].charAt(i) == '0') {
+                        values[i] = Value.FALSE;
+                    } else {
+                        values[i] = null;
+                    }
+                }
+                sg.setValues(values);
+            }
+            component = sg;
+            arguments = null;
         } else if (componentName.equalsIgnoreCase("toggle")) {
             component = new Toggle(variableName);
+        } else if (componentName.equalsIgnoreCase("ffd")) {
+            component = new FlipFlopD(variableName);
+        } else if (componentName.equalsIgnoreCase("ffjk")) {
+            component = new FlipFlopJK(variableName);
         } else if (composites.containsKey(componentName)) {
             // ha van ilyen nevû komponens, akkor azt ugye már létrehoztuk, most le kéne másolni
             Composite subComposite = composites.get(componentName).copy(variableName);
@@ -211,8 +249,6 @@ public class Parser {
 
     private void addComponentsToComposite(Composite composite, List<String> lines,
             String[] inputs, String[] outputs) {
-        System.out.println(composite.getClassName());
-
         for (String line : lines) {
             Matcher matcher = componentPattern.matcher(line);
             if (matcher.matches()) {

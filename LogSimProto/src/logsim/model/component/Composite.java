@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import logsim.log.Logger;
 import logsim.model.component.impl.Gnd;
 import logsim.model.component.impl.Node;
+import logsim.model.component.impl.Scope;
+import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.component.impl.Vcc;
 
 /**
@@ -32,6 +33,14 @@ public class Composite extends AbstractComponent {
      */
     private List<SourceComponent> sources;
     /**
+     * Jelgenerátorok listája
+     */
+    private List<SequenceGenerator> generators;
+    /**
+     * Flipflopok listája
+     */
+    private List<FlipFlop> flipFlops;
+    /**
      * Megjelenítõ típusú komponensek listája (pl. led)
      */
     private List<DisplayComponent> displays;
@@ -39,6 +48,10 @@ public class Composite extends AbstractComponent {
      * Kompozit típusú komponensek listája
      */
     private List<Composite> composites;
+    /**
+     * Oszcillátor típusú komponensek listája
+     */
+    private List<Scope> scopes;
     private Node[] inputNodes;
     private Node[] outputNodes;
     private String type;
@@ -51,7 +64,10 @@ public class Composite extends AbstractComponent {
         sources = new ArrayList<SourceComponent>();
         displays = new ArrayList<DisplayComponent>();
         components = new HashMap<String, AbstractComponent>();
+        generators = new ArrayList<SequenceGenerator>();
+        flipFlops = new ArrayList<FlipFlop>();
         composites = new ArrayList<Composite>();
+        scopes = new ArrayList<Scope>();
 
         inputNodes = new Node[inputCount];
         for (int i = 0; i < inputCount; i++) {
@@ -83,10 +99,7 @@ public class Composite extends AbstractComponent {
      * @param c Hozzáadandó komponens
      */
     public void add(AbstractComponent c) {
-        Logger.logCall(this, "add", c);
-        Logger.logComment("Általános komponens hozzáadása a(z) kompozithoz/áramkörhöz");
         components.put(c.getName(), c);
-        Logger.logReturn();
     }
 
     /**
@@ -94,11 +107,27 @@ public class Composite extends AbstractComponent {
      * @param sc Hozzáadandó komponens
      */
     public void add(SourceComponent sc) {
-        Logger.logCall(this, "add", sc);
-        Logger.logComment("Jelforrás hozzáadása a(z) kompozithoz/áramkörhöz");
         components.put(sc.getName(), sc);
         sources.add(sc);
-        Logger.logReturn();
+    }
+
+    /**
+     * Jelgenerátor komponens hozzáadása
+     * @param sg Hozzáadandó komponens
+     */
+    public void add(SequenceGenerator sg) {
+        components.put(sg.getName(), sg);
+        sources.add(sg);
+        generators.add(sg);
+    }
+
+    /**
+     * Flipflop komponens hozzáadása
+     * @param ff Hozzáadandó komponens
+     */
+    public void add(FlipFlop ff) {
+        components.put(ff.getName(), ff);
+        flipFlops.add(ff);
     }
 
     /**
@@ -106,11 +135,18 @@ public class Composite extends AbstractComponent {
      * @param dc Hozzáadandó komponens
      */
     public void add(DisplayComponent dc) {
-        Logger.logCall(this, "add", dc);
-        Logger.logComment("Kijelzõ hozzáadása a(z) kompozithoz/áramkörhöz");
         components.put(dc.getName(), dc);
         displays.add(dc);
-        Logger.logReturn();
+    }
+
+    /**
+     * Oszcillátor típusú komponens hozzáadása
+     * @param scope Hozzáadandó komponens
+     */
+    public void add(Scope scope) {
+        components.put(scope.getName(), scope);
+        displays.add(scope);
+        scopes.add(scope);
     }
 
     /**
@@ -118,12 +154,8 @@ public class Composite extends AbstractComponent {
      * @param c
      */
     public void add(Composite c) {
-        Logger.logCall(this, "add", c);
-        Logger.logComment("Kompozit hozzáadása a(z) kompozithoz/áramkörhöz");
         components.put(c.getName(), c);
         composites.add(c);
-        Logger.logReturn();
-
     }
 
     @Override
@@ -143,7 +175,6 @@ public class Composite extends AbstractComponent {
 
             for (AbstractComponent c : components.values()) {
                 if (c.isChanged()) {
-                    Logger.logComment("Még egy ciklus...");
                     counter++;
                     continue eval;
                 }
@@ -153,43 +184,48 @@ public class Composite extends AbstractComponent {
         if (counter == cycleLimit) {
             throw new RuntimeException("Nincs stacionárius állapot!");
         }
+        commitScopes();
+        stepGenerators();
+        commitFlipFlops();
     }
 
     /**
      * Jelgenerátorok léptetése
      */
-    public void stepGenerators() {
-        Logger.logCall(this, "stepGenerators");
+    private void stepGenerators() {
         for (Composite c : composites) {
             c.stepGenerators();
         }
-        // TODO - for generators
-        Logger.logReturn();
+        for (SequenceGenerator sg : generators) {
+            sg.step();
+        }
     }
 
     /**
      * A flipflopok jelenlegi kimenetét elmentjük belsõ állapotnak, és az órajel
      * bemenetén lévõ értéket pedig eltároljuk az éldetektálás érdekében.
      */
-    public void commitFlipFlops() {
-        Logger.logCall(this, "commitFlipFlops");
+    private void commitFlipFlops() {
         for (Composite c : composites) {
             c.commitFlipFlops();
         }
-        // TODO - for flipflops
-        Logger.logReturn();
+        for (FlipFlop ff : flipFlops) {
+            ff.commit();
+        }
     }
 
-    @Override
-    public String getClassName() {
-        return "Composite[" + type + "]";
+    private void commitScopes() {
+        for (Composite c : composites) {
+            c.commitScopes();
+        }
+        for (Scope scope : scopes) {
+            scope.commit();
+        }
     }
 
     @Override
     public void addTo(Composite composite) {
-        Logger.logCall(this, "addTo", composite);
         composite.add(this);
-        Logger.logReturn();
     }
 
     @Override
@@ -204,7 +240,7 @@ public class Composite extends AbstractComponent {
             for (int i = 1; i <= inputNodes[nodeIdx].getOutputsCount(); i++) {
                 Wire old = inputNodes[nodeIdx].getOutputWire(i);
                 if (old != null) {
-                    Wire newW = new Wire(old.getName());
+                    Wire newW = new Wire();
                     map.put(old, newW);
                     c.inputNodes[nodeIdx].setOutput(i, newW);
                 }
@@ -220,7 +256,7 @@ public class Composite extends AbstractComponent {
             for (int i = 1; i <= ac.getInputsCount(); i++) {
                 Wire old = ac.getInputWire(i);
                 if (map.get(old) == null) {
-                    map.put(old, new Wire(old.getName()));
+                    map.put(old, new Wire());
                 }
                 Wire newW = map.get(old);
                 newC.setInput(i, newW);
@@ -229,7 +265,7 @@ public class Composite extends AbstractComponent {
             for (int i = 1; i <= ac.getOutputsCount(); i++) {
                 Wire old = ac.getOutputWire(i);
                 if (map.get(old) == null) {
-                    map.put(old, new Wire(old.getName()));
+                    map.put(old, new Wire());
                 }
                 Wire newW = map.get(old);
                 newC.setOutput(i, newW);
@@ -271,7 +307,7 @@ public class Composite extends AbstractComponent {
                 }
 
                 // bekötés
-                Wire wire = new Wire("wire_to_" + target.getName());
+                Wire wire = new Wire();
                 target.setInput(idx++, wire);
 
                 AbstractComponent source;
@@ -308,7 +344,7 @@ public class Composite extends AbstractComponent {
         if (outputs != null) {
             int idx = 0;
             for (String output : outputs) {
-                Wire wire = new Wire("wire_to_output" + idx);
+                Wire wire = new Wire();
                 Matcher paramMatcher = inputPattern.matcher(output);
                 if (paramMatcher.matches()) {
                     source = components.get(paramMatcher.group(1));
@@ -341,12 +377,15 @@ public class Composite extends AbstractComponent {
         return null;
     }
 
-    public List<SourceComponent> getSourceComponents(){
+    public List<SourceComponent> getSourceComponents() {
         return sources;
     }
-    
-    public Collection<AbstractComponent> getComponents(){
-        return components.values();
+
+    public List<DisplayComponent> getDisplayComponents() {
+        return displays;
     }
 
+    public Collection<AbstractComponent> getComponents() {
+        return components.values();
+    }
 }

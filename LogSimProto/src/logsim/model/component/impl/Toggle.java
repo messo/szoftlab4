@@ -1,5 +1,6 @@
 package logsim.model.component.impl;
 
+import logsim.Viewable;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.SourceComponent;
@@ -59,11 +60,8 @@ public class Toggle extends SourceComponent {
         v = newValues[0];
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public String getClassName() {
-        return "Toggle";
+    public void writeValueTo(Viewable view) {
+        view.writeToggleValue(this);
     }
 }

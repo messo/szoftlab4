@@ -1,11 +1,9 @@
 package logsim.model;
 
-import logsim.log.Loggable;
-
 /**
  * Az áramkörben elõfordulható értéket reprezentál.
  */
-public enum Value implements Loggable {
+public enum Value {
 
     TRUE, FALSE;
 
@@ -24,26 +22,10 @@ public enum Value implements Loggable {
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        return "Value";
-    }
-
     public Value invert() {
-        if(this == Value.TRUE) {
+        if (this == Value.TRUE) {
             return Value.FALSE;
-        } else if(this == Value.FALSE) {
+        } else if (this == Value.FALSE) {
             return Value.TRUE;
         }
 

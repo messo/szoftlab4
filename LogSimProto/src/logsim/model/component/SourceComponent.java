@@ -1,7 +1,6 @@
 package logsim.model.component;
 
-import logsim.log.Logger;
-import logsim.model.Circuit;
+import logsim.Viewable;
 import logsim.model.Value;
 
 /**
@@ -38,8 +37,6 @@ public abstract class SourceComponent extends AbstractComponent {
      */
     @Override
     public void addTo(Composite composite) {
-        Logger.logCall(this, "addTo", composite);
         composite.add(this);
-        Logger.logReturn();
     }
 }

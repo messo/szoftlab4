@@ -21,9 +21,4 @@ public class Vcc extends AbstractComponent {
     public AbstractComponent copy(String newName) {
         return new Vcc(newName);
     }
-
-    @Override
-    public String getClassName() {
-        return "Vcc";
-    }
 }

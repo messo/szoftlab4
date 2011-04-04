@@ -1,5 +1,6 @@
 package logsim.model.component.impl;
 
+import logsim.Viewable;
 import logsim.model.Value;
 import logsim.model.component.DisplayComponent;
 
@@ -37,11 +38,8 @@ public class Led extends DisplayComponent {
         return new Led(name);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public String getClassName() {
-        return "Led";
+    public void writeValueTo(Viewable view) {
+        view.writeLedValue(this);
     }
 }

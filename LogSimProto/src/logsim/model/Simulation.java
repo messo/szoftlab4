@@ -1,15 +1,12 @@
 package logsim.model;
 
-import logsim.log.Loggable;
-import logsim.log.Logger;
-
 /**
  * Egy szimulációt reprezentáló objektum.
  * Utasítja az áramkört több kiértékelési ciklus lefuttatásához,
  * amíg az áramkörben van változás. Ha a változás megadott lépésen belül
  * nem áll meg, tájékoztatja a felhasználót, hogy nincs stacionárius állapot.
  */
-public class Simulation implements Loggable {
+public class Simulation {
 
     /**
      * Szimulált áramkör
@@ -21,13 +18,13 @@ public class Simulation implements Loggable {
      * stacionárius állapot.
      */
     public boolean start() {
-        Logger.logCall(this, "start");
-        circuit.evaluate();
-        circuit.commitFlipFlops();
-        circuit.stepGenerators();
-
-        Logger.logReturn("true");
-        return true;
+        try {
+            circuit.evaluate();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace(System.err);
+            return false;
+        }
     }
 
     /**
@@ -36,24 +33,6 @@ public class Simulation implements Loggable {
      * @param circuit Szimulálni kívánt áramkör
      */
     public void setCircuit(Circuit circuit) {
-        Logger.logCall(this, "setCircuit", circuit);
         this.circuit = circuit;
-        Logger.logReturn();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return "simulation";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        return "Simulation";
     }
 }
