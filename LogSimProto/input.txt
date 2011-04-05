@@ -1,8 +1,8 @@
 loadCircuit test.txt
-switch input
 step
+switch tog
 step
-switch input
+loadSettings load.txt
 step
 step
 step

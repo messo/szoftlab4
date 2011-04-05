@@ -42,6 +42,13 @@ public class SequenceGenerator extends SourceComponent {
         index = (index + 1) % sequence.length;
     }
 
+    /**
+     * Jelgenerátor ciklusának nullázása
+     */
+    public void setIndexToZero(){
+        index = 0;
+    }
+
     @Override
     protected void onEvaluation() {
         outputs[0].setValue(sequence[index]);

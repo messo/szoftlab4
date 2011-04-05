@@ -119,7 +119,8 @@ public class View implements Viewable {
      */
     @Override
     public void writeLoadFailed() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //throw new UnsupportedOperationException("Not supported yet.");
+        out.println("load failed");
     }
 
     /**

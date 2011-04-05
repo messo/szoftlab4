@@ -1,48 +1,42 @@
 load successful
 
-input: 1
-
 simulation successful
-input: 1
-seqgen: 0
-led1: 1
+tog: 0
+seq: 0
+led1: 0
 led2: 0
-ledcarry: 0
+
+tog: 1
 
 simulation successful
-input: 1
-seqgen: 1
+tog: 1
+seq: 1
 led1: 1
 led2: 1
-ledcarry: 1
 
-input: 0
+load successful
 
 simulation successful
-input: 0
-seqgen: 0
+tog: 0
+seq: 0
+led1: 0
+led2: 0
+
+simulation successful
+tog: 0
+seq: 0
+led1: 0
+led2: 0
+
+simulation successful
+tog: 0
+seq: 1
 led1: 0
 led2: 1
-ledcarry: 1
 
 simulation successful
-input: 0
-seqgen: 1
+tog: 0
+seq: 0
 led1: 0
 led2: 0
-ledcarry: 0
-
-simulation successful
-input: 0
-seqgen: 0
-led1: 0
-led2: 0
-ledcarry: 0
-
-simulation successful
-input: 0
-seqgen: 1
-led1: 0
-led2: 0
-ledcarry: 0
 

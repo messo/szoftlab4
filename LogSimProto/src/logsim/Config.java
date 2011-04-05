@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import logsim.model.Circuit;
 import logsim.model.component.SourceComponent;
+import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.Value;
 
 /**
@@ -80,31 +81,57 @@ public class Config {
      *
      * @return sikeresség/hibakód
      */
-    public int load(File file) {
+    public int load(File file) throws Exception {
         String line;
         SourceComponent component;
         Value[] values;
+        List<SourceComponent> sources = circuit.getSourceComponents();
+        List<SequenceGenerator> generators = circuit.getStepGenerators();
+
+        for (SequenceGenerator generator : generators) {
+            generator.setIndexToZero();
+            values = new Value[2];
+            values[0] = Value.FALSE;
+            values[1] = Value.TRUE;
+            generator.setValues(values);
+        }
+
+        for (SourceComponent source : sources) {
+            values = new Value[1];
+            values[0] = Value.FALSE;
+            source.setValues(values);
+        }
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             while ((line = br.readLine()) != null) {
                 Matcher matcher = sourceComponentPattern.matcher(line);
                 if (matcher.matches()) {
-                    component = (SourceComponent) circuit.getComponentByName(matcher.group(1));
-                    String valuesString = matcher.group(2);
-                    values = new Value[valuesString.length()];
-                    for (int i = 0; i < valuesString.length(); i++) {
-                        if (valuesString.charAt(i) == '0') {
-                            values[i] = Value.FALSE;
-                        } else {
-                            values[i] = Value.TRUE;
+                    if (circuit.getComponentByName(matcher.group(1)) != null) {
+                        component = (SourceComponent) circuit.getComponentByName(matcher.group(1));
+                        String valuesString = matcher.group(2);
+                        values = new Value[valuesString.length()];
+                        for (int i = 0; i < valuesString.length(); i++) {
+                            if (valuesString.charAt(i) == '0') {
+                                values[i] = Value.FALSE;
+                            } else {
+                                values[i] = Value.TRUE;
+                            }
                         }
+                        if (component.getName().compareTo("toggle") == 0 && values.length > 1) {
+                            throw new Exception();
+                        } else {
+                            component.setValues(values);
+                        }
+                    } else {
+                        throw new Exception();
                     }
-                    component.setValues(values);
                 }
             }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.err);
+            throw new Exception();
         } catch (IOException ex) {
             ex.printStackTrace(System.err);
         }
