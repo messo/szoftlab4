@@ -218,9 +218,9 @@ public class Composite extends AbstractComponent {
         if (counter == cycleLimit) {
             throw new RuntimeException("Nincs stacionárius állapot!");
         }
+        commitFlipFlops();
         commitScopes();
         stepGenerators();
-        commitFlipFlops();
     }
 
     /**
