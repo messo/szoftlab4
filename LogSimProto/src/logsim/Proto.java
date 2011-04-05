@@ -100,10 +100,14 @@ public class Proto implements Controller {
             view.writeLoadSuccessful();
             view.newline();
         } else if (cmds[0].equals("loadSettings")) {
-            config.load(new File(cmds[1]));
-            view.writeLoadSuccessful();
+            try{
+                config.load(new File(cmds[1]));
+                view.writeLoadSuccessful();
+            } catch (Exception e) {
+                view.writeLoadFailed();
+            }
             view.newline();
-        } else if (cmds[0].equals("saveSetting")) {
+        } else if (cmds[0].equals("saveSettings")) {
             config.save(new File(cmds[1]));
             view.writeSaveSuccessful();
             view.newline();

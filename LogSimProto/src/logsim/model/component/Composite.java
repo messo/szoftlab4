@@ -443,6 +443,14 @@ public class Composite extends AbstractComponent {
     }
 
     /**
+     * Jelgenerátorok listája
+     * @return
+     */
+    public List<SequenceGenerator> getStepGenerators(){
+        return generators;
+    }
+
+    /**
      * Megjelenítõk listája
      * @return
      */
