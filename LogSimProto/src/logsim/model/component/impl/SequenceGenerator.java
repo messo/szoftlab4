@@ -98,4 +98,12 @@ public class SequenceGenerator extends SourceComponent {
     public void writeValueTo(Viewable view) {
         view.writeSequenceGeneratorValue(this);
     }
+
+    @Override
+    public void reset() {
+        index = 0;
+        sequence = new Value[2];
+        sequence[0] = Value.FALSE;
+        sequence[1] = Value.TRUE;
+    }
 }

@@ -12,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import logsim.model.Circuit;
 import logsim.model.component.SourceComponent;
-import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.Value;
 
 /**
@@ -81,25 +80,14 @@ public class Config {
      *
      * @return sikeresség/hibakód
      */
-    public int load(File file) throws Exception {
+    public int load(File file) {
         String line;
         SourceComponent component;
         Value[] values;
         List<SourceComponent> sources = circuit.getSourceComponents();
-        List<SequenceGenerator> generators = circuit.getStepGenerators();
-
-        for (SequenceGenerator generator : generators) {
-            generator.setIndexToZero();
-            values = new Value[2];
-            values[0] = Value.FALSE;
-            values[1] = Value.TRUE;
-            generator.setValues(values);
-        }
 
         for (SourceComponent source : sources) {
-            values = new Value[1];
-            values[0] = Value.FALSE;
-            source.setValues(values);
+            source.reset();
         }
 
         try {
@@ -119,21 +107,22 @@ public class Config {
                                 values[i] = Value.TRUE;
                             }
                         }
-                        if (component.getName().compareTo("toggle") == 0 && values.length > 1) {
-                            throw new Exception();
+                        if (component.getValues().length == 1 && values.length > 1) {
+                            return 1;
                         } else {
                             component.setValues(values);
                         }
                     } else {
-                        throw new Exception();
+                        return 1;
                     }
                 }
             }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.err);
-            throw new Exception();
+            return 1;
         } catch (IOException ex) {
             ex.printStackTrace(System.err);
+            return 1;
         }
 
         return 0;
