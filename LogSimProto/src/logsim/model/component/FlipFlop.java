@@ -53,7 +53,7 @@ public abstract class FlipFlop extends AbstractComponent {
 
     /**
      * Hozzáadás kompozithoz
-     * @param composite
+     * @param composite Melyik kompozithoz akarjuk hozzáadni
      */
     @Override
     public void addTo(Composite composite) {

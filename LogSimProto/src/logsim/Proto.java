@@ -90,6 +90,8 @@ public class Proto implements Controller {
 
     /**
      * Parancs értelmezése
+     *
+     * @param s parancs
      */
     private void eval(String s) {
         String cmds[] = s.split(" ");
