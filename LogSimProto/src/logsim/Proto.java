@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import logsim.model.Circuit;
 import logsim.model.Simulation;
 import logsim.model.Value;
@@ -37,23 +37,26 @@ public class Proto implements Controller {
      */
     private Config config;
 
-    public Proto() {
-        // tegyük fel, hogy a felhasználó tol egy loadCircuit()-ot.
-//        Circuit c = new Parser().parse(new File("test.txt"));
-//        c.evaluate();
-//        Led led1 = (Led) c.getComponentByName("led1");
-//        Led led2 = (Led) c.getComponentByName("led2");
-//        System.out.println("led1: " + led1.getValue());
-//        System.out.println("led2: " + led2.getValue());
+    public Proto(String[] args) {
         s = new Simulation();
         try {
-            view = new View(this, new FileWriter("output.txt"));
-            run(new BufferedReader(new FileReader("input.txt")));
+            InputStreamReader input = null;
+            OutputStreamWriter output = null;
+            if (args.length == 3) {
+                input = new FileReader(args[1]);
+                output = new FileWriter(args[2]);
+            } else if (args.length == 2) {
+                // TODO - ha 1 paraméter, akkor vagy onnan olvasunk, vagy oda írunk.
+            } else {
+                input = new InputStreamReader(System.in);
+                output = new OutputStreamWriter(System.out, "CP852");
+            }
+
+            view = new View(this, output);
+            run(new BufferedReader(input));
         } catch (IOException ex) {
-            Logger.getLogger(Proto.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace(System.err);
         }
-        //view = new View(this, new OutputStreamWriter(System.out, "CP852"));
-        //run(new BufferedReader(new InputStreamReader(System.in)));
     }
 
     /**
@@ -62,14 +65,14 @@ public class Proto implements Controller {
      * @param args paraméterek
      */
     public static void main(String[] args) {
-        new Proto();
+        new Proto(args);
     }
 
     /**
      * Felhasználó parancsait olvassa
      */
     @Override
-    public void run(BufferedReader input) {
+    public final void run(BufferedReader input) {
         while (true) {
             try {
                 String str = input.readLine();
@@ -97,12 +100,16 @@ public class Proto implements Controller {
         String cmds[] = s.split(" ");
         if (cmds[0].equals("loadCircuit")) {
             c = new Parser().parse(new File(cmds[1]));
-            this.s.setCircuit(c);
-            config = new Config(c);
-            view.writeLoadSuccessful();
+            if (c == null) {
+                view.writeLoadFailed();
+            } else {
+                this.s.setCircuit(c);
+                config = new Config(c);
+                view.writeLoadSuccessful();
+            }
             view.newline();
         } else if (cmds[0].equals("loadSettings")) {
-            if (config.load(new File(cmds[1])) == 0){;
+            if (config.load(new File(cmds[1])) == 0) {
                 view.writeLoadSuccessful();
             } else {
                 view.writeLoadFailed();
