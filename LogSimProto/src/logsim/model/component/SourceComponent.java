@@ -32,6 +32,11 @@ public abstract class SourceComponent extends AbstractComponent {
     public abstract Value[] getValues();
 
     /**
+     * Jelforrás nullázása
+     */
+    public abstract void reset();
+
+    /**
      * Hozzáadás kompozithoz.
      */
     @Override

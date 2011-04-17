@@ -64,4 +64,9 @@ public class Toggle extends SourceComponent {
     public void writeValueTo(Viewable view) {
         view.writeToggleValue(this);
     }
+
+    @Override
+    public void reset() {
+        v = Value.FALSE;
+    }
 }

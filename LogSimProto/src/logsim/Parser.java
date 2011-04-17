@@ -84,9 +84,9 @@ public class Parser {
 
             return circuit;
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace(System.err);
+            // ex.printStackTrace(System.err);
         } catch (IOException ex) {
-            ex.printStackTrace(System.err);
+            // ex.printStackTrace(System.err);
         }
 
         return null;

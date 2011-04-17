@@ -62,37 +62,37 @@ public interface Viewable {
 
     /**
      * Kiírja a kapcsoló állapotát
-     * @param toggle
+     * @param toggle kapcsoló
      */
     public void writeToggleValue(Toggle toggle);
 
     /**
      * Kiírja a jelgenerátor szekvenciáját
-     * @param sg
+     * @param sg szekvenciagenerátor
      */
     public void writeSequenceGeneratorSequence(SequenceGenerator sg);
 
     /**
      * Kiírja a jelgenerátor éppen kiadott értékét
-     * @param sg
+     * @param sg szekvenciagenerátor
      */
     public void writeSequenceGeneratorValue(SequenceGenerator sg);
 
     /**
      * Kiírja a led értékét
-     * @param led
+     * @param led led
      */
     public void writeLedValue(Led led);
 
     /**
      * Kiírja a 7-szegmentes kijelzõ szegmenseit.
-     * @param seg
+     * @param seg 7-szegmenses kijelzõ
      */
     public void writeSevenSegmentDisplayValues(SevenSegmentDisplay seg);
 
     /**
      * Kiírja a scope által tárolt értékeket
-     * @param scope
+     * @param scope oszcilloszkóp
      */
     public void writeScopeValues(Scope scope);
 

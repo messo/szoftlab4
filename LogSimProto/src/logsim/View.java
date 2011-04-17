@@ -34,8 +34,8 @@ public class View implements Viewable {
     /**
      * Létehozzuk a Viewt egy kontrollerrel és a kimenettel, ide fog menni a kimenet.
      *
-     * @param c
-     * @param out
+     * @param c kontroller
+     * @param out kimenet
      */
     public View(Controller c, OutputStreamWriter out) {
         this.controller = c;
@@ -99,7 +99,7 @@ public class View implements Viewable {
     }
 
     /**
-     * Kiírjuk, hogy betöltés sikeres
+     * Kiírjuk, hogy a betöltés sikeres
      */
     @Override
     public void writeLoadSuccessful() {
@@ -124,7 +124,7 @@ public class View implements Viewable {
     }
 
     /**
-     * Kiírjuk, hogy a config fájl sikertelen
+     * Kiírjuk, hogy a config fájl mentése sikertelen
      */
     @Override
     public void writeSaveFailed() {
@@ -137,6 +137,8 @@ public class View implements Viewable {
      */
     @Override
     public void writeSequenceGenerator(SequenceGenerator sg) {
+        out.print(sg.getName());
+        out.print(": ");
     }
 
     /**
@@ -157,7 +159,7 @@ public class View implements Viewable {
 
     /**
      * Kiírja a kapcsoló állapotát
-     * @param toggle
+     * @param toggle kapcsoló
      */
     @Override
     public void writeToggleValue(Toggle sc) {
@@ -167,7 +169,7 @@ public class View implements Viewable {
 
     /**
      * Kiírja a jelgenerátor éppen kiadott értékét
-     * @param sg
+     * @param sg szekvenciagenerátor
      */
     @Override
     public void writeSequenceGeneratorValue(SequenceGenerator sg) {
@@ -177,7 +179,7 @@ public class View implements Viewable {
 
     /**
      * Kiírja a jelgenerátor szekvenciáját
-     * @param sg
+     * @param sg szekvenciagenerátor
      */
     @Override
     public void writeSequenceGeneratorSequence(SequenceGenerator sg) {
@@ -191,7 +193,7 @@ public class View implements Viewable {
 
     /**
      * Kiírja a led értékét
-     * @param led
+     * @param led led
      */
     @Override
     public void writeLedValue(Led led) {
@@ -201,7 +203,7 @@ public class View implements Viewable {
 
     /**
      * Kiírja a 7-szegmentes kijelzõ szegmenseit.
-     * @param seg
+     * @param seg 7-szegmenses kijelzõ
      */
     @Override
     public void writeSevenSegmentDisplayValues(SevenSegmentDisplay seg) {
@@ -218,7 +220,7 @@ public class View implements Viewable {
 
     /**
      * Kiírja a scope által tárolt értékeket
-     * @param scope
+     * @param scope oszcilloszkóp
      */
     @Override
     public void writeScopeValues(Scope scope) {

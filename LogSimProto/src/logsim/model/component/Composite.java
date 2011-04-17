@@ -72,10 +72,10 @@ public class Composite extends AbstractComponent {
     /**
      * Adott típusú és nevû komponens létrehozása a megfelelõ lábszámmal.
      *
-     * @param type
-     * @param name
-     * @param inputCount
-     * @param outputCount
+     * @param type Komponens típusa
+     * @param name Komponens neve
+     * @param inputCount Komponens bemeneteinek száma
+     * @param outputCount Komponens kimeneteinek száma
      */
     public Composite(String type, String name, int inputCount, int outputCount) {
         super(name, inputCount, outputCount);
@@ -105,8 +105,8 @@ public class Composite extends AbstractComponent {
 
     /**
      * Bemenet beállítása
-     * @param inputPin
-     * @param wire
+     * @param inputPin Aktuális bemenet
+     * @param wire Bekötendõ vezeték
      */
     @Override
     public void setInput(int inputPin, Wire wire) {
@@ -116,8 +116,8 @@ public class Composite extends AbstractComponent {
 
     /**
      * Kimenet beállítása
-     * @param inputPin
-     * @param wire
+     * @param inputPin Aktuális kimenet
+     * @param wire Bekötendõ vezeték
      */
     @Override
     public void setOutput(int outputPin, Wire wire) {
@@ -182,7 +182,7 @@ public class Composite extends AbstractComponent {
 
     /**
      * Kompozit típusú komponens hozzáadása
-     * @param c
+     * @param c Hozzáadandó komponens
      */
     public void add(Composite c) {
         components.put(c.getName(), c);
@@ -262,7 +262,7 @@ public class Composite extends AbstractComponent {
 
     /**
      * Kompozit hozzáadása kompozithoz.
-     * @param composite
+     * @param composite Hozzáadandó kompozit
      */
     @Override
     public void addTo(Composite composite) {
@@ -271,7 +271,7 @@ public class Composite extends AbstractComponent {
 
     /**
      * Kompozit lemásolása (példányosításnál használjuk.)
-     * @param variableName
+     * @param variableName Másolandó kompozit neve
      * @return
      */
     @Override
@@ -415,7 +415,7 @@ public class Composite extends AbstractComponent {
 
     /**
      * Komponens lekérése a neve alapján (delegálja a kérést, ha kell).
-     * @param name
+     * @param name Lekérendõ komponens neve
      * @return
      */
     public AbstractComponent getComponentByName(String name) {

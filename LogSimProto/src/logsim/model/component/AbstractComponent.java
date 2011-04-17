@@ -78,7 +78,7 @@ public abstract class AbstractComponent {
 
     /**
      * Lekérünk egy kimeneti lábon lévõ vezetéket
-     * @param inputPin
+     * @param inputPin Melyik bemenetet állítjuk
      * @return
      */
     public Wire getOutputWire(int outputPin) {
@@ -166,7 +166,7 @@ public abstract class AbstractComponent {
 
     /**
      * Komponens kiírása a viewra.
-     * @param view
+     * @param view Megjelenítõ
      */
     public void writeTo(Viewable view) {
         view.writeDetails(this);
@@ -175,7 +175,7 @@ public abstract class AbstractComponent {
     /**
      * Kiírja az értékét a viewra (csak kijelzõ és forrásra!)
      * 
-     * @param view
+     * @param view Megjelenítõ
      */
     public void writeValueTo(Viewable view) {
         throw new IllegalArgumentException("Csak megjelenítõ és forrásra!");
