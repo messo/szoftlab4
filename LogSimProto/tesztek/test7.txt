@@ -1,0 +1,10 @@
+tog = TOGGLE()
+composite innerComp(in){
+inv = INV(in)
+} (inv)
+composite Main(in){
+inC = innerComp(in)
+or = OR(in, inC)
+} (or)
+m = Main(tog)
+led = LED(m)

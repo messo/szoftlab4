@@ -1,0 +1,11 @@
+loadCircuit test1.txt
+
+step
+
+switch kapcs1
+
+step
+
+check -all
+switch kapcs2
+step

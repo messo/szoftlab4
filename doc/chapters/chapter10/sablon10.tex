@@ -44,16 +44,67 @@ java Main.java
 \end{lstlisting}
 
 
+
+
+
+
+
+
+
+
 \section{Tesztek jegyzőkönyvei}
 
-\subsection{Teszteset1}
-\comment{Az alábbi táblázatot az utolsó, sikeres tesztfuttatáshoz kell kitölteni}
+\subsection{1 teszteset - Kapcsoló, és kapu és LED működésének vizsgálata}
+\tesztok{Apagyi Gábor}{2011.04.16}
 
-\tesztok{...}{...}
+\subsection{2 teszteset - Multiplexer és 7 szegmenses kijelző vizsgálata}
+\tesztfail{Apagyi Gábor}{2011.04.16. 11 óra 14 perc}{Fordítás idejű hiba}{Mivel az eddigi tesztek sikeresen lefutottak valószínűleg a bemeneti fájlokkal lehet gond, illetve esetleg a multiplexer, vagy a 7 szegmensen kijelző implementációjával.}{Az előző részben definiált felhasználói bemenetben az egyik kapcsolóra való hivatkozáskor rossz nevet írtunk a tesztesetbe: seg2, a helyes az áramkör létrehozásakor megadott seg név. A hibát javítva a teszt sikeresen lefutott.}
 
-\comment{Az alábbi táblázatot a megismételt (hibás) tesztek esetén kell kitölteni minden ismétléshez egyszer. Ha szükséges, akkor a valós kimenet is mellékelhető mint a teszt eredménye.}
+\tesztfail{Apagyi Gábor}{2011.04.16. 11 óra 22 perc}{Kimenet nem megfelelő}{Mivel a 7 szegmenses kijelző kimenetén az 1-esek száma megfelelő, valószínűleg, hogy a multiplexer belső logikájával lesz a probléma, azon belül is a kiválasztó jel és kimenet hozzárendeléssel}{Valóban a multiplexer implementációja volt hibás, a belső kiválasztó logikában a sorrend megcserélődött, ezt  át kellett írni:\newline\newline
 
-\tesztfail{...}{...}{...}{...}{...}
+    private static final int DATA0 = 1;\newline
+    private static final int DATA1 = 2;\newline
+    private static final int DATA2 = 3;\newline
+    private static final int DATA3 = 4;\newline
+    private static final int SEL0 = 5;\newline
+    private static final int SEL1 = 6;\newline\newline
+    
+Illetve a számolásnál a selected változó értékét 0-ról indítottuk, azonban a megfelelő tömb indexelésnél ez 1-ről indul.\newline\newline
+    
+    int selected = 1;\newline
+        if (getInput(SEL0) == Value.TRUE) {\newline
+            selected += 1;\newline
+        }\newline
+        if (getInput(SEL1) == Value.TRUE) {\newline
+            selected += 2;\newline
+        }\newline\newline
+
+ A hibát javítva a teszt sikeresen és jó eredménnyel lefutott.}
+
+\tesztok{Apagyi Gábor}{2011.04.16}
+
+\subsection{3 teszteset - Visszacsatolt vagy kapu vizsgálata - STABIL}
+\tesztok{Apagyi Gábor}{2011.04.16}
+
+\subsection{4 teszteset - Visszacsatolt és kapu és inverter vizsgálata -  NEM STABIL}
+\tesztok{Apagyi Gábor}{2011.04.16}
+
+\subsection{5 teszteset - Kompozitos áramkör vizsgálata}
+\tesztok{Apagyi Gábor}{2011.04.16}
+
+\subsection{5 teszteset - Kompoziton belül kompozit áramkör vizsgálata}
+\tesztok{Apagyi Gábor}{2011.04.16}
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Értékelés}
 \comment{A projekt kezdete óta az értékelésig eltelt időben tagokra bontva, százalékban.}

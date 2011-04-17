@@ -1,0 +1,12 @@
+loadCircuit test5.txt
+
+switch k
+step
+step
+switch j
+step
+step
+switch j
+switch k
+step
+step

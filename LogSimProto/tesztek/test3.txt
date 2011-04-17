@@ -1,0 +1,4 @@
+kapcs = TOGGLE()
+vagy = OR(kapcs,node[2])
+node = NODE(vagy,2)
+led = LED(node[1])

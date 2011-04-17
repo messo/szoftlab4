@@ -1,0 +1,6 @@
+loadCircuit test7.txt
+step
+step
+switch tog
+step
+step
