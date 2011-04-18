@@ -430,13 +430,7 @@ A \texttt{run.bat} fájl az alábbi parancsokat hajtja végre:
 A "build" könyvtárból elindítja az előzőleg lefordított programot.
 
 
-
-
-
-
-
-
-
+\newpage
 
 \section{Tesztek jegyzőkönyvei}
 
@@ -446,26 +440,26 @@ A "build" könyvtárból elindítja az előzőleg lefordított programot.
 \subsection{2. teszteset - Multiplexer és 7 szegmenses kijelző vizsgálata}
 \tesztfail{Apagyi Gábor}{2011.04.16. 11 óra 14 perc}{Futás idejű hiba}{Mivel az eddigi tesztek sikeresen lefutottak valószínűleg a bemeneti fájlokkal lehet gond, illetve esetleg a multiplexer, vagy a 7 szegmensen kijelző implementációjával.}{Az előző részben definiált felhasználói bemenetben az egyik kapcsolóra való hivatkozáskor rossz nevet írtunk a tesztesetbe: seg2, a helyes az áramkör létrehozásakor megadott seg név. A hibát javítva a teszt sikeresen lefutott.}
 
-\tesztfail{Apagyi Gábor}{2011.04.16. 11 óra 22 perc}{Kimenet nem megfelelő}{Mivel a 7 szegmenses kijelző kimenetén az 1-esek száma megfelelő, valószínű, hogy a multiplexer belső logikájával lesz a probléma, azon belül is a kiválasztó jel és kimenet hozzárendeléssel}{Valóban a multiplexer implementációja volt hibás, a belső kiválasztó logikában a sorrend megcserélődött, ezt  át kellett írni:\newline\newline
-
-    private static final int DATA0 = 1;\newline
-    private static final int DATA1 = 2;\newline
-    private static final int DATA2 = 3;\newline
-    private static final int DATA3 = 4;\newline
-    private static final int SEL0 = 5;\newline
-    private static final int SEL1 = 6;\newline\newline
+\tesztfail{Apagyi Gábor}{2011.04.16. 11 óra 22 perc}{Kimenet nem megfelelő}{Mivel a 7 szegmenses kijelző kimenetén az 1-esek száma megfelelő, valószínű, hogy a multiplexer belső logikájával lesz a probléma, azon belül is a kiválasztó jel és kimenet hozzárendeléssel}{Valóban a multiplexer implementációja volt hibás, a belső kiválasztó logikában a sorrend megcserélődött, ezt  át kellett írni:\newline
+\newline
+\texttt{~~~~private static final int DATA0 = 1;}\newline
+\texttt{~~~~private static final int DATA1 = 2;}\newline
+\texttt{~~~~private static final int DATA2 = 3;}\newline
+\texttt{~~~~private static final int DATA3 = 4;}\newline
+\texttt{~~~~private static final int SEL0 = 5;}\newline
+\texttt{~~~~private static final int SEL1 = 6;}\newline
     
-Illetve a számolásnál a selected változó értékét 0-ról indítottuk, azonban a megfelelő tömb indexelésnél ez 1-ről indul.\newline\newline
-    
-    int selected = 1;\newline
-        if (getInput(SEL0) == Value.TRUE) {\newline
-            selected += 1;\newline
-        }\newline
-        if (getInput(SEL1) == Value.TRUE) {\newline
-            selected += 2;\newline
-        }\newline\newline
-
- A hibát javítva a teszt sikeresen és jó eredménnyel lefutott.}
+Illetve a számolásnál a selected változó értékét 0-ról indítottuk, azonban a megfelelő tömb indexelésnél ez 1-ről indul.\newline
+\newline
+\texttt{~~~~int selected = 1;}\newline
+\texttt{~~~~if (getInput(SEL0) == Value.TRUE) \{}\newline
+\texttt{~~~~~~~~selected += 1;}\newline
+\texttt{~~~~\}}\newline
+\texttt{~~~~if (getInput(SEL1) == Value.TRUE) \{}\newline
+\texttt{~~~~~~~~selected += 2;}\newline
+\texttt{~~~~\}}\newline
+        
+A hibát javítva a teszt sikeresen és jó eredménnyel lefutott.}
 
 \tesztok{Apagyi Gábor}{2011.04.16}
 
@@ -499,7 +493,7 @@ Illetve a számolásnál a selected változó értékét 0-ról indítottuk, azo
 
 \begin{ertekeles}
 \tag{Apagyi G.} % Tag neve
-{13}        % Munka szazalekban
+{15}        % Munka szazalekban
 \tag{Dévényi A.}
 {22}
 \tag{Jákli G.}
@@ -507,6 +501,6 @@ Illetve a számolásnál a selected változó értékét 0-ról indítottuk, azo
 \tag{Kriván B.}
 {30}
 \tag{Péter T.}
-{13}
+{11}
 \end{ertekeles}
 

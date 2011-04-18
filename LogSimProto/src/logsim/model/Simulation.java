@@ -20,7 +20,7 @@ public class Simulation {
             circuit.evaluate();
             return true;
         } catch (Exception ex) {
-            ex.printStackTrace(System.err);
+            //ex.printStackTrace(System.err);
             return false;
         }
     }
