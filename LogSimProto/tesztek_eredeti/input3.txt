@@ -1,5 +1,0 @@
-loadCircuit test3.txt
-
-step
-switch kapcs
-step

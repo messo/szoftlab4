@@ -1,5 +1,0 @@
-kapcs1 = TOGGLE()
-
-kapcs2 = TOGGLE()
-es = AND(kapcs1,kapcs2)
-led = LED(es)

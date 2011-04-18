@@ -1,5 +1,5 @@
 @echo off
-set C="C:\Program Files\Java\jdk1.6.0_24\bin\"
+set C="C:\Program Files\Java\jdk1.6.0_23\bin\"
 xcopy tesztek build
 cd build
 %C%\java logsim.Proto input1.txt output1.txt

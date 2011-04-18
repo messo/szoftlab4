@@ -1,5 +1,5 @@
 @echo off
-set C="C:\Program Files\Java\jdk1.6.0_24\bin\"
+set C="C:\Program Files\Java\jdk1.6.0_23\bin\"
 cd src
 %C%\javadoc logsim logsim logsim.model logsim.model.component ^
 logsim.model.component.impl -d ..\documents

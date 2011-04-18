@@ -82,7 +82,7 @@
 \fajl
 {src/logsim/model/\newline
 Simulation.java} % Kezdet
-{855 byte} % Idptartam
+{857 byte} % Idptartam
 {2011.04.05.~00:52~} % Résztvevők
 {Egy szimulációt reprezentáló osztály} % Leírás
 
@@ -233,27 +233,20 @@ impl/Vcc.java} % Kezdet
 {A permanens logikai egyet megvalósító osztály} % Leírás
 
 \fajl
-{src/logsim/model/component/\newline
-impl/Vcc.java} % Kezdet
-{537 byte} % Idptartam
-{2011.04.04.~12:39~} % Résztvevők
-{A permanens logikai egyet megvalósító osztály} % Leírás
-
-\fajl
 {diff/cmp.exe} % Kezdet
-{537 byte} % Idptartam
+{57344 byte} % Idptartam
 {2011.04.04.~12:39~} % Résztvevők
 {A diffUtils összehasonlító exe-je} % Leírás
 
 \fajl
 {diff/libiconv2.dll} % Kezdet
-{537 byte} % Idptartam
+{898048 byte} % Idptartam
 {2011.04.04.~12:39~} % Résztvevők
 {a cmp.exe haszálja} % Leírás
 
 \fajl
 {diff/libintl3.dll} % Kezdet
-{537 byte} % Idptartam
+{92672 byte} % Idptartam
 {2011.04.04.~12:39~} % Résztvevők
 {a cmp.exe haszálja} % Leírás
 
@@ -388,7 +381,7 @@ impl/Vcc.java} % Kezdet
 \subsection{Fordítás}
 A hibamentes és minél inkább gördülékeny fordítás érdekében létrehoztunk egy \texttt{compile.bat} nevezetű batch fájlt, mely a projekt főkönyvtárában található. Projekt főkönytára az, amelyik a batch fájlokat és a "src" nevezetű mappát tartalmazza, melyben a program forráskódja található. Szükség estén kézzel kell módosítani a batch fájl
 \begin{verbatim}
-set C="C:\Program Files\Java\jdk1.6.0_24\bin\" 
+set C="C:\Program Files\Java\jdk1.6.0_23\bin\" 
 \end{verbatim}
 sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található és az hová van telepítve!\\
 
@@ -398,7 +391,7 @@ Ha hibamentes volt a fordítás, a "Fordítás sikeres" kimenettel értesíti a 
 
 A fordítás sikeressége után, lehetőség van a dokumentáció legenerálására is. Ehhez felhasználható a főkönyvtárban található \texttt{doc.bat} batch fájl.
 Szükség estén kézzel kell módosítani a batch file \begin{verbatim}
-set C="C:\Program Files\Java\jdk1.6.0_24\bin\" 
+set C="C:\Program Files\Java\jdk1.6.0_23\bin\" 
 \end{verbatim}
 sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található és az hová van telepítve!\\
 
@@ -412,7 +405,7 @@ Ha a dokumentum generálás sikeres volt, akkor a documents nevezetű mappában 
 A futtatás és a beépített tesztesetek ellenőrzésének megkönnyítése érdekében elkészítettük a \texttt{run.bat}, \texttt{runtests.bat} és a \texttt{verifytests.bat} batch fájlt.
 Szükség estén kézzel kell módosítani a \texttt{run.bat} batch fájlt 
 \begin{verbatim}
-set C="C:\Program Files\Java\jdk1.6.0_24\bin\" 
+set C="C:\Program Files\Java\jdk1.6.0_23\bin\" 
 \end{verbatim} sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található és az hová van telepítve!\\
 
 A \texttt{runtests.bat} fájl lefuttatja a 7 beépített teszt esetet.

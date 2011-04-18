@@ -1,5 +1,0 @@
-kapcs = TOGGLE()
-inv = INV(node[2])
-es = AND(kapcs,inv)
-node = NODE(es,2)
-led = LED(node[1])
