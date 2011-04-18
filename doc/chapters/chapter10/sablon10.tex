@@ -409,7 +409,7 @@ Ha a dokumentum generálás sikeres volt, akkor a documents nevezetű mappában 
 
 
 \subsection{Futtatás}
-A futtatás és a beépített tesztesetek ellőrzésének megkönnyítése érdekében elkészítettük a \texttt{run.bat}, \texttt{runtests.bat} és a \texttt{verifytests.bat} batch fájlt.
+A futtatás és a beépített tesztesetek ellenőrzésének megkönnyítése érdekében elkészítettük a \texttt{run.bat}, \texttt{runtests.bat} és a \texttt{verifytests.bat} batch fájlt.
 Szükség estén kézzel kell módosítani a \texttt{run.bat} batch fájlt 
 \begin{verbatim}
 set C="C:\Program Files\Java\jdk1.6.0_24\bin\" 
@@ -440,13 +440,13 @@ A "build" könyvtárból elindítja az előzőleg lefordított programot.
 
 \section{Tesztek jegyzőkönyvei}
 
-\subsection{1 teszteset - Kapcsoló, és kapu és LED működésének vizsgálata}
+\subsection{1. teszteset - Kapcsoló, és kapu és LED működésének vizsgálata}
 \tesztok{Apagyi Gábor}{2011.04.16}
 
-\subsection{2 teszteset - Multiplexer és 7 szegmenses kijelző vizsgálata}
+\subsection{2. teszteset - Multiplexer és 7 szegmenses kijelző vizsgálata}
 \tesztfail{Apagyi Gábor}{2011.04.16. 11 óra 14 perc}{Futás idejű hiba}{Mivel az eddigi tesztek sikeresen lefutottak valószínűleg a bemeneti fájlokkal lehet gond, illetve esetleg a multiplexer, vagy a 7 szegmensen kijelző implementációjával.}{Az előző részben definiált felhasználói bemenetben az egyik kapcsolóra való hivatkozáskor rossz nevet írtunk a tesztesetbe: seg2, a helyes az áramkör létrehozásakor megadott seg név. A hibát javítva a teszt sikeresen lefutott.}
 
-\tesztfail{Apagyi Gábor}{2011.04.16. 11 óra 22 perc}{Kimenet nem megfelelő}{Mivel a 7 szegmenses kijelző kimenetén az 1-esek száma megfelelő, valószínűleg, hogy a multiplexer belső logikájával lesz a probléma, azon belül is a kiválasztó jel és kimenet hozzárendeléssel}{Valóban a multiplexer implementációja volt hibás, a belső kiválasztó logikában a sorrend megcserélődött, ezt  át kellett írni:\newline\newline
+\tesztfail{Apagyi Gábor}{2011.04.16. 11 óra 22 perc}{Kimenet nem megfelelő}{Mivel a 7 szegmenses kijelző kimenetén az 1-esek száma megfelelő, valószínű, hogy a multiplexer belső logikájával lesz a probléma, azon belül is a kiválasztó jel és kimenet hozzárendeléssel}{Valóban a multiplexer implementációja volt hibás, a belső kiválasztó logikában a sorrend megcserélődött, ezt  át kellett írni:\newline\newline
 
     private static final int DATA0 = 1;\newline
     private static final int DATA1 = 2;\newline
@@ -469,16 +469,19 @@ Illetve a számolásnál a selected változó értékét 0-ról indítottuk, azo
 
 \tesztok{Apagyi Gábor}{2011.04.16}
 
-\subsection{3 teszteset - Visszacsatolt vagy kapu vizsgálata - STABIL}
+\subsection{3. teszteset - Visszacsatolt vagy kapu vizsgálata - STABIL}
 \tesztok{Apagyi Gábor}{2011.04.16}
 
-\subsection{4 teszteset - Visszacsatolt és kapu és inverter vizsgálata -  NEM STABIL}
+\subsection{4. teszteset - Visszacsatolt és kapu és inverter vizsgálata -  NEM STABIL}
 \tesztok{Apagyi Gábor}{2011.04.16}
 
-\subsection{5 teszteset - Kompozitos áramkör vizsgálata}
+\subsection{5. teszteset - JK Flip-flop és Scope vizsgálata}
+\tesztok{Jákli Gábor}{2011.04.18}
+
+\subsection{6. teszteset - Kompozitos áramkör vizsgálata}
 \tesztok{Apagyi Gábor}{2011.04.16}
 
-\subsection{5 teszteset - Kompoziton belül kompozit áramkör vizsgálata}
+\subsection{7. teszteset - Kompoziton belül kompozit áramkör vizsgálata}
 \tesztok{Apagyi Gábor}{2011.04.16}
 
 
