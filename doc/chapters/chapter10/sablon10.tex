@@ -183,21 +183,48 @@ impl/Toggle.java} % Kezdet
 \end{fajllista}
 
 \subsection{Fordítás}
-\comment{A fenti listában szereplő forrásfájlokból milyen műveletekkel lehet a bináris, futtatható kódot előállítani. Az előállításhoz csak a 2. Követelmények c. dokumentumban leírt környezetet szabad előírni.}
+A hibamentes és minél inkább gördülékeny fordítás érdekében létrehoztunk egy \texttt{compile.bat} nevezetű batch fájlt, mely a projekt főkönyvtárában található. Projekt főkönytára az, amelyik a batch fájlokat és a "src" nevezetű mappát tartalmazza, melyben a program forráskódja található. Szükség estén kézzel kell módosítani a batch fájl
+\begin{verbatim}
+set C="C:\Program Files\Java\jdk1.6.0_24\bin\" 
+\end{verbatim}
+sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található és az hová van telepítve!\\
 
-\lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
-\begin{lstlisting}
-javac -d bin *.java
-\end{lstlisting}
+A \texttt{compile.bat} fájl az alábbi parancsokat hajtja végre:
+\lstinputlisting[escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh]{../LogSimProto/compile.bat}
+Ha hibamentes volt a fordítás, a "Fordítás sikeres" kimenettel értesíti a felhasználót.\\
+
+A fordítás sikeressége után, lehetőség van a dokumentáció legenerálására is. Ehhez felhasználható a főkönyvtárban található \texttt{doc.bat} batch fájl.
+Szükség estén kézzel kell módosítani a batch file \begin{verbatim}
+set C="C:\Program Files\Java\jdk1.6.0_24\bin\" 
+\end{verbatim}
+sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található és az hová van telepítve!\\
+
+A batch fájl az alábbi parancsokat hajtja végre:
+\lstinputlisting[escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh]{../LogSimProto/doc.bat}
+Ha a dokumentum generálás sikeres volt, akkor a documents nevezetű mappában megtaláhatóak a kívánt dokumentumok.
+
+
 
 \subsection{Futtatás}
-\comment{A futtatható kód elindításával kapcsolatos teendők leírása. Az indításhoz csak a 2. Követelmények c. dokumentumban leírt környezetet szabad előírni.}
+A futtatás és a beépített tesztesetek ellőrzésének megkönnyítése érdekében elkészítettük a \texttt{run.bat}, \texttt{runtests.bat} és a \texttt{verifytests.bat} batch fájlt.
+Szükség estén kézzel kell módosítani a \texttt{run.bat} batch fájlt 
+\begin{verbatim}
+set C="C:\Program Files\Java\jdk1.6.0_24\bin\" 
+\end{verbatim} sorát, attól függően, hogy a gépen éppen melyik Java JDK verzió található és az hová van telepítve!\\
 
-\lstset{escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh}
-\begin{lstlisting}
-cd bin
-java Main.java
-\end{lstlisting}
+A \texttt{runtests.bat} fájl lefuttatja a 7 beépített teszt esetet.
+A \texttt{runtests.bat} fájl az alábbi parancsokat hajtja végre:
+\lstinputlisting[escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh]{../LogSimProto/runtests.bat}
+A "build" könyvtárba outputX.txt néven lesznek a tesztek kimenetei, ahol X a teszteset számát jelüli.
+
+A \texttt{verifytests.bat} fájl összehasonlítja a 7 beépített teszteset kimenetét a referencia kimenetekkel, majd egyenkét kiírja, hogy a tesztesetek megegyeznek-e a referenciával.
+A \texttt{verifytests.bat} fájl az alábbi parancsokat hajtja végre:
+\lstinputlisting[escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh]{../LogSimProto/verifytests.bat}
+
+
+A \texttt{run.bat} fájl az alábbi parancsokat hajtja végre:
+\lstinputlisting[escapeinside=`', xleftmargin=10pt, frame=single, basicstyle=\ttfamily\footnotesize, language=sh]{../LogSimProto/run.bat}
+A "build" könyvtárból elindítja az előzőleg lefordított programot.
 
 
 
