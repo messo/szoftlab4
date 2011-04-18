@@ -26,7 +26,7 @@ simulation successful
 j: 1
 k: 1
 seqgen: 1
-scope: 000
+scope: 001
 
 j: 0
 
@@ -36,11 +36,11 @@ simulation successful
 j: 0
 k: 0
 seqgen: 0
-scope: 001
+scope: 011
 
 simulation successful
 j: 0
 k: 0
 seqgen: 1
-scope: 011
+scope: 111
 
