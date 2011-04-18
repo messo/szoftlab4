@@ -1,0 +1,12 @@
+load successful
+
+simulation successful
+kapcs: 0
+led: 0
+
+kapcs: 1
+
+simulation successful
+kapcs: 1
+led: 1
+

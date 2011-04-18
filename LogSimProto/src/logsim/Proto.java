@@ -42,11 +42,13 @@ public class Proto implements Controller {
         try {
             InputStreamReader input = null;
             OutputStreamWriter output = null;
-            if (args.length == 3) {
-                input = new FileReader(args[1]);
-                output = new FileWriter(args[2]);
-            } else if (args.length == 2) {
+            if (args.length == 2) {
+                input = new FileReader(args[0]);
+                output = new FileWriter(args[1]);
+            } else if (args.length == 1) {
                 // TODO - ha 1 paraméter, akkor vagy onnan olvasunk, vagy oda írunk.
+                input = new FileReader(args[0]);
+                output = new OutputStreamWriter(System.out, "CP852");
             } else {
                 input = new InputStreamReader(System.in);
                 output = new OutputStreamWriter(System.out, "CP852");

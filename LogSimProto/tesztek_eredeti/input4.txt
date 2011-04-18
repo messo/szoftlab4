@@ -1,0 +1,4 @@
+loadCircuit test4.txt
+
+switch kapcs
+step

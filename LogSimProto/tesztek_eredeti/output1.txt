@@ -1,0 +1,34 @@
+load successful
+
+simulation successful
+kapcs1: 0
+kapcs2: 0
+led: 0
+
+kapcs1: 1
+
+simulation successful
+kapcs1: 1
+kapcs2: 0
+led: 0
+
+led:
+ in: 0
+ out: 
+kapcs1:
+ in: 
+ out: 1
+kapcs2:
+ in: 
+ out: 0
+es:
+ in: 1, 0
+ out: 0
+
+kapcs2: 1
+
+simulation successful
+kapcs1: 1
+kapcs2: 1
+led: 1
+

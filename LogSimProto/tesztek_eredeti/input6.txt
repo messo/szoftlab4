@@ -1,0 +1,9 @@
+loadCircuit test6.txt
+switch input
+step
+step
+switch input
+step
+step
+step
+step
