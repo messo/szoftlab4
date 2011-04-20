@@ -71,11 +71,11 @@ Prototípus vezérlő osztálya.
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item[] \texttt{$+$ Proto()}: 
+	\item[] \texttt{$+$ Proto(String[] args)}: 
  % TODO
 	\item[] \texttt{$-$ void eval(String s)}: Parancs értelmezése
 	\item[] \texttt{$+$ static void main(String[] args)}: Program belépési pontja.
-	\item[] \texttt{$+$ void run(BufferedReader input)}: Felhasználó parancsait olvassa
+	\item[] \texttt{$+$ final void run(BufferedReader input)}: Felhasználó parancsait olvassa
 \end{itemize}
 \end{itemize}
 
@@ -97,12 +97,13 @@ Egy konkrét kimeneti implementáció, mely OutputStreamWriter-be ír ki,  így 
 	\item[] \texttt{$+$ void writeDetails(AbstractComponent ac)}: Kiírunk egy komponenst (be és kimenetek)
 	\item[] \texttt{$+$ void writeLedValue(Led led)}: Kiírja a led értékét
 	\item[] \texttt{$+$ void writeLoadFailed()}: Kiírjuk, hogy a betöltés sikertelen
-	\item[] \texttt{$+$ void writeLoadSuccessful()}: Kiírjuk, hogy betöltés sikeres
-	\item[] \texttt{$+$ void writeSaveFailed()}: Kiírjuk, hogy a config fájl sikertelen
+	\item[] \texttt{$+$ void writeLoadSuccessful()}: Kiírjuk, hogy a betöltés sikeres
+	\item[] \texttt{$+$ void writeSaveFailed()}: Kiírjuk, hogy a config fájl mentése sikertelen
 	\item[] \texttt{$+$ void writeSaveSuccessful()}: Kiírjuk, hogy a config fájl mentés sikeres
 	\item[] \texttt{$+$ void writeScopeDetails(Scope ac)}: Kiírunk egy scope-ot
 	\item[] \texttt{$+$ void writeScopeValues(Scope scope)}: Kiírja a scope által tárolt értékeket
 	\item[] \texttt{$+$ void writeSequenceGenerator(SequenceGenerator sg)}: Szekvenciagenerátor szekvenciájának kiírása
+	\item[] \texttt{$+$ void writeSequenceGeneratorDetails(SequenceGenerator sg)}: Kiírunk egy jelgenerátort
 	\item[] \texttt{$+$ void writeSequenceGeneratorSequence(SequenceGenerator sg)}: Kiírja a jelgenerátor szekvenciáját
 	\item[] \texttt{$+$ void writeSequenceGeneratorValue(SequenceGenerator sg)}: Kiírja a jelgenerátor éppen kiadott értékét
 	\item[] \texttt{$+$ void writeSevenSegmentDisplayValues(SevenSegmentDisplay seg)}: Kiírja a 7-szegmentes kijelző szegmenseit.
@@ -131,6 +132,7 @@ A kimenet interfésze.
 	\item[] \texttt{$+$ void writeScopeDetails(Scope scope)}: Kiírunk egy scope-ot
 	\item[] \texttt{$+$ void writeScopeValues(Scope scope)}: Kiírja a scope által tárolt értékeket
 	\item[] \texttt{$+$ void writeSequenceGenerator(SequenceGenerator sg)}: Szekvenciagenerátor szekvenciájának kiírása
+	\item[] \texttt{$+$ void writeSequenceGeneratorDetails(SequenceGenerator sg)}: Kiírunk egy jelgenerátort
 	\item[] \texttt{$+$ void writeSequenceGeneratorSequence(SequenceGenerator sg)}: Kiírja a jelgenerátor szekvenciáját
 	\item[] \texttt{$+$ void writeSequenceGeneratorValue(SequenceGenerator sg)}: Kiírja a jelgenerátor éppen kiadott értékét
 	\item[] \texttt{$+$ void writeSevenSegmentDisplayValues(SevenSegmentDisplay seg)}: Kiírja a 7-szegmentes kijelző szegmenseit.

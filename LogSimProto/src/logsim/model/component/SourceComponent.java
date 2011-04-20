@@ -1,6 +1,5 @@
 package logsim.model.component;
 
-import logsim.Viewable;
 import logsim.model.Value;
 
 /**

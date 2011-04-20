@@ -99,6 +99,23 @@ public class View implements Viewable {
     }
 
     /**
+     * Kiírunk egy jelgenerátort
+     * @param sg jelgenerátor
+     */
+    @Override
+    public void writeSequenceGeneratorDetails(SequenceGenerator sg) {
+        out.println(sg.getName() + ":");
+        out.print(" in: ");
+        for (int i = 0; i < sg.getValues().length; i++) {
+            out.print(sg.getValues()[i] == Value.TRUE ? '1' : '0');
+        }
+        out.println();
+        out.print(" out: ");
+        out.print(sg.getOutputWire(1).getValue() == Value.TRUE ? '1' : '0');
+        out.println();
+    }
+
+    /**
      * Kiírjuk, hogy a betöltés sikeres
      */
     @Override

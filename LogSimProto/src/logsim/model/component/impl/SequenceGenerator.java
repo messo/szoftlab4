@@ -42,13 +42,6 @@ public class SequenceGenerator extends SourceComponent {
         index = (index + 1) % sequence.length;
     }
 
-    /**
-     * Jelgenerátor ciklusának nullázása
-     */
-    public void setIndexToZero(){
-        index = 0;
-    }
-
     @Override
     protected void onEvaluation() {
         outputs[0].setValue(sequence[index]);
@@ -61,6 +54,7 @@ public class SequenceGenerator extends SourceComponent {
      */
     @Override
     public void setValues(Value[] values) {
+        this.index = 0;
         this.sequence = Arrays.copyOf(values, values.length);
     }
 
@@ -99,6 +93,18 @@ public class SequenceGenerator extends SourceComponent {
         view.writeSequenceGeneratorValue(this);
     }
 
+    /**
+     * Komponens kiírása a viewra.
+     * @param view
+     */
+    @Override
+    public void writeTo(Viewable view) {
+        view.writeSequenceGeneratorDetails(this);
+    }
+
+    /**
+     * Jelgenerátor alaphelyzetbe állítása (01-es szekvencia)
+     */
     @Override
     public void reset() {
         index = 0;

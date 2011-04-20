@@ -150,7 +150,10 @@ public class Proto implements Controller {
                     ac.writeTo(view);
                 }
             } else {
-                view.writeDetails(c.getComponentByName(cmds[1]));
+                AbstractComponent component = c.getComponentByName(cmds[1]);
+                if (component != null) {
+                    component.writeTo(view);
+                }
             }
             view.newline();
         } else if (cmds[0].equals("step")) {

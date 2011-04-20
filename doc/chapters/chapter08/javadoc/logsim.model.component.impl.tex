@@ -242,8 +242,10 @@ Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki.  Alapér
 	\item[] \texttt{$+$ Value[] getValues()}: Jelgenerátor bitsorozatának lekérdezése
 	\item[] \texttt{$\#$ void onEvaluation()}: 
  % TODO
+	\item[] \texttt{$+$ void reset()}: Jelgenerátor alaphelyzetbe állítása (01-es szekvencia)
 	\item[] \texttt{$+$ void setValues(Value[] values)}: Jelgenerátor bitsorozatának beállítása
 	\item[] \texttt{$+$ void step()}: A jelgenerátor lép, a bitsorozat következő elemére ugrik. A következő léptetésig  ez kerül kiadásra a kimeneteken.
+	\item[] \texttt{$+$ void writeTo(Viewable view)}: Komponens kiírása a viewra.
 	\item[] \texttt{$+$ void writeValueTo(Viewable view)}: Érték kiírása a megjelenítőre
 \end{itemize}
 \end{itemize}
@@ -290,9 +292,9 @@ Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
 	\item[] \texttt{$+$ Value[] getValues()}: Lekérjük a kapcsoló értékét (1 elemű tömb)
 	\item[] \texttt{$\#$ void onEvaluation()}: 
  % TODO
+	\item[] \texttt{$+$ void reset()}: Kapcsoló alaphelyzetbe állítása.
 	\item[] \texttt{$+$ void setValues(Value[] newValues)}: Kapcsoló állapotának változtatása, csak 1 elemű tömböt kaphat paraméterül.
-	\item[] \texttt{$+$ void writeValueTo(Viewable view)}: 
- % TODO
+	\item[] \texttt{$+$ void writeValueTo(Viewable view)}: Érték kiírása a kimenetre.
 \end{itemize}
 \end{itemize}
 

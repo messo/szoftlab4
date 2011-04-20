@@ -73,6 +73,7 @@ Kompozit elem leírása, kiértékelésnél a tartalmazott komponenseket kiért�
 	\item[] \texttt{$+$ Collection getComponents()}: Összes tartalmazott komponens listája
 	\item[] \texttt{$+$ List getDisplayComponents()}: Megjelenítők listája
 	\item[] \texttt{$+$ List getSourceComponents()}: Jelforrások listája
+	\item[] \texttt{$+$ List getStepGenerators()}: Jelgenerátorok listája
 	\item[] \texttt{$\#$ void onEvaluation()}: Kiértékelési ciklus
 	\item[] \texttt{$+$ void setInput(int inputPin, Wire wire)}: Bemenet beállítása
 	\item[] \texttt{$+$ void setOutput(int outputPin, Wire wire)}: Kimenet beállítása
@@ -139,6 +140,7 @@ Jelforrás típusú komponenst reprezentál. Tőle származnak a jelforrások (p
 	\item[] \texttt{$\#$ SourceComponent(String name)}: Konstruktor. Nincs bemenete és egy kimenete van
 	\item[] \texttt{$+$ void addTo(Composite composite)}: Hozzáadás kompozithoz.
 	\item[] \texttt{$+$ abstract Value[] getValues()}: Lekérhetjük a jelforrás értékeit, hogy el tudjuk menteni.
+	\item[] \texttt{$+$ abstract void reset()}: Jelforrás nullázása
 	\item[] \texttt{$+$ abstract void setValues(Value[] values)}: Beállítjuk a jelforrás értékét. Kapcsoló esetén csak 1 elemű tömb  adható paraméterként!
 \end{itemize}
 \end{itemize}

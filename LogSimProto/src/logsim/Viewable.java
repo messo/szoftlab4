@@ -25,6 +25,12 @@ public interface Viewable {
     public void writeScopeDetails(Scope scope);
 
     /**
+     * Kiírunk egy jelgenerátort
+     * @param sg jelgenerátor
+     */
+    public void writeSequenceGeneratorDetails(SequenceGenerator sg);
+
+    /**
      * Kiírjuk, hogy betöltés sikeres
      */
     public void writeLoadSuccessful();

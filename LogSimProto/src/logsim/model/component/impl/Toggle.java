@@ -60,11 +60,18 @@ public class Toggle extends SourceComponent {
         v = newValues[0];
     }
 
+    /**
+     * Érték kiírása a kimenetre.
+     * @param view
+     */
     @Override
     public void writeValueTo(Viewable view) {
         view.writeToggleValue(this);
     }
 
+    /**
+     * Kapcsoló alaphelyzetbe állítása.
+     */
     @Override
     public void reset() {
         v = Value.FALSE;

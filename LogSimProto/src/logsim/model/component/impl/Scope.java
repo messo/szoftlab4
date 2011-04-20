@@ -42,7 +42,7 @@ public class Scope extends Led {
      * Eltároljuk az értéket a memóriában
      */
     public void commit() {
-        if(memory.size() == size) {
+        if (memory.size() == size) {
             memory.remove();
         }
 
