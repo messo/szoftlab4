@@ -1,0 +1,4 @@
+tog = TOGGLE()
+seq = SEQGEN()
+led1 = LED(tog)
+led2 = LED(seq)
