@@ -8,6 +8,9 @@ LogSimSkeleton/nbproject/private/
 LogSimProto/build/
 LogSimProto/dist/
 LogSimProto/nbproject/private/
+LogSimGui/build/
+LogSimGui/dist/
+LogSimGui/nbproject/private/
 doc/*.log
 doc/*.ps
 doc/*.toc
