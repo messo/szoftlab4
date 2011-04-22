@@ -1,5 +1,6 @@
 package logsim.view;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import logsim.Controller;
 import logsim.model.component.Wire;
@@ -22,6 +23,6 @@ public class WireView extends Drawable {
     }
 
     @Override
-    protected void onDrawing(Graphics2D g) {
+    public void draw(Graphics g, int x, int y) {
     }
 }

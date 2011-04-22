@@ -1,7 +1,9 @@
 package logsim.view;
 
 import java.awt.FileDialog;
-import javax.swing.JFrame;
+import java.awt.Point;
+import java.util.List;
+import java.util.Map;
 import logsim.Controller;
 
 /**
@@ -10,12 +12,6 @@ import logsim.Controller;
 public class Frame extends javax.swing.JFrame implements FrameView {
 
     private final Controller controller;
-    private CircuitView circuitView;
-
-    @Override
-    public void setCircuitView(CircuitView circuitView) {
-        this.circuitView = circuitView;
-    }
 
     @Override
     public Controller getController() {
@@ -25,7 +21,6 @@ public class Frame extends javax.swing.JFrame implements FrameView {
     /** Creates new form ViewFornm */
     public Frame(Controller controller) {
         this.controller = controller;
-        this.circuitView = new CircuitView(this, null, null);
         initComponents();
     }
 
@@ -46,7 +41,7 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         jLabel1 = new javax.swing.JLabel();
         stepBtn = new javax.swing.JButton();
         stateLabel = new javax.swing.JLabel();
-        circuitView1 = new logsim.view.CircuitView();
+        circuitView = new logsim.view.CircuitView(this);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         loadCircuitMI = new javax.swing.JMenuItem();
@@ -70,14 +65,14 @@ public class Frame extends javax.swing.JFrame implements FrameView {
 
         stateLabel.setText("...");
 
-        javax.swing.GroupLayout circuitView1Layout = new javax.swing.GroupLayout(circuitView1);
-        circuitView1.setLayout(circuitView1Layout);
-        circuitView1Layout.setHorizontalGroup(
-            circuitView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout circuitViewLayout = new javax.swing.GroupLayout(circuitView);
+        circuitView.setLayout(circuitViewLayout);
+        circuitViewLayout.setHorizontalGroup(
+            circuitViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 480, Short.MAX_VALUE)
         );
-        circuitView1Layout.setVerticalGroup(
-            circuitView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        circuitViewLayout.setVerticalGroup(
+            circuitViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 240, Short.MAX_VALUE)
         );
 
@@ -135,14 +130,14 @@ public class Frame extends javax.swing.JFrame implements FrameView {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(stateLabel)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
             .addComponent(stepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
-            .addComponent(circuitView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(circuitView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,11 +204,12 @@ public class Frame extends javax.swing.JFrame implements FrameView {
     }
 
     @Override
-    public void drawCircuit() {
+    public void drawCircuit(List<Drawable> drawables, Map<Drawable, Point> coords) {
+        circuitView.updateDrawables(drawables, coords);
         circuitView.refresh();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private logsim.view.CircuitView circuitView1;
+    private logsim.view.CircuitView circuitView;
     private javax.swing.JMenuItem exitMI;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;

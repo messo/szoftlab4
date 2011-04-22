@@ -19,7 +19,6 @@ import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.Wire;
 import logsim.model.component.impl.AndGate;
-import logsim.view.CircuitView;
 import logsim.view.Drawable;
 import logsim.view.FrameView;
 import logsim.view.WireView;
@@ -34,6 +33,8 @@ public class GuiController implements Controller, ComponentViewCreator {
     private final FrameView v;
     private Circuit c;
     private Config config;
+    private Map<Drawable, Point> coords;
+    private List<Drawable> drawables;
 
     public GuiController() {
         simulation = new Simulation();
@@ -75,17 +76,24 @@ public class GuiController implements Controller, ComponentViewCreator {
 
         Collection<AbstractComponent> components = c.getComponents();
         Set<Wire> wires = new HashSet<Wire>();
-        Map<Drawable, Point> coords = new HashMap<Drawable, Point>();
+        coords = new HashMap<Drawable, Point>();
         for (AbstractComponent ac : components) {
+            Wire w;
             for (int i = 1; i <= ac.getInputsCount(); i++) {
-                wires.add(ac.getInputWire(i));
+                w = ac.getInputWire(i);
+                if (w != null) {
+                    wires.add(w);
+                }
             }
             for (int i = 1; i <= ac.getOutputsCount(); i++) {
-                wires.add(ac.getOutputWire(i));
+                w = ac.getOutputWire(i);
+                if (w != null) {
+                    wires.add(w);
+                }
             }
         }
 
-        List<Drawable> drawables = new ArrayList<Drawable>(wires.size() + components.size());
+        drawables = new ArrayList<Drawable>(wires.size() + components.size());
         for (AbstractComponent ac : components) {
             drawables.add(ac.createView(this));
         }
@@ -93,14 +101,13 @@ public class GuiController implements Controller, ComponentViewCreator {
             drawables.add(wire.createView(this));
         }
 
-        v.setCircuitView(new CircuitView(v, drawables, coords));
-        v.drawCircuit();
+        v.drawCircuit(drawables, coords);
     }
 
     @Override
     public void loadConfiguration(String fileName) {
         config.load(new File(fileName));
-        v.drawCircuit();
+        v.drawCircuit(drawables, coords);
     }
 
     @Override
@@ -115,7 +122,7 @@ public class GuiController implements Controller, ComponentViewCreator {
         } else {
             v.onFailedSimulation();
         }
-        v.drawCircuit();
+        v.drawCircuit(drawables, coords);
     }
 
     @Override

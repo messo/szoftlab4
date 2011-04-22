@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logsim.view.component;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import logsim.Controller;
 import logsim.model.component.impl.AndGate;
 import logsim.view.Drawable;
@@ -28,7 +24,8 @@ public class AndGateView extends Drawable {
     }
 
     @Override
-    protected void onDrawing(Graphics2D g) {
-        
+    public void draw(Graphics g, int x, int y) {
+        g.drawRect(x, y, 40, 30);
+        g.drawString("AND", x + 5, y + 15);
     }
 }

@@ -1,5 +1,8 @@
 package logsim.view;
 
+import java.awt.Point;
+import java.util.List;
+import java.util.Map;
 import logsim.Controller;
 
 /**
@@ -15,7 +18,5 @@ public interface FrameView {
 
     Controller getController();
 
-    void setCircuitView(CircuitView circuitView);
-
-    void drawCircuit();
+    void drawCircuit(List<Drawable> drawables, Map<Drawable, Point> coords);
 }

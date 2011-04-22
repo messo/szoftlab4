@@ -1,8 +1,6 @@
 package logsim.view;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,39 +12,25 @@ import java.util.Map;
  */
 public class CircuitView extends javax.swing.JPanel implements MouseListener {
 
-    private final Map<Drawable, Point> coords;
-    private FrameView parent;
+    private Map<Drawable, Point> coords;
+    private final FrameView parent;
     private List<Drawable> drawables;
-    private Graphics g;
-    private Image image;
-    private int width;
-    private int height;
-
-    public CircuitView() {
-        coords = null;
-    }
 
     /**
      * Áramkört kirajzoló panel
      * @param drawables
      */
-    public CircuitView(FrameView view, List<Drawable> drawables, Map<Drawable, Point> coords) {
-        this.coords = coords;
+    public CircuitView(FrameView view) {
         this.parent = view;
-        this.drawables = drawables;
-        // számolni!
-        width = 100;
-        height = 100;
-
-        //this.image = new BufferedImage(
-//                width, height,
-//                BufferedImage.TYPE_INT_ARGB);
-//        this.g = image.createGraphics();
-        this.image = createImage(width, height);
-        //AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.DST_IN, 1.0F);
-        //g.setComposite(ac);
+        this.drawables = null;
+        this.coords = null;
 
         addMouseListener(this);
+    }
+
+    public void updateDrawables(List<Drawable> drawables, Map<Drawable, Point> coords) {
+        this.drawables = drawables;
+        this.coords = coords;
     }
 
     /**
@@ -55,9 +39,28 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
      */
     @Override
     public void paint(Graphics g) {
+        //AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.DST_IN, 1.0F);
+        //((Graphics2D) g).setComposite(ac);
+
         super.paint(g);
 
-        g.drawImage(image, 0, 0, null);
+        //g.clearRect(0, 0, width, height);
+        if (drawables != null) {
+            for (Drawable drawable : drawables) {
+                if (drawable == null) {
+                    continue;
+                }
+                Point point = coords.get(drawable);
+                if (point == null) {
+                    drawable.draw(g, 0, 0);
+                } else {
+                    drawable.draw(g, point.x, point.y);
+                }
+            }
+        }
+
+        //g.setColor(Color.RED);
+        //g.drawRect(0, 0, 20, 20);
     }
 
     @Override
@@ -95,17 +98,6 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
      * Áramkör újrarajzolása.
      */
     public void refresh() {
-        //g.clearRect(0, 0, width, height);
-        if (drawables != null) {
-            for (Drawable drawable : drawables) {
-                Point point = coords.get(drawable);
-                //g.drawImage(drawable.getImage(), point.x, point.y, null);
-            }
-        }
-
-        g.setColor(Color.RED);
-        g.drawRect(0, 0, 20, 20);
-
-        invalidate();
+        revalidate();
     }
 }
