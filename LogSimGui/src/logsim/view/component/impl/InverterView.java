@@ -14,7 +14,7 @@ public class InverterView extends ComponentView {
     private Inverter inv;
 
     public InverterView(Inverter inv) {
-        super(40, 30);
+        super(40, 14);
         this.inv = inv;
     }
 
@@ -25,8 +25,8 @@ public class InverterView extends ComponentView {
 
     @Override
     public void onDraw(Graphics g) {
-        g.drawRect(0, 0, 40, 30);
-        g.drawString("INV", 12, 19);
+        g.drawRect(0, 0, 40, 14);
+        g.drawString("INV", 12, 12);
     }
 
     @Override
