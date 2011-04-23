@@ -26,7 +26,7 @@ public class AndGateView extends Drawable {
     @Override
     protected void onDraw(Graphics g) {
         g.drawRect(0, 0, 40, 30);
-        g.drawString("AND", 5, 15);
+        g.drawString("AND", 10, 19);
     }
 
     @Override

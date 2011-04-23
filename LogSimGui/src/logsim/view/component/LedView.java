@@ -12,8 +12,8 @@ import logsim.view.Drawable;
  */
 public class LedView extends Drawable {
 
-    private static int width = 11;
-    private static int height = 11;
+    private static int width = 10;
+    private static int height = 10;
     private Led led;
 
     public LedView(Led led) {

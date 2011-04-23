@@ -1,3 +1,6 @@
 tog = TOGGLE() {100, 100}
-inv = INV(tog) {200, 100}
+tog2 = TOGGLE() {100, 120}
+tog3 = TOGGLE() {100, 140}
+tog4 = TOGGLE() {100, 160}
+inv = AND(tog, tog2) {200, 100}
 led = LED(inv) {302, 102}
