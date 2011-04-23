@@ -6,13 +6,31 @@
 \thispagestyle{fancy}
 
 \section{A grafikus interfész}
-\comment{A menürendszer, a kezelői felület grafikus képe. A grafikus felület megjelenését, a használt ikonokat, stb screenshot-szerű képekkel kell bemutatni. Az építészetben ez a homlokzati terv.}
+
+\Aref{fig:main}. ábra mutatja a főablakot, a benne lévő áramkör csak illusztráció. A két menü almenüi \aref{fig:menus}. ábrán látszódnak. A Fájl menü almenüi beszédesek, a felső három menüpontra megnyílik egy fájlválasztó ablak, ahol megadható egy fájl, majd az adott akció lefut. A Kilépés menüpont segítségével kiléphetünk az alkalmazásból. Az Egyéb menü Néjegy menüpontjára kapcsolva pedig megnyílik \aref{fig:about}. ábrán látható ablak.
 
 \begin{figure}[h]
 \begin{center}
-%\includegraphics[width=17cm]{chapters/chapter11/example.pdf}
-\caption{x}
-\label{fig:Grafikus}
+\includegraphics[width=4.25in]{chapters/chapter11/screenshots/felulet.png}
+\caption{Főablak}
+\label{fig:main}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=1.98in]{chapters/chapter11/screenshots/menus1.png}
+\includegraphics[width=0.83in]{chapters/chapter11/screenshots/menus2.png}
+\caption{Fájl és az Egyéb menü almenüi}
+\label{fig:menus}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=2.8125in]{chapters/chapter11/screenshots/about.png}
+\caption{Névjegy}
+\label{fig:about}
 \end{center}
 \end{figure}
 
@@ -77,3 +95,18 @@ Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
 \section{Kapcsolat az alkalmazói rendszerrel}
 \comment{Szekvencia-diagramokon ábrázolni kell a grafikus rendszer működését. Konzisztens kell legyen az előző alfejezetekkel. Minden metódus, ami ott szerepel, fel kell tűnjön valamelyik szekvenciában. Minden metódusnak, ami szekvenciában szerepel, szereplnie kell a valamelyik osztálydiagramon.}
 
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=17cm]{chapters/chapter11/pdfs/1_program_start.pdf}
+\caption{Program indítása}
+\label{fig:program_start}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=17cm]{chapters/chapter11/pdfs/2_loadcircuit.pdf}
+\caption{Áramkör betöltése}
+\label{fig:loadcircuit}
+\end{center}
+\end{figure}
