@@ -29,15 +29,25 @@ public class WireView extends Drawable {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public void draw(Graphics g) {
-    }
-
     /**
      * Vezeték referenciapontjainak a beállítása
      * @param referencePoints
      */
     public void setReferencePoints(Point[] referencePoints) {
         this.referencePoints = referencePoints;
+    }
+
+    @Override
+    protected int getInputPinsCount() {
+        return 0;
+    }
+
+    @Override
+    protected int getOutputPinsCount() {
+        return 0;
+    }
+
+    @Override
+    protected void onDraw(Graphics g) {
     }
 }

@@ -27,7 +27,7 @@ public class ToggleView extends Drawable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void onDraw(Graphics g) {
         g.drawRect(0, 0, width, height);
         if (toggle.getValues()[0] == Value.TRUE) {
             g.setColor(Color.RED);
@@ -35,5 +35,15 @@ public class ToggleView extends Drawable {
             g.setColor(Color.BLACK);
         }
         g.drawOval(2, 2, width - 4, height - 4);
+    }
+
+    @Override
+    protected int getInputPinsCount() {
+        return 0;
+    }
+
+    @Override
+    protected int getOutputPinsCount() {
+        return 1;
     }
 }

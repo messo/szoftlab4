@@ -14,7 +14,7 @@ public class AndGateView extends Drawable {
     private AndGate ag;
 
     public AndGateView(AndGate ag) {
-        super(100, 100);
+        super(40, 30);
         this.ag = ag;
     }
 
@@ -24,8 +24,18 @@ public class AndGateView extends Drawable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    protected void onDraw(Graphics g) {
         g.drawRect(0, 0, 40, 30);
         g.drawString("AND", 5, 15);
+    }
+
+    @Override
+    protected int getInputPinsCount() {
+        return ag.getInputsCount();
+    }
+
+    @Override
+    protected int getOutputPinsCount() {
+        return 1;
     }
 }

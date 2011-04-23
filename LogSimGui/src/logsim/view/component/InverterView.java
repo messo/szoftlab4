@@ -14,7 +14,7 @@ public class InverterView extends Drawable {
     private Inverter inv;
 
     public InverterView(Inverter inv) {
-        super(100, 100);
+        super(40, 29);
         this.inv = inv;
     }
 
@@ -24,8 +24,18 @@ public class InverterView extends Drawable {
     }
 
     @Override
-    public void draw(Graphics g) {
-        g.drawRect(0, 0, 40, 30);
-        g.drawString("INV", 5, 15);
+    public void onDraw(Graphics g) {
+        g.drawRect(0, 0, 40, 29);
+        g.drawString("INV", 12, 19);
+    }
+
+    @Override
+    protected int getInputPinsCount() {
+        return 1;
+    }
+
+    @Override
+    protected int getOutputPinsCount() {
+        return 1;
     }
 }

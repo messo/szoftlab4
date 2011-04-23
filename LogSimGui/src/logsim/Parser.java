@@ -193,7 +193,7 @@ public class Parser {
 
     /**
      * Egy olyan komponens-sor feldolgozása a fájlban, ami a legfelsõ szinten szerepel,
-     * azaz a kompozit amiben szerepel az az áramkör.
+     * azaz a kompozit amiben szerepel az az áramkör. Itt a pozíció információt is feldolgozzuk!
      *
      * @param matcher
      * @param circuit

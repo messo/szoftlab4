@@ -26,12 +26,22 @@ public class LedView extends Drawable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void onDraw(Graphics g) {
         if (led.getValue() == Value.TRUE) {
             g.setColor(Color.RED);
             g.fillOval(0, 0, width, height);
             g.setColor(Color.BLACK);
         }
         g.drawOval(0, 0, width, height);
+    }
+
+    @Override
+    protected int getInputPinsCount() {
+        return 1;
+    }
+
+    @Override
+    protected int getOutputPinsCount() {
+        return 0;
     }
 }
