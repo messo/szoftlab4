@@ -3,6 +3,7 @@ package logsim.view.component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.List;
 import logsim.Controller;
 import logsim.model.component.Wire;
 import logsim.view.Drawable;
@@ -27,7 +28,7 @@ public class WireView implements Drawable {
     /**
      * Vezeték referenciapontjai, ahol a vezeték "törik".
      */
-    private Point[] referencePoints;
+    private List<Point> referencePoints;
 
     public WireView(Wire w, Point start, Point end) {
         this.w = w;
@@ -39,13 +40,20 @@ public class WireView implements Drawable {
      * Vezeték referenciapontjainak a beállítása
      * @param referencePoints
      */
-    public void setReferencePoints(Point[] referencePoints) {
+    public void setReferencePoints(List<Point> referencePoints) {
         this.referencePoints = referencePoints;
     }
 
     @Override
     public void draw(Graphics g) {
-        g.drawLine(start.x, start.y, end.x, end.y);
+        Point p1 = start;
+        if (referencePoints != null) {
+            for (Point p2 : referencePoints) {
+                g.drawLine(p1.x, p1.y, p2.x, p2.y);
+                p1 = p2;
+            }
+        }
+        g.drawLine(p1.x, p1.y, end.x, end.y);
     }
 
     @Override

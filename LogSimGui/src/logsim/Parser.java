@@ -17,7 +17,7 @@ import logsim.model.Circuit;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.Composite;
-import logsim.model.component.Wire;
+import logsim.model.component.Pin;
 import logsim.model.component.impl.AndGate;
 import logsim.model.component.impl.FlipFlopD;
 import logsim.model.component.impl.FlipFlopJK;
@@ -51,8 +51,13 @@ public class Parser {
     /**
      * Regex minta egy legfelsõ szintû komponens-sor feldolgozásához
      */
-    private static Pattern topLevelComponentPattern = Pattern.compile("\\s*(.*?)\\s*=\\s*(.*?)\\s*\\((.*?)\\)\\s*\\{\\s*([0-9]+)\\s*,\\s*([0-9]+)\\s*\\}");
+    private static Pattern topLevelComponentPattern = Pattern.compile("\\s*(.*?)\\s*=\\s*(.*?)\\s*\\((.*?)\\)\\s*\\{\\s*([0-9]+)\\s+([0-9]+)\\s*\\}");
     /**
+     * Regex minta a legfelsõ szintû komponensek argumentumaihoz (vezetékek referencia pontjai miatt)
+     */
+    private static Pattern topLevelArgumentPattern = Pattern.compile("(.*?)\\s*(?:\\{((?:\\s*\\(\\s*[0-9]+\\s+[0-9]+\\s*\\)\\s*)+)\\})?");
+    private static Pattern refPointPattern = Pattern.compile("(?:\\s*\\(\\s*([0-9]+)\\s+([0-9]+)\\s*\\)\\s*)");
+    /**\{((?:
      * Regex minta egy kompozit kezdethez
      */
     private static Pattern compositeStartPattern = Pattern.compile("\\s*composite\\s*(.*?)\\((.*?)\\)\\s*\\{", Pattern.CASE_INSENSITIVE);
@@ -69,6 +74,7 @@ public class Parser {
      */
     private Map<Composite, Map<AbstractComponent, String[]>> parameters = new HashMap<Composite, Map<AbstractComponent, String[]>>();
     private Map<AbstractComponent, Point> positions = new HashMap<AbstractComponent, Point>();
+    private Map<AbstractComponent, List<Point>[]> wireRefPoints = new HashMap<AbstractComponent, List<Point>[]>();
 
     /**
      * Létrehoz egy áramkört a megadott fájlból
@@ -188,9 +194,47 @@ public class Parser {
         int x = Integer.parseInt(matcher.group(4));
         int y = Integer.parseInt(matcher.group(5));
 
-        AbstractComponent ac = parseComponent(variableName, componentName, argumentsStr, circuit);
+        // itt szedjük szét az argumentsStr stringet
+        String plainArgumentsStr;
+
+        List<Point>[] refPoints = null;
+
+        if (argumentsStr.length() != 0) {
+            String[] arguments = argumentsStr.split("\\s*,\\s*");
+            String[] plainArguments = new String[arguments.length];
+
+            refPoints = new List[arguments.length];
+
+            for (int i = 0; i < arguments.length; i++) {
+                Matcher m = topLevelArgumentPattern.matcher(arguments[i]);
+                if (m.matches()) {
+                    plainArguments[i] = m.group(1);
+                    String refs = m.group(2);
+                    if (refs != null) {
+                        refPoints[i] = new ArrayList<Point>();
+                        Matcher m2 = refPointPattern.matcher(refs);
+                        while (m2.find()) {
+                            refPoints[i].add(new Point(Integer.parseInt(m2.group(1)), Integer.parseInt(m2.group(2))));
+                        }
+                    }
+                }
+            }
+
+            // majd rakjuk össze
+            StringBuilder sb = new StringBuilder();
+            for (String str : plainArguments) {
+                sb.append(str);
+                sb.append(",");
+            }
+            plainArgumentsStr = sb.deleteCharAt(sb.length() - 1).toString();
+        } else {
+            plainArgumentsStr = argumentsStr;
+        }
+
+        AbstractComponent ac = parseComponent(variableName, componentName, plainArgumentsStr, circuit);
 
         positions.put(ac, new Point(x, y));
+        wireRefPoints.put(ac, refPoints);
 
         return ac;
     }
@@ -299,7 +343,11 @@ public class Parser {
      * @param wire vezeték
      * @return referenciapontok
      */
-    public Point[] getReferencePoints(Wire wire) {
+    public List<Point> getReferencePoints(Pin pin) {
+        List<Point>[] tmp = wireRefPoints.get(pin.getComponent());
+        if (tmp != null) {
+            return tmp[pin.getPin() - 1];
+        }
         return null;
     }
 }

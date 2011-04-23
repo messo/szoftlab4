@@ -139,7 +139,9 @@ public class GuiController implements Controller, ComponentViewCreator {
             end.translate(relEnd.x, relEnd.y);
 
             WireView wv = wire.createView(this, start, end);
-            wv.setReferencePoints(p.getReferencePoints(wire));
+            
+            wv.setReferencePoints(p.getReferencePoints(input));
+
             drawables.add(wv);
         }
 
