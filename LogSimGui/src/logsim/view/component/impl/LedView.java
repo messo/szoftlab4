@@ -16,15 +16,27 @@ public class LedView extends ComponentView {
     private static int height = 10;
     private Led led;
 
+    /**
+     * Konstruktor
+     * @param led Megjelenítendõ LED
+     */
     public LedView(Led led) {
         super(width, height);
         this.led = led;
     }
 
+    /**
+     * Komponensre kacsolás
+     * @param controller Megjelenítõ vezérlõje
+     */
     @Override
     public void onClick(Controller controller) {
     }
 
+    /**
+     * Kirajzolási logika
+     * @param g
+     */
     @Override
     public void onDraw(Graphics g) {
         if (led.getValue() == Value.TRUE) {
@@ -35,11 +47,19 @@ public class LedView extends ComponentView {
         g.drawOval(0, 0, width, height);
     }
 
+    /**
+     * Bemeneti pinek száma
+     * @return
+     */
     @Override
     protected int getInputPinsCount() {
         return 1;
     }
 
+    /**
+     * Kimeneti pinek száma
+     * @return
+     */
     @Override
     protected int getOutputPinsCount() {
         return 0;

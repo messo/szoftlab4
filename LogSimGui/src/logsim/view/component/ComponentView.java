@@ -27,11 +27,20 @@ public abstract class ComponentView implements Drawable {
         this.dimension = new Dimension(w + pinLength * 2, h);
     }
 
+    /**
+     * Lekérhetjük az objektumtól a méretét.
+     *
+     * @return
+     */
     @Override
     public final Dimension getDimension() {
         return dimension;
     }
 
+    /**
+     * Kirajzolási logika
+     * @param g
+     */
     @Override
     public void draw(Graphics g) {
         // kirajzoljuk a belsõt.
@@ -73,9 +82,21 @@ public abstract class ComponentView implements Drawable {
         return new Point(dimension.width, y);
     }
 
+    /**
+     * Komponens kirajzolásának egyedilogikája
+     * @param g
+     */
     protected abstract void onDraw(Graphics g);
 
+    /**
+     * Bemeneti pinek száma
+     * @return
+     */
     protected abstract int getInputPinsCount();
 
+    /**
+     * Kimeneti pinek száma
+     * @return
+     */
     protected abstract int getOutputPinsCount();
 }

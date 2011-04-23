@@ -14,11 +14,19 @@ public class Frame extends javax.swing.JFrame implements FrameView {
 
     private final Controller controller;
 
+    /**
+     * Lekérdezhetõ a vezérlõt
+     * @return
+     */
     @Override
     public Controller getController() {
         return controller;
     }
 
+    /**
+     * Kontruktor
+     * @param controller Vezérlõ
+     */
     public Frame(Controller controller) {
         try {
             UIManager.setLookAndFeel(
@@ -31,6 +39,9 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         this.circuitView.setParent(this);
     }
 
+    /**
+     * Megjelenítés
+     */
     @Override
     public void makeItVisible() {
         setVisible(true);
@@ -222,10 +233,18 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Léptetés gomb eseményvezérlõje
+     * @param evt
+     */
     private void stepBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepBtnActionPerformed
         controller.onStep();
     }//GEN-LAST:event_stepBtnActionPerformed
 
+    /**
+     * Áramkör betöltése menüpont eseményvezérlõje
+     * @param evt
+     */
     private void loadCircuitMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadCircuitMIActionPerformed
         FileDialog fd = new FileDialog(this, "Áramkör betöltés", FileDialog.LOAD);
         fd.setFile("*.txt");
@@ -238,6 +257,10 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         }
     }//GEN-LAST:event_loadCircuitMIActionPerformed
 
+    /**
+     * Konfig fájl betöltése menüpont eseményvezérlõje
+     * @param evt
+     */
     private void loadConfigMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadConfigMIActionPerformed
         FileDialog fd = new FileDialog(this, "Konfig betöltés", FileDialog.LOAD);
         fd.setFile("*.txt");
@@ -250,6 +273,10 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         }
     }//GEN-LAST:event_loadConfigMIActionPerformed
 
+    /**
+     * Konfig fájl mentése menüpont eseményvezérlõje
+     * @param evt
+     */
     private void saveConfigMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveConfigMIActionPerformed
         FileDialog fd = new FileDialog(this, "Konfig mentés", FileDialog.LOAD);
         fd.setFile("*.txt");
@@ -262,34 +289,60 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         }
     }//GEN-LAST:event_saveConfigMIActionPerformed
 
+    /**
+     * Kilépés menüpont eseményvezérlõje
+     * @param evt
+     */
     private void exitMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMIActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMIActionPerformed
 
+    /**
+     * Névjegy menüpont eseményvezérlõje
+     * @param evt
+     */
     private void aboutMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMIActionPerformed
         aboutDialog.pack();
         aboutDialog.setVisible(true);
     }//GEN-LAST:event_aboutMIActionPerformed
 
+    /**
+     * Névjegy ablak bezárása
+     * @param evt
+     */
     private void aboutCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutCloseBtnActionPerformed
         aboutDialog.setVisible(false);
     }//GEN-LAST:event_aboutCloseBtnActionPerformed
 
+    /**
+     * Áramkör szimulációja sikeres
+     */
     @Override
     public void onSuccessfulSimulation() {
         stateLabel.setText("STABIL");
     }
 
+    /**
+     * Áramkör szimulációja nem sikerült
+     */
     @Override
     public void onFailedSimulation() {
         stateLabel.setText("INSTABIL !!!");
     }
 
+    /**
+     * Áramkör kirajzolása
+     */
     @Override
     public void drawCircuit() {
         circuitView.refresh();
     }
 
+    /**
+     * Megjelenítendõ objektumok és koordinátáik átadása a megjelenítõnek
+     * @param drawables Megjelenítendõ objektumok
+     * @param positions Koordináták
+     */
     @Override
     public void setDrawables(List<Drawable> drawables, Map<Drawable, Point> positions) {
         circuitView.updateDrawables(drawables, positions);

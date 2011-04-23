@@ -22,7 +22,7 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
 
     /**
      * Áramkört kirajzoló panel
-     * @param drawables
+     * 
      */
     public CircuitView() {
         this.drawables = null;
@@ -33,10 +33,19 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
         addMouseListener(this);
     }
 
+    /**
+     * Szülõ beállítása
+     * @param parent Szülõ
+     */
     public void setParent(FrameView parent) {
         this.parent = parent;
     }
 
+    /**
+     * Kirajzolandó objektumok és koordinátáik beállítása
+     * @param drawables Megjelenítendõ objektumok
+     * @param coords Koordináták
+     */
     public void updateDrawables(List<Drawable> drawables, Map<Drawable, Point> coords) {
         this.drawables = drawables;
         this.positions = coords;
@@ -77,6 +86,10 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
         }
     }
 
+    /**
+     * Egérkattintás kezelõ
+     * @param me
+     */
     @Override
     public void mouseClicked(MouseEvent me) {
         int x = me.getX();

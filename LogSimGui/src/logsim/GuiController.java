@@ -53,66 +53,130 @@ public class GuiController implements Controller, ComponentViewCreator {
     private Circuit c;
     private Config config;
 
+    /**
+     * Konstruktor
+     */
     public GuiController() {
         simulation = new Simulation();
         v = new Frame(this);
     }
 
+    /**
+     * Megjeleníthetõ ÉS kapu létrehozása
+     * @param ag Becsomagolt ÉS kapu
+     * @return
+     */
     @Override
     public AndGateView createView(AndGate ag) {
         return new AndGateView(ag);
     }
 
+    /**
+     * Megjeleníthetõ VAGY kapu létrehozása
+     * @param og Becsomagolt VAGY kapu
+     * @return
+     */
     @Override
     public OrGateView createView(OrGate og) {
         return new OrGateView(og);
     }
 
+    /**
+     * Megjeleníthetõ vezeték létrehozása
+     * @param wire Becsomagolt vezeték
+     * @param start Kezdõpont
+     * @param end Végpont
+     * @return
+     */
     @Override
     public WireView createView(Wire wire, Point start, Point end) {
         return new WireView(wire, start, end);
     }
 
+    /**
+     * Megjeleníthetõ LED komponens létrehozása
+     * @param led Becsomagolt LED komponens
+     * @return
+     */
     @Override
     public LedView createView(Led led) {
         return new LedView(led);
     }
 
+    /**
+     * Megjeleníthetõ Hétszegmenses komponens létrehozása
+     * @param ssd Becsomagolt Hétszegmenses komponens
+     * @return
+     */
     @Override
     public SevenSegmentDisplayView createView(SevenSegmentDisplay ssd) {
         return new SevenSegmentDisplayView(ssd);
     }
 
+    /**
+     * Megjeleníthetõ Kapcsoló komponens létrehozása
+     * @param toggle Becsomagolt Kapcsoló komponens
+     * @return
+     */
     @Override
     public ToggleView createView(Toggle toggle) {
         return new ToggleView(toggle);
     }
 
+    /**
+     * Megjeleníthetõ Inverter komponens létrehozása
+     * @param inv Becsomagolt Inverter komponens
+     * @return
+     */
     @Override
     public InverterView createView(Inverter inv) {
         return new InverterView(inv);
     }
 
+    /**
+     * Megjeleníthetõ Multiplexer komponens létrehozása
+     * @param ag Becsomagolt Multiplexer komponens
+     * @return
+     */
     @Override
     public MpxView createView(Mpx mpx) {
         return new MpxView(mpx);
     }
 
+    /**
+     * Megjeleníthetõ Node komponens létrehozása
+     * @param node Becsomagolt Node komponens
+     * @return
+     */
     @Override
     public NodeView createView(Node node) {
         return new NodeView(node);
     }
 
+    /**
+     * Megjeleníthetõ GND komponens létrehozása
+     * @param gnd Becsomagolt GND komponens
+     * @return
+     */
     @Override
     public GndView createView(Gnd gnd) {
         return new GndView();
     }
 
+    /**
+     * Megjeleníthetõ VCC komponens létrehozása
+     * @param vcc Becsomagolt VCC komponens
+     * @return
+     */
     @Override
     public VccView createView(Vcc vcc) {
         return new VccView();
     }
 
+    /**
+     * Program belépési pontja
+     * @param args
+     */
     public static void main(String[] args) {
         GuiController c = new GuiController();
         c.run();
@@ -128,6 +192,10 @@ public class GuiController implements Controller, ComponentViewCreator {
         });
     }
 
+    /**
+     * Áramkör betöltése
+     * @param fileName Áramkört leíró fájl neve
+     */
     @Override
     public void loadCircuit(String fileName) {
         Parser p = new Parser();
@@ -174,7 +242,7 @@ public class GuiController implements Controller, ComponentViewCreator {
             Point relStart = outputView.getRelativeOutputPinPosition(output.getPin());
             Point relEnd = inputView.getRelativeInputPinPosition(input.getPin());
 
-            if(positions.get(outputView) == null) {
+            if (positions.get(outputView) == null) {
                 // nincs pozíciója, akkor rakjuk le mi
                 Point pos = positions.get(inputView).getLocation();
                 pos.translate(relEnd.x, relEnd.y);
@@ -189,7 +257,7 @@ public class GuiController implements Controller, ComponentViewCreator {
             end.translate(relEnd.x, relEnd.y);
 
             WireView wv = wire.createView(this, start, end);
-            
+
             wv.setReferencePoints(p.getReferencePoints(input));
 
             drawables.add(wv);
@@ -199,17 +267,28 @@ public class GuiController implements Controller, ComponentViewCreator {
         v.drawCircuit();
     }
 
+    /**
+     * Áromkör konfigurációs fájl betöltése
+     * @param fileName Konfigurációt tároló fájl neve
+     */
     @Override
     public void loadConfiguration(String fileName) {
         config.load(new File(fileName));
         v.drawCircuit();
     }
 
+    /**
+     * Konfigurációs fájl mentése
+     * @param fileName Fájl neve
+     */
     @Override
     public void saveConfiguration(String fileName) {
         config.save(new File(fileName));
     }
 
+    /**
+     * Áramkör léptetése
+     */
     @Override
     public void onStep() {
         if (simulation.start()) {
@@ -220,11 +299,19 @@ public class GuiController implements Controller, ComponentViewCreator {
         v.drawCircuit();
     }
 
+    /**
+     * Általános komponens információ megjelenítés (név, bemenet, kimenet)
+     * @param ag
+     */
     @Override
     public void onComponentClick(AbstractComponent ag) {
         System.out.println("Clicked on: " + ag);
     }
 
+    /**
+     * Kapcsoló változtatása
+     * @param toggle
+     */
     @Override
     public void onComponentClick(Toggle toggle) {
         toggle.setValues(new Value[]{
@@ -233,11 +320,19 @@ public class GuiController implements Controller, ComponentViewCreator {
         v.drawCircuit();
     }
 
+    /**
+     * Jelgenerátor megjelenítése és konfigurálása
+     * @param sg
+     */
     @Override
     public void onComponentClick(SequenceGenerator sg) {
         // ablak megjelenítés
     }
 
+    /**
+     * Scope megjelenítés (eddig eltárolt értékek)
+     * @param scope
+     */
     @Override
     public void onComponentClick(Scope scope) {
         // ablak megjelenítés

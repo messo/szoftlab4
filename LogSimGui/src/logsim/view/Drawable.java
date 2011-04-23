@@ -10,7 +10,7 @@ import logsim.Controller;
 public interface Drawable {
 
     /**
-     * Itt írjuk le, hogy pontosan mit kell kirajzolni.
+     * Kirajzolási logika
      * 
      * @param g
      */
@@ -23,5 +23,9 @@ public interface Drawable {
      */
     Dimension getDimension();
 
+    /**
+     * Komponensre kapcsolás
+     * @param controller Megjelenítõ vezérlõje
+     */
     void onClick(Controller controller);
 }

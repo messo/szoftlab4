@@ -16,16 +16,28 @@ public class ToggleView extends ComponentView {
     private static int height = 15;
     private Toggle toggle;
 
+    /**
+     * Konstruktor
+     * @param toggle Megjelenítendõ kapcsoló
+     */
     public ToggleView(Toggle toggle) {
         super(width, height);
         this.toggle = toggle;
     }
 
+    /**
+     * Komponensre kapcsolás
+     * @param controller Megjelenítõ vezérlõje
+     */
     @Override
     public void onClick(Controller controller) {
         controller.onComponentClick(toggle);
     }
 
+    /**
+     * Kirajzolási logika
+     * @param g
+     */
     @Override
     public void onDraw(Graphics g) {
         g.drawRect(0, 0, width, height);
@@ -37,11 +49,19 @@ public class ToggleView extends ComponentView {
         g.drawOval(2, 2, width - 4, height - 4);
     }
 
+    /**
+     * Bemeneti pinek száma
+     * @return
+     */
     @Override
     protected int getInputPinsCount() {
         return 0;
     }
 
+    /**
+     * Kimeneti pinek száma
+     * @return
+     */
     @Override
     protected int getOutputPinsCount() {
         return 1;

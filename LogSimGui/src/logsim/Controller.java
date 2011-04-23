@@ -6,14 +6,26 @@ import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.component.impl.Toggle;
 
 /**
- *
+ * A program ezeketer a szolgáltatásokat nyújta a grafikus felület felé
  */
 public interface Controller {
 
+    /**
+     * Áramkör betöltése
+     * @param fileName Áramkört leíró fájl neve
+     */
     void loadCircuit(String fileName);
 
+    /**
+     * Áromkör konfigurációs fájl betöltése
+     * @param fileName Konfigurációt tároló fájl neve
+     */
     void loadConfiguration(String fileName);
 
+    /**
+     * Konfigurációs fájl mentése
+     * @param fileName Fájl neve
+     */
     void saveConfiguration(String fileName);
 
     /**
@@ -40,5 +52,8 @@ public interface Controller {
      */
     void onComponentClick(AbstractComponent ag);
 
+    /**
+     * Áramkör léptetése
+     */
     void onStep();
 }

@@ -32,6 +32,12 @@ public class WireView implements Drawable {
      */
     private List<Point> referencePoints;
 
+    /**
+     * Konstruktor
+     * @param w Becsomagolt vezeték
+     * @param start Kezdõpont
+     * @param end Végpont
+     */
     public WireView(Wire w, Point start, Point end) {
         this.w = w;
         this.start = start;
@@ -46,6 +52,10 @@ public class WireView implements Drawable {
         this.referencePoints = referencePoints;
     }
 
+    /**
+     * Kirajzolási logika
+     * @param g
+     */
     @Override
     public void draw(Graphics g) {
         if (w.getValue() == Value.FALSE) {

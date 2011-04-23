@@ -25,29 +25,87 @@ import logsim.view.component.impl.ToggleView;
 import logsim.view.component.impl.VccView;
 
 /**
+ * Az egyes alkatrészekhez létrehozza a "megjeleníthetõ" wrapper objektumokat.
  *
  */
 public interface ComponentViewCreator {
 
+    /**
+     * Megjeleníthetõ ÉS kapu létrehozása
+     * @param ag Becsomagolt ÉS kapu
+     * @return
+     */
     AndGateView createView(AndGate ag);
 
+    /**
+     * Megjeleníthetõ VAGY kapu létrehozása
+     * @param og Becsomagolt VAGY kapu
+     * @return
+     */
     OrGateView createView(OrGate og);
 
+    /**
+     * Megjeleníthetõ vezeték létrehozása
+     * @param wire Becsomagolt vezeték
+     * @param start Kezdõpont
+     * @param end Végpont
+     * @return
+     */
     WireView createView(Wire wire, Point start, Point end);
 
+    /**
+     * Megjeleníthetõ LED komponens létrehozása
+     * @param led Becsomagolt LED komponens
+     * @return
+     */
     LedView createView(Led led);
 
+    /**
+     * Megjeleníthetõ Kapcsoló komponens létrehozása
+     * @param toggle Becsomagolt Kapcsoló komponens
+     * @return
+     */
     ToggleView createView(Toggle toggle);
 
+    /**
+     * Megjeleníthetõ Inverter komponens létrehozása
+     * @param inv Becsomagolt Inverter komponens
+     * @return
+     */
     InverterView createView(Inverter inv);
 
+    /**
+     * Megjeleníthetõ Multiplexer komponens létrehozása
+     * @param ag Becsomagolt Multiplexer komponens
+     * @return
+     */
     MpxView createView(Mpx mpx);
 
+    /**
+     * Megjeleníthetõ Hétszegmenses komponens létrehozása
+     * @param ssd Becsomagolt Hétszegmenses komponens
+     * @return
+     */
     SevenSegmentDisplayView createView(SevenSegmentDisplay ssd);
 
+    /**
+     * Megjeleníthetõ GND komponens létrehozása
+     * @param gnd Becsomagolt GND komponens
+     * @return
+     */
     GndView createView(Gnd gnd);
 
+    /**
+     * Megjeleníthetõ VCC komponens létrehozása
+     * @param vcc Becsomagolt VCC komponens
+     * @return
+     */
     VccView createView(Vcc vcc);
 
+    /**
+     * Megjeleníthetõ Node komponens létrehozása
+     * @param node Becsomagolt Node komponens
+     * @return
+     */
     NodeView createView(Node node);
 }

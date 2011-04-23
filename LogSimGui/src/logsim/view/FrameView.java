@@ -25,6 +25,10 @@ public interface FrameView {
      */
     void makeItVisible();
 
+    /**
+     * Lekérdezzük a vezérlõt
+     * @return
+     */
     Controller getController();
 
     /**
