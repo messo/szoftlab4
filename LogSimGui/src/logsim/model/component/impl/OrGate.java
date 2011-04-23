@@ -1,7 +1,9 @@
 package logsim.model.component.impl;
 
+import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
+import logsim.view.component.ComponentView;
 
 /**
  * VAGY kapu, az áramkör egyik alapeleme. Bemenetein lévõ értékek logikai VAGY kapcsolatát
@@ -33,5 +35,11 @@ public class OrGate extends AbstractComponent {
     @Override
     public AbstractComponent copy(String name) {
         return new OrGate(inputs.length, name);
+
+    }
+
+    @Override
+    public ComponentView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }

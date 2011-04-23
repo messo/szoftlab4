@@ -1,7 +1,9 @@
 package logsim.model.component.impl;
 
+import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
+import logsim.view.component.ComponentView;
 
 /**
  * Csomópont elem. Az egyetlen bemenetére kötött értéket kiadja az összes kimeneti lábán.
@@ -33,5 +35,10 @@ public class Node extends AbstractComponent {
     @Override
     public AbstractComponent copy(String name) {
         return new Node(outputs.length, name);
+    }
+
+    @Override
+    public ComponentView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }

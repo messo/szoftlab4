@@ -5,6 +5,8 @@ import logsim.model.component.impl.Gnd;
 import logsim.model.component.impl.Inverter;
 import logsim.model.component.impl.Led;
 import logsim.model.component.impl.Mpx;
+import logsim.model.component.impl.Node;
+import logsim.model.component.impl.OrGate;
 import logsim.model.component.impl.Scope;
 import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.component.impl.SevenSegmentDisplay;
@@ -35,6 +37,8 @@ import logsim.view.component.impl.GndView;
 import logsim.view.component.impl.InverterView;
 import logsim.view.component.impl.LedView;
 import logsim.view.component.impl.MpxView;
+import logsim.view.component.impl.NodeView;
+import logsim.view.component.impl.OrGateView;
 import logsim.view.component.impl.SevenSegmentDisplayView;
 import logsim.view.component.impl.ToggleView;
 import logsim.view.component.impl.VccView;
@@ -57,6 +61,11 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public AndGateView createView(AndGate ag) {
         return new AndGateView(ag);
+    }
+
+    @Override
+    public OrGateView createView(OrGate og) {
+        return new OrGateView(og);
     }
 
     @Override
@@ -87,6 +96,11 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public MpxView createView(Mpx mpx) {
         return new MpxView(mpx);
+    }
+
+    @Override
+    public NodeView createView(Node node) {
+        return new NodeView(node);
     }
 
     @Override
