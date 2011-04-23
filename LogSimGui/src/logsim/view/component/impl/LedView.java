@@ -1,16 +1,16 @@
-package logsim.view.component;
+package logsim.view.component.impl;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import logsim.Controller;
 import logsim.model.Value;
 import logsim.model.component.impl.Led;
-import logsim.view.Drawable;
+import logsim.view.component.ComponentView;
 
 /**
  * LED-et kirajzoló osztály.
  */
-public class LedView extends Drawable {
+public class LedView extends ComponentView {
 
     private static int width = 10;
     private static int height = 10;

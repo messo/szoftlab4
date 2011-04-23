@@ -1,32 +1,38 @@
-package logsim.view;
+package logsim.view.component;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import logsim.Controller;
 import logsim.model.component.Wire;
+import logsim.view.Drawable;
 
 /**
  * Egy vezeték megjelenítéséért felelõs, amit törött vonallal jelenítünk meg.
  */
-public class WireView extends Drawable {
+public class WireView implements Drawable {
 
     /**
      * Vezeték, aminek a megjelenítéséért felel.
      */
     private final Wire w;
     /**
+     * Vezeték kezdete
+     */
+    private Point start;
+    /**
+     * Vezeték vége
+     */
+    private Point end;
+    /**
      * Vezeték referenciapontjai, ahol a vezeték "törik".
      */
     private Point[] referencePoints;
 
-    public WireView(Wire w) {
-        super(100, 100);
+    public WireView(Wire w, Point start, Point end) {
         this.w = w;
-    }
-
-    @Override
-    public void onClick(Controller controller) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.start = start;
+        this.end = end;
     }
 
     /**
@@ -38,16 +44,18 @@ public class WireView extends Drawable {
     }
 
     @Override
-    protected int getInputPinsCount() {
-        return 0;
+    public void draw(Graphics g) {
+        g.drawLine(start.x, start.y, end.x, end.y);
     }
 
     @Override
-    protected int getOutputPinsCount() {
-        return 0;
+    public Dimension getDimension() {
+        // vezeték nem egy doboz, nincsen "mérete".
+        return null;
     }
 
     @Override
-    protected void onDraw(Graphics g) {
+    public void onClick(Controller controller) {
+        // vezetékre kapcsolás nem érdekel minket.
     }
 }

@@ -351,7 +351,7 @@ public class Composite extends AbstractComponent {
         }
 
         for (AbstractComponent target : connections.keySet()) {
-            int idx = 1;
+            int inputPin = 1;
             for (String argument : connections.get(target)) {
                 int compositeInputIdx = -1;
                 if (inputs != null) {
@@ -360,22 +360,24 @@ public class Composite extends AbstractComponent {
 
                 // bekötés
                 Wire wire = new Wire();
-                target.setInput(idx++, wire);
+                target.setInput(inputPin, wire);
 
-                AbstractComponent source;
+                AbstractComponent source = null;
+                int outputPin = 1;
 
                 if (argument.equals("0")) {
                     source = new Gnd("gnd_" + (gndIdx++));
                     source.addTo(this);
-                    source.setOutput(1, wire);
+                    source.setOutput(outputPin, wire);
                 } else if (argument.equals("1")) {
                     source = new Vcc("vcc_" + (vccIdx++));
                     source.addTo(this);
-                    source.setOutput(1, wire);
+                    source.setOutput(outputPin, wire);
                 } else if (compositeInputIdx >= 0) {
                     // a paraméter egy input paraméter, tehát az adott komponenst
                     // a node egy kimenetére kell kötni
-                    inputNodes[compositeInputIdx].setOutput(inputNodesOutputIdx[compositeInputIdx]++, wire);
+                    outputPin = inputNodesOutputIdx[compositeInputIdx]++;
+                    inputNodes[compositeInputIdx].setOutput(outputPin, wire);
                 } else {
                     Matcher paramMatcher = inputPattern.matcher(argument);
                     if (paramMatcher.matches()) {
@@ -383,11 +385,14 @@ public class Composite extends AbstractComponent {
                         if (source == null) {
                             throw new RuntimeException("Nem létezõ komponens!");
                         } else {
-                            int outputPin = paramMatcher.group(2) != null ? Integer.parseInt(paramMatcher.group(2)) : 1;
+                            outputPin = paramMatcher.group(2) != null ? Integer.parseInt(paramMatcher.group(2)) : 1;
                             source.setOutput(outputPin, wire);
                         }
                     }
                 }
+
+                onWireCreated(wire, source, outputPin, target, inputPin);
+                inputPin++;
             }
         }
 
@@ -446,7 +451,7 @@ public class Composite extends AbstractComponent {
      * Jelgenerátorok listája
      * @return
      */
-    public List<SequenceGenerator> getStepGenerators(){
+    public List<SequenceGenerator> getStepGenerators() {
         return generators;
     }
 
@@ -464,5 +469,17 @@ public class Composite extends AbstractComponent {
      */
     public Collection<AbstractComponent> getComponents() {
         return components.values();
+    }
+
+    /**
+     * Ez fut le, amikor egy új kábel jön létre egy összeköttetés miatt.
+     * @param wire
+     * @param source
+     * @param outputPin
+     * @param target
+     * @param inputPin
+     */
+    protected void onWireCreated(Wire wire, AbstractComponent source, int outputPin,
+            AbstractComponent target, int inputPin) {
     }
 }

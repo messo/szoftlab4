@@ -81,7 +81,6 @@ public class Parser {
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
 
             parameters.put(circuit, new HashMap<AbstractComponent, String[]>());
 
@@ -103,34 +102,17 @@ public class Parser {
             String componentName, String argumentsStr, Composite composite) {
         String arguments[];
 
-        //System.out.println(variableName + " - " + componentName);
-
         if (!parameters.containsKey(composite)) {
             parameters.put(composite, new HashMap<AbstractComponent, String[]>());
         }
 
         Map<AbstractComponent, String[]> argumentsMap = parameters.get(composite);
 
-        //ComponentPin[] pins = null;
         if (argumentsStr.length() == 0) {
             arguments = null;
         } else {
             arguments = argumentsStr.split("\\s*,\\s*");
-//            pins = new ComponentPin[arguments.length];
-//            int i = 0;
-//            for (String arg : arguments) {
-//                Matcher paramMatcher = inputPattern.matcher(arg);
-//                if (paramMatcher.matches()) {
-//                    pins[i++] = new ComponentPin(paramMatcher.group(1), paramMatcher.group(2) != null ? Integer.parseInt(paramMatcher.group(2)) : 1);
-//                }
-//            }
         }
-
-        // KOMPONENS LÉTREHOZÁSA
-
-        // TODO :
-        // * scope-nál nem kell utsó
-        // * seqgennél nem kell
 
         AbstractComponent component = null;
         if (componentName.equalsIgnoreCase("or")) {

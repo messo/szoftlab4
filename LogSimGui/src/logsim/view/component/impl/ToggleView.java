@@ -1,16 +1,16 @@
-package logsim.view.component;
+package logsim.view.component.impl;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import logsim.Controller;
 import logsim.model.Value;
 import logsim.model.component.impl.Toggle;
-import logsim.view.Drawable;
+import logsim.view.component.ComponentView;
 
 /**
  * Kapcsolót kirajzoló osztály
  */
-public class ToggleView extends Drawable {
+public class ToggleView extends ComponentView {
 
     private static int width = 15;
     private static int height = 15;

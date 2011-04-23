@@ -19,15 +19,17 @@ import logsim.model.Circuit;
 import logsim.model.Simulation;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
+import logsim.model.component.Pin;
 import logsim.model.component.Wire;
 import logsim.model.component.impl.AndGate;
 import logsim.view.Drawable;
 import logsim.view.FrameView;
-import logsim.view.WireView;
-import logsim.view.component.AndGateView;
-import logsim.view.component.InverterView;
-import logsim.view.component.LedView;
-import logsim.view.component.ToggleView;
+import logsim.view.component.ComponentView;
+import logsim.view.component.WireView;
+import logsim.view.component.impl.AndGateView;
+import logsim.view.component.impl.InverterView;
+import logsim.view.component.impl.LedView;
+import logsim.view.component.impl.ToggleView;
 
 /**
  * Az alkalmazás vezérlõje
@@ -50,8 +52,8 @@ public class GuiController implements Controller, ComponentViewCreator {
     }
 
     @Override
-    public WireView createView(Wire wire) {
-        return new WireView(wire);
+    public WireView createView(Wire wire, Point start, Point end) {
+        return new WireView(wire, start, end);
     }
 
     @Override
@@ -112,14 +114,31 @@ public class GuiController implements Controller, ComponentViewCreator {
             }
         }
 
+        Map<AbstractComponent, ComponentView> views = new HashMap<AbstractComponent, ComponentView>();
         List<Drawable> drawables = new ArrayList<Drawable>(wires.size() + components.size());
         for (AbstractComponent ac : components) {
-            Drawable d = ac.createView(this);
-            positions.put(d, p.getPosition(ac));
-            drawables.add(d);
+            ComponentView cv = ac.createView(this);
+            positions.put(cv, p.getPosition(ac));
+            drawables.add(cv);
+            views.put(ac, cv);
         }
         for (Wire wire : wires) {
-            WireView wv = wire.createView(this);
+            Pin output = c.getOutputPinForWire(wire);
+            Pin input = c.getInputPinForWire(wire);
+
+            ComponentView outputView = views.get(output.getComponent());
+            ComponentView inputView = views.get(input.getComponent());
+
+            Point start = positions.get(outputView).getLocation();
+            Point end = positions.get(inputView).getLocation();
+
+            Point relStart = outputView.getRelativeOutputPinPosition(output.getPin());
+            Point relEnd = inputView.getRelativeInputPinPosition(input.getPin());
+
+            start.translate(relStart.x, relStart.y);
+            end.translate(relEnd.x, relEnd.y);
+
+            WireView wv = wire.createView(this, start, end);
             wv.setReferencePoints(p.getReferencePoints(wire));
             drawables.add(wv);
         }
@@ -136,7 +155,7 @@ public class GuiController implements Controller, ComponentViewCreator {
 
     @Override
     public void saveConfiguration(String fileName) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        config.save(new File(fileName));
     }
 
     @Override
@@ -151,7 +170,7 @@ public class GuiController implements Controller, ComponentViewCreator {
 
     @Override
     public void onComponentClick(AbstractComponent ag) {
-        // ablak nyitása, adatokkal feltöltve.
+        System.out.println("Clicked on: " + ag);
     }
 
     @Override

@@ -3,7 +3,7 @@ package logsim.model.component.impl;
 import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
-import logsim.view.component.AndGateView;
+import logsim.view.component.ComponentView;
 
 /**
  * ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek
@@ -36,7 +36,7 @@ public class AndGate extends AbstractComponent {
     }
 
     @Override
-    public AndGateView createView(ComponentViewCreator cvc) {
+    public ComponentView createView(ComponentViewCreator cvc) {
         return cvc.createView(this);
     }
 }

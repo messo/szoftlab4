@@ -1,15 +1,15 @@
-package logsim.view.component;
+package logsim.view.component.impl;
 
 import java.awt.Graphics;
 import logsim.Controller;
 import logsim.model.component.impl.AndGate;
-import logsim.view.Drawable;
+import logsim.view.component.ComponentView;
 
 /**
  *
  * @author messo
  */
-public class AndGateView extends Drawable {
+public class AndGateView extends ComponentView {
 
     private AndGate ag;
 

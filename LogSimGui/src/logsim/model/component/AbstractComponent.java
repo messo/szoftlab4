@@ -3,6 +3,7 @@ package logsim.model.component;
 import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.view.Drawable;
+import logsim.view.component.ComponentView;
 
 /**
  * Egy komponens absztrakt megvalósítása, ebbõl származik az összes többi
@@ -172,7 +173,7 @@ public abstract class AbstractComponent {
      * @param cvc
      * @return rajzolható objektum az áramköri panelre
      */
-    public Drawable createView(ComponentViewCreator cvc) {
+    public ComponentView createView(ComponentViewCreator cvc) {
         return null;
     }
 }

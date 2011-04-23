@@ -1,10 +1,9 @@
 package logsim.model.component;
 
+import java.awt.Point;
 import logsim.ComponentViewCreator;
-import logsim.GuiController;
 import logsim.model.Value;
-import logsim.view.Drawable;
-import logsim.view.WireView;
+import logsim.view.component.WireView;
 
 /**
  * Vezeték osztály. Két komponens-lábat köt össze. A rajta lévõ érték lekérdezhetõ
@@ -40,7 +39,7 @@ public class Wire {
      * @param cvc
      * @return rajzolható vezeték az áramköri panelre
      */
-    public WireView createView(ComponentViewCreator cvc) {
-        return cvc.createView(this);
+    public WireView createView(ComponentViewCreator cvc, Point start, Point end) {
+        return cvc.createView(this, start, end);
     }
 }

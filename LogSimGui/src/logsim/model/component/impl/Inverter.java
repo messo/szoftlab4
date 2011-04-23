@@ -2,7 +2,7 @@ package logsim.model.component.impl;
 
 import logsim.ComponentViewCreator;
 import logsim.model.component.AbstractComponent;
-import logsim.view.component.InverterView;
+import logsim.view.component.impl.InverterView;
 
 /**
  * Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén

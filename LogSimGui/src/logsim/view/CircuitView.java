@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class CircuitView extends javax.swing.JPanel implements MouseListener {
 
-    private Map<Drawable, Point> coords;
+    private Map<Drawable, Point> positions;
     private FrameView parent;
     private List<Drawable> drawables;
 
@@ -24,7 +24,7 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
      */
     public CircuitView() {
         this.drawables = null;
-        this.coords = null;
+        this.positions = null;
 
         setBackground(Color.white);
 
@@ -37,7 +37,7 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
 
     public void updateDrawables(List<Drawable> drawables, Map<Drawable, Point> coords) {
         this.drawables = drawables;
-        this.coords = coords;
+        this.positions = coords;
     }
 
     /**
@@ -51,47 +51,43 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
 
         super.paint(g);
 
-        //g.clearRect(0, 0, width, height);
         if (drawables != null) {
             for (Drawable drawable : drawables) {
                 if (drawable == null) {
                     continue;
                 }
-                Point point = coords.get(drawable);
-                if (point == null) {
-                    drawable.draw(g);
+                Point position = positions.get(drawable);
+                if (position != null && drawable.getDimension() != null) {
+                    // ha van pozíciója és dimenziója, akkor csak oda engedjük
+                    // õt rajzolni.
+                    drawable.draw(g.create(position.x, position.y,
+                            drawable.getDimension().width + 1,
+                            drawable.getDimension().height + 1));
                 } else {
-                    drawable.draw(g.create(point.x, point.y, drawable.getDimension().width+1, drawable.getDimension().height+1));
+                    // nem tudunk róla semmit, valószínûleg vezeték
+                    drawable.draw(g);
                 }
             }
         }
-
-        //g.setColor(Color.RED);
-        //g.drawRect(0, 0, 20, 20);
     }
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        Drawable drawable = null;
-
         int x = me.getX();
         int y = me.getY();
 
-        Dimension dim;
-        Point p;
+        Point p = null;
+        Dimension dim = null;
+
         for (Drawable d : drawables) {
+            p = positions.get(d);
             dim = d.getDimension();
-            p = coords.get(d);
             if (dim != null && p != null
                     && p.x <= x && p.y <= y
                     && x <= p.x + dim.width && y <= p.y + dim.height) {
-                drawable = d;
+                d.onClick(parent.getController());
                 break;
             }
-        }
-
-        if (drawable != null) {
-            drawable.onClick(parent.getController());
         }
     }
 
