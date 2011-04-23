@@ -1,8 +1,10 @@
 package logsim.model.component.impl;
 
+import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.DisplayComponent;
+import logsim.view.component.ComponentView;
 
 /**
  * 7-szegmenses kijelzõt reprezentál, melynek 7 bemenete vezérli a
@@ -35,5 +37,10 @@ public class SevenSegmentDisplay extends DisplayComponent {
     @Override
     public AbstractComponent copy(String newName) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ComponentView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }

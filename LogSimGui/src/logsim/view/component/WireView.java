@@ -1,10 +1,12 @@
 package logsim.view.component;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
 import logsim.Controller;
+import logsim.model.Value;
 import logsim.model.component.Wire;
 import logsim.view.Drawable;
 
@@ -46,6 +48,9 @@ public class WireView implements Drawable {
 
     @Override
     public void draw(Graphics g) {
+        if (w.getValue() == Value.FALSE) {
+            g.setColor(Color.LIGHT_GRAY);
+        }
         Point p1 = start;
         if (referencePoints != null) {
             for (Point p2 : referencePoints) {
@@ -54,6 +59,7 @@ public class WireView implements Drawable {
             }
         }
         g.drawLine(p1.x, p1.y, end.x, end.y);
+        g.setColor(Color.BLACK);
     }
 
     @Override

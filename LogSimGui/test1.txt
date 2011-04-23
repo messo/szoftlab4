@@ -1,0 +1,6 @@
+kapcs1 = TOGGLE() {30 50}
+kapcs2 = TOGGLE() {30 105}
+
+es = AND(kapcs1{(80 57)(80 76)}, kapcs2{(80 112)(80 94)}) {110 70}
+
+led = LED(es) {200 80}

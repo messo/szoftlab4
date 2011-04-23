@@ -1,11 +1,15 @@
 package logsim;
 
 import java.awt.Point;
+import logsim.model.component.impl.Gnd;
 import logsim.model.component.impl.Inverter;
 import logsim.model.component.impl.Led;
+import logsim.model.component.impl.Mpx;
 import logsim.model.component.impl.Scope;
 import logsim.model.component.impl.SequenceGenerator;
+import logsim.model.component.impl.SevenSegmentDisplay;
 import logsim.model.component.impl.Toggle;
+import logsim.model.component.impl.Vcc;
 import logsim.view.Frame;
 import java.io.File;
 import java.util.ArrayList;
@@ -27,9 +31,13 @@ import logsim.view.FrameView;
 import logsim.view.component.ComponentView;
 import logsim.view.component.WireView;
 import logsim.view.component.impl.AndGateView;
+import logsim.view.component.impl.GndView;
 import logsim.view.component.impl.InverterView;
 import logsim.view.component.impl.LedView;
+import logsim.view.component.impl.MpxView;
+import logsim.view.component.impl.SevenSegmentDisplayView;
 import logsim.view.component.impl.ToggleView;
+import logsim.view.component.impl.VccView;
 
 /**
  * Az alkalmazás vezérlõje
@@ -62,6 +70,11 @@ public class GuiController implements Controller, ComponentViewCreator {
     }
 
     @Override
+    public SevenSegmentDisplayView createView(SevenSegmentDisplay ssd) {
+        return new SevenSegmentDisplayView(ssd);
+    }
+
+    @Override
     public ToggleView createView(Toggle toggle) {
         return new ToggleView(toggle);
     }
@@ -69,6 +82,21 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public InverterView createView(Inverter inv) {
         return new InverterView(inv);
+    }
+
+    @Override
+    public MpxView createView(Mpx mpx) {
+        return new MpxView(mpx);
+    }
+
+    @Override
+    public GndView createView(Gnd gnd) {
+        return new GndView();
+    }
+
+    @Override
+    public VccView createView(Vcc vcc) {
+        return new VccView();
     }
 
     public static void main(String[] args) {
@@ -129,11 +157,19 @@ public class GuiController implements Controller, ComponentViewCreator {
             ComponentView outputView = views.get(output.getComponent());
             ComponentView inputView = views.get(input.getComponent());
 
-            Point start = positions.get(outputView).getLocation();
-            Point end = positions.get(inputView).getLocation();
-
             Point relStart = outputView.getRelativeOutputPinPosition(output.getPin());
             Point relEnd = inputView.getRelativeInputPinPosition(input.getPin());
+
+            if(positions.get(outputView) == null) {
+                // nincs pozíciója, akkor rakjuk le mi
+                Point pos = positions.get(inputView).getLocation();
+                pos.translate(relEnd.x, relEnd.y);
+                pos.translate(-30, -outputView.getDimension().height / 2);
+                positions.put(outputView, pos);
+            }
+
+            Point start = positions.get(outputView).getLocation();
+            Point end = positions.get(inputView).getLocation();
 
             start.translate(relStart.x, relStart.y);
             end.translate(relEnd.x, relEnd.y);

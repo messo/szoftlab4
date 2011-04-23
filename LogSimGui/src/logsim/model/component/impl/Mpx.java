@@ -1,7 +1,9 @@
 package logsim.model.component.impl;
 
+import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
+import logsim.view.component.ComponentView;
 
 /**
  * 4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következõ:
@@ -40,5 +42,10 @@ public class Mpx extends AbstractComponent {
     @Override
     public Mpx copy(String newName) {
         return new Mpx(newName);
+    }
+
+    @Override
+    public ComponentView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }

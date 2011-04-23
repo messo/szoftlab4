@@ -1,0 +1,9 @@
+inmpx1 = TOGGLE() {30 30}
+inmpx2 = TOGGLE() {30 50}
+inmpx3 = TOGGLE() {30 70}
+inmpx4 = TOGGLE() {30 90}
+selmpx1 = TOGGLE() {30 110}
+selmpx2 = TOGGLE() {30 130}
+mux = MPX(inmpx1,inmpx2,inmpx3,inmpx4,selmpx1,selmpx2) {100 56}
+seg = TOGGLE() {150 90}
+display = 7SEG(mux,seg,0,0,0,0,0) {200 81}
