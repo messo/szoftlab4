@@ -4,6 +4,7 @@ import logsim.ComponentViewCreator;
 import logsim.GuiController;
 import logsim.model.Value;
 import logsim.view.Drawable;
+import logsim.view.WireView;
 
 /**
  * Vezeték osztály. Két komponens-lábat köt össze. A rajta lévõ érték lekérdezhetõ
@@ -39,7 +40,7 @@ public class Wire {
      * @param cvc
      * @return rajzolható vezeték az áramköri panelre
      */
-    public Drawable createView(ComponentViewCreator cvc) {
+    public WireView createView(ComponentViewCreator cvc) {
         return cvc.createView(this);
     }
 }

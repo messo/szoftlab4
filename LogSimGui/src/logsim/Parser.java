@@ -1,5 +1,6 @@
 package logsim;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +17,7 @@ import logsim.model.Circuit;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.Composite;
+import logsim.model.component.Wire;
 import logsim.model.component.impl.AndGate;
 import logsim.model.component.impl.FlipFlopD;
 import logsim.model.component.impl.FlipFlopJK;
@@ -47,6 +49,10 @@ public class Parser {
      */
     private static Pattern componentPattern = Pattern.compile("\\s*(.*?)\\s*=\\s*(.*?)\\s*\\((.*?)\\)");
     /**
+     * Regex minta egy legfelsõ szintû komponens-sor feldolgozásához
+     */
+    private static Pattern topLevelComponentPattern = Pattern.compile("\\s*(.*?)\\s*=\\s*(.*?)\\s*\\((.*?)\\)\\s*\\{\\s*([0-9]+)\\s*,\\s*([0-9]+)\\s*\\}");
+    /**
      * Regex minta egy kompozit kezdethez
      */
     private static Pattern compositeStartPattern = Pattern.compile("\\s*composite\\s*(.*?)\\((.*?)\\)\\s*\\{", Pattern.CASE_INSENSITIVE);
@@ -62,6 +68,7 @@ public class Parser {
      * Kompozitokban lévõ komponensek paraméter listája.
      */
     private Map<Composite, Map<AbstractComponent, String[]>> parameters = new HashMap<Composite, Map<AbstractComponent, String[]>>();
+    private Map<AbstractComponent, Point> positions = new HashMap<AbstractComponent, Point>();
 
     /**
      * Létrehoz egy áramkört a megadott fájlból
@@ -92,17 +99,8 @@ public class Parser {
         return null;
     }
 
-    /**
-     * Egy komponens-sor feldolgozása a fájlban
-     * 
-     * @param matcher regex találatok
-     * @param composite kompozit ahova beszúrjuk
-     * @return létrehozott komponens
-     */
-    private AbstractComponent parseComponentFromLine(Matcher matcher, Composite composite) {
-        String variableName = matcher.group(1);
-        String componentName = matcher.group(2).toLowerCase();
-        String tmp = matcher.group(3).trim();
+    private AbstractComponent parseComponent(String variableName,
+            String componentName, String argumentsStr, Composite composite) {
         String arguments[];
 
         //System.out.println(variableName + " - " + componentName);
@@ -114,10 +112,10 @@ public class Parser {
         Map<AbstractComponent, String[]> argumentsMap = parameters.get(composite);
 
         //ComponentPin[] pins = null;
-        if (tmp.length() == 0) {
+        if (argumentsStr.length() == 0) {
             arguments = null;
         } else {
-            arguments = tmp.split("\\s*,\\s*");
+            arguments = argumentsStr.split("\\s*,\\s*");
 //            pins = new ComponentPin[arguments.length];
 //            int i = 0;
 //            for (String arg : arguments) {
@@ -194,6 +192,43 @@ public class Parser {
     }
 
     /**
+     * Egy olyan komponens-sor feldolgozása a fájlban, ami a legfelsõ szinten szerepel,
+     * azaz a kompozit amiben szerepel az az áramkör.
+     *
+     * @param matcher
+     * @param circuit
+     * @return
+     */
+    private AbstractComponent parseTopLevelComponentFromLine(Matcher matcher, Circuit circuit) {
+        String variableName = matcher.group(1);
+        String componentName = matcher.group(2).toLowerCase();
+        String argumentsStr = matcher.group(3).trim();
+        int x = Integer.parseInt(matcher.group(4));
+        int y = Integer.parseInt(matcher.group(5));
+
+        AbstractComponent ac = parseComponent(variableName, componentName, argumentsStr, circuit);
+
+        positions.put(ac, new Point(x, y));
+
+        return ac;
+    }
+
+    /**
+     * Egy komponens-sor feldolgozása a fájlban
+     * 
+     * @param matcher regex találatok
+     * @param composite kompozit ahova beszúrjuk
+     * @return létrehozott komponens
+     */
+    private AbstractComponent parseComponentFromLine(Matcher matcher, Composite composite) {
+        String variableName = matcher.group(1);
+        String componentName = matcher.group(2).toLowerCase();
+        String argumentsStr = matcher.group(3).trim();
+
+        return parseComponent(variableName, componentName, argumentsStr, composite);
+    }
+
+    /**
      * Bementrõl feldolgozás
      *
      * @param br bemeneti stream
@@ -202,9 +237,9 @@ public class Parser {
     private void parse(BufferedReader br) throws IOException {
         String line;
         while ((line = br.readLine()) != null) {
-            Matcher matcher = componentPattern.matcher(line);
+            Matcher matcher = topLevelComponentPattern.matcher(line);
             if (matcher.matches()) {
-                parseComponentFromLine(matcher, circuit);
+                parseTopLevelComponentFromLine(matcher, circuit);
             } else {
                 Matcher matcher2 = compositeStartPattern.matcher(line);
                 if (matcher2.matches()) {
@@ -264,5 +299,25 @@ public class Parser {
         }
 
         composite.connectComponents(parameters.get(composite), inputs, outputs);
+    }
+
+    /**
+     * Komponens pozíciójának a lekérdezése
+     *
+     * @param ac komponens
+     * @return pozíció
+     */
+    public Point getPosition(AbstractComponent ac) {
+        return positions.get(ac);
+    }
+
+    /**
+     * Vezeték referenciapontjainak a lekérdezése
+     *
+     * @param wire vezeték
+     * @return referenciapontok
+     */
+    public Point[] getReferencePoints(Wire wire) {
+        return null;
     }
 }

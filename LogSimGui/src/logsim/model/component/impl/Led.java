@@ -1,7 +1,10 @@
 package logsim.model.component.impl;
 
+import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.DisplayComponent;
+import logsim.view.Drawable;
+import logsim.view.component.LedView;
 
 /**
  * Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
@@ -32,5 +35,10 @@ public class Led extends DisplayComponent {
     @Override
     public Led copy(String name) {
         return new Led(name);
+    }
+
+    @Override
+    public LedView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }

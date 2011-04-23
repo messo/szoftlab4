@@ -1,6 +1,8 @@
 package logsim.model.component.impl;
 
+import logsim.ComponentViewCreator;
 import logsim.model.component.AbstractComponent;
+import logsim.view.component.InverterView;
 
 /**
  * Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén
@@ -24,5 +26,10 @@ public class Inverter extends AbstractComponent {
     @Override
     public AbstractComponent copy(String name) {
         return new Inverter(name);
+    }
+
+    @Override
+    public InverterView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }

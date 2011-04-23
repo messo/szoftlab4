@@ -1,5 +1,7 @@
 package logsim.view;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -13,19 +15,24 @@ import java.util.Map;
 public class CircuitView extends javax.swing.JPanel implements MouseListener {
 
     private Map<Drawable, Point> coords;
-    private final FrameView parent;
+    private FrameView parent;
     private List<Drawable> drawables;
 
     /**
      * Áramkört kirajzoló panel
      * @param drawables
      */
-    public CircuitView(FrameView view) {
-        this.parent = view;
+    public CircuitView() {
         this.drawables = null;
         this.coords = null;
 
+        setBackground(Color.white);
+
         addMouseListener(this);
+    }
+
+    public void setParent(FrameView parent) {
+        this.parent = parent;
     }
 
     public void updateDrawables(List<Drawable> drawables, Map<Drawable, Point> coords) {
@@ -52,9 +59,9 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
                 }
                 Point point = coords.get(drawable);
                 if (point == null) {
-                    drawable.draw(g, 0, 0);
+                    drawable.draw(g);
                 } else {
-                    drawable.draw(g, point.x, point.y);
+                    drawable.draw(g.create(point.x, point.y, drawable.getDimension().width+1, drawable.getDimension().height+1));
                 }
             }
         }
@@ -65,17 +72,27 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        // meghatározzuk, hogy mire kapcsoltunk.
         Drawable drawable = null;
 
+        int x = me.getX();
+        int y = me.getY();
+
+        Dimension dim;
+        Point p;
         for (Drawable d : drawables) {
-            if (d.getDimension() != null && coords.get(d) != null) {
+            dim = d.getDimension();
+            p = coords.get(d);
+            if (dim != null && p != null
+                    && p.x <= x && p.y <= y
+                    && x <= p.x + dim.width && y <= p.y + dim.height) {
                 drawable = d;
                 break;
             }
         }
 
-        drawable.onClick(parent.getController());
+        if (drawable != null) {
+            drawable.onClick(parent.getController());
+        }
     }
 
     @Override
@@ -98,6 +115,6 @@ public class CircuitView extends javax.swing.JPanel implements MouseListener {
      * Áramkör újrarajzolása.
      */
     public void refresh() {
-        revalidate();
+        repaint();
     }
 }

@@ -1,6 +1,8 @@
 package logsim;
 
 import java.awt.Point;
+import logsim.model.component.impl.Inverter;
+import logsim.model.component.impl.Led;
 import logsim.model.component.impl.Scope;
 import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.component.impl.Toggle;
@@ -23,6 +25,9 @@ import logsim.view.Drawable;
 import logsim.view.FrameView;
 import logsim.view.WireView;
 import logsim.view.component.AndGateView;
+import logsim.view.component.InverterView;
+import logsim.view.component.LedView;
+import logsim.view.component.ToggleView;
 
 /**
  * Az alkalmazás vezérlõje
@@ -33,8 +38,6 @@ public class GuiController implements Controller, ComponentViewCreator {
     private final FrameView v;
     private Circuit c;
     private Config config;
-    private Map<Drawable, Point> coords;
-    private List<Drawable> drawables;
 
     public GuiController() {
         simulation = new Simulation();
@@ -42,13 +45,28 @@ public class GuiController implements Controller, ComponentViewCreator {
     }
 
     @Override
-    public Drawable createView(AndGate ag) {
+    public AndGateView createView(AndGate ag) {
         return new AndGateView(ag);
     }
 
     @Override
-    public Drawable createView(Wire wire) {
+    public WireView createView(Wire wire) {
         return new WireView(wire);
+    }
+
+    @Override
+    public LedView createView(Led led) {
+        return new LedView(led);
+    }
+
+    @Override
+    public ToggleView createView(Toggle toggle) {
+        return new ToggleView(toggle);
+    }
+
+    @Override
+    public InverterView createView(Inverter inv) {
+        return new InverterView(inv);
     }
 
     public static void main(String[] args) {
@@ -68,7 +86,8 @@ public class GuiController implements Controller, ComponentViewCreator {
 
     @Override
     public void loadCircuit(String fileName) {
-        c = new Parser().parse(new File(fileName));
+        Parser p = new Parser();
+        c = p.parse(new File(fileName));
         config = new Config(c);
         simulation.setCircuit(c);
 
@@ -76,7 +95,7 @@ public class GuiController implements Controller, ComponentViewCreator {
 
         Collection<AbstractComponent> components = c.getComponents();
         Set<Wire> wires = new HashSet<Wire>();
-        coords = new HashMap<Drawable, Point>();
+        Map<Drawable, Point> positions = new HashMap<Drawable, Point>();
         for (AbstractComponent ac : components) {
             Wire w;
             for (int i = 1; i <= ac.getInputsCount(); i++) {
@@ -93,21 +112,26 @@ public class GuiController implements Controller, ComponentViewCreator {
             }
         }
 
-        drawables = new ArrayList<Drawable>(wires.size() + components.size());
+        List<Drawable> drawables = new ArrayList<Drawable>(wires.size() + components.size());
         for (AbstractComponent ac : components) {
-            drawables.add(ac.createView(this));
+            Drawable d = ac.createView(this);
+            positions.put(d, p.getPosition(ac));
+            drawables.add(d);
         }
         for (Wire wire : wires) {
-            drawables.add(wire.createView(this));
+            WireView wv = wire.createView(this);
+            wv.setReferencePoints(p.getReferencePoints(wire));
+            drawables.add(wv);
         }
 
-        v.drawCircuit(drawables, coords);
+        v.setDrawables(drawables, positions);
+        v.drawCircuit();
     }
 
     @Override
     public void loadConfiguration(String fileName) {
         config.load(new File(fileName));
-        v.drawCircuit(drawables, coords);
+        v.drawCircuit();
     }
 
     @Override
@@ -122,7 +146,7 @@ public class GuiController implements Controller, ComponentViewCreator {
         } else {
             v.onFailedSimulation();
         }
-        v.drawCircuit(drawables, coords);
+        v.drawCircuit();
     }
 
     @Override
@@ -135,6 +159,7 @@ public class GuiController implements Controller, ComponentViewCreator {
         toggle.setValues(new Value[]{
                     toggle.getValues()[0].invert()
                 });
+        v.drawCircuit();
     }
 
     @Override

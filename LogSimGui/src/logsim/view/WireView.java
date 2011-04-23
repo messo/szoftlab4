@@ -1,16 +1,23 @@
 package logsim.view;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.Point;
 import logsim.Controller;
 import logsim.model.component.Wire;
 
 /**
- *
+ * Egy vezeték megjelenítéséért felelõs, amit törött vonallal jelenítünk meg.
  */
 public class WireView extends Drawable {
 
+    /**
+     * Vezeték, aminek a megjelenítéséért felel.
+     */
     private final Wire w;
+    /**
+     * Vezeték referenciapontjai, ahol a vezeték "törik".
+     */
+    private Point[] referencePoints;
 
     public WireView(Wire w) {
         super(100, 100);
@@ -23,6 +30,14 @@ public class WireView extends Drawable {
     }
 
     @Override
-    public void draw(Graphics g, int x, int y) {
+    public void draw(Graphics g) {
+    }
+
+    /**
+     * Vezeték referenciapontjainak a beállítása
+     * @param referencePoints
+     */
+    public void setReferencePoints(Point[] referencePoints) {
+        this.referencePoints = referencePoints;
     }
 }

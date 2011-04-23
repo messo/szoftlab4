@@ -2,14 +2,27 @@ package logsim;
 
 import logsim.model.component.Wire;
 import logsim.model.component.impl.AndGate;
-import logsim.view.Drawable;
+import logsim.model.component.impl.Inverter;
+import logsim.model.component.impl.Led;
+import logsim.model.component.impl.Toggle;
+import logsim.view.WireView;
+import logsim.view.component.AndGateView;
+import logsim.view.component.InverterView;
+import logsim.view.component.LedView;
+import logsim.view.component.ToggleView;
 
 /**
  *
  */
 public interface ComponentViewCreator {
 
-    Drawable createView(AndGate ag);
+    AndGateView createView(AndGate ag);
 
-    Drawable createView(Wire wire);
+    WireView createView(Wire wire);
+
+    LedView createView(Led led);
+
+    ToggleView createView(Toggle toggle);
+
+    InverterView createView(Inverter inv);
 }

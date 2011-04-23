@@ -1,5 +1,3 @@
-tog = TOGGLE()
-seq = SEQGEN()
-led1 = LED(tog)
-led2 = LED(seq)
-and = AND(1, 1)
+tog = TOGGLE() {100, 100}
+inv = INV(tog) {200, 100}
+led = LED(inv) {300, 102}

@@ -1,8 +1,10 @@
 package logsim.model.component.impl;
 
+import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.AbstractComponent;
 import logsim.model.component.SourceComponent;
+import logsim.view.component.ToggleView;
 
 /**
  * Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
@@ -65,5 +67,10 @@ public class Toggle extends SourceComponent {
     @Override
     public void reset() {
         v = Value.FALSE;
+    }
+
+    @Override
+    public ToggleView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }

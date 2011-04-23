@@ -2,30 +2,30 @@ package logsim.view.component;
 
 import java.awt.Graphics;
 import logsim.Controller;
-import logsim.model.component.impl.AndGate;
+import logsim.model.component.impl.Inverter;
 import logsim.view.Drawable;
 
 /**
  *
  * @author messo
  */
-public class AndGateView extends Drawable {
+public class InverterView extends Drawable {
 
-    private AndGate ag;
+    private Inverter inv;
 
-    public AndGateView(AndGate ag) {
+    public InverterView(Inverter inv) {
         super(100, 100);
-        this.ag = ag;
+        this.inv = inv;
     }
 
     @Override
     public void onClick(Controller controller) {
-        controller.onComponentClick(ag);
+        controller.onComponentClick(inv);
     }
 
     @Override
     public void draw(Graphics g) {
         g.drawRect(0, 0, 40, 30);
-        g.drawString("AND", 5, 15);
+        g.drawString("INV", 5, 15);
     }
 }

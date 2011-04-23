@@ -31,5 +31,5 @@ public abstract class Drawable {
 
     public abstract void onClick(Controller controller);
 
-    public abstract void draw(Graphics g, int x, int y);
+    public abstract void draw(Graphics g);
 }

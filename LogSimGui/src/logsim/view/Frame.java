@@ -4,6 +4,7 @@ import java.awt.FileDialog;
 import java.awt.Point;
 import java.util.List;
 import java.util.Map;
+import javax.swing.UIManager;
 import logsim.Controller;
 
 /**
@@ -18,10 +19,16 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         return controller;
     }
 
-    /** Creates new form ViewFornm */
     public Frame(Controller controller) {
+        try {
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+        }
+
         this.controller = controller;
         initComponents();
+        this.circuitView.setParent(this);
     }
 
     @Override
@@ -38,10 +45,17 @@ public class Frame extends javax.swing.JFrame implements FrameView {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        aboutDialog = new javax.swing.JDialog();
+        aboutCloseBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         stepBtn = new javax.swing.JButton();
         stateLabel = new javax.swing.JLabel();
-        circuitView = new logsim.view.CircuitView(this);
+        jLabel1 = new javax.swing.JLabel();
+        circuitView = new logsim.view.CircuitView();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         loadCircuitMI = new javax.swing.JMenuItem();
@@ -50,11 +64,58 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         sep = new javax.swing.JPopupMenu.Separator();
         exitMI = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        aboutMI = new javax.swing.JMenuItem();
+
+        aboutDialog.setTitle("Névjegy");
+        aboutDialog.setResizable(false);
+
+        aboutCloseBtn.setText("Bezárás");
+        aboutCloseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutCloseBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("LogSim");
+
+        jLabel3.setText("<html>Digitális áramkör szimuláló program, mely a<br>Szoftver Labor 4 címû tárgy keretében készült<br>el a 2010/2011-es tanév második félévében.");
+        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel5.setText("<html><b>Készítették</b>:<br>Apagyi Gábor<br>Dévényi Attila<br>Jákli Gábor<br>Kriván Bálint<br>Péter Tamás Pál");
+
+        javax.swing.GroupLayout aboutDialogLayout = new javax.swing.GroupLayout(aboutDialog.getContentPane());
+        aboutDialog.getContentPane().setLayout(aboutDialogLayout);
+        aboutDialogLayout.setHorizontalGroup(
+            aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aboutDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(aboutCloseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        aboutDialogLayout.setVerticalGroup(
+            aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aboutDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(aboutCloseBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LogSim");
-
-        jLabel1.setText("Szimuláció állapota:");
 
         stepBtn.setText("Léptetés");
         stepBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -65,15 +126,31 @@ public class Frame extends javax.swing.JFrame implements FrameView {
 
         stateLabel.setText("...");
 
-        javax.swing.GroupLayout circuitViewLayout = new javax.swing.GroupLayout(circuitView);
-        circuitView.setLayout(circuitViewLayout);
-        circuitViewLayout.setHorizontalGroup(
-            circuitViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+        jLabel1.setText("Szimuláció állapota:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(stateLabel)
+                .addContainerGap(283, Short.MAX_VALUE))
+            .addComponent(stepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
-        circuitViewLayout.setVerticalGroup(
-            circuitViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(stateLabel)))
         );
 
         jMenu1.setText("Fájl");
@@ -117,7 +194,16 @@ public class Frame extends javax.swing.JFrame implements FrameView {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Névjegy");
+        jMenu2.setText("Egyéb");
+
+        aboutMI.setText("Névjegy");
+        aboutMI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMIActionPerformed(evt);
+            }
+        });
+        jMenu2.add(aboutMI);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -126,24 +212,11 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stateLabel)
-                .addContainerGap(365, Short.MAX_VALUE))
-            .addComponent(stepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
-            .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(stepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(stateLabel)))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -193,6 +266,15 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         System.exit(0);
     }//GEN-LAST:event_exitMIActionPerformed
 
+    private void aboutMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMIActionPerformed
+        aboutDialog.pack();
+        aboutDialog.setVisible(true);
+    }//GEN-LAST:event_aboutMIActionPerformed
+
+    private void aboutCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutCloseBtnActionPerformed
+        aboutDialog.setVisible(false);
+    }//GEN-LAST:event_aboutCloseBtnActionPerformed
+
     @Override
     public void onSuccessfulSimulation() {
         stateLabel.setText("STABIL");
@@ -204,17 +286,29 @@ public class Frame extends javax.swing.JFrame implements FrameView {
     }
 
     @Override
-    public void drawCircuit(List<Drawable> drawables, Map<Drawable, Point> coords) {
-        circuitView.updateDrawables(drawables, coords);
+    public void drawCircuit() {
         circuitView.refresh();
     }
+
+    @Override
+    public void setDrawables(List<Drawable> drawables, Map<Drawable, Point> positions) {
+        circuitView.updateDrawables(drawables, positions);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton aboutCloseBtn;
+    private javax.swing.JDialog aboutDialog;
+    private javax.swing.JMenuItem aboutMI;
     private logsim.view.CircuitView circuitView;
     private javax.swing.JMenuItem exitMI;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuItem loadCircuitMI;
     private javax.swing.JMenuItem loadConfigMI;
     private javax.swing.JMenuItem saveConfigMI;
