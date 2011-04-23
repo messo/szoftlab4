@@ -2,7 +2,6 @@ package logsim.view;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Point;
 import logsim.Controller;
 
 /**
