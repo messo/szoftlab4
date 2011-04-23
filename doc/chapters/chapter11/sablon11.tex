@@ -40,13 +40,6 @@
 \subsection{A felület működési elve}
 \comment{Le kell írni, hogy a grafikai megjelenésért felelős osztályok, objektumok hogyan kapcsolódnak a meglevő rendszerhez, a megjelenítés során mi volt az alapelv. Törekedni kell az MVC megvalósításra. Alapelvek lehetnek: \textbf{push} alapú: a modell értesíti a felületet, hogy változott; \textbf{pull} alapú: a felület kérdezi le a modellt, hogy változott-e; \textbf{kevert}: a kettő kombinációja.}
 
-Az általunk elkészített grafikus felület "pull" típusú, vagyis a grafikus rendszer kérdezi le a modell objektumoktól az aktuális állapotukat.
-Azokhoz a modellobjektumokhoz, melyeket megjelenítünk, elkészítettünk egy-egy wrapper osztályt, mely a megjelenítésért és a megjelenítéshez szükséges információk tárolásáért felel. 
-Az áramkört egy JPanel-ra rajzoljuk, mely biztosítja számunkra, hogy az elhelyezhető legyen bármilyen ablakon. Áramkör újrarajzoláskor, az eltárolt objektumok egyenkét rajzolják ki magukat az előzöleg megadott koordináták alapján.
-Bármilyen felhasználói interakciónál, melynél változhat az áramkör állapota, az egész áramkört újrarajzoljuk, biztosítva ezzel, hogy a kirajzolt áramkör mindig az aktuális állapotban legyen megjelenítve.
-
-
-
 \subsection{A felület osztály-struktúrája}
 \comment{Osztálydiagram. Minden új osztály, és azon régiek, akik az újakhoz közvetlenül kapcsolódnak.}
 
@@ -115,5 +108,37 @@ Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
 \includegraphics[width=17cm]{chapters/chapter11/pdfs/2_loadcircuit.pdf}
 \caption{Áramkör betöltése}
 \label{fig:loadcircuit}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=17cm]{chapters/chapter11/pdfs/3_loadconfig.pdf}
+\caption{Konfigurációs fájl betöltése}
+\label{fig:loadconfig}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=17cm]{chapters/chapter11/pdfs/4_saveconfig.pdf}
+\caption{Konfigurációs fájl mentése}
+\label{fig:saveconfig}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=10cm]{chapters/chapter11/pdfs/5_paint1.pdf}
+\caption{Rajzolás indítása}
+\label{fig:paint1}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=10cm]{chapters/chapter11/pdfs/6_paint2.pdf}
+\caption{Rajzolás}
+\label{fig:paint2}
 \end{center}
 \end{figure}
