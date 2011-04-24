@@ -2,7 +2,6 @@ package logsim.view.component.impl;
 
 import java.awt.Graphics;
 import logsim.Controller;
-import logsim.DetailedView;
 import logsim.model.component.impl.Inverter;
 import logsim.view.component.ComponentView;
 
