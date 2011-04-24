@@ -21,7 +21,7 @@ public class AndGateView extends ComponentView {
      * @param ag Megjelenítendõ ÉS kapu
      */
     public AndGateView(AndGate ag) {
-        super(40, 30);
+        super(35, 30);
         this.ag = ag;
     }
 
@@ -40,8 +40,13 @@ public class AndGateView extends ComponentView {
      */
     @Override
     protected void onDraw(Graphics g) {
-        g.drawRect(0, 0, 40, 30);
-        g.drawString("AND", 10, 19);
+        //g.drawRect(0, 0, 40, 30);
+        //g.drawString("AND", 10, 19);
+        g.drawLine(0, 0, 0, 30);
+        g.drawLine(0, 0, 20, 0);
+        g.drawLine(0, 30, 20, 30);
+        g.drawArc(5, 0, 30, 30, 0, 90);
+        g.drawArc(5, 0, 30, 30, 0, -90);
     }
 
     /**
