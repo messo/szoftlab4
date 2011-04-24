@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import logsim.ComponentViewCreator;
 import logsim.model.component.impl.Gnd;
 import logsim.model.component.impl.Node;
 import logsim.model.component.impl.Scope;
 import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.component.impl.Vcc;
+import logsim.view.component.ComponentView;
 
 /**
  * Kompozit elem leírása, kiértékelésnél a tartalmazott komponenseket kiértékeli, lépteti
@@ -481,5 +483,10 @@ public class Composite extends AbstractComponent {
      */
     protected void onWireCreated(Wire wire, AbstractComponent source, int outputPin,
             AbstractComponent target, int inputPin) {
+    }
+
+    @Override
+    public ComponentView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }

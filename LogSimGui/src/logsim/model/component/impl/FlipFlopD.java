@@ -1,6 +1,8 @@
 package logsim.model.component.impl;
 
+import logsim.ComponentViewCreator;
 import logsim.model.component.FlipFlop;
+import logsim.view.component.ComponentView;
 
 /**
  * D flipflop, mely felfutó órajelnél beírja a belsõ memóriába az adatbemeneten (D)
@@ -36,5 +38,10 @@ public class FlipFlopD extends FlipFlop {
     @Override
     public FlipFlopD copy(String newName) {
         return new FlipFlopD(newName);
+    }
+
+    @Override
+    public ComponentView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }
