@@ -390,7 +390,6 @@ public class GuiController implements Controller, ComponentViewCreator {
 
     @Override
     public void onSequenceChanged(SequenceGenerator sg, String seq) {
-      ;
         Value[] values = new Value[seq.length()];
         for (int i = 0; i < seq.length(); i++) {
             if (seq.charAt(i) == '0') {
@@ -400,5 +399,7 @@ public class GuiController implements Controller, ComponentViewCreator {
             }
         }
         sg.setValues(values);
+
+        v.drawCircuit();
     }
 }
