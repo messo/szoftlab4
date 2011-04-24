@@ -58,4 +58,5 @@ public class MpxView extends ComponentView {
     protected int getOutputPinsCount() {
         return 1;
     }
+
 }

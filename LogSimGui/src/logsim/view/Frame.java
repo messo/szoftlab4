@@ -55,7 +55,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
      * @param ac Megjelenítendõ komponens
      */
     @Override
-    public void showDetailsAC(AbstractComponent ac) {
+    public void showDetails(AbstractComponent ac) {
         componentNameLabel.setText(ac.getName());
         StringBuilder sbIn = new StringBuilder();
         for (int i = 1; i <= ac.getInputsCount(); i++) {
@@ -86,18 +86,18 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
      * @param sc Megjelenítendõ scope
      */
     @Override
-    public void showDetailsSC(Scope sc) {
-        componentNameLabel.setText(sc.getName());
+    public void showDetails(Scope s) {
+        componentNameLabel.setText(s.getName());
         StringBuilder sbIn = new StringBuilder();
-        for (int i = 1; i <= sc.getInputsCount(); i++) {
-            sbIn.append(sc.getInputWire(i).getValue() == Value.TRUE ? '1' : '0');
-            if (i != sc.getInputsCount()) {
+        for (int i = 1; i <= s.getInputsCount(); i++) {
+            sbIn.append(s.getInputWire(i).getValue() == Value.TRUE ? '1' : '0');
+            if (i != s.getInputsCount()) {
                 sbIn.append(", ");
             }
         }
 
         StringBuilder sbOut = new StringBuilder();
-        Value[] values = sc.getValues();
+        Value[] values = s.getValues();
         for (int i = 0; i < values.length; i++) {
             if (i != 0) {
                 sbOut.append(", ");
@@ -118,7 +118,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
      * @param sg Megjelenítendõ szekvenciagenerátor
      */
     @Override
-    public void showDetailsSG(SequenceGenerator sg) {
+    public void showDetails(SequenceGenerator sg) {
         componentNameLabel.setText(sg.getName());
         sgedit = sg;
         StringBuilder sbIn = new StringBuilder();
@@ -701,4 +701,5 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
     private javax.swing.JLabel stateLabel;
     private javax.swing.JButton stepBtn;
     // End of variables declaration//GEN-END:variables
+
 }

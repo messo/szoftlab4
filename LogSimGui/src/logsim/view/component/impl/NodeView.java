@@ -1,10 +1,8 @@
 package logsim.view.component.impl;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import logsim.Controller;
-import logsim.model.Value;
 import logsim.model.component.impl.Node;
 import logsim.view.component.ComponentView;
 
@@ -88,4 +86,5 @@ public class NodeView extends ComponentView {
     protected int getOutputPinsCount() {
         return node.getOutputsCount();
     }
+
 }

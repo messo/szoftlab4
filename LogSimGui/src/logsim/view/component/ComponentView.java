@@ -99,4 +99,7 @@ public abstract class ComponentView implements Drawable {
      * @return
      */
     protected abstract int getOutputPinsCount();
+
+
+//   protected abstract void showDetails(DetailedView dv);
 }

@@ -340,7 +340,7 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public void onComponentClick(AbstractComponent ag) {
 //        System.out.println("Clicked on: " + ag);
-        v.showDetailsAC(ag);
+        v.showDetails(ag);
     }
 
     /**
@@ -362,7 +362,8 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public void onComponentClick(SequenceGenerator sg) {
         // ablak megjelenítés
-        v.showDetailsSG(sg);
+
+        v.showDetails(sg);
     }
 
     /**
@@ -376,7 +377,7 @@ public class GuiController implements Controller, ComponentViewCreator {
 //            System.out.print(value == Value.TRUE ? "1" : "0");
 //        }
 //        System.out.println("");
-        v.showDetailsSC(scope);
+        v.showDetails(scope);
     }
 
     /**

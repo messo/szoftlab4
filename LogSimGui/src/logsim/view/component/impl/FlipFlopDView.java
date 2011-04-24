@@ -61,4 +61,5 @@ public class FlipFlopDView extends ComponentView {
     protected int getOutputPinsCount() {
         return 1;
     }
+
 }

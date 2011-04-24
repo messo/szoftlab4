@@ -2,6 +2,7 @@ package logsim.view.component.impl;
 
 import java.awt.Graphics;
 import logsim.Controller;
+import logsim.DetailedView;
 import logsim.model.component.impl.Inverter;
 import logsim.view.component.ComponentView;
 
@@ -60,4 +61,9 @@ public class InverterView extends ComponentView {
     protected int getOutputPinsCount() {
         return 1;
     }
+
+//    @Override
+//    protected void showDetails(DetailedView dv) {
+//        dv.showDetails(inv);
+//    }
 }

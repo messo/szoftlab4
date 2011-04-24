@@ -113,4 +113,5 @@ public class SevenSegmentDisplayView extends ComponentView {
     protected int getOutputPinsCount() {
         return 0;
     }
+
 }

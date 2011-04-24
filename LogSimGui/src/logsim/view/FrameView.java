@@ -53,21 +53,25 @@ public interface FrameView {
      */
     void setDrawables(List<Drawable> drawables, Map<Drawable, Point> positions);
 
-    /**
-     * Általános komponens részleteit megjeleníti
-     * @param ac Megjelenítendõ alkatrész
-     */
-    void showDetailsAC(AbstractComponent ac);
+//    /**
+//     * Általános komponens részleteit megjeleníti
+//     * @param ac Megjelenítendõ alkatrész
+//     */
+//    void showDetailsAC(AbstractComponent ac);
+//
+//    /**
+//     * Scope komponens részleteinek megjelenítése
+//     * @param sc Megjelenítendõ alkatrész
+//     */
+//    void showDetailsSC(Scope sc);
+//
+//    /**
+//     * Szekvenciagenerátor részleteinek megjelenítése
+//     * @param sg Megjelenítendõ szekvenciagenerátor
+//     */
+//    void showDetailsSG(SequenceGenerator sg);
 
-    /**
-     * Scope komponens részleteinek megjelenítése
-     * @param sc Megjelenítendõ alkatrész
-     */
-    void showDetailsSC(Scope sc);
-
-    /**
-     * Szekvenciagenerátor részleteinek megjelenítése
-     * @param sg Megjelenítendõ szekvenciagenerátor
-     */
-    void showDetailsSG(SequenceGenerator sg);
+    public void showDetails(Scope s);
+    public void showDetails(SequenceGenerator sg);
+    public void showDetails(AbstractComponent ac);
 }

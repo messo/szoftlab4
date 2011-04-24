@@ -61,4 +61,5 @@ public class AndGateView extends ComponentView {
     protected int getOutputPinsCount() {
         return 1;
     }
+
 }

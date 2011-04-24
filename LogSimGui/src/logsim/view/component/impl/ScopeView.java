@@ -65,4 +65,5 @@ public class ScopeView extends ComponentView {
     protected int getOutputPinsCount() {
         return 0;
     }
+
 }
