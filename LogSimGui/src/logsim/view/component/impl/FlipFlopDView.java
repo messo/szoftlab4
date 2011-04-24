@@ -39,7 +39,7 @@ public class FlipFlopDView extends ComponentView {
      * @param g
      */
     @Override
-    public void onDraw(Graphics g) {
+    protected void onDraw(Graphics g) {
         g.drawRect(0, 0, 30, 46);
         g.drawString("D", 10, 27);
     }

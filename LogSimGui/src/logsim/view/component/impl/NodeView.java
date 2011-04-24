@@ -68,7 +68,7 @@ public class NodeView extends ComponentView {
      * @param g
      */
     @Override
-    public void onDraw(Graphics g) {
+    protected void onDraw(Graphics g) {
     }
 
     /**

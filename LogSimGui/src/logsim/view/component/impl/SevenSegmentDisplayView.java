@@ -36,7 +36,7 @@ public class SevenSegmentDisplayView extends ComponentView {
      * @param g
      */
     @Override
-    public void onDraw(Graphics g) {
+    protected void onDraw(Graphics g) {
         g.drawRect(0, 0, 41, 73);
         //1. szegmens
         if (ssd.getInputWire(1).getValue() == Value.TRUE) {

@@ -33,7 +33,7 @@ public class VccView extends ComponentView {
      * @param g
      */
     @Override
-    public void onDraw(Graphics g) {
+    protected void onDraw(Graphics g) {
         g.setColor(Color.DARK_GRAY);
         g.drawString("1", 3, 10);
         g.setColor(Color.BLACK);

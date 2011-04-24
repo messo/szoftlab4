@@ -39,7 +39,7 @@ public class ScopeView extends ComponentView {
      * @param g
      */
     @Override
-    public void onDraw(Graphics g) {
+    protected void onDraw(Graphics g) {
         if (scope.getValue() == Value.TRUE) {
             g.setColor(Color.RED);
             g.fillOval(0, 0, width, height);

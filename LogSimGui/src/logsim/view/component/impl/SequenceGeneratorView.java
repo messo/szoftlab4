@@ -39,7 +39,7 @@ public class SequenceGeneratorView extends ComponentView {
      * @param g
      */
     @Override
-    public void onDraw(Graphics g) {
+    protected void onDraw(Graphics g) {
         //g.drawRect(0, 0, width, height);
         g.drawString("seq", 0, 9);
         if (sg.getOutputWire(1).getValue() == Value.TRUE) {
