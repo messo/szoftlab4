@@ -1,0 +1,221 @@
+\subsection{AbstractComponent}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelõsség\\
+Egy komponens absztrakt megvalósítása, ebbõl származik az összes többi  komponens. A közös logikát valósítja meg. A gyakran használt dolgokra  ad alapértelmezett implementációt (kimenetekre és bemenetekre kötés, kiértékelés stb.)
+\item Õsosztályok\ Object $\rightarrow{}$ AbstractComponent.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ boolean changed} Változott-e a komponens kimenete
+	\item[] \texttt{$\#$ Wire[] inputs} Bemenetekre kötött vezetékek
+	\item[] \texttt{$\#$ String name} Komponens neve
+	\item[] \texttt{$\#$ Wire[] outputs} Kimenetekre kötött vezetékek
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$\#$ AbstractComponent(String name, int inputCount, int outputCount)}: Konstruktor
+	\item[] \texttt{$+$ void addTo(Composite composite)}: Komponens hozzáadása az áramkörhöz
+	\item[] \texttt{$+$ abstract AbstractComponent copy(String newName)}: Lemásoljuk a komponenst.
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: Lekérjük a komponenst ábrázoló viewt, de a tényleges rajzolást nem mi végezzük, hanem  a ComponentViewCreator, kihasználva a Visitor tervezési mintát.
+	\item[] \texttt{$+$ void evaluate()}: Komponens kimeneti lábain lévõ vezetékeken lévõ értékek újraszámolása  a bemenetek alapján.
+	\item[] \texttt{$\#$ Value getInput(int inputPin)}: Lekérjük egy adott bemenetre kötött értéket
+	\item[] \texttt{$+$ int getInputsCount()}: Bemeneti lábak száma
+	\item[] \texttt{$+$ Wire getInputWire(int inputPin)}: Lekérünk egy bemeneti lábon lévõ vezetéket
+	\item[] \texttt{$+$ String getName()}: Komponens nevének lekérése.
+	\item[] \texttt{$+$ int getOutputsCount()}: Kimeneti lábak száma
+	\item[] \texttt{$+$ Wire getOutputWire(int outputPin)}: Lekérünk egy kimeneti lábon lévõ vezetéket
+	\item[] \texttt{$+$ boolean isChanged()}: Visszaadja, hogy a komponensünk kimeneti értéke változott-e a kiértékelés során
+	\item[] \texttt{$\#$ abstract void onEvaluation()}: Ebben a metódusban kell implementálni az alkatrész logikáját, vagyis  az adott bemenet(ek) függvényében mit kell kiadnia a kimenet(ek)re.
+	\item[] \texttt{$+$ void setInput(int inputPin, Wire wire)}: Beállítunk egy bemenetet
+	\item[] \texttt{$+$ void setOutput(int outputPin, Wire wire)}: Beállítunk egy kimenetet
+\end{itemize}
+\end{itemize}
+
+\subsection{Composite}
+\begin{itemize}
+\item Felelõsség\\
+Kompozit elem leírása, kiértékelésnél a tartalmazott komponenseket kiértékeli, lépteti  a jelgenerátorokat stb. Ha nem áll be stacionárius állapotba a kiértékelésnél, akkor ezt jelzi kifelé.
+\item Õsosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Composite.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Map components} Komponensek listája
+	\item[] \texttt{$-$ List composites} Kompozit típusú komponensek listája
+	\item[] \texttt{$-$ final int \underline{cycleLimit}} Max. ciklusok száma
+	\item[] \texttt{$-$ List displays} Megjelenítõ típusú komponensek listája (pl. led)
+	\item[] \texttt{$-$ List flipFlops} Flipflopok listája
+	\item[] \texttt{$-$ List generators} Jelgenerátorok listája
+	\item[] \texttt{$-$ Node[] inputNodes} Bemeneti csomópontok
+	\item[] \texttt{$-$ Pattern \underline{inputPattern}} Regex minta egy komponens bemeneteinek a feldolgozásához
+	\item[] \texttt{$-$ Node[] outputNodes} Kimeneti csomópontok
+	\item[] \texttt{$-$ List scopes} Oszcillátor típusú komponensek listája
+	\item[] \texttt{$-$ List sources} Jelforrás típusú komponensek listája (pl. kapcsoló)
+	\item[] \texttt{$-$ String type} Kompozit típusa
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Composite(String type, String name, int inputCount, int outputCount)}: Adott típusú és nevû komponens létrehozása a megfelelõ lábszámmal.
+	\item[] \texttt{$+$ void add(AbstractComponent c)}: Általános típusú komponens hozzáadása
+	\item[] \texttt{$+$ void add(Composite c)}: Kompozit típusú komponens hozzáadása
+	\item[] \texttt{$+$ void add(DisplayComponent dc)}: Kijelzõ típusú komponens hozzáadása
+	\item[] \texttt{$+$ void add(FlipFlop ff)}: Flipflop komponens hozzáadása
+	\item[] \texttt{$+$ void add(Scope scope)}: Oszcillátor típusú komponens hozzáadása
+	\item[] \texttt{$+$ void add(SequenceGenerator sg)}: Jelgenerátor komponens hozzáadása
+	\item[] \texttt{$+$ void add(SourceComponent sc)}: Jelforrás típusú komponens hozzáadása
+	\item[] \texttt{$+$ void addTo(Composite composite)}: Kompozit hozzáadása kompozithoz.
+	\item[] \texttt{$-$ void commitFlipFlops()}: A flipflopok jelenlegi kimenetét elmentjük belsõ állapotnak, és az órajel  bemenetén lévõ értéket pedig eltároljuk az éldetektálás érdekében.
+	\item[] \texttt{$-$ void commitScopes()}: Oszcilloszkópok véglegesítése
+	\item[] \texttt{$+$ void connectComponents(Map connections, String[] inputs, String[] outputs)}: Komponensek összekötése
+	\item[] \texttt{$+$ Composite copy(String variableName)}: Kompozit lemásolása (példányosításnál használjuk.)
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+ % TODO
+	\item[] \texttt{$+$ AbstractComponent getComponentByName(String name)}: Komponens lekérése a neve alapján (delegálja a kérést, ha kell).
+	\item[] \texttt{$+$ Collection getComponents()}: Összes tartalmazott komponens listája
+	\item[] \texttt{$+$ List getDisplayComponents()}: Megjelenítõk listája
+	\item[] \texttt{$+$ List getSourceComponents()}: Jelforrások listája
+	\item[] \texttt{$+$ List getStepGenerators()}: Jelgenerátorok listája
+	\item[] \texttt{$\#$ void onEvaluation()}: Kiértékelési ciklus
+	\item[] \texttt{$\#$ void onWireCreated(Wire wire, AbstractComponent source, int outputPin, AbstractComponent target, int inputPin)}: Ez fut le, amikor egy új kábel jön létre egy összeköttetés miatt.
+	\item[] \texttt{$+$ void setInput(int inputPin, Wire wire)}: Bemenet beállítása
+	\item[] \texttt{$+$ void setOutput(int outputPin, Wire wire)}: Kimenet beállítása
+	\item[] \texttt{$-$ void stepGenerators()}: Jelgenerátorok léptetése
+\end{itemize}
+\end{itemize}
+
+\subsection{DisplayComponent}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelõsség\\
+Megjelenítõ típusú komponenst reprezentál. Tõle származnak a megjelenítõk (pl. led).
+\item Õsosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ DisplayComponent.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$\#$ DisplayComponent(String name, int inputCount)}: Konstruktor. Nem lesz kimenete.
+	\item[] \texttt{$+$ void addTo(Composite composite)}: Hozzáadás kompozithoz
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlop}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelõsség\\
+Flipflopok õsosztálya, minden flipflop 1. bemenete az órajel!
+\item Õsosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$\#$ Value clk} Elõzõ érvényes órajel, ettõl és a kiértékelés pillanatában lévõ órajel értékétõl  függõen észlelhetjük, hogy felfutó él van-e vagy sem.
+	\item[] \texttt{$\#$ final int \underline{CLK}} Fixen az 1. bemenet az órajel
+	\item[] \texttt{$\#$ Value q} Belsõ memóriája, ami a kimenetén megjelenik, órajel felfutó élénél változhat az állapota.
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ FlipFlop(String name, int inputCount)}: 
+ % TODO
+	\item[] \texttt{$+$ void addTo(Composite composite)}: Hozzáadás kompozithoz
+	\item[] \texttt{$+$ void commit()}: Véglegesítés
+	\item[] \texttt{$+$ boolean isActive()}: Számolhat-e az FF? Ezt hívja meg az FF-ek onEvaluation() metódusa, mielõtt  bármit is csinálnának.
+	\item[] \texttt{$\#$ abstract void onCommit()}: Kimenetre értékadás a logika elvégzése után.
+	\item[] \texttt{$\#$ void onEvaluation()}: Nem csinálunk semmit, majd csak commit()-nál.
+\end{itemize}
+\end{itemize}
+
+\subsection{Pin}
+\begin{itemize}
+\item Felelõsség\\
+
+ % TODO
+\item Õsosztályok\ Object $\rightarrow{}$ Pin.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ AbstractComponent ac} 
+ % TODO
+	\item[] \texttt{$-$ int pin} 
+ % TODO
+	\item[] \texttt{$-$ Type type} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Pin(AbstractComponent ac, int pin, Type type)}: 
+ % TODO
+	\item[] \texttt{$+$ AbstractComponent getComponent()}: 
+ % TODO
+	\item[] \texttt{$+$ int getPin()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{Pin.Type}
+\begin{itemize}
+\item Felelõsség\\
+
+ % TODO
+\item Õsosztályok\ Object $\rightarrow{}$ Enum $\rightarrow{}$ Pin.Type.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$+$ final Type \underline{INPUT}} 
+ % TODO
+	\item[] \texttt{$+$ final Type \underline{OUTPUT}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Pin.Type()}: 
+ % TODO
+	\item[] \texttt{$+$ static Type valueOf(String name)}: 
+ % TODO
+	\item[] \texttt{$+$ static Type[] values()}: 
+ % TODO
+\end{itemize}
+\end{itemize}
+
+\subsection{SourceComponent}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelõsség\\
+Jelforrás típusú komponenst reprezentál. Tõle származnak a jelforrások (pl. toggle).
+\item Õsosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SourceComponent.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$\#$ SourceComponent(String name)}: Konstruktor. Nincs bemenete és egy kimenete van
+	\item[] \texttt{$+$ void addTo(Composite composite)}: Hozzáadás kompozithoz.
+	\item[] \texttt{$+$ abstract Value[] getValues()}: Lekérhetjük a jelforrás értékeit, hogy el tudjuk menteni.
+	\item[] \texttt{$+$ abstract void reset()}: Jelforrás nullázása
+	\item[] \texttt{$+$ abstract void setValues(Value[] values)}: Beállítjuk a jelforrás értékét. Kapcsoló esetén csak 1 elemû tömb  adható paraméterként!
+\end{itemize}
+\end{itemize}
+
+\subsection{Wire}
+\begin{itemize}
+\item Felelõsség\\
+Vezeték osztály. Két komponens-lábat köt össze. A rajta lévõ érték lekérdezhetõ  és beállítható.
+\item Õsosztályok\ Object $\rightarrow{}$ Wire.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Value value} Vezetéken lévõ érték
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Wire()}: 
+ % TODO
+	\item[] \texttt{$+$ WireView createView(ComponentViewCreator cvc, Point start, Point end)}: Lekérjük a vezetéket ábrázoló viewt, de a tényleges rajzolást nem mi végezzük, hanem  a ComponentViewCreator, kihasználva a Visitor tervezési mintát.
+	\item[] \texttt{$+$ Value getValue()}: Vezeték értékének lekérése
+	\item[] \texttt{$+$ void setValue(Value value)}: Vezeték értékének beállítása
+\end{itemize}
+\end{itemize}
+

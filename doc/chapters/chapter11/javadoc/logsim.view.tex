@@ -1,0 +1,104 @@
+\subsection{CircuitView}
+\begin{itemize}
+\item Felelősség\\
+Áramkört kirajzoló panel.
+\item Ősosztályok\ JPanel $\rightarrow{}$ CircuitView.
+\item Interfészek MouseListener.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ List drawables}: kirajzolandók listája
+	\item[] \texttt{$-$ FrameView parent}: főablak
+	\item[] \texttt{$-$ Map positions}: kirajzolandók pozíciója
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ CircuitView()}: Áramkört kirajzoló panel
+	\item[] \texttt{$+$ void mouseClicked(MouseEvent me)}: Egérkattintás kezelő
+	\item[] \texttt{$+$ void paint(Graphics g)}: Áramkör kirajzolása
+	\item[] \texttt{$+$ void refresh()}: Áramkör újrarajzolása.
+	\item[] \texttt{$+$ void setParent(FrameView parent)}: Szülő beállítása
+	\item[] \texttt{$+$ void updateDrawables(List drawables, Map coords)}: Kirajzolandó objektumok és koordinátáik beállítása
+\end{itemize}
+\end{itemize}
+
+\subsection{Drawable}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+Áramköri panelre rajzolható objektum.
+\item Ősosztályok\ Drawable.
+\item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ void draw(Graphics g)}: Kirajzolási logika
+	\item[] \texttt{$+$ Dimension getDimension()}: Lekérhetjük az objektumtól a méretét, ha beszélhetünk ilyenről.
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás logikája (visszahívhat a vezérlőre)
+\end{itemize}
+\end{itemize}
+
+\subsection{Frame}
+\begin{itemize}
+\item Felelősség\\
+Alkalmazás főablaka. Ő tartalmazza a CircuitView-t és a menüsort valamint a gombokat.
+\item Ősosztályok\ JFrame $\rightarrow{}$ Frame.
+\item Interfészek ActionListener, FrameView.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ CircuitView circuitView} 
+	\item[] \texttt{$-$ Controller controller}: vezérlő
+	\item[] \texttt{$-$ Timer t}: időzítő
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Frame(Controller controller)}: Kontruktor
+	\item[] \texttt{$-$ void aboutCloseBtnActionPerformed(ActionEvent evt)}: Névjegy ablak bezárása
+	\item[] \texttt{$-$ void aboutMIActionPerformed(ActionEvent evt)}: Névjegy menüpont eseményvezérlője
+	\item[] \texttt{$+$ void actionPerformed(ActionEvent e)}: Timer tick eventje
+	\item[] \texttt{$-$ void closeDetailedBTNActionPerformed(ActionEvent evt)}: Komponens részletei ablak bezárása
+	\item[] \texttt{$+$ void drawCircuit()}: Áramkör kirajzolása
+	\item[] \texttt{$-$ void exitMIActionPerformed(ActionEvent evt)}: Kilépés menüpont eseményvezérlője
+	\item[] \texttt{$+$ Controller getController()}: Lekérdezhető a vezérlő
+	\item[] \texttt{$-$ void loadCircuitMIActionPerformed(ActionEvent evt)}: Áramkör betöltése menüpont eseményvezérlője
+	\item[] \texttt{$-$ void loadConfigMIActionPerformed(ActionEvent evt)}: Konfig fájl betöltése menüpont eseményvezérlője
+	\item[] \texttt{$+$ void makeItVisible()}: Megjelenítés
+	\item[] \texttt{$+$ void onFailedSimulation()}: Áramkör szimulációja nem sikerült
+	\item[] \texttt{$+$ void onSuccessfulSimulation()}: Áramkör szimulációja sikeres
+	\item[] \texttt{$-$ void saveConfigMIActionPerformed(ActionEvent evt)}: Konfig fájl mentése menüpont eseményvezérlője
+	\item[] \texttt{$-$ void saveSeqBTNActionPerformed(ActionEvent evt)}: Új szekvencia elmentése
+	\item[] \texttt{$+$ void setDrawables(List drawables, Map positions)}: Megjelenítendő objektumok és koordinátáik átadása a megjelenítőnek
+	\item[] \texttt{$+$ void setPeriod(int pt)}: Szimuláció sebességének beállítása
+	\item[] \texttt{$+$ void showDetails(AbstractComponent ac)}: Általános komponens részleteinek megjelenítése
+	\item[] \texttt{$+$ void showDetails(Scope s)}: Scope részleteinek megjelenítése
+	\item[] \texttt{$+$ void showDetails(SequenceGenerator sg)}: Szekvenciagenerátor részleteinek megjelenítése
+	\item[] \texttt{$-$ void simSpeedSaveBtnActionPerformed(ActionEvent evt)}: Új sebesség mentése
+	\item[] \texttt{$-$ void simulationDelayActionPerformed(ActionEvent evt)}: Szimuláció sebességének beállítására szolgáló ablak megjelenítése
+	\item[] \texttt{$-$ void StartStopActionPerformed(ActionEvent evt)}: Szimuláció start/stop
+	\item[] \texttt{$-$ void stepBtnActionPerformed(ActionEvent evt)}: Léptetés gomb eseményvezérlője
+\end{itemize}
+\end{itemize}
+
+\subsection{FrameView}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+Főablak interfésze
+\item Ősosztályok\ FrameView.
+\item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ void drawCircuit()}: Kirajzoljuk az áramkört.
+	\item[] \texttt{$+$ Controller getController()}: Lekérdezzük a vezérlőt
+	\item[] \texttt{$+$ void makeItVisible()}: Itt kell megadni, hogy a főablak, hogy tehető láthatóvá.
+	\item[] \texttt{$+$ void onFailedSimulation()}: Itt adható meg, hogy mi történjen, ha nem stabil az áramkör
+	\item[] \texttt{$+$ void onSuccessfulSimulation()}: Itt adható meg, hogy mi történjen, ha sikeres egy szimulációs lépés
+	\item[] \texttt{$+$ void setDrawables(List drawables, Map positions)}: Beállítjuk a kirajzolandó objektumokat és azok pozícióját.
+	\item[] \texttt{$+$ void setPeriod(int pt)}: Szimuláció sebességének beállítása
+	\item[] \texttt{$+$ void showDetails(AbstractComponent ac)}: 
+Általános komponens részleteinek megjelenítése
+	\item[] \texttt{$+$ void showDetails(Scope s)}: 
+Scope részleteinek megjelenítése
+	\item[] \texttt{$+$ void showDetails(SequenceGenerator sg)}: 
+Szekvenciagenerátor részleteinek megjelenítése
+\end{itemize}
+\end{itemize}
+

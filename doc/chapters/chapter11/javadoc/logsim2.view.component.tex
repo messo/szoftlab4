@@ -1,0 +1,56 @@
+\subsection{ComponentView}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelõsség\\
+
+ % TODO
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView.
+\item Interfészek Drawable.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ final Dimension dimension} Szélesség-magasság
+	\item[] \texttt{$-$ final int \underline{margin}} 
+ % TODO
+	\item[] \texttt{$-$ final int \underline{pinLength}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView(int w, int h)}: Konstruktor a pozíciók megadásával.
+	\item[] \texttt{$+$ void draw(Graphics g)}: Kirajzolási logika
+	\item[] \texttt{$+$ final Dimension getDimension()}: Lekérhetjük az objektumtól a méretét.
+	\item[] \texttt{$\#$ abstract int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ abstract int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ Point getRelativeInputPinPosition(int pin)}: 
+ % TODO
+	\item[] \texttt{$+$ Point getRelativeOutputPinPosition(int pin)}: 
+ % TODO
+	\item[] \texttt{$\#$ abstract void onDraw(Graphics g)}: Komponens kirajzolásának egyedilogikája
+\end{itemize}
+\end{itemize}
+
+\subsection{WireView}
+\begin{itemize}
+\item Felelõsség\\
+Egy vezeték megjelenítéséért felelõs, amit törött vonallal jelenítünk meg.
+\item Õsosztályok\ Object $\rightarrow{}$ WireView.
+\item Interfészek Drawable.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Point end} Vezeték vége
+	\item[] \texttt{$-$ List referencePoints} Vezeték referenciapontjai, ahol a vezeték "törik".
+	\item[] \texttt{$-$ Point start} Vezeték kezdete
+	\item[] \texttt{$-$ final Wire w} Vezeték, aminek a megjelenítéséért felel.
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ WireView(Wire w, Point start, Point end)}: Konstruktor
+	\item[] \texttt{$+$ void draw(Graphics g)}: Kirajzolási logika
+	\item[] \texttt{$+$ Dimension getDimension()}: 
+ % TODO
+	\item[] \texttt{$+$ void onClick(Controller controller)}: 
+ % TODO
+	\item[] \texttt{$+$ void setReferencePoints(List referencePoints)}: Vezeték referenciapontjainak a beállítása
+\end{itemize}
+\end{itemize}
+

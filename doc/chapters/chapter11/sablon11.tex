@@ -28,6 +28,14 @@
 
 \begin{figure}[H]
 \begin{center}
+\includegraphics[width=2.8125in]{chapters/chapter11/screenshots/szimseb.png}
+\caption{Szimuláció sebességének beállítása}
+\label{fig:szimseb}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
 \includegraphics[width=2.8125in]{chapters/chapter11/screenshots/about.png}
 \caption{Névjegy}
 \label{fig:about}
@@ -57,60 +65,33 @@
 \subsection{A felület működési elve}
 \comment{Le kell írni, hogy a grafikai megjelenésért felelős osztályok, objektumok hogyan kapcsolódnak a meglevő rendszerhez, a megjelenítés során mi volt az alapelv. Törekedni kell az MVC megvalósításra. Alapelvek lehetnek: \textbf{push} alapú: a modell értesíti a felületet, hogy változott; \textbf{pull} alapú: a felület kérdezi le a modellt, hogy változott-e; \textbf{kevert}: a kettő kombinációja.}
 
+Az általunk elkészített grafikus felület "pull" típusú, vagyis a grafikus rendszer kérdezi le a modell objektumoktól az aktuális állapotukat.
+Azokhoz a modellobjektumokhoz, melyeket megjelenítünk, elkészítettünk egy-egy wrapper osztályt, mely a megjelenítésért és a megjelenítéshez szükséges információk tárolásáért felel. 
+Az áramkört egy JPanel-ra rajzoljuk, mely biztosítja számunkra, hogy az elhelyezhető legyen bármilyen ablakon. Áramkör újrarajzoláskor, az eltárolt objektumok egyenkét rajzolják ki magukat az előzöleg megadott koordináták alapján.
+Bármilyen felhasználói interakciónál, melynél változhat az áramkör állapota, az egész áramkört újrarajzoljuk, biztosítva ezzel, hogy a kirajzolt áramkör mindig az aktuális állapotban legyen megjelenítve.
+
+
 \subsection{A felület osztály-struktúrája}
-\comment{Osztálydiagram. Minden új osztály, és azon régiek, akik az újakhoz közvetlenül kapcsolódnak.}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics*[width=17cm]{chapters/chapter11/pdfs/class.pdf}
+\caption{Statikus struktúra nézet}
+\label{fig:class_diagram}
+\end{center}
+\end{figure}
 
 \section{A grafikus objektumok felsorolása}
-\comment{Az új osztályok felsorolása. Az régi osztályok közül azoknak a felsorolása, ahol változás volt. Ezek esetén csak a változásokat kell leírni.}
 
-\subsection{Osztály1}
-\begin{itemize}
-\item Felelősség\newline
-\comment{Mi az osztály felelőssége. Kb 1 bekezdés. Ha szükséges, akkor state-chart is.}
-\item Ősosztályok\newline
-\comment{Mely osztályokból származik (öröklési hierarchia)\newline
-Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
-\item Interfészek\newline
-\comment{Mely interfészeket valósítja meg.}
-\item Attribútumok\newline
-\comment{Milyen attribútumai vannak}
-	\begin{itemize}
-		\item attribútum1: attribútum jellemzése: mire való, láthatósága (UML jelöléssel), típusa
-		\item attribútum2: attribútum jellemzése: mire való, láthatósága (UML jelöléssel), típusa
-	\end{itemize}
-\item Metódusok\newline
-\comment{Milyen publikus, protected és privát  metódusokkal rendelkezik. Metódusonként precíz leírás, ha szükséges, activity diagram is  a metódusban megvalósítandó algoritmusról.}
-	\begin{itemize}
-		\item int foo(Osztály3 o1, Osztály4 o2): metódus leírása, láthatósága (UML jelöléssel)
-		\item int bar(Osztály5 o1): metódus leírása, láthatósága (UML jelöléssel)
-	\end{itemize}
-\end{itemize}
-
-\subsection{Osztály2}
-\begin{itemize}
-\item Felelősség\newline
-\comment{Mi az osztály felelőssége. Kb 1 bekezdés. Ha szükséges, akkor state-chart is.}
-\item Ősosztályok\newline
-\comment{Mely osztályokból származik (öröklési hierarchia)\newline
-Legősebb osztály $\rightarrow$ Ősosztály2 $\rightarrow$ Ősosztály3...}
-\item Interfészek\newline
-\comment{Mely interfészeket valósítja meg.}
-\item Attribútumok\newline
-\comment{Milyen attribútumai vannak}
-	\begin{itemize}
-		\item attribútum1: attribútum jellemzése: mire való, láthatósága (UML jelöléssel), típusa
-		\item attribútum2: attribútum jellemzése: mire való, láthatósága (UML jelöléssel), típusa
-	\end{itemize}
-\item Metódusok\newline
-\comment{Milyen publikus, protected és privát  metódusokkal rendelkezik. Metódusonként precíz leírás, ha szükséges, activity diagram is  a metódusban megvalósítandó algoritmusról.}
-	\begin{itemize}
-		\item int foo(Osztály3 o1, Osztály4 o2): metódus leírása, láthatósága (UML jelöléssel)
-		\item int bar(Osztály5 o1): metódus leírása, láthatósága (UML jelöléssel)
-	\end{itemize}
-\end{itemize}
+\input{chapters/chapter11/javadoc/logsim.tex}
+\input{chapters/chapter11/javadoc/logsim.model.tex}
+\input{chapters/chapter11/javadoc/logsim.model.component.tex}
+\input{chapters/chapter11/javadoc/logsim.model.component.impl.tex}
+\input{chapters/chapter11/javadoc/logsim.view.tex}
+\input{chapters/chapter11/javadoc/logsim.view.component.tex}
+\input{chapters/chapter11/javadoc/logsim.view.component.impl.tex}
 
 \section{Kapcsolat az alkalmazói rendszerrel}
-\comment{Szekvencia-diagramokon ábrázolni kell a grafikus rendszer működését. Konzisztens kell legyen az előző alfejezetekkel. Minden metódus, ami ott szerepel, fel kell tűnjön valamelyik szekvenciában. Minden metódusnak, ami szekvenciában szerepel, szereplnie kell a valamelyik osztálydiagramon.}
 
 \begin{figure}[h]
 \begin{center}

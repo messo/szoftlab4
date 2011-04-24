@@ -1,0 +1,114 @@
+\subsection{ComponentViewCreator}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+Az egyes alkatrészekhez létrehozza a "megjeleníthető" wrapper objektumokat.
+\item Ősosztályok\ ComponentViewCreator.
+\item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ AndGateView createView(AndGate ag)}: Megjeleníthető ÉS kapu létrehozása
+	\item[] \texttt{$+$ CompositeView createView(Composite c)}: Megjeleníthető Kompozit létrehozása
+	\item[] \texttt{$+$ FlipFlopDView createView(FlipFlopD ff)}: Megjeleníthető D flip-flop létrehozása
+	\item[] \texttt{$+$ FlipFlopJKView createView(FlipFlopJK ff)}: Megjeleníthető JK flip-flop létrehozása
+	\item[] \texttt{$+$ GndView createView(Gnd gnd)}: Megjeleníthető GND komponens létrehozása
+	\item[] \texttt{$+$ InverterView createView(Inverter inv)}: Megjeleníthető Inverter komponens létrehozása
+	\item[] \texttt{$+$ LedView createView(Led led)}: Megjeleníthető LED komponens létrehozása
+	\item[] \texttt{$+$ MpxView createView(Mpx mpx)}: Megjeleníthető Multiplexer komponens létrehozása
+	\item[] \texttt{$+$ NodeView createView(Node node)}: Megjeleníthető Node komponens létrehozása
+	\item[] \texttt{$+$ OrGateView createView(OrGate og)}: Megjeleníthető VAGY kapu létrehozása
+	\item[] \texttt{$+$ ScopeView createView(Scope scope)}: Megjeleníthető Scope komponens létrehozása
+	\item[] \texttt{$+$ SequenceGeneratorView createView(SequenceGenerator sg)}: Megjeleníthető jelgenerátor létrehozása
+	\item[] \texttt{$+$ SevenSegmentDisplayView createView(SevenSegmentDisplay ssd)}: Megjeleníthető Hétszegmenses komponens létrehozása
+	\item[] \texttt{$+$ ToggleView createView(Toggle toggle)}: Megjeleníthető Kapcsoló komponens létrehozása
+	\item[] \texttt{$+$ VccView createView(Vcc vcc)}: Megjeleníthető VCC komponens létrehozása
+	\item[] \texttt{$+$ WireView createView(Wire wire, Point start, Point end)}: Megjeleníthető vezeték létrehozása
+\end{itemize}
+\end{itemize}
+
+\subsection{Controller}
+Interfész.
+\begin{itemize}
+\item Felelősség\\
+A program ezeket a szolgáltatásokat nyújta a grafikus felület felé
+\item Ősosztályok\ Controller.
+\item Interfészek (nincs)
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ void loadCircuit(String fileName)}: Áramkör betöltése
+	\item[] \texttt{$+$ void loadConfiguration(String fileName)}: Áromkör konfigurációs fájl betöltése
+	\item[] \texttt{$+$ void onComponentClick(AbstractComponent ag)}: Általános komponens információ megjelenítés (név, bemenet, kimenet)
+	\item[] \texttt{$+$ void onComponentClick(Scope scope)}: Scope megjelenítés (eddig eltárolt értékek)
+	\item[] \texttt{$+$ void onComponentClick(SequenceGenerator sg)}: Jelgenerátor megjelenítése és konfigurálása
+	\item[] \texttt{$+$ void onComponentClick(Toggle toggle)}: Kapcsoló változtatása
+	\item[] \texttt{$+$ void onPeriodChanged(int p)}: Szimuláció sebességének megváltoztatása
+	\item[] \texttt{$+$ void onSequenceChanged(SequenceGenerator sg, String seq)}: Új szekvencia mentése
+	\item[] \texttt{$+$ void onStep()}: Áramkör léptetése
+	\item[] \texttt{$+$ void saveConfiguration(String fileName)}: Konfigurációs fájl mentése
+\end{itemize}
+\end{itemize}
+
+\subsection{GuiController}
+\begin{itemize}
+\item Felelősség\\
+Az alkalmazás vezérlője
+\item Ősosztályok\ Object $\rightarrow{}$ GuiController.
+\item Interfészek ComponentViewCreator, Controller.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Circuit c}: vezérelt áramkör
+	\item[] \texttt{$-$ Config config}: vezérelt áramkörhöz tartozó konfiguráció
+	\item[] \texttt{$-$ Simulation simulation}: szimuláció
+	\item[] \texttt{$-$ FrameView v}: alkalmazás főablaka
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ GuiController()}: Konstruktor
+	\item[] \texttt{$+$ AndGateView createView(AndGate ag)}: Megjeleníthető ÉS kapu létrehozása
+	\item[] \texttt{$+$ CompositeView createView(Composite c)}: Megjeleníthető Kompozit létrehozása
+	\item[] \texttt{$+$ FlipFlopDView createView(FlipFlopD ff)}: Megjeleníthető D flip-flop létrehozása
+	\item[] \texttt{$+$ FlipFlopJKView createView(FlipFlopJK ff)}: Megjeleníthető JK flip-flop létrehozása
+	\item[] \texttt{$+$ GndView createView(Gnd gnd)}: Megjeleníthető GND komponens létrehozása
+	\item[] \texttt{$+$ InverterView createView(Inverter inv)}: Megjeleníthető Inverter komponens létrehozása
+	\item[] \texttt{$+$ LedView createView(Led led)}: Megjeleníthető LED komponens létrehozása
+	\item[] \texttt{$+$ MpxView createView(Mpx mpx)}: Megjeleníthető Multiplexer komponens létrehozása
+	\item[] \texttt{$+$ NodeView createView(Node node)}: Megjeleníthető Node komponens létrehozása
+	\item[] \texttt{$+$ OrGateView createView(OrGate og)}: Megjeleníthető VAGY kapu létrehozása
+	\item[] \texttt{$+$ ScopeView createView(Scope scope)}: Megjeleníthető Scope komponens létrehozása
+	\item[] \texttt{$+$ SequenceGeneratorView createView(SequenceGenerator sg)}: Megjeleníthető jelgenerátor létrehozása
+	\item[] \texttt{$+$ SevenSegmentDisplayView createView(SevenSegmentDisplay ssd)}: Megjeleníthető Hétszegmenses komponens létrehozása
+	\item[] \texttt{$+$ ToggleView createView(Toggle toggle)}: Megjeleníthető Kapcsoló komponens létrehozása
+	\item[] \texttt{$+$ VccView createView(Vcc vcc)}: Megjeleníthető VCC komponens létrehozása
+	\item[] \texttt{$+$ WireView createView(Wire wire, Point start, Point end)}: Megjeleníthető vezeték létrehozása
+	\item[] \texttt{$+$ void loadCircuit(String fileName)}: Áramkör betöltése
+	\item[] \texttt{$+$ void loadConfiguration(String fileName)}: Áromkör konfigurációs fájl betöltése
+	\item[] \texttt{$+$ static void main(String[] args)}: Program belépési pontja
+	\item[] \texttt{$+$ void onComponentClick(AbstractComponent ag)}: Általános komponens információ megjelenítés (név, bemenet, kimenet)
+	\item[] \texttt{$+$ void onComponentClick(Scope scope)}: Scope megjelenítés (eddig eltárolt értékek)
+	\item[] \texttt{$+$ void onComponentClick(SequenceGenerator sg)}: Jelgenerátor megjelenítése és konfigurálása
+	\item[] \texttt{$+$ void onComponentClick(Toggle toggle)}: Kapcsoló változtatása
+	\item[] \texttt{$+$ void onPeriodChanged(int p)}: Szimuláció sebességének megváltoztatása
+	\item[] \texttt{$+$ void onSequenceChanged(SequenceGenerator sg, String seq)}: Szekvenciagenerátor értékének változtatása
+	\item[] \texttt{$+$ void onStep()}: Áramkör léptetése
+	\item[] \texttt{$-$ void run()}: főablakot kirajzoljuk
+	\item[] \texttt{$+$ void saveConfiguration(String fileName)}: Konfigurációs fájl mentése
+\end{itemize}
+\end{itemize}
+
+\subsection{Parser (vált.)}
+\begin{itemize}
+\item Felelősség\\
+Áramkör értelmező objektum, feladata, hogy a paraméterként átadott, illetve  fájlban elhelyezett komponenseket értelmezze, a kapcsolatokat feltérképezze,  elvégezze az összeköttetéseket, és ezáltal felépítse az áramkört.
+\item Ősosztályok\ Object $\rightarrow{}$ Parser.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Point getPosition(AbstractComponent ac)}: Komponens pozíciójának a lekérdezése
+	\item[] \texttt{$-$ AbstractComponent parseComponent(String variableName, String componentName, String argumentsStr, Composite composite)}: 
+ % TODO
+	\item[] \texttt{$-$ AbstractComponent parseComponentFromLine(Matcher matcher, Composite composite)}: Egy komponens-sor feldolgozása a fájlban
+	\item[] \texttt{$-$ AbstractComponent parseTopLevelComponentFromLine(Matcher matcher, Circuit circuit)}: Egy olyan komponens-sor feldolgozása a fájlban, ami a legfelső szinten szerepel,  azaz a kompozit amiben szerepel az az áramkör. Itt a pozíció információt is feldolgozzuk!
+\end{itemize}
+\end{itemize}

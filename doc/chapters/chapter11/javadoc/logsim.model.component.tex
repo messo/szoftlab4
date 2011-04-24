@@ -1,0 +1,40 @@
+\subsection{AbstractComponent (vált.)}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelősség\\
+Egy komponens absztrakt megvalósítása, ebből származik az összes többi  komponens. A közös logikát valósítja meg. A gyakran használt dolgokra  ad alapértelmezett implementációt (kimenetekre és bemenetekre kötés, kiértékelés stb.)
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: Lekérjük a komponenst ábrázoló viewt, de a tényleges rajzolást nem mi végezzük, hanem  a ComponentViewCreator, kihasználva a Visitor tervezési mintát.
+\end{itemize}
+\end{itemize}
+
+\subsection{Composite (vált.)}
+\begin{itemize}
+\item Felelősség\\
+Kompozit elem leírása, kiértékelésnél a tartalmazott komponenseket kiértékeli, lépteti  a jelgenerátorokat stb. Ha nem áll be stacionárius állapotba a kiértékelésnél, akkor ezt jelzi kifelé.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Composite.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{Wire (vált.)}
+\begin{itemize}
+\item Felelősség\\
+Vezeték osztály. Két komponens-lábat köt össze. A rajta lévő érték lekérdezhető  és beállítható.
+\item Ősosztályok\ Object $\rightarrow{}$ Wire.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ WireView createView(ComponentViewCreator cvc, Point start, Point end)}: Lekérjük a vezetéket ábrázoló viewt, de a tényleges rajzolást nem mi végezzük, hanem  a ComponentViewCreator, kihasználva a Visitor tervezési mintát.
+\end{itemize}
+\end{itemize}
+

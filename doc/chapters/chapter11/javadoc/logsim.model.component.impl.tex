@@ -1,0 +1,206 @@
+\subsection{AndGate (vált.)}
+\begin{itemize}
+\item Felelősség\\
+ÉS kapu, az áramkör egyik alapeleme. Bemeneteire kötött komponensek  kiértékelését kezdeményezi, s a kapott értékek logikai ÉS kapcsolatát  valósítja meg, amit a kimenetén kiad.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ AndGate.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlopD (vált.)}
+\begin{itemize}
+\item Felelősség\\
+D flipflop, mely felfutó órajelnél beírja a belső memóriába az adatbemeneten (D)  lévő értéket.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopD.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlopJK (vált.)}
+\begin{itemize}
+\item Felelősség\\
+JK flipflop, mely a belső memóriáját a Követelmények résznél leírt módon  a J és K bemenetektől függően változtatja.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ FlipFlop $\rightarrow{}$ FlipFlopJK.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{Gnd (vált.)}
+\begin{itemize}
+\item Felelősség\\
+A "föld" komponens, mely állandóan a hamis értéket adja ki. Nincs bemenete.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Gnd.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{Inverter (vált.)}
+\begin{itemize}
+\item Felelősség\\
+Inverter alkatrész, mely invertálva adja ki a kimenetén a bemenetén  érkező jelet.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Inverter.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{Led (vált.)}
+\begin{itemize}
+\item Felelősség\\
+Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ DisplayComponent $\rightarrow{}$ Led.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{Mpx (vált.)}
+\begin{itemize}
+\item Felelősség\\
+4-1-es multiplexer, melynek a bemeneti lábak sorrendje a következő:  D0, D1, D2, D3, S0, S1. Ahol Dx az adatbemenetek, Sy a kiválasztóbemenetek.  Kimenetén a kiválasztóbemenetektől függően valamelyik adatbemenet kerül kiadásra.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Mpx.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{Node (vált.)}
+\begin{itemize}
+\item Felelősség\\
+Csomópont elem. Az egyetlen bemenetére kötött értéket kiadja az összes kimeneti lábán.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Node.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{OrGate (vált.)}
+\begin{itemize}
+\item Felelősség\\
+VAGY kapu, az áramkör egyik alapeleme. Bemenetein lévő értékek logikai VAGY kapcsolatát  valósítja meg, amit a kimenetén kiad.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ OrGate.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{Scope (vált.)}
+\begin{itemize}
+\item Felelősség\\
+Egy oszcilloszkópot reprezentál. Eltárolt értékek egy sorba kerülnek bele, mely fix méretű.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ DisplayComponent $\rightarrow{}$ Led $\rightarrow{}$ Scope.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{SequenceGenerator (vált.)}
+\begin{itemize}
+\item Felelősség\\
+Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki.  Alapértelmezetten (amíg a felhasználó nem állítja be, vagy tölt be másikat) a 0,1-es  szekvenciát tárolja.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SourceComponent $\rightarrow{}$ SequenceGenerator.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{SevenSegmentDisplay (vált.)}
+\begin{itemize}
+\item Felelősség\\
+7-szegmenses kijelzőt reprezentál, melynek 7 bemenete vezérli a  megfelelő szegmenseket, ezek világítanak, ha az adott bemenetre logikai  igaz van kötve.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ DisplayComponent $\rightarrow{}$ SevenSegmentDisplay.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{Toggle (vált.)}
+\begin{itemize}
+\item Felelősség\\
+Kapcsoló jelforrás, melyet a felhasználó szimuláció közben kapcsolgathat.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ SourceComponent $\rightarrow{}$ Toggle.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
+\subsection{Vcc (vált.)}
+\begin{itemize}
+\item Felelősség\\
+A tápfeszültés komponens, ami konstans igaz értéket ad. Nincs bemenete.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Vcc.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+\item (nincs)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView createView(ComponentViewCreator cvc)}: 
+\end{itemize}
+\end{itemize}
+
