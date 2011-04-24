@@ -9,6 +9,10 @@
 
 \Aref{fig:main}. ábra mutatja a főablakot, a benne lévő áramkör csak illusztráció. A két menü almenüi \aref{fig:menus}. ábrán látszódnak. A Fájl menü almenüi beszédesek, a felső három menüpontra megnyílik egy fájlválasztó ablak, ahol megadható egy fájl, majd az adott akció lefut. A Kilépés menüpont segítségével kiléphetünk az alkalmazásból. Az Egyéb menü Néjegy menüpontjára kapcsolva pedig megnyílik \aref{fig:about}. ábrán látható ablak.
 
+A Start gombra kattintva a szimuláció magától lép, az éppen beállított időközönként. Ennek módosítása az Egyéb/Szimuláció sebessége menüpontra kattinta lehetséges, ahol msec-ben megadhatjuk a két léptetés közt eltelt időt.
+
+Lehetőség van bármikor megnézni egy komponens részleteit - ha rákkattintunk egy külön ablakban láthatjuk a komponens bemeneteit és kimeneteit. Szekvenciagenerátor szekvenciájának módosítása is hasonlóképpen történik.
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=3.64in]{chapters/chapter11/screenshots/felulet.png}
@@ -60,10 +64,10 @@
 
 
 \section{A grafikus rendszer architektúrája}
-\comment{A felület működésének elve, a grafikus rendszer architektúrája (struktúra diagramok). A struktúra diagramokon a prototípus azon és csak azon osztályainak is szerepelnie kell, amelyekhez a grafikus felületet létrehozó osztályok kapcsolódnak.}
+%\comment{A felület működésének elve, a grafikus rendszer architektúrája (struktúra diagramok). A struktúra diagramokon a prototípus azon és csak azon osztályainak is szerepelnie kell, amelyekhez a grafikus felületet létrehozó osztályok kapcsolódnak.}
 
 \subsection{A felület működési elve}
-\comment{Le kell írni, hogy a grafikai megjelenésért felelős osztályok, objektumok hogyan kapcsolódnak a meglevő rendszerhez, a megjelenítés során mi volt az alapelv. Törekedni kell az MVC megvalósításra. Alapelvek lehetnek: \textbf{push} alapú: a modell értesíti a felületet, hogy változott; \textbf{pull} alapú: a felület kérdezi le a modellt, hogy változott-e; \textbf{kevert}: a kettő kombinációja.}
+%\comment{Le kell írni, hogy a grafikai megjelenésért felelős osztályok, objektumok hogyan kapcsolódnak a meglevő rendszerhez, a megjelenítés során mi volt az alapelv. Törekedni kell az MVC megvalósításra. Alapelvek lehetnek: \textbf{push} alapú: a modell értesíti a felületet, hogy változott; \textbf{pull} alapú: a felület kérdezi le a modellt, hogy változott-e; \textbf{kevert}: a kettő kombinációja.}
 
 Az általunk elkészített grafikus felület "pull" típusú, vagyis a grafikus rendszer kérdezi le a modell objektumoktól az aktuális állapotukat.
 Azokhoz a modellobjektumokhoz, melyeket megjelenítünk, elkészítettünk egy-egy wrapper osztályt, mely a megjelenítésért és a megjelenítéshez szükséges információk tárolásáért felel. 
@@ -93,7 +97,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 
 \section{Kapcsolat az alkalmazói rendszerrel}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{chapters/chapter11/pdfs/1_program_start.pdf}
 \caption{Program indítása}
@@ -101,7 +105,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{chapters/chapter11/pdfs/2_loadcircuit.pdf}
 \caption{Áramkör betöltése}
@@ -109,7 +113,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{chapters/chapter11/pdfs/3_loadconfig.pdf}
 \caption{Konfigurációs fájl betöltése}
@@ -117,7 +121,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{chapters/chapter11/pdfs/4_saveconfig.pdf}
 \caption{Konfigurációs fájl mentése}
@@ -125,7 +129,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=10cm]{chapters/chapter11/pdfs/5_paint1.pdf}
 \caption{Rajzolás indítása}
@@ -133,7 +137,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=10cm]{chapters/chapter11/pdfs/6_paint2.pdf}
 \caption{Rajzolás}
@@ -141,7 +145,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=15cm]{chapters/chapter11/pdfs/7_step.pdf}
 \caption{Szimuláció léptetése}
@@ -149,7 +153,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=10cm]{chapters/chapter11/pdfs/8_newsequence.pdf}
 \caption{Szekvencia mentése}
@@ -157,7 +161,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{chapters/chapter11/pdfs/9_toggle.pdf}
 \caption{Kapcsolóra kattintás}
@@ -165,7 +169,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{chapters/chapter11/pdfs/10_showcomponent.pdf}
 \caption{Komponens állapotának kijelzése}
@@ -173,7 +177,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=17cm]{chapters/chapter11/pdfs/11_startstop.pdf}
 \caption{Start/Stop klikk}
@@ -181,7 +185,7 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=6cm]{chapters/chapter11/pdfs/12_szimseb.pdf}
 \caption{Szimuláció sebességének állítása}

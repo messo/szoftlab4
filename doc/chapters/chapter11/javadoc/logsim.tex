@@ -36,7 +36,7 @@ A program ezeket a szolgáltatásokat nyújta a grafikus felület felé
 \item Metódusok$\ $
 \begin{itemize}
 	\item[] \texttt{$+$ void loadCircuit(String fileName)}: Áramkör betöltése
-	\item[] \texttt{$+$ void loadConfiguration(String fileName)}: Áromkör konfigurációs fájl betöltése
+	\item[] \texttt{$+$ void loadConfiguration(String fileName)}: Áramkör konfigurációs fájl betöltése
 	\item[] \texttt{$+$ void onComponentClick(AbstractComponent ag)}: Általános komponens információ megjelenítés (név, bemenet, kimenet)
 	\item[] \texttt{$+$ void onComponentClick(Scope scope)}: Scope megjelenítés (eddig eltárolt értékek)
 	\item[] \texttt{$+$ void onComponentClick(SequenceGenerator sg)}: Jelgenerátor megjelenítése és konfigurálása
@@ -106,7 +106,7 @@ Az alkalmazás vezérlője
 \item Metódusok$\ $
 \begin{itemize}
 	\item[] \texttt{$+$ Point getPosition(AbstractComponent ac)}: Komponens pozíciójának a lekérdezése
-	\item[] \texttt{$-$ AbstractComponent parseComponent(String variableName, String componentName, String argumentsStr, Composite composite)}: 
+	\item[] \texttt{$-$ AbstractComponent parseComponent(String variableName,}\\\texttt{String componentName, String argumentsStr, Composite composite)}: 
  % TODO
 	\item[] \texttt{$-$ AbstractComponent parseComponentFromLine(Matcher matcher, Composite composite)}: Egy komponens-sor feldolgozása a fájlban
 	\item[] \texttt{$-$ AbstractComponent parseTopLevelComponentFromLine(Matcher matcher, Circuit circuit)}: Egy olyan komponens-sor feldolgozása a fájlban, ami a legfelső szinten szerepel,  azaz a kompozit amiben szerepel az az áramkör. Itt a pozíció információt is feldolgozzuk!
