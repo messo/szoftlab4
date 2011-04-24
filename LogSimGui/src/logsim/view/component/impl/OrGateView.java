@@ -18,7 +18,7 @@ public class OrGateView extends ComponentView {
      * @param og Megjelenítendõ VAGY kapu
      */
     public OrGateView(OrGate og) {
-        super(40, 30);
+        super(35, 30);
         this.og = og;
     }
 
@@ -37,8 +37,10 @@ public class OrGateView extends ComponentView {
      */
     @Override
     protected void onDraw(Graphics g) {
-        g.drawRect(0, 0, 40, 30);
-        g.drawString("OR", 13, 19);
+        //g.drawRect(0, 0, 40, 30);
+        //g.drawString("OR", 13, 19);
+        g.drawOval(-35, 0, 70, 30);
+        g.drawOval(-7, 0, 14, 30);
     }
 
     /**
