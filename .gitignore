@@ -20,3 +20,9 @@ doc/*.lof
 doc/*.out
 doc/chapters/chapter03/javadoc/*.aux
 doc/chapters/chapter03/javadoc/*.class
+
+/LogSimProto/test2.txt
+/LogSimProto/test_t.txt
+/doc/chapters/chapter11/diagrams/showcomponent.vpp~4
+/doc/chapters/chapter11/diagrams/showcomponent.vpp~5
+/doc/chapters/chapter11/diagrams/toggleclick.vpp~1

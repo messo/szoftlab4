@@ -1,6 +1,8 @@
 package logsim;
 
 import java.awt.Point;
+import logsim.model.component.Composite;
+import logsim.model.component.impl.FlipFlopD;
 import logsim.model.component.impl.FlipFlopJK;
 import logsim.model.component.impl.Gnd;
 import logsim.model.component.impl.Inverter;
@@ -34,6 +36,8 @@ import logsim.view.FrameView;
 import logsim.view.component.ComponentView;
 import logsim.view.component.WireView;
 import logsim.view.component.impl.AndGateView;
+import logsim.view.component.impl.CompositeView;
+import logsim.view.component.impl.FlipFlopDView;
 import logsim.view.component.impl.FlipFlopJKView;
 import logsim.view.component.impl.GndView;
 import logsim.view.component.impl.InverterView;
@@ -205,6 +209,26 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public SequenceGeneratorView createView(SequenceGenerator sg) {
         return new SequenceGeneratorView(sg);
+    }
+
+    /**
+     * Megjeleníthetõ D flip-flop létrehozása
+     * @param ff Becsomagolt D FF komponens
+     * @return
+     */
+    @Override
+    public FlipFlopDView createView(FlipFlopD ff) {
+        return new FlipFlopDView(ff);
+    }
+
+    /**
+     * Megjeleníthetõ Kompozit létrehozása
+     * @param c Becsomagolt Kompozit komponens
+     * @return
+     */
+    @Override
+    public CompositeView createView(Composite c) {
+        return new CompositeView(c);
     }
 
     /**
