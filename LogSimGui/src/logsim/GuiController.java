@@ -41,6 +41,7 @@ import logsim.view.component.impl.LedView;
 import logsim.view.component.impl.MpxView;
 import logsim.view.component.impl.NodeView;
 import logsim.view.component.impl.OrGateView;
+import logsim.view.component.impl.ScopeView;
 import logsim.view.component.impl.SequenceGeneratorView;
 import logsim.view.component.impl.SevenSegmentDisplayView;
 import logsim.view.component.impl.ToggleView;
@@ -104,6 +105,16 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public LedView createView(Led led) {
         return new LedView(led);
+    }
+
+    /**
+     * Megjeleníthetõ Scope komponens létrehozása
+     * @param scope Becsomagolt oszcilloszkóp
+     * @return
+     */
+    @Override
+    public ScopeView createView(Scope scope) {
+        return new ScopeView(scope);
     }
 
     /**
@@ -359,5 +370,9 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public void onComponentClick(Scope scope) {
         // ablak megjelenítés
+        for(Value value : scope.getValues()) {
+            System.out.print(value == Value.TRUE ? "1" : "0");
+        }
+        System.out.println("");
     }
 }

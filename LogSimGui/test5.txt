@@ -1,0 +1,5 @@
+seqgen = SEQGEN() {30 30}
+j = TOGGLE() {46 47}
+k = TOGGLE() {46 64}
+jk = FFJK(seqgen,j,k) {100 30}
+scope = SCOPE(jk, 3) {180 47}

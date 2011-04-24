@@ -10,11 +10,11 @@ import logsim.model.component.impl.Led;
 import logsim.model.component.impl.Mpx;
 import logsim.model.component.impl.Node;
 import logsim.model.component.impl.OrGate;
+import logsim.model.component.impl.Scope;
 import logsim.model.component.impl.SequenceGenerator;
 import logsim.model.component.impl.SevenSegmentDisplay;
 import logsim.model.component.impl.Toggle;
 import logsim.model.component.impl.Vcc;
-import logsim.view.component.ComponentView;
 import logsim.view.component.WireView;
 import logsim.view.component.impl.AndGateView;
 import logsim.view.component.impl.FlipFlopJKView;
@@ -24,6 +24,7 @@ import logsim.view.component.impl.LedView;
 import logsim.view.component.impl.MpxView;
 import logsim.view.component.impl.NodeView;
 import logsim.view.component.impl.OrGateView;
+import logsim.view.component.impl.ScopeView;
 import logsim.view.component.impl.SequenceGeneratorView;
 import logsim.view.component.impl.SevenSegmentDisplayView;
 import logsim.view.component.impl.ToggleView;
@@ -64,6 +65,13 @@ public interface ComponentViewCreator {
      * @return
      */
     LedView createView(Led led);
+
+    /**
+     * Megjeleníthetõ Scope komponens létrehozása
+     * @param scope Becsomagolt oszcilloszkóp
+     * @return
+     */
+    ScopeView createView(Scope scope);
 
     /**
      * Megjeleníthetõ Kapcsoló komponens létrehozása

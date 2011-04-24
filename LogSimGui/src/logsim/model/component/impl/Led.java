@@ -4,7 +4,6 @@ import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.DisplayComponent;
 import logsim.view.component.ComponentView;
-import logsim.view.component.impl.LedView;
 
 /**
  * Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.

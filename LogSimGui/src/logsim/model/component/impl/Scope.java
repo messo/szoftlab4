@@ -2,8 +2,10 @@ package logsim.model.component.impl;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.Composite;
+import logsim.view.component.ComponentView;
 
 /**
  * Egy oszcilloszkópot reprezentál. Eltárolt értékek egy sorba kerülnek bele, mely fix méretû.
@@ -65,5 +67,10 @@ public class Scope extends Led {
     @Override
     public void addTo(Composite composite) {
         composite.add(this);
+    }
+
+    @Override
+    public ComponentView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }
