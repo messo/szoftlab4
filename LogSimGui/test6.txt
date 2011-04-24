@@ -1,0 +1,12 @@
+input = TOGGLE() {50 68}
+seqgen = SEQGEN() {30 50}
+composite SHR(clk, in){
+in2 = NODE(in, 1)
+d1 = FFD(clk, in)
+node1 = NODE(d1,2)
+d2 = FFD(clk,node1[1])
+} (in2, node1[2], d2)
+myshr = SHR(seqgen, input) {80 50}
+led1 = LED(myshr[1]) {140 38}
+led2 = LED(myshr[2]) {140 59}
+ledcarry = LED(myshr[3]) {140 80}
