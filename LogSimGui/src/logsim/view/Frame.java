@@ -645,6 +645,10 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
     @Override
     public void onFailedSimulation() {
         stateLabel.setText("INSTABIL !!!");
+        if (t.isRunning()) {
+            StartStop.setText("Start");
+            t.stop();
+        }
     }
 
     /**
