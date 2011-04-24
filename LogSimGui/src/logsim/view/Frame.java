@@ -257,6 +257,8 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
         jLabel4.setText("jLabel4");
 
+        simSpeedDialog.setTitle("Szimuláció sebessége");
+
         jLabel6.setText("Szimuláció sebessége (msec):");
 
         simSpeedTF.setText("jTextField1");
@@ -290,8 +292,11 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        detailedViewDialog.setTitle("Komponens részletei");
+
         inputsLabel.setText("Bemenetek:");
 
+        inputsTF.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         inputsTF.setText("jTextField1");
 
         jLabel7.setText("Kimenetek:");
