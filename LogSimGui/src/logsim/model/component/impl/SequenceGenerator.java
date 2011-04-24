@@ -1,9 +1,11 @@
 package logsim.model.component.impl;
 
 import java.util.Arrays;
+import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.Composite;
 import logsim.model.component.SourceComponent;
+import logsim.view.component.ComponentView;
 
 /**
  * Jelgenerátort reprezentál, amely a beállított bitsorozatot adja ki.
@@ -92,5 +94,10 @@ public class SequenceGenerator extends SourceComponent {
         sequence = new Value[2];
         sequence[0] = Value.FALSE;
         sequence[1] = Value.TRUE;
+    }
+
+    @Override
+    public ComponentView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }

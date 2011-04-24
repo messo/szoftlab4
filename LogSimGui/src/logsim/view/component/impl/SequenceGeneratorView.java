@@ -4,25 +4,25 @@ import java.awt.Color;
 import java.awt.Graphics;
 import logsim.Controller;
 import logsim.model.Value;
-import logsim.model.component.impl.Toggle;
+import logsim.model.component.impl.SequenceGenerator;
 import logsim.view.component.ComponentView;
 
 /**
- * Kapcsolót kirajzoló osztály
+ * Jelgenerátort kirajzoló osztály
  */
-public class ToggleView extends ComponentView {
+public class SequenceGeneratorView extends ComponentView {
 
-    private static int width = 12;
+    private static int width = 26;
     private static int height = 12;
-    private Toggle toggle;
+    private SequenceGenerator sg;
 
     /**
      * Konstruktor
-     * @param toggle Megjelenítendõ kapcsoló
+     * @param sg Megjelenítendõ jelgenerátor
      */
-    public ToggleView(Toggle toggle) {
+    public SequenceGeneratorView(SequenceGenerator sg) {
         super(width, height);
-        this.toggle = toggle;
+        this.sg = sg;
     }
 
     /**
@@ -31,7 +31,7 @@ public class ToggleView extends ComponentView {
      */
     @Override
     public void onClick(Controller controller) {
-        controller.onComponentClick(toggle);
+        controller.onComponentClick(sg);
     }
 
     /**
@@ -40,13 +40,14 @@ public class ToggleView extends ComponentView {
      */
     @Override
     public void onDraw(Graphics g) {
-        g.drawRect(0, 0, width, height);
-        if (toggle.getValues()[0] == Value.TRUE) {
+        //g.drawRect(0, 0, width, height);
+        g.drawString("seq", 0, 9);
+        if (sg.getOutputWire(1).getValue() == Value.TRUE) {
             g.setColor(Color.RED);
-            g.fillOval(2, 2, width - 4, height - 4);
+            g.fillOval(18, 2, 8, 8);
             g.setColor(Color.BLACK);
         }
-        g.drawOval(2, 2, width - 4, height - 4);
+        g.drawOval(18, 2, 8, 8);
     }
 
     /**

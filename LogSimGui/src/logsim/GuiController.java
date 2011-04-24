@@ -1,6 +1,7 @@
 package logsim;
 
 import java.awt.Point;
+import logsim.model.component.impl.FlipFlopJK;
 import logsim.model.component.impl.Gnd;
 import logsim.model.component.impl.Inverter;
 import logsim.model.component.impl.Led;
@@ -33,12 +34,14 @@ import logsim.view.FrameView;
 import logsim.view.component.ComponentView;
 import logsim.view.component.WireView;
 import logsim.view.component.impl.AndGateView;
+import logsim.view.component.impl.FlipFlopJKView;
 import logsim.view.component.impl.GndView;
 import logsim.view.component.impl.InverterView;
 import logsim.view.component.impl.LedView;
 import logsim.view.component.impl.MpxView;
 import logsim.view.component.impl.NodeView;
 import logsim.view.component.impl.OrGateView;
+import logsim.view.component.impl.SequenceGeneratorView;
 import logsim.view.component.impl.SevenSegmentDisplayView;
 import logsim.view.component.impl.ToggleView;
 import logsim.view.component.impl.VccView;
@@ -171,6 +174,26 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public VccView createView(Vcc vcc) {
         return new VccView();
+    }
+
+    /**
+     * Megjeleníthetõ JK flip-flop létrehozása
+     * @param ff Becsomagolt JK FF komponens
+     * @return
+     */
+    @Override
+    public FlipFlopJKView createView(FlipFlopJK ff) {
+        return new FlipFlopJKView(ff);
+    }
+
+    /**
+     * Megjeleníthetõ jelgenerátor létrehozása
+     * @param sg
+     * @return
+     */
+    @Override
+    public SequenceGeneratorView createView(SequenceGenerator sg) {
+        return new SequenceGeneratorView(sg);
     }
 
     /**

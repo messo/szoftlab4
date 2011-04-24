@@ -12,8 +12,8 @@ import logsim.view.component.ComponentView;
  */
 public class LedView extends ComponentView {
 
-    private static int width = 10;
-    private static int height = 10;
+    private static int width = 12;
+    private static int height = 12;
     private Led led;
 
     /**

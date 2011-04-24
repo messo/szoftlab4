@@ -1,7 +1,9 @@
 package logsim.model.component.impl;
 
+import logsim.ComponentViewCreator;
 import logsim.model.Value;
 import logsim.model.component.FlipFlop;
+import logsim.view.component.ComponentView;
 
 /**
  * JK flipflop, mely a belsõ memóriáját a Követelmények résznél leírt módon
@@ -53,5 +55,10 @@ public class FlipFlopJK extends FlipFlop {
     @Override
     public FlipFlopJK copy(String newName) {
         return new FlipFlopJK(newName);
+    }
+
+    @Override
+    public ComponentView createView(ComponentViewCreator cvc) {
+        return cvc.createView(this);
     }
 }
