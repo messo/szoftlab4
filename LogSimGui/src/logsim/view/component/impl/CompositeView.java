@@ -31,7 +31,7 @@ public class CompositeView extends ComponentView {
      * @param g
      */
     @Override
-    protected void onDraw(Graphics g) {
+    public void onDraw(Graphics g) {
         g.drawRect(0, 0, 40, 30);
         g.drawString("COMP", 10, 27);
     }

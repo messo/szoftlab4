@@ -133,6 +133,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
         detailedViewDialog.pack();
         detailedViewDialog.setVisible(true);
+        saveSeqBTN.setVisible(true);
 
 
     }

@@ -1,5 +1,5 @@
 kapcs = TOGGLE() {30 50}
-inv = INV(node[2] {(172 110)(20 110)(20 74)}) {30 67}
-es = AND(kapcs,inv) {100 50}
+inv = INV(node[2] {(172 110)(20 110)(20 77)}) {30 67}
+es = AND(kapcs,inv{(75 77)(75 74)}) {100 50}
 node = NODE(es,2) {170 63}
 led = LED(node[1]) {200 59}

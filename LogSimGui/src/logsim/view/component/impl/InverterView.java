@@ -18,7 +18,7 @@ public class InverterView extends ComponentView {
      * @param inv Megjelenítendõ Inverter
      */
     public InverterView(Inverter inv) {
-        super(40, 14);
+        super(28, 20);
         this.inv = inv;
     }
 
@@ -37,8 +37,10 @@ public class InverterView extends ComponentView {
      */
     @Override
     public void onDraw(Graphics g) {
-        g.drawRect(0, 0, 40, 14);
-        g.drawString("INV", 12, 12);
+        g.drawPolygon(new int[]{0, 20, 0}, new int[]{0, 10, 20}, 3);
+        g.drawOval(20, 6, 8, 8);
+        //g.drawRect(0, 0, 40, 14);
+        //g.drawString("INV", 12, 12);
     }
 
     /**
