@@ -86,6 +86,10 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        simSpeedDialog = new javax.swing.JDialog();
+        jLabel6 = new javax.swing.JLabel();
+        simSpeedTF = new javax.swing.JTextField();
+        simSpeedSaveBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         stepBtn = new javax.swing.JButton();
         stateLabel = new javax.swing.JLabel();
@@ -100,6 +104,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         sep = new javax.swing.JPopupMenu.Separator();
         exitMI = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        simulationDelay = new javax.swing.JMenuItem();
         aboutMI = new javax.swing.JMenuItem();
 
         aboutDialog.setTitle("Névjegy");
@@ -150,6 +155,39 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
         jLabel4.setText("jLabel4");
 
+        jLabel6.setText("Szimuláció sebessége (msec):");
+
+        simSpeedTF.setText("jTextField1");
+
+        simSpeedSaveBtn.setText("Mentés");
+        simSpeedSaveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simSpeedSaveBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout simSpeedDialogLayout = new javax.swing.GroupLayout(simSpeedDialog.getContentPane());
+        simSpeedDialog.getContentPane().setLayout(simSpeedDialogLayout);
+        simSpeedDialogLayout.setHorizontalGroup(
+            simSpeedDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(simSpeedTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, simSpeedDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(simSpeedSaveBtn))
+        );
+        simSpeedDialogLayout.setVerticalGroup(
+            simSpeedDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(simSpeedDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(simSpeedTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(simSpeedSaveBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LogSim");
 
@@ -176,15 +214,15 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+            .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(stateLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(StartStop, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE))
-            .addComponent(stepBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(StartStop, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(stepBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,6 +285,14 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Egyéb");
+
+        simulationDelay.setText("Szimuláció sebessége");
+        simulationDelay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simulationDelayActionPerformed(evt);
+            }
+        });
+        jMenu2.add(simulationDelay);
 
         aboutMI.setText("Névjegy");
         aboutMI.addActionListener(new java.awt.event.ActionListener() {
@@ -375,6 +421,23 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
     }//GEN-LAST:event_StartStopActionPerformed
 
     /**
+     * Szimuláció sebességének beállítására szolgáló ablak megjelenítése
+     * @param evt
+     */
+    private void simulationDelayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulationDelayActionPerformed
+        simSpeedDialog.pack();
+        Integer delay = t.getDelay();
+        simSpeedTF.setText(delay.toString());
+        simSpeedDialog.setVisible(true);
+    }//GEN-LAST:event_simulationDelayActionPerformed
+
+    private void simSpeedSaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simSpeedSaveBtnActionPerformed
+        // TODO add your handling code here:
+        controller.onPeriodChanged(Integer.parseInt(simSpeedTF.getText()));
+        simSpeedDialog.setVisible(false);
+    }//GEN-LAST:event_simSpeedSaveBtnActionPerformed
+
+    /**
      * Áramkör szimulációja sikeres
      */
     @Override
@@ -419,6 +482,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -427,8 +491,13 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
     private javax.swing.JMenuItem loadConfigMI;
     private javax.swing.JMenuItem saveConfigMI;
     private javax.swing.JPopupMenu.Separator sep;
+    private javax.swing.JDialog simSpeedDialog;
+    private javax.swing.JButton simSpeedSaveBtn;
+    private javax.swing.JTextField simSpeedTF;
+    private javax.swing.JMenuItem simulationDelay;
     private javax.swing.JLabel stateLabel;
     private javax.swing.JButton stepBtn;
     // End of variables declaration//GEN-END:variables
+
 
 }
