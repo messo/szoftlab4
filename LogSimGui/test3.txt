@@ -1,4 +1,4 @@
-kapcs = TOGGLE() {30 49}
+kapcs = TOGGLE() {30 50}
 vagy = OR(kapcs, node[2] {(172 110)(80 110)(80 74)}) {100 50}
 node = NODE(vagy,2) {170 63}
-led = LED(node[1]) {200 60}
+led = LED(node[1]) {200 59}
