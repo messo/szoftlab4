@@ -2,20 +2,24 @@ package logsim.view;
 
 import java.awt.FileDialog;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import logsim.Controller;
 
 /**
  *
  */
-public class Frame extends javax.swing.JFrame implements FrameView {
+public class Frame extends javax.swing.JFrame implements FrameView, ActionListener {
 
     private final Controller controller;
+    private Timer t;
 
     /**
-     * Lekérdezhetõ a vezérlõt
+     * Lekérdezhetõ a vezérlõ
      * @return
      */
     @Override
@@ -37,6 +41,8 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         this.controller = controller;
         initComponents();
         this.circuitView.setParent(this);
+        t = new Timer(1000, this);
+        t.setRepeats(true);
     }
 
     /**
@@ -45,6 +51,24 @@ public class Frame extends javax.swing.JFrame implements FrameView {
     @Override
     public void makeItVisible() {
         setVisible(true);
+    }
+
+    /**
+     * Timer tick eventje
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        controller.onStep();
+    }
+
+    /**
+     * Szimuláció sebességének beállítása
+     * @param pt Sebesség (msec)
+     */
+    @Override
+    public void setPeriod(int pt) {
+        t.setDelay(pt);
     }
 
     /** This method is called from within the constructor to
@@ -67,6 +91,7 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         stateLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         circuitView = new logsim.view.CircuitView();
+        StartStop = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         loadCircuitMI = new javax.swing.JMenuItem();
@@ -87,7 +112,7 @@ public class Frame extends javax.swing.JFrame implements FrameView {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("LogSim");
 
@@ -139,30 +164,46 @@ public class Frame extends javax.swing.JFrame implements FrameView {
 
         jLabel1.setText("Szimuláció állapota:");
 
+        StartStop.setText("Start");
+        StartStop.setActionCommand("StartStop");
+        StartStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartStopActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(stateLabel)
-                .addContainerGap(283, Short.MAX_VALUE))
-            .addComponent(stepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(StartStop, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE))
+            .addComponent(stepBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(stateLabel)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(stateLabel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(StartStop)
+                        .addGap(11, 11, 11))))
         );
+
+        StartStop.getAccessibleContext().setAccessibleName("Start/stop");
+        StartStop.getAccessibleContext().setAccessibleParent(jPanel2);
 
         jMenu1.setText("Fájl");
 
@@ -238,6 +279,10 @@ public class Frame extends javax.swing.JFrame implements FrameView {
      * @param evt
      */
     private void stepBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepBtnActionPerformed
+        if (t.isRunning()) {
+            StartStop.setText("Start");
+            t.stop();
+        }
         controller.onStep();
     }//GEN-LAST:event_stepBtnActionPerformed
 
@@ -315,6 +360,21 @@ public class Frame extends javax.swing.JFrame implements FrameView {
     }//GEN-LAST:event_aboutCloseBtnActionPerformed
 
     /**
+     * Szimuláció start/stop
+     * @param evt
+     */
+    private void StartStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartStopActionPerformed
+        // TODO add your handling code here:
+        if (t.isRunning()) {
+            StartStop.setText("Start");
+            t.stop();
+        } else {
+            StartStop.setText("Stop");
+            t.start();
+        }
+    }//GEN-LAST:event_StartStopActionPerformed
+
+    /**
      * Áramkör szimulációja sikeres
      */
     @Override
@@ -348,6 +408,7 @@ public class Frame extends javax.swing.JFrame implements FrameView {
         circuitView.updateDrawables(drawables, positions);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton StartStop;
     private javax.swing.JButton aboutCloseBtn;
     private javax.swing.JDialog aboutDialog;
     private javax.swing.JMenuItem aboutMI;
@@ -369,4 +430,5 @@ public class Frame extends javax.swing.JFrame implements FrameView {
     private javax.swing.JLabel stateLabel;
     private javax.swing.JButton stepBtn;
     // End of variables declaration//GEN-END:variables
+
 }

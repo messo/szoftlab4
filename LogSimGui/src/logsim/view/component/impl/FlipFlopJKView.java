@@ -2,7 +2,6 @@ package logsim.view.component.impl;
 
 import java.awt.Graphics;
 import logsim.Controller;
-import logsim.model.component.impl.AndGate;
 import logsim.model.component.impl.FlipFlopJK;
 import logsim.view.component.ComponentView;
 

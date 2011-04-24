@@ -375,4 +375,13 @@ public class GuiController implements Controller, ComponentViewCreator {
         }
         System.out.println("");
     }
+
+    /**
+     * Szimuláció sebességének megváltoztatása
+     * @param p
+     */
+    @Override
+    public void onPeriodChanged(int p) {
+        v.setPeriod(p);
+    }
 }

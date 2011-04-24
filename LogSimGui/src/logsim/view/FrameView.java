@@ -26,6 +26,12 @@ public interface FrameView {
     void makeItVisible();
 
     /**
+     * Szimuláció sebessége
+     * @param pt
+     */
+    void setPeriod(int pt);
+
+    /**
      * Lekérdezzük a vezérlõt
      * @return
      */

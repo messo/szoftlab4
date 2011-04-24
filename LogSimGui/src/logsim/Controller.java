@@ -56,4 +56,9 @@ public interface Controller {
      * Áramkör léptetése
      */
     void onStep();
+
+    /**
+     * Szimuláció sebességének megváltoztatása
+     */
+    void onPeriodChanged(int p);
 }
