@@ -61,4 +61,9 @@ public interface Controller {
      * Szimuláció sebességének megváltoztatása
      */
     void onPeriodChanged(int p);
+
+    /**
+     * Új szekvencia mentése
+     */
+    void onSequenceChanged(SequenceGenerator sg, String seq);
 }

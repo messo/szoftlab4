@@ -9,6 +9,10 @@ import java.util.Map;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import logsim.Controller;
+import logsim.model.Value;
+import logsim.model.component.AbstractComponent;
+import logsim.model.component.impl.Scope;
+import logsim.model.component.impl.SequenceGenerator;
 
 /**
  *
@@ -17,6 +21,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
     private final Controller controller;
     private Timer t;
+    private SequenceGenerator sgedit;
 
     /**
      * Lekérdezhetõ a vezérlõ
@@ -43,6 +48,93 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         this.circuitView.setParent(this);
         t = new Timer(1000, this);
         t.setRepeats(true);
+    }
+
+    /**
+     * Általános komponens részleteinek megjelenítése
+     * @param ac Megjelenítendõ komponens
+     */
+    @Override
+    public void showDetailsAC(AbstractComponent ac) {
+        componentNameLabel.setText(ac.getName());
+        StringBuilder sbIn = new StringBuilder();
+        for (int i = 1; i <= ac.getInputsCount(); i++) {
+            sbIn.append(ac.getInputWire(i).getValue() == Value.TRUE ? '1' : '0');
+            if (i != ac.getInputsCount()) {
+                sbIn.append(", ");
+            }
+        }
+        StringBuilder sbOut = new StringBuilder();
+        for (int i = 1; i <= ac.getOutputsCount(); i++) {
+            sbOut.append(ac.getOutputWire(i).getValue() == Value.TRUE ? '1' : '0');
+            if (i != ac.getOutputsCount()) {
+                sbOut.append(", ");
+            }
+        }
+
+        inputsTF.setText(sbIn.toString());
+        outputsTF.setText(sbOut.toString());
+
+        detailedViewDialog.pack();
+        detailedViewDialog.setVisible(true);
+        saveSeqBTN.setVisible(false);
+
+    }
+
+    /**
+     * Scope részleteinek megjelenítése
+     * @param sc Megjelenítendõ scope
+     */
+    @Override
+    public void showDetailsSC(Scope sc) {
+        componentNameLabel.setText(sc.getName());
+        StringBuilder sbIn = new StringBuilder();
+        for (int i = 1; i <= sc.getInputsCount(); i++) {
+            sbIn.append(sc.getInputWire(i).getValue() == Value.TRUE ? '1' : '0');
+            if (i != sc.getInputsCount()) {
+                sbIn.append(", ");
+            }
+        }
+
+        StringBuilder sbOut = new StringBuilder();
+        Value[] values = sc.getValues();
+        for (int i = 0; i < values.length; i++) {
+            if (i != 0) {
+                sbOut.append(", ");
+            }
+            sbOut.append(values[i] == Value.TRUE ? '1' : '0');
+        }
+        inputsTF.setText(sbIn.toString());
+        outputsTF.setText(sbOut.toString());
+
+        detailedViewDialog.pack();
+        detailedViewDialog.setVisible(true);
+        saveSeqBTN.setVisible(true);
+
+    }
+
+    /**
+     * Szekvenciagenerátor részleteinek megjelenítése
+     * @param sg Megjelenítendõ szekvenciagenerátor
+     */
+    @Override
+    public void showDetailsSG(SequenceGenerator sg) {
+        componentNameLabel.setText(sg.getName());
+        sgedit = sg;
+        StringBuilder sbIn = new StringBuilder();
+        for (int i = 0; i < sg.getValues().length; i++) {
+            sbIn.append(sg.getValues()[i] == Value.TRUE ? '1' : '0');
+        }
+
+        StringBuilder sbOut = new StringBuilder();
+        sbOut.append(sg.getOutputWire(1).getValue() == Value.TRUE ? '1' : '0');
+        inputsTF.setText(sbIn.toString());
+        outputsTF.setText(sbOut.toString());
+
+        detailedViewDialog.pack();
+        detailedViewDialog.setVisible(true);
+
+
     }
 
     /**
@@ -90,6 +182,15 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         jLabel6 = new javax.swing.JLabel();
         simSpeedTF = new javax.swing.JTextField();
         simSpeedSaveBtn = new javax.swing.JButton();
+        detailedViewDialog = new javax.swing.JDialog();
+        inputsLabel = new javax.swing.JLabel();
+        inputsTF = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        outputsTF = new javax.swing.JTextField();
+        closeDetailedBTN = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        componentNameLabel = new javax.swing.JLabel();
+        saveSeqBTN = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         stepBtn = new javax.swing.JButton();
         stateLabel = new javax.swing.JLabel();
@@ -186,6 +287,77 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(simSpeedSaveBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        inputsLabel.setText("Bemenetek:");
+
+        inputsTF.setText("jTextField1");
+
+        jLabel7.setText("Kimenetek:");
+
+        outputsTF.setText("jTextField1");
+
+        closeDetailedBTN.setText("Bezárás");
+        closeDetailedBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeDetailedBTNActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Komponens neve:");
+
+        componentNameLabel.setText("jLabel9");
+
+        saveSeqBTN.setText("Szekvencia mentése");
+        saveSeqBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveSeqBTNActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout detailedViewDialogLayout = new javax.swing.GroupLayout(detailedViewDialog.getContentPane());
+        detailedViewDialog.getContentPane().setLayout(detailedViewDialogLayout);
+        detailedViewDialogLayout.setHorizontalGroup(
+            detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(detailedViewDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(detailedViewDialogLayout.createSequentialGroup()
+                        .addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(outputsTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                            .addComponent(inputsTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                            .addComponent(inputsLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailedViewDialogLayout.createSequentialGroup()
+                        .addComponent(saveSeqBTN)
+                        .addGap(73, 73, 73)
+                        .addComponent(closeDetailedBTN))
+                    .addGroup(detailedViewDialogLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(componentNameLabel)
+                        .addContainerGap(252, Short.MAX_VALUE))))
+        );
+        detailedViewDialogLayout.setVerticalGroup(
+            detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailedViewDialogLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(componentNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(inputsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(outputsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(closeDetailedBTN)
+                    .addComponent(saveSeqBTN)))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -431,11 +603,32 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         simSpeedDialog.setVisible(true);
     }//GEN-LAST:event_simulationDelayActionPerformed
 
+    /**
+     * Új sebesség mentése
+     * @param evt
+     */
     private void simSpeedSaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simSpeedSaveBtnActionPerformed
         // TODO add your handling code here:
         controller.onPeriodChanged(Integer.parseInt(simSpeedTF.getText()));
         simSpeedDialog.setVisible(false);
     }//GEN-LAST:event_simSpeedSaveBtnActionPerformed
+
+    /**
+     * Komponens részletei ablak bezárása
+     * @param evt
+     */
+    private void closeDetailedBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeDetailedBTNActionPerformed
+        detailedViewDialog.setVisible(false);
+    }//GEN-LAST:event_closeDetailedBTNActionPerformed
+
+    /**
+     * Új szekvencia elmentése
+     * @param evt
+     */
+    private void saveSeqBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSeqBTNActionPerformed
+        controller.onSequenceChanged(sgedit, inputsTF.getText());
+        detailedViewDialog.setVisible(false);
+    }//GEN-LAST:event_saveSeqBTNActionPerformed
 
     /**
      * Áramkör szimulációja sikeres
@@ -476,20 +669,29 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
     private javax.swing.JDialog aboutDialog;
     private javax.swing.JMenuItem aboutMI;
     private logsim.view.CircuitView circuitView;
+    private javax.swing.JButton closeDetailedBTN;
+    private javax.swing.JLabel componentNameLabel;
+    private javax.swing.JDialog detailedViewDialog;
     private javax.swing.JMenuItem exitMI;
+    private javax.swing.JLabel inputsLabel;
+    private javax.swing.JTextField inputsTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuItem loadCircuitMI;
     private javax.swing.JMenuItem loadConfigMI;
+    private javax.swing.JTextField outputsTF;
     private javax.swing.JMenuItem saveConfigMI;
+    private javax.swing.JButton saveSeqBTN;
     private javax.swing.JPopupMenu.Separator sep;
     private javax.swing.JDialog simSpeedDialog;
     private javax.swing.JButton simSpeedSaveBtn;
@@ -498,6 +700,4 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
     private javax.swing.JLabel stateLabel;
     private javax.swing.JButton stepBtn;
     // End of variables declaration//GEN-END:variables
-
-
 }

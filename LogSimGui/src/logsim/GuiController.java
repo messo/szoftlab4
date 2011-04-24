@@ -339,7 +339,8 @@ public class GuiController implements Controller, ComponentViewCreator {
      */
     @Override
     public void onComponentClick(AbstractComponent ag) {
-        System.out.println("Clicked on: " + ag);
+//        System.out.println("Clicked on: " + ag);
+        v.showDetailsAC(ag);
     }
 
     /**
@@ -361,6 +362,7 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public void onComponentClick(SequenceGenerator sg) {
         // ablak megjelenítés
+        v.showDetailsSG(sg);
     }
 
     /**
@@ -370,10 +372,11 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public void onComponentClick(Scope scope) {
         // ablak megjelenítés
-        for(Value value : scope.getValues()) {
-            System.out.print(value == Value.TRUE ? "1" : "0");
-        }
-        System.out.println("");
+//        for(Value value : scope.getValues()) {
+//            System.out.print(value == Value.TRUE ? "1" : "0");
+//        }
+//        System.out.println("");
+        v.showDetailsSC(scope);
     }
 
     /**
@@ -383,5 +386,19 @@ public class GuiController implements Controller, ComponentViewCreator {
     @Override
     public void onPeriodChanged(int p) {
         v.setPeriod(p);
+    }
+
+    @Override
+    public void onSequenceChanged(SequenceGenerator sg, String seq) {
+      ;
+        Value[] values = new Value[seq.length()];
+        for (int i = 0; i < seq.length(); i++) {
+            if (seq.charAt(i) == '0') {
+                values[i] = Value.FALSE;
+            } else {
+                values[i] = Value.TRUE;
+            }
+        }
+        sg.setValues(values);
     }
 }

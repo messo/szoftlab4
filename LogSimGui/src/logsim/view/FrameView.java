@@ -4,6 +4,9 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Map;
 import logsim.Controller;
+import logsim.model.component.AbstractComponent;
+import logsim.model.component.impl.Scope;
+import logsim.model.component.impl.SequenceGenerator;
 
 /**
  * Fõablak interfésze
@@ -49,4 +52,22 @@ public interface FrameView {
      * @param positions pozíciók
      */
     void setDrawables(List<Drawable> drawables, Map<Drawable, Point> positions);
+
+    /**
+     * Általános komponens részleteit megjeleníti
+     * @param ac Megjelenítendõ alkatrész
+     */
+    void showDetailsAC(AbstractComponent ac);
+
+    /**
+     * Scope komponens részleteinek megjelenítése
+     * @param sc Megjelenítendõ alkatrész
+     */
+    void showDetailsSC(Scope sc);
+
+    /**
+     * Szekvenciagenerátor részleteinek megjelenítése
+     * @param sg Megjelenítendõ szekvenciagenerátor
+     */
+    void showDetailsSG(SequenceGenerator sg);
 }
