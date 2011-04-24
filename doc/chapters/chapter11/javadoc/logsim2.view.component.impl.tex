@@ -1,0 +1,338 @@
+\subsection{AndGateView}
+\begin{itemize}
+\item Felelõsség\\
+ÉS kaput kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ AndGateView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ AndGate ag} Becsomagolt ÉS kapu
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ AndGateView(AndGate ag)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: ÉS kapura kattintás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{CompositeView}
+\begin{itemize}
+\item Felelõsség\\
+Kompozitot kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ CompositeView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Composite c} Becsomagolt kompozit
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ CompositeView(Composite c)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kiraqjzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlopDView}
+\begin{itemize}
+\item Felelõsség\\
+D flip-flopot kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ FlipFlopDView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ FlipFlopD d} Becsomagolt D flip-flop
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ FlipFlopDView(FlipFlopD d)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: D flip-flopra kattintás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{FlipFlopJKView}
+\begin{itemize}
+\item Felelõsség\\
+JK flip-flopot kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ FlipFlopJKView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ FlipFlopJK jk} Becsomagolt JK flip-flop
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ FlipFlopJKView(FlipFlopJK jk)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: JK flip-flopra kattintás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{GndView}
+\begin{itemize}
+\item Felelõsség\\
+GND-t kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ GndView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ int \underline{height}} 
+ % TODO
+	\item[] \texttt{$-$ int \underline{width}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ GndView()}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{InverterView}
+\begin{itemize}
+\item Felelõsség\\
+Invertert kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ InverterView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Inverter inv} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ InverterView(Inverter inv)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{LedView}
+\begin{itemize}
+\item Felelõsség\\
+LED-et kirajzoló osztály.
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ LedView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ int \underline{height}} 
+ % TODO
+	\item[] \texttt{$-$ Led led} 
+ % TODO
+	\item[] \texttt{$-$ int \underline{width}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ LedView(Led led)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kacsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{MpxView}
+\begin{itemize}
+\item Felelõsség\\
+Multiplexert kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ MpxView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Mpx mpx} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ MpxView(Mpx mpx)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{NodeView}
+\begin{itemize}
+\item Felelõsség\\
+Node-ot kirajzoló osztály.
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ NodeView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ int \underline{height}} 
+ % TODO
+	\item[] \texttt{$-$ Node node} 
+ % TODO
+	\item[] \texttt{$-$ int \underline{width}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ NodeView(Node node)}: Konstruktor
+	\item[] \texttt{$+$ void draw(Graphics g)}: Kirajzolási logika
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ Point getRelativeInputPinPosition(int pin)}: Megadott bemeneti pin relatív pozicíóját adja vissza
+	\item[] \texttt{$+$ Point getRelativeOutputPinPosition(int pin)}: Megadott kimeneti pin relatív pozicíóját adja vissza
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{OrGateView}
+\begin{itemize}
+\item Felelõsség\\
+VAGY kaput kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ OrGateView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ OrGate og} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ OrGateView(OrGate og)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{ScopeView}
+\begin{itemize}
+\item Felelõsség\\
+Scope-ot kirajzoló osztály.
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ ScopeView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ int \underline{height}} 
+ % TODO
+	\item[] \texttt{$-$ Scope scope} 
+ % TODO
+	\item[] \texttt{$-$ int \underline{width}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ScopeView(Scope scope)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kacsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{SequenceGeneratorView}
+\begin{itemize}
+\item Felelõsség\\
+Jelgenerátort kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ SequenceGeneratorView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ int \underline{height}} 
+ % TODO
+	\item[] \texttt{$-$ SequenceGenerator sg} 
+ % TODO
+	\item[] \texttt{$-$ int \underline{width}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ SequenceGeneratorView(SequenceGenerator sg)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{SevenSegmentDisplayView}
+\begin{itemize}
+\item Felelõsség\\
+Hétszegmenses kijelzõt kirajzoló osztály.
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ SevenSegmentDisplayView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ SevenSegmentDisplay ssd} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ SevenSegmentDisplayView(SevenSegmentDisplay ssd)}: Konstriktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{ToggleView}
+\begin{itemize}
+\item Felelõsség\\
+Kapcsolót kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ ToggleView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ int \underline{height}} 
+ % TODO
+	\item[] \texttt{$-$ Toggle toggle} 
+ % TODO
+	\item[] \texttt{$-$ int \underline{width}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ToggleView(Toggle toggle)}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemeneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+
+\subsection{VccView}
+\begin{itemize}
+\item Felelõsség\\
+VCC-t kirajzoló osztály
+\item Õsosztályok\ Object $\rightarrow{}$ ComponentView $\rightarrow{}$ VccView.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ int \underline{height}} 
+ % TODO
+	\item[] \texttt{$-$ int \underline{width}} 
+ % TODO
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ VccView()}: Konstruktor
+	\item[] \texttt{$\#$ int getInputPinsCount()}: Bemneti pinek száma
+	\item[] \texttt{$\#$ int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ void onClick(Controller controller)}: Komponensre kapcsolás
+	\item[] \texttt{$\#$ void onDraw(Graphics g)}: Kirajzolási logika
+\end{itemize}
+\end{itemize}
+

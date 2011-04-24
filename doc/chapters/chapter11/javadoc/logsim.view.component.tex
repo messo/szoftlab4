@@ -1,0 +1,49 @@
+\subsection{ComponentView}
+Absztrakt osztály.
+\begin{itemize}
+\item Felelősség\\
+A kirajzoló wrapper objektumok ősosztálya. Itt irhatjuk le a közös kirajzoló logikákat (pl. kábelek pinjei).
+\item Ősosztályok\ Object $\rightarrow{}$ ComponentView.
+\item Interfészek Drawable.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Dimension dimension} Szélesség-magasság
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ ComponentView(int w, int h)}: Konstruktor a méretek megadásával.
+	\item[] \texttt{$+$ void draw(Graphics g)}: Kirajzolási logika
+	\item[] \texttt{$+$ Dimension getDimension()}: Lekérhetjük az objektumtól a méretét.
+	\item[] \texttt{$\#$ abstract int getInputPinsCount()}: Bemeneti pinek száma.
+	\item[] \texttt{$\#$ abstract int getOutputPinsCount()}: Kimeneti pinek száma
+	\item[] \texttt{$+$ Point getRelativeInputPinPosition(int pin)}: 
+Visszaadja a bemeneti pin relatív pozícióját.
+	\item[] \texttt{$+$ Point getRelativeOutputPinPosition(int pin)}: 
+Visszaadja a kimeneti pin relatív pozícióját.
+	\item[] \texttt{$\#$ abstract void onDraw(Graphics g)}: Komponens kirajzolásának egyedi logikája.
+\end{itemize}
+\end{itemize}
+
+\subsection{WireView}
+\begin{itemize}
+\item Felelősség\\
+Egy vezeték megjelenítéséért felelős, amit törött vonallal jelenítünk meg.
+\item Ősosztályok\ Object $\rightarrow{}$ WireView.
+\item Interfészek Drawable.
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Point end} Vezeték vége
+	\item[] \texttt{$-$ List referencePoints} Vezeték referenciapontjai, ahol a vezeték "törik".
+	\item[] \texttt{$-$ Point start} Vezeték kezdete
+	\item[] \texttt{$-$ Wire w} Vezeték, aminek a megjelenítéséért felel.
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ WireView(Wire w, Point start, Point end)}: Konstruktor
+	\item[] \texttt{$+$ void draw(Graphics g)}: Kirajzolási logika
+	\item[] \texttt{$+$ Dimension getDimension()}: 
+ % TODO
+	\item[] \texttt{$+$ void setReferencePoints(List referencePoints)}: Vezeték referenciapontjainak a beállítása
+\end{itemize}
+\end{itemize}
+
