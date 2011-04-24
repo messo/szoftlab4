@@ -76,6 +76,9 @@
       </Properties>
     </Component>
     <Container class="javax.swing.JDialog" name="simSpeedDialog">
+      <Properties>
+        <Property name="title" type="java.lang.String" value="Szimul&#xe1;ci&#xf3; sebess&#xe9;ge"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -124,6 +127,9 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDialog" name="detailedViewDialog">
+      <Properties>
+        <Property name="title" type="java.lang.String" value="Komponens r&#xe9;szletei"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -188,6 +194,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="inputsTF">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>
         </Component>
