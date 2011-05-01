@@ -197,6 +197,7 @@ public class Composite extends AbstractComponent {
     @Override
     protected void onEvaluation() {
         int counter = 0;
+        storeFlipFlopsInput();
         eval:
         while (counter < cycleLimit) {
             for (Node n : inputNodes) {
@@ -223,6 +224,15 @@ public class Composite extends AbstractComponent {
         commitFlipFlops();
         commitScopes();
         stepGenerators();
+    }
+
+    private void storeFlipFlopsInput() {
+        for (Composite c : composites) {
+            c.storeFlipFlopsInput();
+        }
+        for (FlipFlop ff : flipFlops) {
+            ff.storeInput();
+        }
     }
 
     /**

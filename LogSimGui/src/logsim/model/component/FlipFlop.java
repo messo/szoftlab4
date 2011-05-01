@@ -17,6 +17,8 @@ public abstract class FlipFlop extends AbstractComponent {
      * Belsõ memóriája, ami a kimenetén megjelenik, órajel felfutó élénél változhat az állapota.
      */
     protected Value q = Value.FALSE;
+
+    protected Value[] in = new Value[2];
     /**
      * Elõzõ érvényes órajel, ettõl és a kiértékelés pillanatában lévõ órajel értékétõl
      * függõen észlelhetjük, hogy felfutó él van-e vagy sem.
@@ -37,16 +39,18 @@ public abstract class FlipFlop extends AbstractComponent {
         return clk == Value.FALSE && getInput(CLK) == Value.TRUE;
     }
 
-    /**
-     * Kimenetre értékadás a logika elvégzése után.
-     */
-    protected abstract void onCommit();
+//    /**
+//     * Kimenetre értékadás a logika elvégzése után.
+//     */
+//    protected abstract void onCommit();
+
+    protected abstract void storeInput();
 
     /**
      * Véglegesítés
      */
     public void commit() {
-        onCommit();
+        //onCommit();
         q = outputs[0].getValue();
         clk = getInput(CLK);
     }
@@ -60,10 +64,10 @@ public abstract class FlipFlop extends AbstractComponent {
         composite.add(this);
     }
 
-    /**
-     * Nem csinálunk semmit, majd csak commit()-nál.
-     */
-    @Override
-    protected void onEvaluation() {
-    }
+//    /**
+//     * Nem csinálunk semmit, majd csak commit()-nál.
+//     */
+//    @Override
+//    protected void onEvaluation() {
+//    }
 }

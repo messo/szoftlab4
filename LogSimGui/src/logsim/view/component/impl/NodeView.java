@@ -1,8 +1,10 @@
 package logsim.view.component.impl;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import logsim.Controller;
+import logsim.model.Value;
 import logsim.model.component.impl.Node;
 import logsim.view.component.ComponentView;
 
@@ -38,6 +40,8 @@ public class NodeView extends ComponentView {
      */
     @Override
     public void draw(Graphics g) {
+        if (node.getInputWire(1).getValue() == Value.FALSE)
+            g.setColor(Color.LIGHT_GRAY);
         g.fillOval(0, 0, width, height);
     }
 

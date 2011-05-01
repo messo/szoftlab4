@@ -1,0 +1,28 @@
+composite NAND(in1, in2){
+and = AND(in1, in2)
+inv = INV(and)
+} (inv)
+composite D(clk, in){
+nand2_n = NODE(nand2, 3)
+nand3_n = NODE(nand3, 2)
+nand4_n = NODE(nand4, 2)
+nand5_n = NODE(nand5, 2)
+and = AND(nand2_n[3], clk)
+nand1 = NAND(nand4_n[1], nand2_n[1])
+nand2 = NAND(nand1, clk)
+nand3 = NAND(and, nand4_n[2])
+nand4 = NAND(nand3_n[2], in)
+nand5 = NAND(nand2_n[2], nand6)
+nand6 = NAND(nand3_n[1], nand5_n[1])
+} (nand5_n[2])
+tog = TOGGLE() {20 38}
+seq = SEQGEN() {5 20}
+seq_n = NODE(seq, 3) {50 24}
+d1_n = NODE(d1, 2) {150 60}
+d2_n = NODE(d2, 2) {150 110}
+d1 = D(seq_n[1], tog) {70 20}
+d2 = D(seq_n[2], d1_n[1]) {70 70}
+d3 = D(seq_n[3], d2_n[1]) {70 120}
+led1 = LED(d1_n[2]) {170 20}
+led2 = LED(d2_n[2]) {170 70}
+led3 = LED(d3) {170 120}

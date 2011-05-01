@@ -30,10 +30,10 @@ public class FlipFlopJK extends FlipFlop {
      * Flipflop logika véglegesítésnél
      */
     @Override
-    protected void onCommit() {
+    public void onEvaluation() {
         if (isActive()) {
-            Value j = getInput(J);
-            Value k = getInput(K);
+            Value j = in[0];
+            Value k = in[1];
 
             if (j == Value.TRUE && k == Value.TRUE) {
                 // invertálunk
@@ -55,6 +55,12 @@ public class FlipFlopJK extends FlipFlop {
     @Override
     public FlipFlopJK copy(String newName) {
         return new FlipFlopJK(newName);
+    }
+
+    @Override
+    protected void storeInput() {
+        in[0] = getInputWire(J).getValue();
+        in[1] = getInputWire(K).getValue();
     }
 
     @Override

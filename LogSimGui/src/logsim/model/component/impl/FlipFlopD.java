@@ -25,10 +25,10 @@ public class FlipFlopD extends FlipFlop {
      * Flipflop logika véglegesítésnél
      */
     @Override
-    protected void onCommit() {
+    public void onEvaluation() {
         if (isActive()) {
             // bemenetén lévõ értéket beírjuk.
-            outputs[0].setValue(getInput(D));
+            outputs[0].setValue(in[0]);
         } else {
             // marad a régi.
             outputs[0].setValue(q);
@@ -38,6 +38,11 @@ public class FlipFlopD extends FlipFlop {
     @Override
     public FlipFlopD copy(String newName) {
         return new FlipFlopD(newName);
+    }
+
+    @Override
+    protected void storeInput() {
+        in[0] = getInputWire(2).getValue();
     }
 
     @Override
