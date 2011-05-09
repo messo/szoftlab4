@@ -21,19 +21,23 @@ public class CompositeView extends ComponentView {
      * @param c Megjelenítendõ kompozit
      */
     public CompositeView(Composite c){
-        super(40,30);
-        this.c = c;
-        
+        //+14 annyit tesz, hogy a szöveg, a téglalap szüleitõl legalább 7 pixel távolságra lesz x tengelyen
+        //minden karakterre 6 pixelt számolva	
+        //összesen a téglalap szélessége a string hossza *6 pixel + a két behúzás(14 pixel)
+        super(c.getName().length()*6+14,30);
+        this.c = c;        
     }
 
     /**
-     * Kiraqjzolási logika
+     * Kirajzolási logika
      * @param g
      */
     @Override
     protected void onDraw(Graphics g) {
-        g.drawRect(0, 0, 40, 30);
-        g.drawString(c.getName(), 7, 20);
+        g.drawRect(0, 0, c.getName().length()*6+14, 30);
+        //a string kezdõpozíciója a téglalap szélességének a felétõl balra található,
+        //a string hosszára számított pixelérték felével
+        g.drawString(c.getName(),(c.getName().length()*6+14)/2-c.getName().length()*6/2, 20);
     }
 
     /**
