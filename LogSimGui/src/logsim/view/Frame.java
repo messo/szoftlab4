@@ -214,6 +214,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
         aboutCloseBtn.setText("Bezárás");
         aboutCloseBtn.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutCloseBtnActionPerformed(evt);
             }
@@ -231,29 +232,9 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         javax.swing.GroupLayout aboutDialogLayout = new javax.swing.GroupLayout(aboutDialog.getContentPane());
         aboutDialog.getContentPane().setLayout(aboutDialogLayout);
         aboutDialogLayout.setHorizontalGroup(
-            aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(aboutDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                    .addComponent(aboutCloseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+                aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(aboutDialogLayout.createSequentialGroup().addContainerGap().addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE).addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE).addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE).addComponent(aboutCloseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)).addContainerGap()));
         aboutDialogLayout.setVerticalGroup(
-            aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(aboutDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(aboutCloseBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(aboutDialogLayout.createSequentialGroup().addContainerGap().addComponent(jLabel2).addGap(18, 18, 18).addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(18, 18, 18).addComponent(aboutCloseBtn).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         jLabel4.setText("jLabel4");
 
@@ -265,6 +246,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
         simSpeedSaveBtn.setText("Mentés");
         simSpeedSaveBtn.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simSpeedSaveBtnActionPerformed(evt);
             }
@@ -273,24 +255,9 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         javax.swing.GroupLayout simSpeedDialogLayout = new javax.swing.GroupLayout(simSpeedDialog.getContentPane());
         simSpeedDialog.getContentPane().setLayout(simSpeedDialogLayout);
         simSpeedDialogLayout.setHorizontalGroup(
-            simSpeedDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(simSpeedTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, simSpeedDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(simSpeedSaveBtn))
-        );
+                simSpeedDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(simSpeedTF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE).addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, simSpeedDialogLayout.createSequentialGroup().addContainerGap().addComponent(simSpeedSaveBtn)));
         simSpeedDialogLayout.setVerticalGroup(
-            simSpeedDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(simSpeedDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(simSpeedTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(simSpeedSaveBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                simSpeedDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(simSpeedDialogLayout.createSequentialGroup().addContainerGap().addComponent(jLabel6).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(simSpeedTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(simSpeedSaveBtn).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         detailedViewDialog.setTitle("Komponens részletei");
 
@@ -305,6 +272,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
         closeDetailedBTN.setText("Bezárás");
         closeDetailedBTN.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeDetailedBTNActionPerformed(evt);
             }
@@ -316,6 +284,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
         saveSeqBTN.setText("Szekvencia mentése");
         saveSeqBTN.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveSeqBTNActionPerformed(evt);
             }
@@ -324,53 +293,16 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         javax.swing.GroupLayout detailedViewDialogLayout = new javax.swing.GroupLayout(detailedViewDialog.getContentPane());
         detailedViewDialog.getContentPane().setLayout(detailedViewDialogLayout);
         detailedViewDialogLayout.setHorizontalGroup(
-            detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(detailedViewDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(detailedViewDialogLayout.createSequentialGroup()
-                        .addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(outputsTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                            .addComponent(inputsTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                            .addComponent(inputsLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailedViewDialogLayout.createSequentialGroup()
-                        .addComponent(saveSeqBTN)
-                        .addGap(73, 73, 73)
-                        .addComponent(closeDetailedBTN))
-                    .addGroup(detailedViewDialogLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(componentNameLabel)
-                        .addContainerGap(252, Short.MAX_VALUE))))
-        );
+                detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(detailedViewDialogLayout.createSequentialGroup().addContainerGap().addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(detailedViewDialogLayout.createSequentialGroup().addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(outputsTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE).addComponent(inputsTF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE).addComponent(inputsLabel, javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)).addContainerGap()).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailedViewDialogLayout.createSequentialGroup().addComponent(saveSeqBTN).addGap(73, 73, 73).addComponent(closeDetailedBTN)).addGroup(detailedViewDialogLayout.createSequentialGroup().addComponent(jLabel8).addGap(18, 18, 18).addComponent(componentNameLabel).addContainerGap(252, Short.MAX_VALUE)))));
         detailedViewDialogLayout.setVerticalGroup(
-            detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailedViewDialogLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(componentNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(outputsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(closeDetailedBTN)
-                    .addComponent(saveSeqBTN)))
-        );
+                detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailedViewDialogLayout.createSequentialGroup().addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel8).addComponent(componentNameLabel)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(inputsLabel).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(inputsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(jLabel7).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(outputsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(18, 18, 18).addGroup(detailedViewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(closeDetailedBTN).addComponent(saveSeqBTN))));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LogSim");
 
         stepBtn.setText("Léptetés");
         stepBtn.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 stepBtnActionPerformed(evt);
             }
@@ -383,6 +315,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         StartStop.setText("Start");
         StartStop.setActionCommand("StartStop");
         StartStop.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StartStopActionPerformed(evt);
             }
@@ -391,32 +324,9 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stateLabel)
-                .addContainerGap(463, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(StartStop, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(stepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE).addGroup(jPanel2Layout.createSequentialGroup().addGap(2, 2, 2).addComponent(jLabel1).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(stateLabel).addContainerGap(463, Short.MAX_VALUE)).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup().addComponent(StartStop, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(stepBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)));
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(stepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(StartStop))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(stateLabel)))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup().addComponent(circuitView, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(stepBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(StartStop)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel1).addComponent(stateLabel))));
 
         StartStop.getAccessibleContext().setAccessibleName("Start/stop");
         StartStop.getAccessibleContext().setAccessibleParent(jPanel2);
@@ -426,6 +336,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         loadCircuitMI.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         loadCircuitMI.setText("Áramkör betöltés");
         loadCircuitMI.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadCircuitMIActionPerformed(evt);
             }
@@ -435,6 +346,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         loadConfigMI.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         loadConfigMI.setText("Konfig betöltés");
         loadConfigMI.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadConfigMIActionPerformed(evt);
             }
@@ -444,6 +356,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         saveConfigMI.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         saveConfigMI.setText("Konfig mentése");
         saveConfigMI.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveConfigMIActionPerformed(evt);
             }
@@ -454,6 +367,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         exitMI.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         exitMI.setText("Kilépés");
         exitMI.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMIActionPerformed(evt);
             }
@@ -466,6 +380,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
         simulationDelay.setText("Szimuláció sebessége");
         simulationDelay.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simulationDelayActionPerformed(evt);
             }
@@ -474,6 +389,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
 
         aboutMI.setText("Névjegy");
         aboutMI.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutMIActionPerformed(evt);
             }
@@ -487,13 +403,9 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -520,7 +432,7 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
         fd.setDirectory(".\\");
         fd.setLocation(50, 50);
         fd.setVisible(true);
-        String fileName = fd.getFile();
+        String fileName = fd.getDirectory() + fd.getFile();
         if (fileName != null) {
             controller.loadCircuit(fileName);
         }
@@ -710,5 +622,4 @@ public class Frame extends javax.swing.JFrame implements FrameView, ActionListen
     private javax.swing.JLabel stateLabel;
     private javax.swing.JButton stepBtn;
     // End of variables declaration//GEN-END:variables
-
 }
