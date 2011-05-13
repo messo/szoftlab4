@@ -95,6 +95,24 @@ Bármilyen felhasználói interakciónál, melynél változhat az áramkör áll
 \input{chapters/chapter11/javadoc/logsim.view.component.tex}
 \input{chapters/chapter11/javadoc/logsim.view.component.impl.tex}
 
+\section{Áramkör leíró fájl változása}
+
+A grafikus felület miatt, szükség volt az áramköri elemek és az összeköttetésükhöz szükséges vezetékek pozícionálására. Az áramkörben a komponensek pozícióit az alábbi szerint adhatjuk meg:
+\begin{verbatim}
+	<név> = <komponens> ( <paraméter1> [, <paraméter2>, ...] ) { x y }
+\end{verbatim}
+Ahol a $x$ és $y$ írja le $(x, y)$ koordinátákként a pozíciót. A vezetékeket pedig a bemeneti paraméterek mögé lehet írni:
+\begin{verbatim}
+	<paraméter> { (172 110) (80 110) (80 74) }
+\end{verbatim}
+Ahol a számpárok a vezetékek töréspontait definiálják. Példa egy komplex leíróra:
+\begin{verbatim}
+kapcs = TOGGLE() {30 50}
+vagy = OR(kapcs, node[2] {(172 110)(80 110)(80 74)}) {100 50}
+node = NODE(vagy,2) {170 63}
+led = LED(node[1]) {200 59}
+\end{verbatim}
+
 \section{Kapcsolat az alkalmazói rendszerrel}
 
 \begin{figure}[H]

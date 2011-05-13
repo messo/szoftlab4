@@ -17,8 +17,11 @@ A szimuláció állapotát megvalósító objektum. 3 állapotot különböztet�
 \item a szimuláció fut \item a szimuláció sikeresen lefutott \item a szimuláció során hiba történt
 \end{itemize}
 
+\subsection{\bf Composite}
+Az áramkörben egy összetett komponenst ír le. Összeköttetéseket megvalósítja, illetve tartalmazza a kiértékelési logikát. A flip-flopokat utasítja arra, hogy mentsék el a jelenlegi kimenetüket belső állapotként és az órajel bemenetén lévő értéket az éldetektálás érdekében. Ezen kívül lépteti a jelgenerátorokat.
+
 \subsection{\bf Circuit}
-Az áramkör objektum. Ez az objektum hozza létre és köti össze egymással az áramköri elemeket. Egy kiértékelési ciklusban minden komponenst kiértékel. A flip-flopokat utasítja arra, hogy mentsék el a jelenlegi kimenetüket belső állapotként és az órajel bemenetén lévő értéket az éldetektálás érdekében. Megmondja, hogy az áramköri elemek értékei megváltoztak-e. Ezen kívül lépteti a jelgenerátorokat.
+Az áramkör objektum. Tulajdonképpen a legfelső szinten lévő kompozit. Semmivel se speciálisabb, mint egy mezei kompozit.
 
 \subsection{\bf Wire}
 Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vezeték egy darab kimenetet és egy darab bemenetet köt össze. A rajta lévő értéket le lehet tőle kérdezni, illetve be lehet azt állítani.
@@ -108,29 +111,17 @@ Egy komponens absztrakt megvalósítása, ebből származik az összes többi  k
 \subsection{Circuit}
 \begin{itemize}
 \item Felelősség\\
-A komponensek létrehozása és összekötése a szimuláció elején, szimuláció által indított kiértékelési ciklus végrehajtása. Rajta keresztül léptethetőek a jelgenerátorok és véglegesíthető a FF-ok állapota.
-\item Ősosztályok: (nincs)
-\item Interfészek: (nincs)
+Áramkört reprezentáló osztály, igazából egy kompozit. Felelőssége megegyzik a kompozitéval.
+\item Ősosztályok\ AbstractComponent $\rightarrow{}$ Composite $\rightarrow{}$ Circuit.
+\item Interfészek (nincs)
 \item Attribútumok $\ $
 \begin{itemize}
-	\item \texttt{private Collection<AbstractComponent> components}: Összes áramköri komponens
-	\item \texttt{private Collection<DisplayComponent> displays}: Megjelenítő típusú komponensek (kijelző, 7-szegmenses kijelző)
-	\item \texttt{private Collection<SourceComponent> sources}: Jelforrás típusú komponensek (kapcsoló, jelgenerátor)
-	\item \texttt{private Collection<FlipFlop> flipFlops}: Flipflopok (D és JK flipflopok)
-	\item \texttt{private Collection<SequenceGenerator> sequenceGens}: Jelgenerátorok
+\item (nincs)
 \end{itemize}
 \item Metódusok$\ $
 \begin{itemize}
-	\item \texttt{void init()}: Áramkör inicializálása; komponensek létrehozása és összekötése.
-	\item \texttt{void add(AbstractComponent component)}: Komponens hozzáadása a \texttt{components}-hez. Ezt minden komponensre meg kell hívni.
-	\item \raggedright \texttt{void add(SourceComponent sc)}: Jelforrás hozzáadása a \texttt{sources}-hoz és az \texttt{add(AbstractComponent component)} meghívása.
-	\item \raggedright \texttt{void add(FlipFlop ff)}: FlipFlop hozzáadása a \texttt{flipFlops}-hoz és az \texttt{add(AbstractComponent component)} meghívása.
-	\item \raggedright \texttt{void add(SequenceGenerator sg)}: Jelgenerátor hozzáadása a \texttt{sequenceGens}-hez és az \texttt{add(AbstractComponent component)} meghívása.
-	\item \raggedright \texttt{void add(DisplayComponent dc)}: Megjelenítő hozzáadása a \texttt{displays}-hez és az \texttt{add(AbstractComponent component)} meghívása.
-	\item \texttt{void doEvaluationCycle()}: Egy kiértékelési ciklus lefuttatása. Az áramkörtől ezután lekérdezhető, hogy változott-e a rendszer állapota, azaz valamelyik komponens eltérő kimenetet ad-e, mint az előző ciklusban.
-	\item \texttt{boolean isChanged()}: Áramkör változásának lekérdezése. Igazzal tér vissza, ha van olyan komponens, ami azt jelzi magáról, hogy változott a kimenete az előző kiértékeléshez képest.
-	\item \texttt{void commitFlipFlops()}: A flipflopok jelenlegi kimenetének elmentése belső állapotnak, és az órajel bemenetén lévő érték eltárolása az éldetektálás érdekében.
-	\item \texttt{void stepGenerators()}: Jelgenerátorok léptetése.
+	\item[] \texttt{$+$ Circuit()}: 
+ % TODO
 \end{itemize}
 \end{itemize}
 
@@ -148,6 +139,36 @@ Megjelenítő típusú komponensek ősosztálya.
 \item Metódusok$\ $
 \begin{itemize}
 \item \texttt{addTo(Circuit c)}: Meghívja az áramkör \texttt{add(DisplayComponent dc)} metódusát.
+\end{itemize}
+\end{itemize}
+
+\subsection{Composite}
+\begin{itemize}
+\item Felelősség\\
+Kompozit elem leírása, kiértékelésnél a tartalmazott komponenseket kiértékeli, lépteti  a jelgenerátorokat stb. Ha nem áll be stacionárius állapotba a kiértékelésnél, akkor ezt jelzi kifelé.
+\item Ősosztályok\ Object $\rightarrow{}$ AbstractComponent $\rightarrow{}$ Composite.
+\item Interfészek (nincs)
+\item Attribútumok $\ $
+\begin{itemize}
+	\item[] \texttt{$-$ Map components} Komponensek listája
+	\item[] \texttt{$-$ List composites} Kompozit típusú komponensek listája
+	\item[] \texttt{$-$ List displays} Megjelenítő típusú komponensek listája (pl. led)
+	\item[] \texttt{$-$ List flipFlops} Flipflopok listája
+	\item[] \texttt{$-$ List seqGens} Jelgenerátorok listája
+	\item[] \texttt{$-$ List scopes} Oszcillátor típusú komponensek listája
+	\item[] \texttt{$-$ List sources} Jelforrás típusú komponensek listája (pl. kapcsoló)
+\end{itemize}
+\item Metódusok$\ $
+\begin{itemize}
+	\item[] \texttt{$+$ Composite(String type, String name, int inputCount, int outputCount)}: Adott típusú és nevű komponens létrehozása a megfelelő lábszámmal.
+	\item[] \texttt{$+$ void add(AbstractComponent c)}: Általános típusú komponens hozzáadása
+	\item[] \texttt{$+$ void add(Composite c)}: Kompozit típusú komponens hozzáadása
+	\item[] \texttt{$+$ void add(DisplayComponent dc)}: Kijelző típusú komponens hozzáadása
+	\item[] \texttt{$+$ void add(FlipFlop ff)}: Flipflop komponens hozzáadása
+	\item[] \texttt{$+$ void add(Scope scope)}: Oszcillátor típusú komponens hozzáadása
+	\item[] \texttt{$+$ void add(SequenceGenerator sg)}: Jelgenerátor komponens hozzáadása
+	\item[] \texttt{$+$ void add(SourceComponent sc)}: Jelforrás típusú komponens hozzáadása
+	\item[] \texttt{$+$ void addTo(Composite composite)}: Kompozit hozzáadása kompozithoz.
 \end{itemize}
 \end{itemize}
 
@@ -267,7 +288,6 @@ Egy LED-et reprezentál, mely világít, ha bemenetén igaz érték van.
 \item (nincs)
 \end{itemize}
 \end{itemize}
-
 
 \subsection{Node}
 \begin{itemize}
@@ -467,7 +487,7 @@ Vezeték, mely az áramköri komponensek ki és bemeneteit köti össze. Egy vez
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics*[angle=90, width=17cm, viewport = 25 30 705 565]{chapters/chapter04/classdiagram/class.pdf}
+\includegraphics*[angle=90, width=17cm, viewport = 25 30 720 565]{chapters/chapter04/classdiagram/class.pdf}
 \caption{Statikus struktúra nézet}
 \label{fig:class_diagram}
 \end{center}
